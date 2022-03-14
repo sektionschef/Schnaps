@@ -61,11 +61,6 @@ function resize_canvas() {
     // SCALING_FACTOR = 1;
 
     resizeCanvas(CANVAS_WIDTH * SCALING_FACTOR, CANVAS_HEIGHT * SCALING_FACTOR);
-    reset_camera();
-}
-
-function reset_camera() {
-    camera(...cameraDefault);
 }
 
 function keyTyped() {
