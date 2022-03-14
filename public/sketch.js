@@ -57,7 +57,9 @@ function setup() {
 
   let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
 
-  brush = createGraphics(30, 30);
+  brush = new Pattern(50, 50);
+
+  background(100);
 
   resize_canvas();
 }
@@ -69,11 +71,8 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  background(100);
-
-  brush.background(20);
-  brush.noStroke();
-  image(brush, 50, 50, brush.width, brush.height);
+  // image(brush.buffer, 50, 50, brush.buffer.width, brush.buffer.height);
+  image(brush.buffer, mouseX - width / 2, mouseY - height / 2, brush.buffer.width, brush.buffer.height);
 
 
   // if (grid.boxes_completely_run == true && preview_called == false) {
