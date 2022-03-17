@@ -60,6 +60,7 @@ function setup() {
   brush = new Pattern();
 
   painted_area = new Paint(200, 400, 155);
+  painted_area_2 = new Paint(300, 500, 155);
 
   // brush.create_dots(50, 50);
   // brush.create_noise(100, 100);
@@ -82,6 +83,8 @@ function draw() {
 
 
   painted_area.show();
+  painted_area_2.show();
+  image(painted_area_2.buffer, - painted_area_2.buffer.width / 2 + 200, - painted_area_2.buffer.height / 2, painted_area_2.buffer.width, painted_area_2.buffer.height);
   image(painted_area.buffer, - painted_area.buffer.width / 2, - painted_area.buffer.height / 2, painted_area.buffer.width, painted_area.buffer.height);
 
   // image(brush.buffer, 50, 50, brush.buffer.width, brush.buffer.height);
