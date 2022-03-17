@@ -59,7 +59,7 @@ function setup() {
 
   brush = new Pattern();
 
-  painted_area = new Paint(width, height, 155);
+  painted_area = new Paint(200, 400, 155);
 
   // brush.create_dots(50, 50);
   // brush.create_noise(100, 100);
@@ -80,13 +80,13 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
+
+  painted_area.show();
+  image(painted_area.buffer, - painted_area.buffer.width / 2, - painted_area.buffer.height / 2, painted_area.buffer.width, painted_area.buffer.height);
+
   // image(brush.buffer, 50, 50, brush.buffer.width, brush.buffer.height);
   // image(brush.buffer, mouseX - width / 2, mouseY - height / 2, brush.buffer.width, brush.buffer.height);
   image(brush.buffer, - width / 2, - height / 2, brush.buffer.width, brush.buffer.height);
-
-  painted_area.show();
-  image(painted_area.buffer, - width / 2, - height / 2, painted_area.buffer.width, painted_area.buffer.height);
-
 
   // if (grid.boxes_completely_run == true && preview_called == false) {
   //   logging.debug("all work is done");

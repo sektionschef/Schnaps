@@ -40,17 +40,17 @@ class Pattern {
     create_canvas(custom_width, custom_height) {
 
         const colory = 190;
+        const opacity = 80;
         // const colory = "#c9c9c9";
         const maxCell = 400;  // amount of cells per line
         const strokeWeight_ = 1;
-        const c = brightenColor(color(colory), -20);
+        const c = brightenColor(color(colory, opacity), -20);
         const deviation = 0.3;
 
         this.buffer = createGraphics(custom_width, custom_height);
 
         const cell = maxCell;
         const scl = this.buffer.width / cell;
-
 
         for (let x = 0; x < this.buffer.width; x += scl) {
             for (let y = 0; y < this.buffer.height; y += scl) {

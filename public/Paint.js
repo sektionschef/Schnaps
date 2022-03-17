@@ -2,17 +2,19 @@ class Paint {
     constructor(width, height, color) {
         this.width = width;
         this.height = height;
-        this.border = 15;  // 25 frame for the image - 5-35
+        this.border = 35;  // 25 frame for the image - 5-35
 
         this.area = this.width * this.height;
         this.buffer = createGraphics(this.width + 2 * this.border, this.height + 2 * this.border);
         this.color_master = color;
 
-        this.brush_size = 50;  // area of stroke
-        this.counter_max = 70;
+        this.brush_size = 20;  // area of stroke
+        this.counter_max = 40;
 
-        this.primaryStrokeWeight = 10;
+        this.primaryStrokeWeight = 2;
+        this.secondaryStrokeWeight = 1;
 
+        this.brushTightness = 3 // 0-5
         this.counter = 0;
 
         this.area_fully_painted = false;
@@ -49,8 +51,8 @@ class Paint {
         this.loop_2 = constrain(this.area / 250, 50, 400)
 
 
-        this.paint_layer(this.loop_1, this.primaryStrokeWeight, 5);
-        this.paint_layer(this.loop_2, 1, 10);
+        this.paint_layer(this.loop_1, this.primaryStrokeWeight, 2);
+        this.paint_layer(this.loop_2, this.secondaryStrokeWeight, 10);
 
         if (typeof (on_top_layer) != "undefined") {
             this.buffer.image(on_top_layer, 0, 0, this.buffer.width, this.buffer.height);
@@ -78,7 +80,7 @@ class Paint {
             let begin_x = getRandomFromInterval(this.border, this.width + this.border)
             let begin_y = getRandomFromInterval(this.border, this.height + this.border)
 
-            this.buffer.curveTightness(BRUSH_TIGHTNESS);
+            this.buffer.curveTightness(this.brushTightness);
             this.buffer.beginShape();
             this.buffer.curveVertex(begin_x, begin_y);
             this.buffer.curveVertex(begin_x, begin_y);
