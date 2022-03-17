@@ -1,17 +1,17 @@
-// border relative to size
-
 class Paint {
     constructor(width, height, color) {
         this.width = width;
         this.height = height;
-        this.border = BORDER_FRAME;  // 25 frame for the image - 5-35
+        this.border = 15;  // 25 frame for the image - 5-35
 
         this.area = this.width * this.height;
         this.buffer = createGraphics(this.width + 2 * this.border, this.height + 2 * this.border);
         this.color_master = color;
 
-        this.brush_size = BRUSH_SIZE;
+        this.brush_size = 50;  // area of stroke
         this.counter_max = 70;
+
+        this.primaryStrokeWeight = 10;
 
         this.counter = 0;
 
@@ -20,27 +20,27 @@ class Paint {
         // create background
         // this.buffer.background(this.color_master);
 
-        this.create_dotty();
+        // this.create_dotty();
     }
 
-    create_dotty() {
-        this.dotty = createGraphics(this.width, this.height);
-        let loop_count = constrain(this.area / 250, 50, 600)
-        let size_point = 1;
+    // create_dotty() {
+    //     this.dotty = createGraphics(this.width, this.height);
+    //     let loop_count = constrain(this.area / 250, 50, 600)
+    //     let size_point = 1;
 
-        this.dotty.push();
-        this.dotty.noStroke();
-        this.dotty.strokeWeight(size_point);
-        for (var i = 0; i < loop_count; i++) {
-            this.dotty.stroke(brightenColor(distortColor(color(this.color_master), 10), 70));
-            this.dotty.point(getRandomFromInterval(0, this.dotty.width), getRandomFromInterval(0, this.dotty.height));
+    //     this.dotty.push();
+    //     this.dotty.noStroke();
+    //     this.dotty.strokeWeight(size_point);
+    //     for (var i = 0; i < loop_count; i++) {
+    //         this.dotty.stroke(brightenColor(distortColor(color(this.color_master), 10), 70));
+    //         this.dotty.point(getRandomFromInterval(0, this.dotty.width), getRandomFromInterval(0, this.dotty.height));
 
-            this.dotty.stroke(brightenColor(color(INSIDE_COLOR), 20));
-            this.dotty.point(getRandomFromInterval(0, this.dotty.width), getRandomFromInterval(0, this.dotty.height));
-        }
+    //         this.dotty.stroke(brightenColor(color(INSIDE_COLOR), 20));
+    //         this.dotty.point(getRandomFromInterval(0, this.dotty.width), getRandomFromInterval(0, this.dotty.height));
+    //     }
 
-        this.dotty.pop();
-    }
+    //     this.dotty.pop();
+    // }
 
     show(on_top_layer) {
 
@@ -49,7 +49,7 @@ class Paint {
         this.loop_2 = constrain(this.area / 250, 50, 400)
 
 
-        this.paint_layer(this.loop_1, PRIMARY_STROKE_WEIGHT, 5);
+        this.paint_layer(this.loop_1, this.primaryStrokeWeight, 5);
         this.paint_layer(this.loop_2, 1, 10);
 
         if (typeof (on_top_layer) != "undefined") {
@@ -100,8 +100,7 @@ class Paint {
             this.buffer.endShape();
         }
 
-        this.buffer.image(this.dotty, this.border, this.border, this.dotty.width, this.dotty.height);
-
+        // this.buffer.image(this.dotty, this.border, this.border, this.dotty.width, this.dotty.height);
 
     }
 }

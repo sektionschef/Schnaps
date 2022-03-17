@@ -57,7 +57,16 @@ function setup() {
 
   let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
 
-  brush = new Pattern(50, 50);
+  brush = new Pattern();
+
+  painted_area = new Paint(width, height, 155);
+
+  // brush.create_dots(50, 50);
+  // brush.create_noise(100, 100);
+  brush.create_canvas(width, height);
+  // brush.create_lines(width, height);
+  // brush.create_corroded_area(width, height);
+  // brush.create_bars(width, height);
 
   background(100);
 
@@ -72,7 +81,11 @@ function draw() {
   ambientMaterial(255);
 
   // image(brush.buffer, 50, 50, brush.buffer.width, brush.buffer.height);
-  image(brush.buffer, mouseX - width / 2, mouseY - height / 2, brush.buffer.width, brush.buffer.height);
+  // image(brush.buffer, mouseX - width / 2, mouseY - height / 2, brush.buffer.width, brush.buffer.height);
+  image(brush.buffer, - width / 2, - height / 2, brush.buffer.width, brush.buffer.height);
+
+  painted_area.show();
+  image(painted_area.buffer, - width / 2, - height / 2, painted_area.buffer.width, painted_area.buffer.height);
 
 
   // if (grid.boxes_completely_run == true && preview_called == false) {

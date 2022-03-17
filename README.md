@@ -1,6 +1,9 @@
 # Schnaps
 
-paint by image
+* paint by image - https://editor.p5js.org/steinlav/sketches/dxdxe98f5
+* canvas dann drüber, als static method? https://www.w3schools.com/js/js_class_static.asp 
+
+* reset brauch ich wieder
 
 # Shortcuts
 * 's' | export png image
