@@ -36,6 +36,9 @@ let rescaling_width;
 let rescaling_height;
 let preview_called = false;
 
+let fxhash_number;
+let xoff = 0;
+
 
 logging.info("FXHASH: " + fxhash);
 // logging.info("Grid: " + GRID);
@@ -57,9 +60,13 @@ function setup() {
 
   let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
 
-  paper = new Pattern();
+  fxhash_number = hashFnv32a(fxhash);
+  console.log(fxhash_number);
+  noiseSeed(fxhash_number);
 
-  paper.create_corroded_area(width, height);
+
+  // paper = new Pattern();
+  // paper.create_corroded_area(width, height);
 
   painted_area = new Paint(200, 400, 155);
   painted_area_2 = new Paint(300, 500, "#123456");
@@ -83,7 +90,7 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  image(paper.buffer, - width / 2, - height / 2, paper.buffer.width, paper.buffer.height);
+  // image(paper.buffer, - width / 2, - height / 2, paper.buffer.width, paper.buffer.height);
 
   painted_area.show();
   painted_area_2.show();
@@ -91,6 +98,10 @@ function draw() {
   image(painted_area.buffer, - painted_area.buffer.width / 2, - painted_area.buffer.height / 2, painted_area.buffer.width, painted_area.buffer.height);
 
   image(brush.buffer, - width / 2, - height / 2, brush.buffer.width, brush.buffer.height);
+
+  xoff = xoff + 0.01;
+  let n = noise(xoff) * width;
+  line(n - width / 2, 0, n - height / 2, height);
 
   // if (grid.boxes_completely_run == true && preview_called == false) {
   //   logging.debug("all work is done");
