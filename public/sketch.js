@@ -101,7 +101,7 @@ function draw() {
 
   xoff = xoff + 0.01;
   let n = noise(xoff) * width;
-  line(n - width / 2, 0, n - height / 2, height);
+  line(n, - height / 2, n, height / 2);
 
   // if (grid.boxes_completely_run == true && preview_called == false) {
   //   logging.debug("all work is done");

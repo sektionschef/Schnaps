@@ -93,8 +93,7 @@ function label_feature(value, min, max) {
 
 function hashFnv32a(str, asString, seed) {
     /*jshint bitwise:false  https://www.codegrepper.com/code-examples/javascript/js+hash+string+to+number */
-    var i, l,
-        hval = (seed === undefined) ? 0x811c9dc5 : seed;
+    var i, l, hval = (seed === undefined) ? 0x811c9dc5 : seed;
 
     for (i = 0, l = str.length; i < l; i++) {
         hval ^= str.charCodeAt(i);
