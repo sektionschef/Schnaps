@@ -82,25 +82,27 @@ class Pattern {
 
     // CORRODED - bubbles that hide background
     create_corroded_area(custom_width, custom_height) {
-        const colory = 240;
-        const d = 1.2  // 2 - 1 - 1.5 - 1.3
-        const s = 3.5;  // 3 - 3 - 3 - 3.5
-        const c = brightenColor(color(colory), 20);
-        const maxCell = 300;
+        const background_color = 250;
+        const foreground_color = 255;
+        const d = 1  // 2 - 1 - 1.5 - 1.3 - 1.2
+        const radius = 5;  // 3 - 3 - 3 - 3.5 - 3.5
+        const maxCell = 260;
         const cell = maxCell * d;
 
         this.buffer = createGraphics(custom_width, custom_height);
+        this.buffer.background(245);
         const scl = this.buffer.width / cell;
 
-        this.buffer.background(colory);
+        this.buffer.background(background_color);
         for (let x = 0; x < this.buffer.width; x += scl) {
             for (let y = 0; y < this.buffer.height; y += scl) {
-                const r = random(s);  // FXRAND
-                if (r > d) {
-                    this.buffer.stroke(c);
-                    this.buffer.strokeWeight(r * d);
-                    this.buffer.line(x + r, y - r, x, y);
-                }
+                const c = brightenColor(color(foreground_color), 5);
+                const r = getRandomFromInterval(0, radius);
+                // if (r > d) {
+                this.buffer.stroke(c);
+                this.buffer.strokeWeight(r * d);
+                this.buffer.line(x + r, y - r, x, y);
+                // }
             }
         }
     }
