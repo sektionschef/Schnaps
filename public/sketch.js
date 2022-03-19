@@ -72,8 +72,8 @@ function setup() {
 
   paper = Pattern.create_corroded_area(width, height);
   // dots = Pattern.create_dots(width, height);
-  // noise = Pattern.create_noise(100, 100);
-  canvas = Pattern.create_canvas(width, height);
+  noise = Pattern.create_noise(100, 100);
+  canvasOverlay = Pattern.create_canvas(width, height);
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
@@ -93,17 +93,17 @@ function draw() {
 
   image(paper, - width / 2, - height / 2, paper.width, paper.height);
 
-  // painted_area.show();
 
   // maska
   // brush.buffer = brush.buffer.get();
   // brush.buffer.mask(fog.buffer);
 
-  // painted_area_2.show();
-  // image(painted_area_2.buffer, - painted_area_2.buffer.width / 2 + 200, - painted_area_2.buffer.height / 2, painted_area_2.buffer.width, painted_area_2.buffer.height);
-  // image(painted_area.buffer, - painted_area.buffer.width / 2, - painted_area.buffer.height / 2, painted_area.buffer.width, painted_area.buffer.height);
+  painted_area.show();
+  painted_area_2.show();
+  image(painted_area_2.buffer, - painted_area_2.buffer.width / 2 + 200, - painted_area_2.buffer.height / 2, painted_area_2.buffer.width, painted_area_2.buffer.height);
+  image(painted_area.buffer, - painted_area.buffer.width / 2, - painted_area.buffer.height / 2, painted_area.buffer.width, painted_area.buffer.height);
 
-  image(canvas, - width / 2, - height / 2, canvas.width, canvas.height);
+  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
   // image(noise, - width / 2, - height / 2, noise.width, noise.height);
 
 
