@@ -66,21 +66,18 @@ function setup() {
   noiseSeed(fxhash_number);
 
 
-  // paper = new Pattern();
-  // paper.create_corroded_area(width, height);
 
   painted_area = new Paint(200, 400, 155);
   painted_area_2 = new Paint(300, 500, "#123456");
 
-  brush = new Pattern();
-  // brush.create_dots(50, 50);
-  // brush.create_noise(100, 100);
-  brush.create_canvas(width, height);
-  // brush.create_lines(width, height);
-  // brush.create_bars(width, height);
+  paper = Pattern.create_corroded_area(width, height);
+  // dots = Pattern.create_dots(width, height);
+  // noise = Pattern.create_noise(100, 100);
+  canvas = Pattern.create_canvas(width, height);
+  // lines = Pattern.create_lines(width, height);
+  // bars = Pattern.create_bars(width, height);
 
-  fog = new Pattern();
-  fog.create_noise_fog(width, height);
+  // fog = Pattern.create_noise_fog(100, 100);
 
   background(100);
 
@@ -94,20 +91,21 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  // image(paper.buffer, - width / 2, - height / 2, paper.buffer.width, paper.buffer.height);
-  image(fog.buffer, - width / 2, - height / 2, fog.buffer.width, fog.buffer.height);
+  image(paper, - width / 2, - height / 2, paper.width, paper.height);
 
   // painted_area.show();
+
+  // maska
+  // brush.buffer = brush.buffer.get();
+  // brush.buffer.mask(fog.buffer);
+
   // painted_area_2.show();
   // image(painted_area_2.buffer, - painted_area_2.buffer.width / 2 + 200, - painted_area_2.buffer.height / 2, painted_area_2.buffer.width, painted_area_2.buffer.height);
   // image(painted_area.buffer, - painted_area.buffer.width / 2, - painted_area.buffer.height / 2, painted_area.buffer.width, painted_area.buffer.height);
 
-  image(brush.buffer, - width / 2, - height / 2, brush.buffer.width, brush.buffer.height);
+  image(canvas, - width / 2, - height / 2, canvas.width, canvas.height);
+  // image(noise, - width / 2, - height / 2, noise.width, noise.height);
 
-
-  // xoff = xoff + 0.01;
-  // let n = noise(xoff, xoff);
-  // line(n[0], - height / 2, n[1], height / 2);
 
   // if (grid.boxes_completely_run == true && preview_called == false) {
   //   logging.debug("all work is done");

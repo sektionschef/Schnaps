@@ -1,12 +1,11 @@
+// thanks to https://github.com/matthias-jaeger-net/p5-toolkit/blob/main/src/hatches/modules/bars.ts
+
 class Pattern {
     constructor() {
-
-        // https://github.com/matthias-jaeger-net/p5-toolkit/blob/main/src/hatches/modules/bars.ts
-
     }
 
     // random_dots
-    create_dots(custom_width, custom_height) {
+    static create_dots(custom_width, custom_height) {
         const amount = 30;
 
         this.buffer = createGraphics(custom_width, custom_height);
@@ -18,9 +17,11 @@ class Pattern {
             this.buffer.stroke(getRandomFromInterval(150, 250));
             this.buffer.point(x, y);
         }
+
+        return this.buffer;
     }
 
-    create_noise(custom_width, custom_height) {
+    static create_noise(custom_width, custom_height) {
 
         this.buffer = createGraphics(custom_width, custom_height);
 
@@ -35,11 +36,16 @@ class Pattern {
         // background_buffer.strokeWeight(3);
         // background_buffer.stroke(10);
         // background_buffer.point(getRandomFromInterval(0, width), getRandomFromInterval(0, height));
+
+        return this.buffer;
     }
 
-    create_noise_fog(custom_width, custom_height) {
+    static create_noise_fog(custom_width, custom_height) {
+
+        // noiseDetail(8, 0.65);
 
         let inc = 0.01;  // 0.01
+        let opacityValue = 255;
 
         this.buffer = createGraphics(custom_width, custom_height);
 
@@ -61,7 +67,7 @@ class Pattern {
                 this.buffer.pixels[index + 1] = 90 + r;
                 this.buffer.pixels[index + 2] = 0 + r;
                 // this.buffer.pixels[index + 3] = 100 + r;
-                this.buffer.pixels[index + 3] = 255;
+                this.buffer.pixels[index + 3] = opacityValue;
 
 
                 xoff += inc;
@@ -69,10 +75,12 @@ class Pattern {
             yoff += inc;
         }
         this.buffer.updatePixels();
+
+        return this.buffer;
     }
 
 
-    create_canvas(custom_width, custom_height) {
+    static create_canvas(custom_width, custom_height) {
 
         const colory = 190;
         const opacity = 80;
@@ -94,10 +102,11 @@ class Pattern {
                 this.buffer.point(x + getRandomFromInterval(-deviation, deviation), y + getRandomFromInterval(-deviation, deviation));
             }
         }
+        return this.buffer;
     }
 
     // LINES
-    create_lines(custom_width, custom_height) {
+    static create_lines(custom_width, custom_height) {
         const d = 4;  // 3
         const s = 3;  // 3
         // const c = BACKGROUND_COLOR;
@@ -113,10 +122,11 @@ class Pattern {
             this.buffer.stroke(c);
             this.buffer.line(0, y, this.buffer.width, y);
         }
+        return this.buffer;
     }
 
     // CORRODED - bubbles that hide background
-    create_corroded_area(custom_width, custom_height) {
+    static create_corroded_area(custom_width, custom_height) {
         const background_color = 250;
         const foreground_color = 255;
         const d = 1  // 2 - 1 - 1.5 - 1.3 - 1.2
@@ -140,10 +150,12 @@ class Pattern {
                 // }
             }
         }
+
+        return this.buffer;
     }
 
     // BARS
-    create_bars(custom_width, custom_height) {
+    static create_bars(custom_width, custom_height) {
         const d = 1.3;
         const s = 3.5;
 
@@ -162,5 +174,7 @@ class Pattern {
             this.buffer.stroke(c);
             this.buffer.line(x, 0, x, this.buffer.height);
         }
+        return this.buffer;
     }
+
 }
