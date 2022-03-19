@@ -1,7 +1,9 @@
 class Paint {
-    constructor(width, height, color) {
-        this.width = width;
-        this.height = height;
+    constructor(custom_width, custom_height, posX, posY, color) {
+        this.width = custom_width;
+        this.height = custom_height;
+        this.posX = posX;
+        this.posY = posY;
         this.border = 35;  // 25 frame for the image - 5-35
 
         this.area = this.width * this.height;
@@ -9,7 +11,7 @@ class Paint {
         this.color_master = color;
 
         this.brush_size = 20;  // area of stroke
-        this.counter_max = 40;
+        this.counter_max = 100;
 
         this.primaryStrokeWeight = 2;
         this.secondaryStrokeWeight = 1;
@@ -67,9 +69,11 @@ class Paint {
         this.brush_loops = brush_loops;
         this.stroke_size = stroke_size;
         this.color_noise = color_noise;
+        this.opacity_value = "38";
+        // this.opacity_value = "ad";
 
         if (this.counter <= this.counter_max) {
-            this.color = brightenColor(distortColor(color(this.color_master), this.color_noise), 30);
+            this.color = brightenColor(distortColor(color(this.color_master + this.opacity_value), this.color_noise), 30);
 
             this.counter += 1;
 

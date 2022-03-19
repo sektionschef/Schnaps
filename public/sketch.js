@@ -65,19 +65,36 @@ function setup() {
   logging.info("hash number: " + fxhash_number);
   noiseSeed(fxhash_number);
 
+  let minAreaSize = 50;
+  let maxAreaSize = 350;
+  let minPosX = - width / 2 - 50;
+  let minPosY = - height / 2 - 50;
+  let maxPosX = width / 2 + 50;
+  let maxPosY = height / 2 + 50;
+  // let colorArea = own color for each area
+  all_areas = []
+  for (let i = 0; i < 300; i++) {
+    all_areas.push(
+      new Paint(
+        getRandomFromInterval(minAreaSize, maxAreaSize),
+        getRandomFromInterval(minAreaSize, maxAreaSize),
+        getRandomFromInterval(minPosX, maxPosX),
+        getRandomFromInterval(minPosY, maxPosY),
+        "#123456"
+      ));
+  }
 
-
-  painted_area = new Paint(200, 400, 155);
-  painted_area_2 = new Paint(300, 500, "#123456");
+  painted_area = new Paint(200, 400, 50, 100, "#babdff");
+  painted_area_2 = new Paint(300, 500, 100, 60, "#123456");
 
   paper = Pattern.create_corroded_area(width, height);
   // dots = Pattern.create_dots(width, height);
-  noise = Pattern.create_noise(100, 100);
+  // normal_noise = Pattern.create_noise(100, 100);
   canvasOverlay = Pattern.create_canvas(width, height);
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
-  // fog = Pattern.create_noise_fog(100, 100);
+  // fog = Pattern.create_noise_fog(300, 300);
 
   background(100);
 
@@ -100,11 +117,17 @@ function draw() {
 
   painted_area.show();
   painted_area_2.show();
-  image(painted_area_2.buffer, - painted_area_2.buffer.width / 2 + 200, - painted_area_2.buffer.height / 2, painted_area_2.buffer.width, painted_area_2.buffer.height);
-  image(painted_area.buffer, - painted_area.buffer.width / 2, - painted_area.buffer.height / 2, painted_area.buffer.width, painted_area.buffer.height);
+  image(painted_area.buffer, painted_area.posX, painted_area.posY, painted_area.buffer.width, painted_area.buffer.height);
+  image(painted_area_2.buffer, painted_area_2.posX, painted_area_2.posY, painted_area_2.buffer.width, painted_area_2.buffer.height);
 
+
+  for (let area of all_areas) {
+    area.show();
+    image(area.buffer, area.posX, area.posY, area.buffer.width, area.buffer.height);
+  }
+
+  // image(fog, - 300, - 200, fog.width, fog.height);
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
-  // image(noise, - width / 2, - height / 2, noise.width, noise.height);
 
 
   // if (grid.boxes_completely_run == true && preview_called == false) {

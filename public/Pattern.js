@@ -44,17 +44,17 @@ class Pattern {
 
         // noiseDetail(8, 0.65);
 
-        let inc = 0.01;  // 0.01
+        let inc = 0.05;  // 0.01
         let opacityValue = 255;
 
-        this.buffer = createGraphics(custom_width, custom_height);
+        let buffer = createGraphics(custom_width, custom_height);
 
         let yoff = 0;
-        this.buffer.loadPixels();
-        for (let y = 0; y < height; y++) {
+        buffer.loadPixels();
+        for (let y = 0; y < buffer.height; y++) {
             let xoff = 0;
-            for (let x = 0; x < width; x++) {
-                let index = (x + y * width) * 4;
+            for (let x = 0; x < buffer.width; x++) {
+                let index = (x + y * buffer.width) * 4;
 
                 // let r = noise(xoff, yoff) * 255;
                 // this.buffer.pixels[index + 0] = r;
@@ -63,20 +63,19 @@ class Pattern {
                 // this.buffer.pixels[index + 3] = 255;
 
                 let r = noise(xoff, yoff) * 30;
-                this.buffer.pixels[index + 0] = 50 + r;
-                this.buffer.pixels[index + 1] = 90 + r;
-                this.buffer.pixels[index + 2] = 0 + r;
-                // this.buffer.pixels[index + 3] = 100 + r;
-                this.buffer.pixels[index + 3] = opacityValue;
+                buffer.pixels[index + 0] = 50 + r;
+                buffer.pixels[index + 1] = 90 + r;
+                buffer.pixels[index + 2] = 0 + r;
+                buffer.pixels[index + 3] = opacityValue;
 
 
                 xoff += inc;
             }
             yoff += inc;
         }
-        this.buffer.updatePixels();
+        buffer.updatePixels();
 
-        return this.buffer;
+        return buffer;
     }
 
 
