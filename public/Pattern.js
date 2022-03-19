@@ -37,6 +37,31 @@ class Pattern {
         // background_buffer.point(getRandomFromInterval(0, width), getRandomFromInterval(0, height));
     }
 
+    create_noise_fog(custom_width, custom_height) {
+
+        this.buffer = createGraphics(custom_width, custom_height);
+
+        let yoff = 0;
+        this.buffer.loadPixels();
+        for (let y = 0; y < height; y++) {
+            let xoff = 0;
+            for (let x = 0; x < width; x++) {
+                let index = (x + y * width) * 4;
+                // let r = random(255);
+                let r = noise(xoff, yoff) * 255;
+                this.buffer.pixels[index + 0] = r;
+                this.buffer.pixels[index + 1] = r;
+                this.buffer.pixels[index + 2] = r;
+                this.buffer.pixels[index + 3] = 255;
+
+                xoff += inc;
+            }
+            yoff += inc;
+        }
+        this.buffer.updatePixels();
+    }
+
+
     create_canvas(custom_width, custom_height) {
 
         const colory = 190;

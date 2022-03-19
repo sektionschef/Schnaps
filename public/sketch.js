@@ -39,6 +39,8 @@ let preview_called = false;
 let fxhash_number;
 let xoff = 0;
 
+let inc = 0.01;
+
 
 logging.info("FXHASH: " + fxhash);
 // logging.info("Grid: " + GRID);
@@ -56,6 +58,7 @@ function preload() {
 }
 
 function setup() {
+  pixelDensity(1);
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
   let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
@@ -78,6 +81,9 @@ function setup() {
   // brush.create_lines(width, height);
   // brush.create_bars(width, height);
 
+  fog = new Pattern();
+  fog.create_noise_fog(width, height);
+
   background(100);
 
   resize_canvas();
@@ -99,9 +105,11 @@ function draw() {
 
   image(brush.buffer, - width / 2, - height / 2, brush.buffer.width, brush.buffer.height);
 
-  xoff = xoff + 0.01;
-  let n = noise(xoff) * width;
-  line(n, - height / 2, n, height / 2);
+  image(fog.buffer, - width / 2, - height / 2, fog.buffer.width, fog.buffer.height);
+
+  // xoff = xoff + 0.01;
+  // let n = noise(xoff, xoff);
+  // line(n[0], - height / 2, n[1], height / 2);
 
   // if (grid.boxes_completely_run == true && preview_called == false) {
   //   logging.debug("all work is done");
