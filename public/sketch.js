@@ -39,8 +39,6 @@ let preview_called = false;
 let fxhash_number;
 let xoff = 0;
 
-let inc = 0.01;
-
 
 logging.info("FXHASH: " + fxhash);
 // logging.info("Grid: " + GRID);
@@ -64,7 +62,7 @@ function setup() {
   let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
 
   fxhash_number = hashFnv32a(fxhash);
-  console.log(fxhash_number);
+  logging.info("hash number: " + fxhash_number);
   noiseSeed(fxhash_number);
 
 
@@ -97,15 +95,15 @@ function draw() {
   ambientMaterial(255);
 
   // image(paper.buffer, - width / 2, - height / 2, paper.buffer.width, paper.buffer.height);
+  image(fog.buffer, - width / 2, - height / 2, fog.buffer.width, fog.buffer.height);
 
-  painted_area.show();
-  painted_area_2.show();
-  image(painted_area_2.buffer, - painted_area_2.buffer.width / 2 + 200, - painted_area_2.buffer.height / 2, painted_area_2.buffer.width, painted_area_2.buffer.height);
-  image(painted_area.buffer, - painted_area.buffer.width / 2, - painted_area.buffer.height / 2, painted_area.buffer.width, painted_area.buffer.height);
+  // painted_area.show();
+  // painted_area_2.show();
+  // image(painted_area_2.buffer, - painted_area_2.buffer.width / 2 + 200, - painted_area_2.buffer.height / 2, painted_area_2.buffer.width, painted_area_2.buffer.height);
+  // image(painted_area.buffer, - painted_area.buffer.width / 2, - painted_area.buffer.height / 2, painted_area.buffer.width, painted_area.buffer.height);
 
   image(brush.buffer, - width / 2, - height / 2, brush.buffer.width, brush.buffer.height);
 
-  image(fog.buffer, - width / 2, - height / 2, fog.buffer.width, fog.buffer.height);
 
   // xoff = xoff + 0.01;
   // let n = noise(xoff, xoff);

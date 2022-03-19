@@ -39,6 +39,8 @@ class Pattern {
 
     create_noise_fog(custom_width, custom_height) {
 
+        let inc = 0.01;  // 0.01
+
         this.buffer = createGraphics(custom_width, custom_height);
 
         let yoff = 0;
@@ -47,12 +49,20 @@ class Pattern {
             let xoff = 0;
             for (let x = 0; x < width; x++) {
                 let index = (x + y * width) * 4;
-                // let r = random(255);
-                let r = noise(xoff, yoff) * 255;
-                this.buffer.pixels[index + 0] = r;
-                this.buffer.pixels[index + 1] = r;
-                this.buffer.pixels[index + 2] = r;
+
+                // let r = noise(xoff, yoff) * 255;
+                // this.buffer.pixels[index + 0] = r;
+                // this.buffer.pixels[index + 1] = r;
+                // this.buffer.pixels[index + 2] = r;
+                // this.buffer.pixels[index + 3] = 255;
+
+                let r = noise(xoff, yoff) * 30;
+                this.buffer.pixels[index + 0] = 50 + r;
+                this.buffer.pixels[index + 1] = 90 + r;
+                this.buffer.pixels[index + 2] = 0 + r;
+                // this.buffer.pixels[index + 3] = 100 + r;
                 this.buffer.pixels[index + 3] = 255;
+
 
                 xoff += inc;
             }
