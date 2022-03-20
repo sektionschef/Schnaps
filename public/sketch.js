@@ -66,7 +66,7 @@ function setup() {
   noiseSeed(fxhash_number);
 
   // RANDOM AREAS
-  // let minAreaSize = 50;
+  // let minAreaSize = 100;
   // let maxAreaSize = 350;
   // let minPosX = - width / 2 - 50;
   // let minPosY = - height / 2 - 50;
@@ -75,7 +75,7 @@ function setup() {
   // // let colorArea = own color for each area
   // all_areas = []
   // for (let i = 0; i < 180; i++) {
-  //   let random_color_code = "#123456";
+  //   let random_color_code = getRandomFromList(["#123456", "#babdff", "#a0a3e8", "#9fa2ed", "#9799d1", "#fadc57"]);
   //   // let random_color_code = ("#babdff" + getRandomFromList(["f3", "cc", "99", "43"]))
   //   all_areas.push(
   //     new Paint(
@@ -88,10 +88,10 @@ function setup() {
   // }
 
 
-  painted_area = new Paint(200, 400, -350, -200, "#babdff");
-  painted_area_2 = new Paint(300, 500, -80, -250, "#123456");
+  // painted_area = new Paint(200, 400, -200, -200, "#babdff");
+  // painted_area_2 = new Paint(300, 500, 0, -250, "#123456");
 
-  paper = Pattern.create_corroded_area(width, height);
+  // paper = Pattern.create_corroded_area(width, height);
   // dots = Pattern.create_dots(width, height);
   // normal_noise = Pattern.create_noise(100, 100);
   canvasOverlay = Pattern.create_canvas(width, height);
@@ -99,6 +99,8 @@ function setup() {
   // bars = Pattern.create_bars(width, height);
 
   // fog = Pattern.create_noise_fog(300, 300);
+
+  // splatter = Pattern.create_splatter_splitter(width, height);
 
   background(100);
 
@@ -112,23 +114,25 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  image(paper, - width / 2, - height / 2, paper.width, paper.height);
-
+  // image(paper, - width / 2, - height / 2, paper.width, paper.height);
+  // image(splatter, - width / 2, - height / 2, splatter.width, splatter.height);
 
   // maska
   // brush.buffer = brush.buffer.get();
   // brush.buffer.mask(fog.buffer);
 
-  painted_area.show();
-  painted_area_2.show();
-  image(painted_area.buffer, painted_area.posX, painted_area.posY, painted_area.buffer.width, painted_area.buffer.height);
-  image(painted_area_2.buffer, painted_area_2.posX, painted_area_2.posY, painted_area_2.buffer.width, painted_area_2.buffer.height);
+  // painted_area.show();
+  // painted_area_2.show();
+  // image(painted_area.buffer, painted_area.posX, painted_area.posY, painted_area.buffer.width, painted_area.buffer.height);
+  // image(painted_area_2.buffer, painted_area_2.posX, painted_area_2.posY, painted_area_2.buffer.width, painted_area_2.buffer.height);
 
   // RANDOM AREAS
   // for (let area of all_areas) {
   //   area.show();
   //   image(area.buffer, area.posX, area.posY, area.buffer.width, area.buffer.height);
   // }
+
+  paint();
 
   // image(fog, - 300, - 200, fog.width, fog.height);
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
@@ -142,3 +146,48 @@ function draw() {
 
 }
 
+function paint() {
+
+  let startX = 40;
+  let startY = 60;
+  let sizeStroke = 5;
+  let linesAmount = 30;
+
+  strokeWeight(sizeStroke);
+  stroke("red");
+  noFill();
+
+  for (var i = 0; i < linesAmount; i++) {
+
+    curveTightness(5);
+    beginShape();
+    curveVertex(startX, startY + sizeStroke * i);
+    curveVertex(startX, startY + sizeStroke * i);
+    curveVertex(80, startY + sizeStroke * i);
+    curveVertex(160, startY + sizeStroke * i);
+    curveVertex(160, startY + sizeStroke * i);
+    endShape();
+
+    strokeWeight(sizeStroke);
+    stroke("black");
+    noFill();
+    beginShape();
+    curveVertex(startX, startY + sizeStroke);
+    curveVertex(startX, startY + sizeStroke);
+    curveVertex(80, 65);
+    curveVertex(160, 65);
+    curveVertex(160, 65);
+    endShape();
+
+    strokeWeight(sizeStroke);
+    stroke("green");
+    noFill();
+    beginShape();
+    curveVertex(startX, startY + sizeStroke * 2);
+    curveVertex(startX, startY + sizeStroke * 2);
+    curveVertex(80, 70);
+    curveVertex(160, 70);
+    curveVertex(160, 70);
+    endShape();
+  }
+}
