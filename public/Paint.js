@@ -73,7 +73,7 @@ class Paint {
         // this.opacity_value = "ad";
 
         if (this.counter <= this.counter_max) {
-            this.color = brightenColor(distortColor(color(this.color_master + this.opacity_value), this.color_noise), 30);
+            this.color = lessenColor(brightenColor(distortColor(color(this.color_master + this.opacity_value), this.color_noise), 30), 100);
 
             this.counter += 1;
 

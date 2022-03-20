@@ -65,27 +65,31 @@ function setup() {
   logging.info("hash number: " + fxhash_number);
   noiseSeed(fxhash_number);
 
-  let minAreaSize = 50;
-  let maxAreaSize = 350;
-  let minPosX = - width / 2 - 50;
-  let minPosY = - height / 2 - 50;
-  let maxPosX = width / 2 + 50;
-  let maxPosY = height / 2 + 50;
-  // let colorArea = own color for each area
-  all_areas = []
-  for (let i = 0; i < 300; i++) {
-    all_areas.push(
-      new Paint(
-        getRandomFromInterval(minAreaSize, maxAreaSize),
-        getRandomFromInterval(minAreaSize, maxAreaSize),
-        getRandomFromInterval(minPosX, maxPosX),
-        getRandomFromInterval(minPosY, maxPosY),
-        "#123456"
-      ));
-  }
+  // RANDOM AREAS
+  // let minAreaSize = 50;
+  // let maxAreaSize = 350;
+  // let minPosX = - width / 2 - 50;
+  // let minPosY = - height / 2 - 50;
+  // let maxPosX = width / 2 + 50;
+  // let maxPosY = height / 2 + 50;
+  // // let colorArea = own color for each area
+  // all_areas = []
+  // for (let i = 0; i < 180; i++) {
+  //   let random_color_code = "#123456";
+  //   // let random_color_code = ("#babdff" + getRandomFromList(["f3", "cc", "99", "43"]))
+  //   all_areas.push(
+  //     new Paint(
+  //       getRandomFromInterval(minAreaSize, maxAreaSize),
+  //       getRandomFromInterval(minAreaSize, maxAreaSize),
+  //       getRandomFromInterval(minPosX, maxPosX),
+  //       getRandomFromInterval(minPosY, maxPosY),
+  //       random_color_code
+  //     ));
+  // }
 
-  painted_area = new Paint(200, 400, 50, 100, "#babdff");
-  painted_area_2 = new Paint(300, 500, 100, 60, "#123456");
+
+  painted_area = new Paint(200, 400, -350, -200, "#babdff");
+  painted_area_2 = new Paint(300, 500, -80, -250, "#123456");
 
   paper = Pattern.create_corroded_area(width, height);
   // dots = Pattern.create_dots(width, height);
@@ -120,11 +124,11 @@ function draw() {
   image(painted_area.buffer, painted_area.posX, painted_area.posY, painted_area.buffer.width, painted_area.buffer.height);
   image(painted_area_2.buffer, painted_area_2.posX, painted_area_2.posY, painted_area_2.buffer.width, painted_area_2.buffer.height);
 
-
-  for (let area of all_areas) {
-    area.show();
-    image(area.buffer, area.posX, area.posY, area.buffer.width, area.buffer.height);
-  }
+  // RANDOM AREAS
+  // for (let area of all_areas) {
+  //   area.show();
+  //   image(area.buffer, area.posX, area.posY, area.buffer.width, area.buffer.height);
+  // }
 
   // image(fog, - 300, - 200, fog.width, fog.height);
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
