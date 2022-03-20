@@ -57,11 +57,12 @@ class Pattern {
                 let index = (x + y * buffer.width) * 4;
 
                 // let r = noise(xoff, yoff) * 255;
-                // this.buffer.pixels[index + 0] = r;
-                // this.buffer.pixels[index + 1] = r;
-                // this.buffer.pixels[index + 2] = r;
-                // this.buffer.pixels[index + 3] = 255;
+                // buffer.pixels[index + 0] = r;
+                // buffer.pixels[index + 1] = r;
+                // buffer.pixels[index + 2] = r;
+                // buffer.pixels[index + 3] = 255;
 
+                // CUSTOM COLOR
                 let r = noise(xoff, yoff) * 30;
                 buffer.pixels[index + 0] = 50 + r;
                 buffer.pixels[index + 1] = 90 + r;
@@ -174,6 +175,43 @@ class Pattern {
             this.buffer.line(x, 0, x, this.buffer.height);
         }
         return this.buffer;
+    }
+
+    static create_splatter_splitter(custom_width, custom_height) {
+        let inc = 0.08;
+        let opacityValue = 255;
+
+        let buffer = createGraphics(custom_width, custom_height);
+
+        let yoff = 0;
+        buffer.loadPixels();
+        for (let y = 0; y < buffer.height; y++) {
+            let xoff = 0;
+            for (let x = 0; x < buffer.width; x++) {
+                let index = (x + y * buffer.width) * 4;
+
+                let perlinValue = noise(xoff, yoff)
+                if (perlinValue >= 0.65) {
+                    buffer.pixels[index + 0] = perlinValue * 155;
+                    buffer.pixels[index + 1] = perlinValue * 155;
+                    buffer.pixels[index + 2] = perlinValue * 155;
+                    buffer.pixels[index + 3] = 155;
+                }
+                if (perlinValue >= 0.75) {
+                    buffer.pixels[index + 0] = perlinValue * 255;
+                    buffer.pixels[index + 1] = perlinValue * 255;
+                    buffer.pixels[index + 2] = perlinValue * 255;
+                    buffer.pixels[index + 3] = 255;
+                }
+
+
+                xoff += inc;
+            }
+            yoff += inc;
+        }
+        buffer.updatePixels();
+
+        return buffer;
     }
 
 }

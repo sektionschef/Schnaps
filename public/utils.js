@@ -39,17 +39,12 @@ function brightenColor(colorObject, diff) {
 }
 
 function lessenColor(colorObject, diff) {
-    let diff_constant = getRandomFromInterval(-diff, diff)
+    let diff_constant = getRandomFromInterval(0, -diff)
     let red = colorObject.levels[0];
     let green = colorObject.levels[1];
     let blue = colorObject.levels[2];
-    let opacity = (colorObject.levels[3] + diff_constant);
-
-    // not larger than 255 and not smaller than 0
-    red = Math.min(Math.max(parseInt(red), 0), 255);
-    green = Math.min(Math.max(parseInt(green), 0), 255);
-    blue = Math.min(Math.max(parseInt(blue), 0), 255);
-    opacity = Math.min(Math.max(parseInt(opacity), 0), 255);
+    // let opacity = (colorObject.levels[3] - diff_constant);
+    let opacity = constrain(colorObject.levels[3] + diff_constant, 0, 255);
 
     return color(red, green, blue, opacity);
 }

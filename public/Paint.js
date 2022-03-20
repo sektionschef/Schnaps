@@ -16,7 +16,7 @@ class Paint {
         this.primaryStrokeWeight = 2;
         this.secondaryStrokeWeight = 1;
 
-        this.brushTightness = 3 // 0-5
+        this.brushTightness = 1 // 0-5
         this.counter = 0;
 
         this.area_fully_painted = false;
@@ -69,11 +69,13 @@ class Paint {
         this.brush_loops = brush_loops;
         this.stroke_size = stroke_size;
         this.color_noise = color_noise;
-        this.opacity_value = "38";
+        this.brightness_noise = 30;
+        this.opacity_noise = 250;  // 100
+        // this.opacity_value = "38";
         // this.opacity_value = "ad";
 
         if (this.counter <= this.counter_max) {
-            this.color = lessenColor(brightenColor(distortColor(color(this.color_master + this.opacity_value), this.color_noise), 30), 100);
+            this.color = lessenColor(brightenColor(distortColor(color(this.color_master), this.color_noise), this.brightness_noise), this.opacity_noise);
 
             this.counter += 1;
 
