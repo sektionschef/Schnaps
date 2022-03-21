@@ -102,6 +102,8 @@ function setup() {
 
   // splatter = Pattern.create_splatter_splitter(width, height);
 
+  brush = new Brush();
+
   background(100);
 
   resize_canvas();
@@ -132,7 +134,7 @@ function draw() {
   //   image(area.buffer, area.posX, area.posY, area.buffer.width, area.buffer.height);
   // }
 
-  paint();
+  brush.show();
 
   // image(fog, - 300, - 200, fog.width, fog.height);
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
@@ -144,50 +146,4 @@ function draw() {
   //   preview_called = true;
   // }
 
-}
-
-function paint() {
-
-  let startX = 40;
-  let startY = 60;
-  let sizeStroke = 5;
-  let linesAmount = 30;
-
-  strokeWeight(sizeStroke);
-  stroke("red");
-  noFill();
-
-  for (var i = 0; i < linesAmount; i++) {
-
-    curveTightness(5);
-    beginShape();
-    curveVertex(startX, startY + sizeStroke * i);
-    curveVertex(startX, startY + sizeStroke * i);
-    curveVertex(80, startY + sizeStroke * i);
-    curveVertex(160, startY + sizeStroke * i);
-    curveVertex(160, startY + sizeStroke * i);
-    endShape();
-
-    strokeWeight(sizeStroke);
-    stroke("black");
-    noFill();
-    beginShape();
-    curveVertex(startX, startY + sizeStroke);
-    curveVertex(startX, startY + sizeStroke);
-    curveVertex(80, 65);
-    curveVertex(160, 65);
-    curveVertex(160, 65);
-    endShape();
-
-    strokeWeight(sizeStroke);
-    stroke("green");
-    noFill();
-    beginShape();
-    curveVertex(startX, startY + sizeStroke * 2);
-    curveVertex(startX, startY + sizeStroke * 2);
-    curveVertex(80, 70);
-    curveVertex(160, 70);
-    curveVertex(160, 70);
-    endShape();
-  }
 }
