@@ -4,6 +4,8 @@
 * canvas dann drüber, als static method? https://www.w3schools.com/js/js_class_static.asp 
 * schiefe rechtecke
 
+* ukranian cities
+
 * reset brauch ich wieder
 
 # Shortcuts

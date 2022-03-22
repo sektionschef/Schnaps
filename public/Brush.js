@@ -1,14 +1,18 @@
 class Fibre {
-    constructor(brushStartX, brushStartY, brushStopX) {
+    constructor(brushStartX, brushStartY, brushStopX, brushStrokeSize) {
         this.startXNoise = 5;
         this.startY = brushStartY;
+        this.brushStrokeSize = brushStrokeSize;  // default value
 
-        this.sizeStroke = 1.5;
-        this.curveTightness = 5;
+        this.curveTightness = 3;
         this.baseColor = "#ed4f3e";
         this.colorNoise = 20;
-        this.brightnessNoise = 50;
+        this.brightnessNoise = 30;
+        this.strokeSizeNoise = 0.2;
+        this.yNoise = 2;
 
+        this.posMiddleY = this.startY + getRandomFromInterval(-this.yNoise, this.yNoise);
+        this.sizeStroke = brushStrokeSize + getRandomFromInterval(-this.strokeSizeNoise, this.strokeSizeNoise);
         this.startX = brushStartX + getRandomFromInterval(-this.startXNoise, this.startXNoise);
         this.stopX = brushStopX + getRandomFromInterval(-this.startXNoise, this.startXNoise);
         this.colorFibre = brightenColor(distortColor(color(this.baseColor), this.colorNoise), this.brightnessNoise)
@@ -22,11 +26,13 @@ class Fibre {
         strokeWeight(this.sizeStroke);
 
         beginShape();
-        curveVertex(this.startX, this.startY + this.sizeStroke * i);
-        curveVertex(this.startX, this.startY + this.sizeStroke * i);
-        // curveVertex(80, this.startY + this.sizeStroke * i);
-        curveVertex(this.stopX, this.startY + this.sizeStroke * i);
-        curveVertex(this.stopX, this.startY + this.sizeStroke * i);
+        curveVertex(this.startX, this.startY + this.brushStrokeSize * i);
+        curveVertex(this.startX, this.startY + this.brushStrokeSize * i);
+        // middle
+        curveVertex(this.startX + (this.stopX - this.startX) / 2, this.posMiddleY + this.brushStrokeSize * i);
+        // end
+        curveVertex(this.stopX, this.startY + this.brushStrokeSize * i);
+        curveVertex(this.stopX, this.startY + this.brushStrokeSize * i);
         endShape();
     }
 }
@@ -38,11 +44,18 @@ class Brush {
         this.brushStopX = 160;
         // this.brushStartY = 60;
 
+        this.sizeStroke = 1.5;
+
         this.fibresAmount = 30;
         this.fibres = []
 
         for (var i = 0; i < this.fibresAmount; i++) {
-            this.fibres.push(new Fibre(this.brushStartX, this.brushStartY, this.brushStopX));
+            this.fibres.push(new Fibre(
+                this.brushStartX,
+                this.brushStartY,
+                this.brushStopX,
+                this.sizeStroke
+            ));
         }
 
     }

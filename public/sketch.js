@@ -104,8 +104,6 @@ function setup() {
 
   brush = new Brush();
 
-  background(100);
-
   resize_canvas();
 }
 
@@ -115,6 +113,8 @@ function draw() {
   // orbitControl(1, 1, 0.1);
   ambientLight(255, 255, 255);
   ambientMaterial(255);
+
+  background(100);
 
   // image(paper, - width / 2, - height / 2, paper.width, paper.height);
   // image(splatter, - width / 2, - height / 2, splatter.width, splatter.height);
