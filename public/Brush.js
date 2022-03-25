@@ -5,7 +5,8 @@ class Fibre {
         this.brushStrokeSize = brushStrokeSize;  // default value
 
         this.curveTightness = 3;
-        this.baseColor = "#ed4f3e";
+        // this.baseColor = "#ed4f3e";
+        this.baseColor = color2;
         this.colorNoise = 20;
         this.brightnessNoise = 30;
         this.strokeSizeNoise = 0.2;

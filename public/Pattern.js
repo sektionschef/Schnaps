@@ -40,12 +40,15 @@ class Pattern {
         return this.buffer;
     }
 
-    static create_noise_fog(custom_width, custom_height) {
+    static create_noise_fog(custom_width, custom_height, inc, colorObject) {
 
-        // noiseDetail(8, 0.65);
+        // noiseDetail(2, 0.65);
+        noiseDetail(8, 0.5);
+        // noiseDetail(12, 0.8);
 
-        let inc = 0.05;  // 0.01
-        let opacityValue = 255;
+        // let inc = 0.01;  // 0.01 - 0.04
+        // let opacityValue = 255;
+        let opacityValue = 0;
 
         let buffer = createGraphics(custom_width, custom_height);
 
@@ -60,15 +63,24 @@ class Pattern {
                 // buffer.pixels[index + 0] = r;
                 // buffer.pixels[index + 1] = r;
                 // buffer.pixels[index + 2] = r;
-                // buffer.pixels[index + 3] = 255;
+                // buffer.pixels[index + 3] = r;  // 255
 
-                // CUSTOM COLOR
-                let r = noise(xoff, yoff) * 30;
-                buffer.pixels[index + 0] = 50 + r;
-                buffer.pixels[index + 1] = 90 + r;
-                buffer.pixels[index + 2] = 0 + r;
-                buffer.pixels[index + 3] = opacityValue;
+                // CUSTOM COLOR 52, 100, 235
+                // let r = noise(xoff, yoff) * 30;
+                // buffer.pixels[index + 0] = 52 + r;
+                // buffer.pixels[index + 1] = 100 + r;
+                // buffer.pixels[index + 2] = 235 + r;
+                // buffer.pixels[index + 3] = opacityValue;
 
+                // mix colors
+                let r = noise(xoff, yoff) * getRandomFromInterval(0, 80);
+                let g = noise(xoff, yoff) * getRandomFromInterval(0, 80);
+                let b = noise(xoff, yoff) * getRandomFromInterval(0, 80);
+                let alpha = noise(xoff, yoff) * 255;
+                buffer.pixels[index + 0] = colorObject.levels[0] + r;
+                buffer.pixels[index + 1] = colorObject.levels[1] + g;
+                buffer.pixels[index + 2] = colorObject.levels[2] + b;
+                buffer.pixels[index + 3] = opacityValue + alpha;
 
                 xoff += inc;
             }

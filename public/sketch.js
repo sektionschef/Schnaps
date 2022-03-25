@@ -29,6 +29,11 @@ const PRIMARY_STROKE_WEIGHT_MIN = 2;
 const PRIMARY_STROKE_WEIGHT_MAX = 4;
 const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, PRIMARY_STROKE_WEIGHT_MAX);
 
+// palette = https://colorhunt.co/palette/97bfb4f5eedcdd4a484f091d
+const COLOR_1_HEX = "#97BFB4";
+const COLOR_2_HEX = "#F5EEDC";
+const COLOR_3_HEX = "#DD4A48";
+const COLOR_4_HEX = "#4F091D";
 
 // variable stuff
 let SCALING_FACTOR = 1;
@@ -65,6 +70,11 @@ function setup() {
   logging.info("hash number: " + fxhash_number);
   noiseSeed(fxhash_number);
 
+  color1 = color(COLOR_1_HEX);
+  color2 = color(COLOR_2_HEX);
+  color3 = color(COLOR_3_HEX);
+  color4 = color(COLOR_4_HEX);
+
   // RANDOM AREAS
   // let minAreaSize = 100;
   // let maxAreaSize = 350;
@@ -98,11 +108,16 @@ function setup() {
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
-  // fog = Pattern.create_noise_fog(300, 300);
+  noise_fog = Pattern.create_noise_fog(width, height, 0.01, color1);
+  noise_fog_2 = Pattern.create_noise_fog(width, height, 0.01, color3);
+  noise_fog_3 = Pattern.create_noise_fog(width, height, 0.005, color4);
 
   // splatter = Pattern.create_splatter_splitter(width, height);
 
   brush = new Brush();
+
+  // paper = paper.get()
+  // paper.mask(noise_fog);
 
   resize_canvas();
 }
@@ -114,7 +129,13 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  background(100);
+  background(color1);
+
+  // image(paper);
+  // shape = createGraphics(width, height);
+  // shape.ellipse(200, 200, 200, 200);
+  // paper = paper.get(); // convert to image
+  // paper.mask
 
   // image(paper, - width / 2, - height / 2, paper.width, paper.height);
   // image(splatter, - width / 2, - height / 2, splatter.width, splatter.height);
@@ -136,7 +157,10 @@ function draw() {
 
   brush.show();
 
-  // image(fog, - 300, - 200, fog.width, fog.height);
+  // blend on top in setup
+  image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
+  image(noise_fog_2, - width / 2, - height / 2, noise_fog_2.width, noise_fog_2.height);
+  // image(noise_fog_3, - width / 2, - height / 2, noise_fog_3.width, noise_fog_3.height);
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
 
 
@@ -146,4 +170,33 @@ function draw() {
   //   preview_called = true;
   // }
 
+}
+
+
+// https://github.com/royhzq/betajs
+function betaPDF(x, a, b) {
+  // Beta probability density function impementation
+  // using logarithms, no factorials involved.
+  // Overcomes the problem with large integers
+  return Math.exp(lnBetaPDF(x, a, b))
+}
+function lnBetaPDF(x, a, b) {
+  // Log of the Beta Probability Density Function
+  return ((a - 1) * Math.log(x) + (b - 1) * Math.log(1 - x)) - lnBetaFunc(a, b)
+}
+function lnBetaFunc(a, b) {
+  // Log Beta Function
+  // ln(Beta(x,y))
+  foo = 0.0;
+
+  for (i = 0; i < a - 2; i++) {
+    foo += Math.log(a - 1 - i);
+  }
+  for (i = 0; i < b - 2; i++) {
+    foo += Math.log(b - 1 - i);
+  }
+  for (i = 0; i < a + b - 2; i++) {
+    foo -= Math.log(a + b - 1 - i);
+  }
+  return foo
 }
