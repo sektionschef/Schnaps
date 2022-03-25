@@ -108,9 +108,9 @@ function setup() {
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
-  // noise_fog = Pattern.create_noise_fog(width, height, 0.01, color1);
-  // noise_fog_2 = Pattern.create_noise_fog(width, height, 0.01, color3);
-  // noise_fog_3 = Pattern.create_noise_fog(width, height, 0.005, color4);
+  noise_fog = Pattern.create_noise_fog(width, height, 0.01, color1);
+  noise_fog_2 = Pattern.create_noise_fog(width, height, 0.01, color3);
+  noise_fog_3 = Pattern.create_noise_fog(width, height, 0.005, color4);
 
   // splatter = Pattern.create_splatter_splitter(width, height);
 
@@ -168,9 +168,9 @@ function draw() {
   brush.show();
 
   // blend on top in setup
-  // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
-  // image(noise_fog_2, - width / 2, - height / 2, noise_fog_2.width, noise_fog_2.height);
-  // image(noise_fog_3, - width / 2, - height / 2, noise_fog_3.width, noise_fog_3.height);
+  image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
+  image(noise_fog_2, - width / 2, - height / 2, noise_fog_2.width, noise_fog_2.height);
+  image(noise_fog_3, - width / 2, - height / 2, noise_fog_3.width, noise_fog_3.height);
 
   for (var i = 0; i < binomial_points.length; i++) {
     push();

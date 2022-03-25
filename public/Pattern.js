@@ -76,11 +76,12 @@ class Pattern {
                 let r = noise(xoff, yoff) * getRandomFromInterval(0, 80);
                 let g = noise(xoff, yoff) * getRandomFromInterval(0, 80);
                 let b = noise(xoff, yoff) * getRandomFromInterval(0, 80);
-                let alpha = noise(xoff, yoff) * 255;
+                // let alpha = noise(xoff, yoff) * 255;
                 buffer.pixels[index + 0] = colorObject.levels[0] + r;
                 buffer.pixels[index + 1] = colorObject.levels[1] + g;
                 buffer.pixels[index + 2] = colorObject.levels[2] + b;
-                buffer.pixels[index + 3] = opacityValue + alpha;
+                // buffer.pixels[index + 3] = opacityValue + alpha;
+                buffer.pixels[index + 3] = 150;
 
                 xoff += inc;
             }
