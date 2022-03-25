@@ -108,9 +108,9 @@ function setup() {
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
-  noise_fog = Pattern.create_noise_fog(width, height, 0.01, color1);
-  noise_fog_2 = Pattern.create_noise_fog(width, height, 0.01, color3);
-  noise_fog_3 = Pattern.create_noise_fog(width, height, 0.005, color4);
+  // noise_fog = Pattern.create_noise_fog(width, height, 0.01, color1);
+  // noise_fog_2 = Pattern.create_noise_fog(width, height, 0.01, color3);
+  // noise_fog_3 = Pattern.create_noise_fog(width, height, 0.005, color4);
 
   // splatter = Pattern.create_splatter_splitter(width, height);
 
@@ -120,6 +120,16 @@ function setup() {
   // paper.mask(noise_fog);
 
   resize_canvas();
+
+  binomial_points = [];
+
+  for (var i = 0; i < 500; i++) {
+    x_input = getRandomFromInterval(30, 300)
+    binomial_points.push(createVector(x_input, (betaPDF(x = 0.5, a = x_input, b = x_input) * 10)));
+  }
+
+  console.log(binomial_points);
+
 }
 
 
@@ -158,9 +168,17 @@ function draw() {
   brush.show();
 
   // blend on top in setup
-  image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
-  image(noise_fog_2, - width / 2, - height / 2, noise_fog_2.width, noise_fog_2.height);
+  // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
+  // image(noise_fog_2, - width / 2, - height / 2, noise_fog_2.width, noise_fog_2.height);
   // image(noise_fog_3, - width / 2, - height / 2, noise_fog_3.width, noise_fog_3.height);
+
+  for (var i = 0; i < binomial_points.length; i++) {
+    push();
+    strokeWeight(2);
+    point(binomial_points[i].x, binomial_points[i].y);
+    pop();
+  }
+
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
 
 
@@ -169,6 +187,8 @@ function draw() {
   //   fxpreview();
   //   preview_called = true;
   // }
+
+
 
 }
 
