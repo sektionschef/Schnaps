@@ -133,8 +133,6 @@ function setup() {
   }
   // console.log(binomial_points);
 
-  background(color1);
-
 }
 
 
@@ -144,7 +142,7 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  // background(color1);
+  background(color1);
 
   // image(paper);
   // shape = createGraphics(width, height);
@@ -189,7 +187,7 @@ function draw() {
   // }
 
   // CANVAS
-  // image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
+  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
 
 
   // if (grid.boxes_completely_run == true && preview_called == false) {
