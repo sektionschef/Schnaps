@@ -118,21 +118,23 @@ function setup() {
 
   // splatter = Pattern.create_splatter_splitter(width, height);
 
-  grainy_gradient = Pattern.create_grainy_gradient(200, 150);
+  grainy_gradient = Pattern.create_grainy_gradient(200, 550);
 
-  brush = new Brush();
+  // SINGLE BRUSHSTROKE
+  // brush = new Brush();
 
+  paintbrusharea = new PaintBrushArea(300, 400);
   // paper = paper.get()
   // paper.mask(noise_fog);
 
   resize_canvas();
 
-  binomial_points = [];
+  // binomial_points = [];
 
-  for (var i = 0; i < 500; i++) {
-    x_input = getRandomFromInterval(30, 300)
-    binomial_points.push(createVector(x_input, (betaPDF(x = 0.5, a = x_input, b = x_input) * 10)));
-  }
+  // for (var i = 0; i < 5000; i++) {
+  //   x_input = getRandomFromInterval(1, 600)
+  //   binomial_points.push(createVector(x_input, (betaPDF(x = 0.5, a = x_input, b = x_input) * 10)));
+  // }
   // console.log(binomial_points);
 
 }
@@ -173,9 +175,13 @@ function draw() {
   // PERLIN Noise
   // image(flowfield.update_noise(), -300, 0);
 
-  image(grainy_gradient, 0, 0, grainy_gradient.width, grainy_gradient.height);
+  // image(grainy_gradient, -100, -300, grainy_gradient.width, grainy_gradient.height);
 
+  // SINGLE BRUSHSTROKE
   // brush.show();
+
+  // paintbrusharea.show();
+  image(paintbrusharea.show(), 0, 0)
 
   // blend on top in setup
   // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);

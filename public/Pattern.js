@@ -257,7 +257,6 @@ class Pattern {
                 this.buffer.point(posX, posY);
                 pop();
             }
-            console.log(this.colorValueCurrent);
             this.colorValueCurrent += this.colorStep;
             this.numberParticlesCurrent -= this.numberParticlesPerStep;
         }
