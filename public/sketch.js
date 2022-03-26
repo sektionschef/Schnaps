@@ -76,7 +76,7 @@ function setup() {
   color4 = color(COLOR_4_HEX);
 
 
-  flowfield = new FlowField(600, 300);
+  // flowfield = new FlowField(600, 300);
 
   // RANDOM AREAS
   // let minAreaSize = 100;
@@ -117,6 +117,8 @@ function setup() {
   // noise_fog_3 = Pattern.create_noise_fog(width, height, 0.005, color4);
 
   // splatter = Pattern.create_splatter_splitter(width, height);
+
+  grainy_gradient = Pattern.create_grainy_gradient(200, 150);
 
   brush = new Brush();
 
@@ -169,7 +171,9 @@ function draw() {
   // }
 
   // PERLIN Noise
-  image(flowfield.update_noise(), -300, 0);
+  // image(flowfield.update_noise(), -300, 0);
+
+  image(grainy_gradient, 0, 0, grainy_gradient.width, grainy_gradient.height);
 
   // brush.show();
 
