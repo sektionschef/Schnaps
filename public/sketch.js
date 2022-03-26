@@ -75,6 +75,9 @@ function setup() {
   color3 = color(COLOR_3_HEX);
   color4 = color(COLOR_4_HEX);
 
+
+  flowfield = new FlowField();
+
   // RANDOM AREAS
   // let minAreaSize = 100;
   // let maxAreaSize = 350;
@@ -108,9 +111,10 @@ function setup() {
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
-  noise_fog = Pattern.create_noise_fog(width, height, 0.01, color1);
-  noise_fog_2 = Pattern.create_noise_fog(width, height, 0.01, color3);
-  noise_fog_3 = Pattern.create_noise_fog(width, height, 0.005, color4);
+  // check transparency and color mixing
+  // noise_fog = Pattern.create_noise_fog(width, height, 0.01, color1);
+  // noise_fog_2 = Pattern.create_noise_fog(width, height, 0.01, color3);
+  // noise_fog_3 = Pattern.create_noise_fog(width, height, 0.005, color4);
 
   // splatter = Pattern.create_splatter_splitter(width, height);
 
@@ -127,8 +131,9 @@ function setup() {
     x_input = getRandomFromInterval(30, 300)
     binomial_points.push(createVector(x_input, (betaPDF(x = 0.5, a = x_input, b = x_input) * 10)));
   }
+  // console.log(binomial_points);
 
-  console.log(binomial_points);
+  background(color1);
 
 }
 
@@ -139,7 +144,7 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  background(color1);
+  // background(color1);
 
   // image(paper);
   // shape = createGraphics(width, height);
@@ -165,21 +170,25 @@ function draw() {
   //   image(area.buffer, area.posX, area.posY, area.buffer.width, area.buffer.height);
   // }
 
-  brush.show();
+  flowfield.update_noise();
+
+  // brush.show();
 
   // blend on top in setup
-  image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
-  image(noise_fog_2, - width / 2, - height / 2, noise_fog_2.width, noise_fog_2.height);
-  image(noise_fog_3, - width / 2, - height / 2, noise_fog_3.width, noise_fog_3.height);
+  // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
+  // image(noise_fog_2, - width / 2, - height / 2, noise_fog_2.width, noise_fog_2.height);
+  // image(noise_fog_3, - width / 2, - height / 2, noise_fog_3.width, noise_fog_3.height);
 
-  for (var i = 0; i < binomial_points.length; i++) {
-    push();
-    strokeWeight(2);
-    point(binomial_points[i].x, binomial_points[i].y);
-    pop();
-  }
+  // BINOMIAL FUNCTION
+  // for (var i = 0; i < binomial_points.length; i++) {
+  //   push();
+  //   strokeWeight(2);
+  //   point(binomial_points[i].x, binomial_points[i].y);
+  //   pop();
+  // }
 
-  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
+  // CANVAS
+  // image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
 
 
   // if (grid.boxes_completely_run == true && preview_called == false) {

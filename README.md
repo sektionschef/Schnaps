@@ -1,14 +1,22 @@
 # Schnaps
 
-* random dots
+* Flow field check
+* gradient
+* document brush
+* slider adding for dingsi
+* framerate browser?? - fr = createP(''); // fr.html(floor(frameRate()));
+* reset brauch ich wieder
+* paint area with zig zag
+* perlin with more layers transparency + combine to one image
+* intersection
+* random dots for math function
 * lines
-* paint by image - https://editor.p5js.org/steinlav/sketches/dxdxe98f5
 * canvas dann drüber, als static method? https://www.w3schools.com/js/js_class_static.asp 
 * schiefe rechtecke
+* resize
 
+* paint by image. paper plane, noc - https://editor.p5js.org/steinlav/sketches/dxdxe98f5
 * ukranian cities
-
-* reset brauch ich wieder
 
 # Shortcuts
 * 's' | export png image
