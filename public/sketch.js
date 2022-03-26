@@ -76,7 +76,7 @@ function setup() {
   color4 = color(COLOR_4_HEX);
 
 
-  flowfield = new FlowField();
+  flowfield = new FlowField(300, 300);
 
   // RANDOM AREAS
   // let minAreaSize = 100;
@@ -170,7 +170,8 @@ function draw() {
   //   image(area.buffer, area.posX, area.posY, area.buffer.width, area.buffer.height);
   // }
 
-  flowfield.update_noise();
+  // PERLIN Noise
+  image(flowfield.update_noise(), 0, 0);
 
   // brush.show();
 

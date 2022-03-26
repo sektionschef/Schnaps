@@ -1,29 +1,30 @@
 // based dan shiffman on https://editor.p5js.org/codingtrain/sketches/vDcIAbfg7 & https://www.youtube.com/watch?v=BjoM9oKOAKY&t=1154s 
 
-
+// POS missing
 class FlowField {
     // needs a static background to see the traces - needs creategraphics()
-    constructor() {
+    constructor(custom_width, custom_height) {
         this.inc = 0.1;
-        this.scl = 50;
+        this.scl = 10;
         this.numberParticles = 300
 
-        this.particles = [];
+        this.buffer = createGraphics(custom_width, custom_height);
 
+        this.particles = [];
         this.create_grid();
         this.create_particles()
     }
 
     create_grid() {
-        this.cols = floor(width / this.scl);
-        this.rows = floor(height / this.scl);
+        this.cols = floor(this.buffer.width / this.scl);
+        this.rows = floor(this.buffer.height / this.scl);
 
         this.flowfield = new Array(this.cols * this.rows);
     }
 
     create_particles() {
         for (var i = 0; i < this.numberParticles; i++) {
-            this.particles[i] = new FlowFieldParticle(this.scl, this.cols);
+            this.particles[i] = new FlowFieldParticle(this.buffer, this.scl, this.cols);
         }
     }
 
@@ -63,12 +64,14 @@ class FlowField {
         }
 
         this.update_particles();
+        return this.buffer
     }
 }
 
 
 class FlowFieldParticle {
-    constructor(scl, cols) {
+    constructor(buffer, scl, cols) {
+        this.buffer = buffer;
         this.scl = scl;
         this.cols = cols;
 
@@ -99,12 +102,12 @@ class FlowFieldParticle {
     }
 
     show() {
-        push();
-        stroke(255, 60);  // 255, 10
-        strokeWeight(1);  // 1
-        // point(this.pos.x, this.pos.y);
-        line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
-        pop();
+        this.buffer.push();
+        this.buffer.stroke(255, 10);  // 255, 10
+        this.buffer.strokeWeight(1);  // 1
+        // this.buffer.point(this.pos.x, this.pos.y);
+        this.buffer.line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
+        this.buffer.pop();
         this.updatePrev();
     }
 
@@ -114,20 +117,20 @@ class FlowFieldParticle {
     }
 
     edges() {
-        if (this.pos.x > width / 2) {
-            this.pos.x = -width / 2;
+        if (this.pos.x > this.buffer.width) {
+            this.pos.x = 0;
             this.updatePrev();
         }
-        if (this.pos.x < -width / 2) {
-            this.pos.x = width / 2;
+        if (this.pos.x < 0) {
+            this.pos.x = this.buffer.width;
             this.updatePrev();
         }
-        if (this.pos.y > height / 2) {
-            this.pos.y = -height / 2;
+        if (this.pos.y > this.buffer.height) {
+            this.pos.y = 0;
             this.updatePrev();
         }
-        if (this.pos.y < -height / 2) {
-            this.pos.y = height / 2;
+        if (this.pos.y < 0) {
+            this.pos.y = this.buffer.height;
             this.updatePrev();
         }
 
