@@ -81,10 +81,10 @@ class PaintBrushArea {
 
     constructor(custom_width, custom_height, colorObject) {
         this.colorObject = colorObject;
-        this.NumberBrushStrokes = 150;
+        this.NumberBrushStrokes = 150;  //area and some rest
         this.brushLength = 50;  // default
         this.sizeStroke = 1.5;
-        this.numberFibres = 15;
+        this.numberFibres = 15;  // default
 
         this.overlap = 20;
         this.brightnessNoise = 30;
@@ -99,7 +99,8 @@ class PaintBrushArea {
             var posX = getRandomFromInterval(-this.overlap, this.buffer.width + this.overlap);
             var posY = getRandomFromInterval(-this.overlap, this.buffer.height + this.overlap);
             var brushLength_ = this.brushLength + getRandomFromInterval(-this.brushLength * 0.2, this.brushLength * 0.2);
-            this.brushStrokes.push(new Brush(this.buffer, colorBrush, posX, posY, brushLength_, this.sizeStroke, this.numberFibres));
+            var numberFibres_ = this.numberFibres + getRandomFromInterval(-this.numberFibres * 0.2, this.numberFibres * 0.2);
+            this.brushStrokes.push(new Brush(this.buffer, colorBrush, posX, posY, brushLength_, this.sizeStroke, numberFibres_));
         }
     }
 
