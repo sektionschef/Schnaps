@@ -1,6 +1,5 @@
 // based dan shiffman on https://editor.p5js.org/codingtrain/sketches/vDcIAbfg7 & https://www.youtube.com/watch?v=BjoM9oKOAKY&t=1154s 
 
-// POS missing
 class FlowField {
     // needs a static background to see the traces - needs creategraphics()
     constructor(custom_width, custom_height) {
@@ -40,9 +39,9 @@ class FlowField {
     update_noise() {
         var zoff = 0;
         var yoff = 0;
-        for (var y = -height / 2; y < this.rows; y++) {
+        for (var y = 0; y < this.rows; y++) {
             var xoff = 0;
-            for (var x = -width / 2; x < this.cols; x++) {
+            for (var x = 0; x < this.cols; x++) {
                 var index = x + y * this.cols;
                 var angle = noise(xoff, yoff, zoff) * TWO_PI * 4;
                 var v = p5.Vector.fromAngle(angle);
@@ -75,7 +74,7 @@ class FlowFieldParticle {
         this.scl = scl;
         this.cols = cols;
 
-        this.pos = createVector(getRandomFromInterval(-width / 2, width / 2), getRandomFromInterval(- height / 2, height / 2));
+        this.pos = createVector(getRandomFromInterval(0, this.buffer.width), getRandomFromInterval(0, this.buffer.height));
         this.vel = createVector(0, 0);
         this.acc = createVector(0, 0);
         this.maxspeed = 4;
@@ -103,7 +102,7 @@ class FlowFieldParticle {
 
     show() {
         this.buffer.push();
-        this.buffer.stroke(255, 10);  // 255, 10
+        this.buffer.stroke(255, 5);  // 255, 10
         this.buffer.strokeWeight(1);  // 1
         // this.buffer.point(this.pos.x, this.pos.y);
         this.buffer.line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
