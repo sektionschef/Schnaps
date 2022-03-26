@@ -229,29 +229,37 @@ class Pattern {
 
 
     static create_grainy_gradient(custom_width, custom_height) {
-        this.numberRows = 10;
-        this.numberParticlesPerStep = 30;
-        this.GrainSize = 3;
+        this.numberRows = 5;
+        this.numberParticlesPerStepMax = 350;
+        this.numberParticlesPerStepMin = 10;
+        this.colorValueStart = 0;
+        this.colorValueStop = 100;
+        this.GrainSize = 1;
+
+        this.numberParticlesCurrent = this.numberParticlesPerStepMax;
+        this.numberParticlesPerStep = floor((this.numberParticlesPerStepMax - this.numberParticlesPerStepMin) / (this.numberRows - 1))
+        this.colorValueCurrent = this.colorValueStart;
+        this.colorStep = floor((this.colorValueStop - this.colorValueStart) / (this.numberRows - 1))
 
         this.buffer = createGraphics(custom_width, custom_height);
 
         this.rowStepSize = floor(this.buffer.height / this.numberRows);
-        this.colorValue = 0
 
         for (var i = 0; i < this.numberRows; i++) {
-            for (var v = 0; v < this.numberParticlesPerStep; v++) {
+            for (var v = 0; v < this.numberParticlesCurrent; v++) {
 
                 var posX = getRandomFromInterval(0, this.buffer.width);
                 var posY = getRandomFromInterval(this.rowStepSize * i, this.rowStepSize * (i + 1))
 
                 push();
-                this.buffer.stroke(this.colorValue);
+                this.buffer.stroke(this.colorValueCurrent);
                 this.buffer.strokeWeight(this.GrainSize);
                 this.buffer.point(posX, posY);
                 pop();
             }
-
-            this.colorValue += 50;
+            console.log(this.colorValueCurrent);
+            this.colorValueCurrent += this.colorStep;
+            this.numberParticlesCurrent -= this.numberParticlesPerStep;
         }
 
 
