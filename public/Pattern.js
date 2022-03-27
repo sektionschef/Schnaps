@@ -190,15 +190,27 @@ class Pattern {
         return this.buffer;
     }
 
-    static create_splatter_splitter(custom_width, custom_height) {
-        // random artefacts as shapes. maxs of perlin noise colored.
-        let incMax = 0.2;
-        let incMin = 0.5
-        let inc = getRandomFromInterval(incMin, incMax);
-        noiseDetail(12, 0.6);
-        let opacityValue = 200;
-        let blackness = 160
+    // random artefacts as shapes. maxs of perlin noise colored.
+    static create_splatter_splitter(
+        custom_width,
+        custom_height,
+        incMin,
+        incMax,
+        noiseDetailLod,
+        noiseDetailFalloff,
+        opacityValue,
+        blackness,
+        perlinThreshold
+    ) {
+        // let incMax = 0.5;
+        // let incMin = 0.3
+        // noiseDetail(8, 0.6);
+        // let opacityValue = 50;
+        // let blackness = 160;
+        // let perlinThreshold = 0.90;  // minimum to get drawn
 
+        let inc = getRandomFromInterval(incMin, incMax);
+        noiseDetail(noiseDetailLod, noiseDetailFalloff)
         let buffer = createGraphics(custom_width, custom_height);
 
         let yoff = 0;
@@ -209,13 +221,7 @@ class Pattern {
                 let index = (x + y * buffer.width) * 4;
 
                 let perlinValue = noise(xoff, yoff)
-                // if (perlinValue >= 0.65) {
-                //     buffer.pixels[index + 0] = perlinValue * 40;
-                //     buffer.pixels[index + 1] = perlinValue * 40;
-                //     buffer.pixels[index + 2] = perlinValue * 40;
-                //     buffer.pixels[index + 3] = 50;
-                // }
-                if (perlinValue >= 0.90) {
+                if (perlinValue >= perlinThreshold) {
                     buffer.pixels[index + 0] = perlinValue * blackness;
                     buffer.pixels[index + 1] = perlinValue * blackness;
                     buffer.pixels[index + 2] = perlinValue * blackness;

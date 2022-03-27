@@ -75,6 +75,10 @@ function setup() {
   color3 = color(COLOR_3_HEX);
   color4 = color(COLOR_4_HEX);
 
+  slider = createSlider(0, 255, 100);
+  slider.position(10, 10);
+  slider.style('width', '300px');
+
 
   // flowfield = new FlowField(600, 300);
 

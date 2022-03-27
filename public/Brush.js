@@ -71,7 +71,17 @@ class Brush {
             ));
         }
 
-        this.splattery = Pattern.create_splatter_splitter(floor(widthX), this.sizeStroke * this.numberFibres);
+        this.splattery = Pattern.create_splatter_splitter(
+            floor(widthX),  // custom_width,
+            this.sizeStroke * this.numberFibres,  // custom_height,
+            0.9,  // incMin,
+            0.7,  // incMax,
+            8,  // noiseDetailLod,
+            0.7,  // noiseDetailFalloff,
+            50,  // opacityValue,
+            160,  // blackness,
+            0.8,  // minimum to get drawn
+        );
     }
 
     show() {
