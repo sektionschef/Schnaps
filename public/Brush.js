@@ -1,10 +1,10 @@
 class Fibre {
     constructor(buffer, colorObject, brushStartX, brushStartY, brushStopX, brushStrokeSize, angle) {
 
-        this.curveTightness = 3;  // shape of curve, between 0 and 5;
+        this.curveTightness = 3;  // shape of curve, between 0 and 5; little effect
 
         this.colorNoise = 10;
-        this.brightnessNoise = 10;
+        this.brightnessNoise = 20;
         this.strokeSizeNoise = 0.2;
         this.startXNoise = 5;  // start earlier or later
         this.yNoise = 2;
@@ -97,7 +97,7 @@ class PaintBrushArea {
         this.overlap = 30;  // adding to desired size
 
         this.brightnessNoise = 30;
-        this.colorNoise = 10;
+        this.colorNoise = 5;
         this.brushLengthNoise = 0.2;
         this.numberFibresNoise = 0.2;
 
