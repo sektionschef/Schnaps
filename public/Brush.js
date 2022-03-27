@@ -74,13 +74,13 @@ class Brush {
         this.splattery = Pattern.create_splatter_splitter(
             floor(widthX),  // custom_width,
             this.sizeStroke * this.numberFibres,  // custom_height,
-            0.9,  // incMin,
-            0.7,  // incMax,
+            0.3,  // incMin,
+            0.1,  // incMax,
             8,  // noiseDetailLod,
             0.7,  // noiseDetailFalloff,
             50,  // opacityValue,
             160,  // blackness,
-            0.8,  // minimum to get drawn
+            0.9,  // minimum to get drawn
         );
     }
 
@@ -88,8 +88,7 @@ class Brush {
         for (var i = 0; i < this.fibres.length; i++) {
             this.fibres[i].show(i);
         }
-        this.buffer.image(this.splattery, this.brushStartX, this.brushStartY);
-        // this.buffer.image(this.splattery, this.brushStartX, this.brushStartY, this.splattery.width, this.splattery.height);
+        this.buffer.image(this.splattery, this.brushStartX, this.brushStartY, this.splattery.width, this.splattery.height);
     }
 }
 
