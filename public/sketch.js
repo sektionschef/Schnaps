@@ -118,7 +118,7 @@ function setup() {
 
   // splatter = Pattern.create_splatter_splitter(width, height);
 
-  grainy_gradient = Pattern.create_grainy_gradient(200, 550);
+  // grainy_gradient = Pattern.create_grainy_gradient(200, 550);
 
   // SINGLE BRUSHSTROKE
   // brush = new Brush();
@@ -175,7 +175,6 @@ function draw() {
   // PERLIN Noise
   // image(flowfield.update_noise(), -300, 0);
 
-  // image(grainy_gradient, -100, -300, grainy_gradient.width, grainy_gradient.height);
 
   // SINGLE BRUSHSTROKE
   // brush.show();
@@ -187,6 +186,8 @@ function draw() {
   // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
   // image(noise_fog_2, - width / 2, - height / 2, noise_fog_2.width, noise_fog_2.height);
   // image(noise_fog_3, - width / 2, - height / 2, noise_fog_3.width, noise_fog_3.height);
+
+  // image(grainy_gradient, 100, 0, grainy_gradient.width, grainy_gradient.height);
 
   // BINOMIAL FUNCTION
   // for (var i = 0; i < binomial_points.length; i++) {
