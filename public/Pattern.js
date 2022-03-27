@@ -6,15 +6,15 @@ class Pattern {
 
     // random_dots
     static create_dots(custom_width, custom_height) {
-        const amount = 30;
+        const amount = 2;
 
         this.buffer = createGraphics(custom_width, custom_height);
 
         for (let i = 0; i < amount; i++) {
             let x = getRandomFromInterval(0, this.buffer.width);
             let y = getRandomFromInterval(0, this.buffer.height);
-            this.buffer.strokeWeight(getRandomFromInterval(1, 3));
-            this.buffer.stroke(getRandomFromInterval(150, 250));
+            this.buffer.strokeWeight(getRandomFromInterval(0.5, 2));
+            this.buffer.stroke(getRandomFromInterval(100, 150));
             this.buffer.point(x, y);
         }
 
@@ -191,8 +191,13 @@ class Pattern {
     }
 
     static create_splatter_splitter(custom_width, custom_height) {
-        let inc = 0.08;
-        let opacityValue = 255;
+        // random artefacts as shapes. maxs of perlin noise colored.
+        let incMax = 0.2;
+        let incMin = 0.5
+        let inc = getRandomFromInterval(incMin, incMax);
+        noiseDetail(12, 0.6);
+        let opacityValue = 200;
+        let blackness = 160
 
         let buffer = createGraphics(custom_width, custom_height);
 
@@ -204,17 +209,17 @@ class Pattern {
                 let index = (x + y * buffer.width) * 4;
 
                 let perlinValue = noise(xoff, yoff)
-                if (perlinValue >= 0.65) {
-                    buffer.pixels[index + 0] = perlinValue * 155;
-                    buffer.pixels[index + 1] = perlinValue * 155;
-                    buffer.pixels[index + 2] = perlinValue * 155;
-                    buffer.pixels[index + 3] = 155;
-                }
-                if (perlinValue >= 0.75) {
-                    buffer.pixels[index + 0] = perlinValue * 255;
-                    buffer.pixels[index + 1] = perlinValue * 255;
-                    buffer.pixels[index + 2] = perlinValue * 255;
-                    buffer.pixels[index + 3] = 255;
+                // if (perlinValue >= 0.65) {
+                //     buffer.pixels[index + 0] = perlinValue * 40;
+                //     buffer.pixels[index + 1] = perlinValue * 40;
+                //     buffer.pixels[index + 2] = perlinValue * 40;
+                //     buffer.pixels[index + 3] = 50;
+                // }
+                if (perlinValue >= 0.90) {
+                    buffer.pixels[index + 0] = perlinValue * blackness;
+                    buffer.pixels[index + 1] = perlinValue * blackness;
+                    buffer.pixels[index + 2] = perlinValue * blackness;
+                    buffer.pixels[index + 3] = opacityValue;
                 }
 
 

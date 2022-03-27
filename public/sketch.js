@@ -120,10 +120,9 @@ function setup() {
 
   // grainy_gradient = Pattern.create_grainy_gradient(200, 550);
 
-  // SINGLE BRUSHSTROKE
-  // brush = new Brush();
-
+  //
   paintbrusharea = new PaintBrushArea(300, 400, color2);
+
   // paper = paper.get()
   // paper.mask(noise_fog);
 
@@ -175,11 +174,6 @@ function draw() {
   // PERLIN Noise
   // image(flowfield.update_noise(), -300, 0);
 
-
-  // SINGLE BRUSHSTROKE
-  // brush.show();
-
-  // paintbrusharea.show();
   image(paintbrusharea.show(), 0, 0)
 
   // blend on top in setup

@@ -71,12 +71,15 @@ class Brush {
             ));
         }
 
+        this.splattery = Pattern.create_splatter_splitter(floor(widthX), this.sizeStroke * this.numberFibres);
     }
 
     show() {
         for (var i = 0; i < this.fibres.length; i++) {
             this.fibres[i].show(i);
         }
+        this.buffer.image(this.splattery, this.brushStartX, this.brushStartY);
+        // this.buffer.image(this.splattery, this.brushStartX, this.brushStartY, this.splattery.width, this.splattery.height);
     }
 }
 
