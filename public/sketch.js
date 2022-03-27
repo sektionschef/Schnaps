@@ -75,8 +75,6 @@ function setup() {
   color3 = color(COLOR_3_HEX);
   color4 = color(COLOR_4_HEX);
 
-  console.log(color2);
-
 
   // flowfield = new FlowField(600, 300);
 

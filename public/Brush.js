@@ -85,21 +85,31 @@ class PaintBrushArea {
         this.brushLength = 50;  // default
         this.sizeStroke = 1.5;
         this.numberFibres = 15;  // default
+        this.overlap = 20;  // adding to desired size
 
-        this.overlap = 20;
         this.brightnessNoise = 30;
         this.colorNoise = 10;
+        this.brushLengthNoise = 0.2;
+        this.numberFibresNoise = 0.2;
 
-        this.buffer = createGraphics(custom_width, custom_height);
+        this.buffer = createGraphics(custom_width + this.overlap, custom_height + this.overlap);
 
         this.brushStrokes = [];
 
         for (var i = 0; i < this.NumberBrushStrokes; i++) {
             var colorBrush = brightenColor(distortColor(color(this.colorObject), this.colorNoise), this.brightnessNoise)
-            var posX = getRandomFromInterval(-this.overlap, this.buffer.width + this.overlap);
-            var posY = getRandomFromInterval(-this.overlap, this.buffer.height + this.overlap);
-            var brushLength_ = this.brushLength + getRandomFromInterval(-this.brushLength * 0.2, this.brushLength * 0.2);
-            var numberFibres_ = this.numberFibres + getRandomFromInterval(-this.numberFibres * 0.2, this.numberFibres * 0.2);
+            var brushLength_ = this.brushLength + getRandomFromInterval(-this.brushLength * this.brushLengthNoise, this.brushLength * this.brushLengthNoise);
+            var numberFibres_ = this.numberFibres + getRandomFromInterval(-this.numberFibres * this.numberFibresNoise, this.numberFibres * this.numberFibresNoise);
+
+            if (fxrand() > 0.95) {
+                var posX = getRandomFromInterval(0, this.buffer.width + this.overlap - brushLength_);
+                var posY = getRandomFromInterval(0, this.buffer.height + this.overlap - numberFibres_ * this.sizeStroke);
+            } else {
+                var posX = getRandomFromInterval(this.overlap, this.buffer.width - this.overlap - brushLength_);
+                var posY = getRandomFromInterval(this.overlap, this.buffer.height - this.overlap - numberFibres_ * this.sizeStroke);
+            }
+
+
             this.brushStrokes.push(new Brush(this.buffer, colorBrush, posX, posY, brushLength_, this.sizeStroke, numberFibres_));
         }
     }
