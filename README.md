@@ -1,6 +1,5 @@
 # Schnaps
 
-* document brush
 * slider adding for dingsi
 * framerate browser?? - fr = createP(''); // fr.html(floor(frameRate()));
 * reset brauch ich wieder

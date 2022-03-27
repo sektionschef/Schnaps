@@ -1,8 +1,6 @@
 class Fibre {
     constructor(buffer, colorObject, brushStartX, brushStartY, brushStopX, brushStrokeSize, angle) {
-
         this.curveTightness = 3;  // shape of curve, between 0 and 5; little effect
-
         this.colorNoise = 10;
         this.brightnessNoise = 20;
         this.strokeSizeNoise = 0.2;
@@ -48,19 +46,17 @@ class Fibre {
 }
 
 class Brush {
-    constructor(buffer, colorObject, posX, posY, width, sizeStroke, numberFibres) {
+    constructor(buffer, colorObject, posX, posY, widthX, sizeStroke, numberFibres) {
         this.angleNoise = PI / 30;
 
         this.brushStartX = posX;
-        this.brushStopX = posX + width;
+        this.brushStopX = posX + widthX;
         this.brushStartY = posY;
-
         this.sizeStroke = sizeStroke;
         this.buffer = buffer;
-
         this.numberFibres = numberFibres;
-        this.fibres = []
 
+        this.fibres = []
         this.angle = getRandomFromInterval(-this.angleNoise, this.angleNoise)
 
         for (var i = 0; i < this.numberFibres; i++) {
@@ -85,11 +81,9 @@ class Brush {
 }
 
 class PaintBrushArea {
-    // rotate
-    // noch mehr random, wie bei length
+    // has an overlap with some brushstrokes additional to the specified width and height
 
     constructor(custom_width, custom_height, colorObject) {
-        this.colorObject = colorObject;  // default color
         this.NumberBrushStrokes = 150;
         this.brushLength = 50;  // default
         this.sizeStroke = 1.5;
@@ -101,8 +95,9 @@ class PaintBrushArea {
         this.brushLengthNoise = 0.2;
         this.numberFibresNoise = 0.2;
 
-        this.buffer = createGraphics(custom_width + this.overlap, custom_height + this.overlap);
+        this.colorObject = colorObject;  // default color
 
+        this.buffer = createGraphics(custom_width + this.overlap, custom_height + this.overlap);
         this.brushStrokes = [];
 
         for (var i = 0; i < this.NumberBrushStrokes; i++) {
@@ -110,6 +105,7 @@ class PaintBrushArea {
             var brushLength_ = this.brushLength + getRandomFromInterval(-this.brushLength * this.brushLengthNoise, this.brushLength * this.brushLengthNoise);
             var numberFibres_ = this.numberFibres + getRandomFromInterval(-this.numberFibres * this.numberFibresNoise, this.numberFibres * this.numberFibresNoise);
 
+            // positioning
             if (fxrand() > 0.95) {
                 var posX = getRandomFromInterval(0, this.buffer.width - brushLength_);
                 var posY = getRandomFromInterval(0, this.buffer.height - numberFibres_ * this.sizeStroke);
@@ -117,7 +113,6 @@ class PaintBrushArea {
                 var posX = getRandomFromInterval(this.overlap, this.buffer.width - this.overlap - brushLength_);
                 var posY = getRandomFromInterval(this.overlap, this.buffer.height - this.overlap - numberFibres_ * this.sizeStroke);
             }
-
 
             this.brushStrokes.push(new Brush(this.buffer, colorBrush, posX, posY, brushLength_, this.sizeStroke, numberFibres_));
         }
