@@ -10,7 +10,7 @@
 * lines
 * canvas dann drüber, als static method? https://www.w3schools.com/js/js_class_static.asp 
 * schiefe rechtecke
-* resize
+* resize - check the image stuff
 
 * paint by image. paper plane, noc - https://editor.p5js.org/steinlav/sketches/dxdxe98f5
 * ukranian cities

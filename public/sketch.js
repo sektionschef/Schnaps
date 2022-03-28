@@ -75,7 +75,7 @@ function setup() {
   color3 = color(COLOR_3_HEX);
   color4 = color(COLOR_4_HEX);
 
-  slider = createSlider(0, 255, 100);
+  slider = createSlider(0.01, 0.2, 0.05);
   slider.position(10, 10);
   slider.style('width', '300px');
 
@@ -115,17 +115,16 @@ function setup() {
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
-  // check transparency and color mixing
-  // noise_fog = Pattern.create_noise_fog(width, height, 0.01, color1);
-  // noise_fog_2 = Pattern.create_noise_fog(width, height, 0.01, color3);
-  // noise_fog_3 = Pattern.create_noise_fog(width, height, 0.005, color4);
+  sphere = Pattern.painted_sphere(width, height, color3);
+
+  // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
 
   // splatter = Pattern.create_splatter_splitter(width, height);
 
   // grainy_gradient = Pattern.create_grainy_gradient(200, 550);
 
   //
-  paintbrusharea = new PaintBrushArea(300, 400, color2);
+  paintbrusharea = new PaintBrushArea(300, 400, color1);
 
   // paper = paper.get()
   // paper.mask(noise_fog);
@@ -148,6 +147,8 @@ function draw() {
   // orbitControl(1, 1, 0.1);
   ambientLight(255, 255, 255);
   ambientMaterial(255);
+
+  let val = slider.value();
 
   background(color1);
 
@@ -178,12 +179,13 @@ function draw() {
   // PERLIN Noise
   // image(flowfield.update_noise(), -300, 0);
 
-  image(paintbrusharea.show(), 0, 0)
-
-  // blend on top in setup
+  // PERLIN NOISE
   // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
-  // image(noise_fog_2, - width / 2, - height / 2, noise_fog_2.width, noise_fog_2.height);
-  // image(noise_fog_3, - width / 2, - height / 2, noise_fog_3.width, noise_fog_3.height);
+
+  image(sphere, - width / 2, - height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
+
+  image(paintbrusharea.show(), 0, 0, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
+
 
   // image(grainy_gradient, 100, 0, grainy_gradient.width, grainy_gradient.height);
 
@@ -194,6 +196,7 @@ function draw() {
   //   point(binomial_points[i].x, binomial_points[i].y);
   //   pop();
   // }
+
 
   // CANVAS
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);

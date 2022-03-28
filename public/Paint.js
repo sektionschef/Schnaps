@@ -109,6 +109,5 @@ class Paint {
         }
 
         // this.buffer.image(this.dotty, this.border, this.border, this.dotty.width, this.dotty.height);
-
     }
 }

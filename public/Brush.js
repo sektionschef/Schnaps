@@ -1,13 +1,14 @@
 class Fibre {
     constructor(buffer, colorObject, brushStartX, brushStartY, brushStopX, brushStrokeSize, angle) {
         this.curveTightness = 3;  // shape of curve, between 0 and 5; little effect
-        this.colorNoise = 10;
-        this.brightnessNoise = 20;
-        this.strokeSizeNoise = 0.2;
+        this.colorNoise = 5;
+        this.brightnessNoise = 10;
+        this.strokeSizeNoise = 0.5;
         this.startXNoise = 5;  // start earlier or later
-        this.yNoise = 2;
-        this.rotationNoise = PI / 50;
+        this.yNoise = 1;  // noise of fibre along the y axis in the middle
+        this.rotationNoise = PI / 80;
 
+        this.complete = false;
         this.baseColor = colorObject;
         this.brushStrokeSize = brushStrokeSize;  // default value
         this.startY = brushStartY;
@@ -24,24 +25,28 @@ class Fibre {
 
     show(i) {
 
-        this.buffer.push();
-        this.buffer.translate(this.startX, this.startY)
-        this.buffer.rotate(this.angleFibre);
-        this.buffer.noFill();
-        this.buffer.curveTightness(this.curveTightness);
-        this.buffer.stroke(this.colorFibre);
-        this.buffer.strokeWeight(this.sizeStroke);
+        if (this.complete == false) {
+            this.buffer.push();
+            this.buffer.translate(this.startX, this.startY)
+            this.buffer.rotate(this.angleFibre);
+            this.buffer.noFill();
+            this.buffer.curveTightness(this.curveTightness);
+            this.buffer.stroke(this.colorFibre);
+            this.buffer.strokeWeight(this.sizeStroke);
 
-        this.buffer.beginShape();
-        this.buffer.curveVertex(0, this.brushStrokeSize * i);
-        this.buffer.curveVertex(0, this.brushStrokeSize * i);
-        // middle
-        this.buffer.curveVertex((this.stopX - this.startX) / 2, this.posMiddleY + this.brushStrokeSize * i);
-        // end
-        this.buffer.curveVertex((this.stopX - this.startX), this.brushStrokeSize * i);
-        this.buffer.curveVertex((this.stopX - this.startX), this.brushStrokeSize * i);
-        this.buffer.endShape();
-        this.buffer.pop();
+            this.buffer.beginShape();
+            this.buffer.curveVertex(0, this.brushStrokeSize * i);
+            this.buffer.curveVertex(0, this.brushStrokeSize * i);
+            // middle
+            this.buffer.curveVertex((this.stopX - this.startX) / 2, this.posMiddleY + this.brushStrokeSize * i);
+            // end
+            this.buffer.curveVertex((this.stopX - this.startX), this.brushStrokeSize * i);
+            this.buffer.curveVertex((this.stopX - this.startX), this.brushStrokeSize * i);
+            this.buffer.endShape();
+            this.buffer.pop();
+
+            // this.complete = true;
+        }
     }
 }
 
@@ -58,6 +63,7 @@ class Brush {
 
         this.fibres = []
         this.angle = getRandomFromInterval(-this.angleNoise, this.angleNoise)
+        this.complete = false;
 
         for (var i = 0; i < this.numberFibres; i++) {
             this.fibres.push(new Fibre(
@@ -78,17 +84,22 @@ class Brush {
             0.1,  // incMax,
             8,  // noiseDetailLod,
             0.7,  // noiseDetailFalloff,
-            50,  // opacityValue,
+            150,  // opacityValue,
             160,  // blackness,
             0.9,  // minimum to get drawn
         );
     }
 
     show() {
-        for (var i = 0; i < this.fibres.length; i++) {
-            this.fibres[i].show(i);
+        if (this.complete == false) {
+
+            for (var i = 0; i < this.fibres.length; i++) {
+                this.fibres[i].show(i);
+            }
+
+            // this.buffer.image(this.splattery, this.brushStartX, this.brushStartY, this.splattery.width * SCALING_FACTOR, this.splattery.height * SCALING_FACTOR);
+            this.complete = true;
         }
-        this.buffer.image(this.splattery, this.brushStartX, this.brushStartY, this.splattery.width, this.splattery.height);
     }
 }
 
@@ -98,12 +109,13 @@ class PaintBrushArea {
     constructor(custom_width, custom_height, colorObject) {
         this.NumberBrushStrokes = 150;
         this.brushLength = 50;  // default
-        this.sizeStroke = 1.5;
+        this.sizeStroke = 2;
         this.numberFibres = 15;  // default
         this.overlap = 30;  // adding to desired size
 
-        this.brightnessNoise = 30;
+        this.brightnessNoise = 20;
         this.colorNoise = 5;
+        this.opacityBoost = 0;
         this.brushLengthNoise = 0.2;
         this.numberFibresNoise = 0.2;
 
@@ -113,7 +125,7 @@ class PaintBrushArea {
         this.brushStrokes = [];
 
         for (var i = 0; i < this.NumberBrushStrokes; i++) {
-            var colorBrush = brightenColor(distortColor(color(this.colorObject), this.colorNoise), this.brightnessNoise)
+            var colorBrush = lessenColor(brightenColor(distortColor(color(this.colorObject), this.colorNoise), this.brightnessNoise), this.opacityBoost);
             var brushLength_ = this.brushLength + getRandomFromInterval(-this.brushLength * this.brushLengthNoise, this.brushLength * this.brushLengthNoise);
             var numberFibres_ = this.numberFibres + getRandomFromInterval(-this.numberFibres * this.numberFibresNoise, this.numberFibres * this.numberFibresNoise);
 

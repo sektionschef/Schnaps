@@ -40,16 +40,18 @@ class Pattern {
         return this.buffer;
     }
 
-    static create_noise_fog(custom_width, custom_height, inc, colorObject) {
+    static create_noise_fog(
+        custom_width,
+        custom_height,
+        colorObject1,
+        colorObject2,
+        inc,
+        noiseDetailLod,
+        noiseDetailFalloff,
+        opacityValue,
+    ) {
 
-        // noiseDetail(2, 0.65);
-        noiseDetail(8, 0.5);
-        // noiseDetail(12, 0.8);
-
-        // let inc = 0.01;  // 0.01 - 0.04
-        // let opacityValue = 255;
-        let opacityValue = 0;
-
+        noiseDetail(noiseDetailLod, noiseDetailFalloff);
         let buffer = createGraphics(custom_width, custom_height);
 
         let yoff = 0;
@@ -65,23 +67,30 @@ class Pattern {
                 // buffer.pixels[index + 2] = r;
                 // buffer.pixels[index + 3] = r;  // 255
 
-                // CUSTOM COLOR 52, 100, 235
-                // let r = noise(xoff, yoff) * 30;
-                // buffer.pixels[index + 0] = 52 + r;
-                // buffer.pixels[index + 1] = 100 + r;
-                // buffer.pixels[index + 2] = 235 + r;
+                // CUSTOM COLOR
+                // let gain = 50;
+                // let r = noise(xoff, yoff);
+                // buffer.pixels[index + 0] = colorObject.levels[0] + r * gain;
+                // buffer.pixels[index + 1] = colorObject.levels[1] + r * gain;
+                // buffer.pixels[index + 2] = colorObject.levels[2] + r * gain;
                 // buffer.pixels[index + 3] = opacityValue;
 
                 // mix colors
-                let r = noise(xoff, yoff) * getRandomFromInterval(0, 80);
-                let g = noise(xoff, yoff) * getRandomFromInterval(0, 80);
-                let b = noise(xoff, yoff) * getRandomFromInterval(0, 80);
-                // let alpha = noise(xoff, yoff) * 255;
-                buffer.pixels[index + 0] = colorObject.levels[0] + r;
-                buffer.pixels[index + 1] = colorObject.levels[1] + g;
-                buffer.pixels[index + 2] = colorObject.levels[2] + b;
-                // buffer.pixels[index + 3] = opacityValue + alpha;
-                buffer.pixels[index + 3] = 150;
+                let r = noise(xoff, yoff);
+                let mixedColor = lerpColor(colorObject1, colorObject2, r)
+                buffer.pixels[index + 0] = mixedColor.levels[0];
+                buffer.pixels[index + 1] = mixedColor.levels[1];
+                buffer.pixels[index + 2] = mixedColor.levels[2];
+                buffer.pixels[index + 3] = opacityValue;
+
+
+                // let r = noise(xoff, yoff) * getRandomFromInterval(0, 80);
+                // let g = noise(xoff, yoff) * getRandomFromInterval(0, 80);
+                // let b = noise(xoff, yoff) * getRandomFromInterval(0, 80);
+                // buffer.pixels[index + 0] = colorObject.levels[0] + r;
+                // buffer.pixels[index + 1] = colorObject.levels[1] + g;
+                // buffer.pixels[index + 2] = colorObject.levels[2] + b;
+                // buffer.pixels[index + 3] = opacityValue;
 
                 xoff += inc;
             }
@@ -275,5 +284,61 @@ class Pattern {
 
         return this.buffer;
 
+    }
+
+
+    //inspired by Robert Ryman, https://openprocessing.org/sketch/1110176/ 
+    static painted_sphere(custom_width, custom_height, colorObject) {
+        let margin = 30;
+        let colorObjectSpread = 10;  // add and subtract for random;
+        let fillColorOpacityMax = 30;
+        let strokeColorBoost = 50;
+        let strokeOpacityMax = 40;
+
+        // let strokColorWhitenessMin = 
+        let colorObjectRed = colorObject.levels[0];
+        let colorObjectGreen = colorObject.levels[1];
+        let colorObjectBlue = colorObject.levels[2];
+
+        let area = custom_width * custom_height;
+        let shapeNumber = area / 1000 * 5;  // relative to size
+
+        this.buffer = createGraphics(custom_width, custom_height);
+
+        // debug
+        // this.buffer.rect(0, 0, this.buffer.width, this.buffer.height);
+        for (var i = 0; i < shapeNumber; i++) {
+            // blue value remains in example
+            // let fillColorRed = getRandomFromInterval(200, 235);
+            // let fillColorGreen = getRandomFromInterval(200, 235);
+            // let fillColorBlue = getRandomFromInterval(255, 255);
+            // let fillColorOpacity = getRandomFromInterval(0, 40);
+
+            let fillColorRed = getRandomFromInterval(colorObjectRed - colorObjectSpread, colorObjectRed + colorObjectSpread);
+            let fillColorGreen = getRandomFromInterval(colorObjectGreen - colorObjectSpread, colorObjectGreen + colorObjectSpread);
+            let fillColorBlue = getRandomFromInterval(colorObjectBlue - colorObjectSpread, colorObjectBlue + colorObjectSpread);
+            let fillColorOpacity = getRandomFromInterval(0, fillColorOpacityMax);
+
+            let strokeSize = getRandomFromInterval(0, 50);
+            let strokeColorOpacity = getRandomFromInterval(0, strokeOpacityMax);
+
+            // let strokeColor = color(strokColorWhiteness, strokColorWhiteness, strokColorWhiteness, strokeColorOpacity);
+            let strokeColor = color(colorObjectRed + strokeColorBoost, colorObjectGreen + strokeColorBoost, colorObjectBlue + strokeColorBoost, strokeColorOpacity);
+            let fillColor = color(fillColorRed, fillColorGreen, fillColorBlue, fillColorOpacity);
+
+            this.buffer.push();
+            this.buffer.stroke(strokeColor);
+            this.buffer.strokeWeight(strokeSize);
+            this.buffer.fill(fillColor);
+
+            let widthShape = getRandomFromInterval(0, 120);
+            let heightShape = getRandomFromInterval(0, 80);
+
+            this.buffer.ellipse(getRandomFromInterval(margin, this.buffer.width - margin), getRandomFromInterval(margin, this.buffer.height - margin), widthShape, heightShape);
+            this.buffer.rect(getRandomFromInterval(margin, this.buffer.width - margin - widthShape), getRandomFromInterval(margin, this.buffer.height - margin - heightShape), widthShape, heightShape);
+            this.buffer.pop();
+        }
+
+        return this.buffer;
     }
 }
