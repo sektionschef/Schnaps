@@ -296,12 +296,16 @@ class Pattern {
 
 
     //inspired by Robert Ryman, https://openprocessing.org/sketch/1110176/ 
-    static painted_sphere(custom_width, custom_height, colorObject) {
-        let margin = 70;
-        let colorObjectSpread = 10;  // add and subtract for random;
-        let fillColorOpacityMax = 30;
-        let strokeColorBoost = 50;
-        let strokeOpacityMax = 40;
+    static painted_sphere(
+        custom_width,
+        custom_height,
+        colorObject,
+        margin,
+        colorObjectSpread,
+        fillColorOpacityMax,
+        strokeColorBoost,
+        strokeOpacityMax
+    ) {
 
         // let strokColorWhitenessMin = 
         let colorObjectRed = colorObject.levels[0];
