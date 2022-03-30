@@ -297,7 +297,7 @@ class Pattern {
 
     //inspired by Robert Ryman, https://openprocessing.org/sketch/1110176/ 
     static painted_sphere(custom_width, custom_height, colorObject) {
-        let margin = 30;
+        let margin = 70;
         let colorObjectSpread = 10;  // add and subtract for random;
         let fillColorOpacityMax = 30;
         let strokeColorBoost = 50;
@@ -356,9 +356,12 @@ class DumbAgent {
     constructor(custom_width, custom_height, colorObject) {
         this.stepSize = 1;
         this.agentSize = 1;
-        this.opacityLevel = 10;
-        this.color = color(colorObject.levels[0], colorObject.levels[1], colorObject.levels[2], this.opacityLevel);
+        this.opacityLevel = 2;
+        this.opacityLevel2 = 30;
+        this.lineLength = 20;
         this.loopSize = 100000;
+
+        this.color = color(colorObject.levels[0], colorObject.levels[1], colorObject.levels[2], this.opacityLevel);
         this.buffer = createGraphics(custom_width, custom_height);
 
         this.posX = getRandomFromInterval(0, this.buffer.width);
@@ -413,9 +416,19 @@ class DumbAgent {
             }
 
             this.buffer.push();
+            // this.buffer.strokeWeight(this.agentSize);
+            // this.buffer.stroke(this.color);
+            // this.buffer.point(this.posX, this.posY);
+
+            this.buffer.translate(this.posX, this.posY);
             this.buffer.strokeWeight(this.agentSize);
             this.buffer.stroke(this.color);
-            this.buffer.point(this.posX, this.posY);
+            this.buffer.rotate(i % PI);
+            this.buffer.line(0, 0, this.lineLength, this.lineLength);
+
+            this.buffer.stroke(color(this.color.levels[0], this.color.levels[1], this.color.levels[2], this.opacityLevel2));
+            this.buffer.point(0, 0);
+            this.buffer.point(this.lineLength, this.lineLength);
             this.buffer.pop();
         }
     }
