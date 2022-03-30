@@ -123,7 +123,7 @@ function setup() {
 
   // grainy_gradient = Pattern.create_grainy_gradient(200, 550);
 
-  agent = new DumbAgent(width, height);
+  agent = new DumbAgent(width, height, color2);
 
   //
   paintbrusharea = new PaintBrushArea(300, 400, color1);

@@ -353,9 +353,11 @@ class Pattern {
 
 
 class DumbAgent {
-    constructor(custom_width, custom_height) {
+    constructor(custom_width, custom_height, colorObject) {
         this.stepSize = 1;
         this.agentSize = 1;
+        this.opacityLevel = 10;
+        this.color = color(colorObject.levels[0], colorObject.levels[1], colorObject.levels[2], this.opacityLevel);
         this.loopSize = 100000;
         this.buffer = createGraphics(custom_width, custom_height);
 
@@ -410,7 +412,11 @@ class DumbAgent {
                 this.posY = getRandomFromInterval(0, this.buffer.height)
             }
 
+            this.buffer.push();
+            this.buffer.strokeWeight(this.agentSize);
+            this.buffer.stroke(this.color);
             this.buffer.point(this.posX, this.posY);
+            this.buffer.pop();
         }
     }
 
