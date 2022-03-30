@@ -107,7 +107,7 @@ class Pattern {
         const colory = 190;
         const opacity = 80;
         // const colory = "#c9c9c9";
-        const maxCell = 400;  // amount of cells per line
+        const maxCell = 300;  // amount of cells per line
         const strokeWeight_ = 1;
         const c = brightenColor(color(colory, opacity), -20);
         const deviation = 0.3;
@@ -148,9 +148,17 @@ class Pattern {
     }
 
     // CORRODED - bubbles that hide background
-    static create_corroded_area(custom_width, custom_height) {
-        const background_color = 250;
-        const foreground_color = 255;
+    static create_corroded_area(custom_width, custom_height, colorObject) {
+        // const background_color = 250;
+        // const foreground_color = 255;
+        const diff = 5;
+        let foreground_color = colorObject;
+        let background_color = color(
+            colorObject.levels[0] - diff,
+            colorObject.levels[1] - diff,
+            colorObject.levels[2] - diff,
+        );
+
         const d = 1  // 2 - 1 - 1.5 - 1.3 - 1.2
         const radius = 5;  // 3 - 3 - 3 - 3.5 - 3.5
         const maxCell = 260;
@@ -341,4 +349,69 @@ class Pattern {
 
         return this.buffer;
     }
+}
+
+
+class DumbAgent {
+    constructor(custom_width, custom_height) {
+        this.stepSize = 1;
+        this.agentSize = 1;
+        this.loopSize = 100000;
+        this.buffer = createGraphics(custom_width, custom_height);
+
+        this.posX = getRandomFromInterval(0, this.buffer.width);
+        this.posY = getRandomFromInterval(0, this.buffer.height);
+        this.complete = false;
+
+        this.show();
+    }
+
+    show() {
+
+        for (var i = 0; i < this.loopSize; i++) {
+
+            let directive = getRandomFromList([
+                "up",
+                "up-right",
+                "right",
+                "right-down",
+                "down",
+                "down-left",
+                "left",
+                "left-up"
+            ]);
+
+            if (directive == "up") {
+                this.posY -= this.stepSize;
+            } else if (directive == "up-right") {
+                this.posX += this.stepSize;
+                this.posY -= this.stepSize;
+            } else if (directive == "right") {
+                this.posX += this.stepSize;
+            } else if (directive == "right-down") {
+                this.posX += this.stepSize;
+                this.posY += this.stepSize;
+            } else if (directive == "down") {
+                this.posY += this.stepSize;
+            } else if (directive == "down-left") {
+                this.posX -= this.stepSize;
+                this.posY += this.stepSize;
+            } else if (directive == "left") {
+                this.posX -= this.stepSize;
+            } else if (directive == "left-up") {
+                this.posX -= this.stepSize;
+                this.posY -= this.stepSize;
+            }
+
+            if (this.posX > this.buffer.width | this.posX < 0) {
+                this.posX = getRandomFromInterval(0, this.buffer.width)
+            }
+            if (this.posY > this.buffer.height | this.posY < 0) {
+                this.posY = getRandomFromInterval(0, this.buffer.height)
+            }
+
+            this.buffer.point(this.posX, this.posY);
+        }
+    }
+
 }

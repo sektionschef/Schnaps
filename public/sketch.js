@@ -108,7 +108,7 @@ function setup() {
   // painted_area = new Paint(200, 400, -200, -200, "#babdff");
   // painted_area_2 = new Paint(300, 500, 0, -250, "#123456");
 
-  // paper = Pattern.create_corroded_area(width, height);
+  paper = Pattern.create_corroded_area(width, height, color1);
   // dots = Pattern.create_dots(width, height);
   // normal_noise = Pattern.create_noise(100, 100);
   canvasOverlay = Pattern.create_canvas(width, height);
@@ -122,6 +122,8 @@ function setup() {
   // splatter = Pattern.create_splatter_splitter(width, height);
 
   // grainy_gradient = Pattern.create_grainy_gradient(200, 550);
+
+  agent = new DumbAgent(width, height);
 
   //
   paintbrusharea = new PaintBrushArea(300, 400, color1);
@@ -150,7 +152,7 @@ function draw() {
 
   let val = slider.value();
 
-  background(color1);
+  // background(color1);
 
   // image(paper);
   // shape = createGraphics(width, height);
@@ -158,7 +160,7 @@ function draw() {
   // paper = paper.get(); // convert to image
   // paper.mask
 
-  // image(paper, - width / 2, - height / 2, paper.width, paper.height);
+  image(paper, - width / 2, - height / 2, paper.width * SCALING_FACTOR, paper.height * SCALING_FACTOR);
   // image(splatter, - width / 2, - height / 2, splatter.width, splatter.height);
 
   // maska
@@ -187,6 +189,9 @@ function draw() {
   image(paintbrusharea.show(), 0, 0, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
 
 
+  image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
+
+
   // image(grainy_gradient, 100, 0, grainy_gradient.width, grainy_gradient.height);
 
   // BINOMIAL FUNCTION
@@ -199,7 +204,7 @@ function draw() {
 
 
   // CANVAS
-  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width, canvasOverlay.height);
+  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
 
   // if (grid.boxes_completely_run == true && preview_called == false) {

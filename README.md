@@ -1,6 +1,7 @@
 # Schnaps
 
 * slider adding for dingsi
+* primary color - 70 20 10 oder s0
 * framerate browser?? - fr = createP(''); // fr.html(floor(frameRate()));
 * reset brauch ich wieder
 * paint area with zig zag

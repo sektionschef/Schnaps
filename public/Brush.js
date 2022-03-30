@@ -3,7 +3,7 @@ class Fibre {
         this.curveTightness = 3;  // shape of curve, between 0 and 5; little effect
         this.colorNoise = 5;
         this.brightnessNoise = 10;
-        this.strokeSizeNoise = 0.5;
+        this.strokeSizeNoise = 0.2;
         this.startXNoise = 5;  // start earlier or later
         this.yNoise = 1;  // noise of fibre along the y axis in the middle
         this.rotationNoise = PI / 80;
@@ -77,17 +77,6 @@ class Brush {
             ));
         }
 
-        this.splattery = Pattern.create_splatter_splitter(
-            floor(widthX),  // custom_width,
-            this.sizeStroke * this.numberFibres,  // custom_height,
-            0.3,  // incMin,
-            0.1,  // incMax,
-            8,  // noiseDetailLod,
-            0.7,  // noiseDetailFalloff,
-            150,  // opacityValue,
-            160,  // blackness,
-            0.9,  // minimum to get drawn
-        );
     }
 
     show() {
@@ -97,7 +86,6 @@ class Brush {
                 this.fibres[i].show(i);
             }
 
-            // this.buffer.image(this.splattery, this.brushStartX, this.brushStartY, this.splattery.width * SCALING_FACTOR, this.splattery.height * SCALING_FACTOR);
             this.complete = true;
         }
     }
