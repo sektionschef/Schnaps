@@ -105,8 +105,8 @@ function setup() {
   // }
 
 
-  // painted_area = new Paint(200, 400, -200, -200, "#babdff");
-  // painted_area_2 = new Paint(300, 500, 0, -250, "#123456");
+  // painted_area = new Paint(200, 400, -200, -200, color1);
+  // painted_area_2 = new Paint(300, 500, 0, -250, color4);
 
   // paper = Pattern.create_corroded_area(width, height, color1);
   // dots = Pattern.create_dots(width, height);
@@ -115,63 +115,60 @@ function setup() {
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
-  sphere = Pattern.painted_sphere(
-    width - 200,
-    height - 400,
-    color3,
-    70,  // margin
-    10,  // colorObjectSpread
-    30,  // fillColorOpacityMax
-    50,  // strokeColorBoost
-    40  // strokeOpacityMax
-  );
+  // sphere = Pattern.painted_sphere(
+  //   width - 200,
+  //   height - 400,
+  //   color3,
+  //   70,  // margin
+  //   10,  // colorObjectSpread
+  //   30,  // fillColorOpacityMax
+  //   50,  // strokeColorBoost
+  //   40  // strokeOpacityMax
+  // );
 
-  backup = Pattern.painted_sphere(
-    width,
-    200,
-    color4,
-    70,  // margin
-    10,  // colorObjectSpread
-    30,  // fillColorOpacityMax
-    50,  // strokeColorBoost
-    40  // strokeOpacityMax
-  );
+  // backup = Pattern.painted_sphere(
+  //   width,
+  //   200,
+  //   color4,
+  //   70,  // margin
+  //   10,  // colorObjectSpread
+  //   30,  // fillColorOpacityMax
+  //   50,  // strokeColorBoost
+  //   40  // strokeOpacityMax
+  // );
 
-  backmiddle = Pattern.painted_sphere(
-    width,
-    200,
-    color1,
-    70,  // margin
-    10,  // colorObjectSpread
-    30,  // fillColorOpacityMax
-    50,  // strokeColorBoost
-    40  // strokeOpacityMax
-  );
+  // backmiddle = Pattern.painted_sphere(
+  //   width,
+  //   200,
+  //   color1,
+  //   70,  // margin
+  //   10,  // colorObjectSpread
+  //   30,  // fillColorOpacityMax
+  //   50,  // strokeColorBoost
+  //   40  // strokeOpacityMax
+  // );
 
-  backdown = Pattern.painted_sphere(
-    width,
-    height - backup.height - backmiddle.height,
-    color4,
-    70,  // margin
-    10,  // colorObjectSpread
-    30,  // fillColorOpacityMax
-    50,  // strokeColorBoost
-    40  // strokeOpacityMax
-  );
+  // backdown = Pattern.painted_sphere(
+  //   width,
+  //   height - backup.height - backmiddle.height,
+  //   color4,
+  //   70,  // margin
+  //   10,  // colorObjectSpread
+  //   30,  // fillColorOpacityMax
+  //   50,  // strokeColorBoost
+  //   40  // strokeOpacityMax
+  // );
 
   // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
 
   // splatter = Pattern.create_splatter_splitter(width, height);
 
-  // grainy_gradient = Pattern.create_grainy_gradient(200, 550);
+  // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
-  agent = new DumbAgent(width, height, color2);
-  agent2 = new DumbAgent(width, height, color2);
-  agent3 = new DumbAgent(width, height, color2);
-  agent4 = new DumbAgent(width, height, color2);
+  // agent = new DumbAgent(width, height, color1);
 
-  //
-  // paintbrusharea = new PaintBrushArea(300, 400, color1);
+  paintbrusharea = new PaintBrushArea(900, 400, color3);
+  paintbrusharea2 = new PaintBrushArea(900, 200, color4);
 
   // paper = paper.get()
   // paper.mask(noise_fog);
@@ -229,22 +226,21 @@ function draw() {
   // PERLIN NOISE
   // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
 
-  image(backup, - width / 2, - height / 2, backup.width * SCALING_FACTOR, backup.height * SCALING_FACTOR);
-  image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
-  image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
-
-  image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
-
-  // image(paintbrusharea.show(), 0, 0, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
+  // image(backup, - width / 2, - height / 2, backup.width * SCALING_FACTOR, backup.height * SCALING_FACTOR);
+  // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
 
 
-  image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
-  image(agent2.buffer, - width / 2, - height / 2, agent2.buffer.width * SCALING_FACTOR, agent2.buffer.height * SCALING_FACTOR);
-  image(agent3.buffer, - width / 2, - height / 2, agent3.buffer.width * SCALING_FACTOR, agent3.buffer.height * SCALING_FACTOR);
-  image(agent4.buffer, - width / 2, - height / 2, agent4.buffer.width * SCALING_FACTOR, agent4.buffer.height * SCALING_FACTOR);
+  // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
 
+  // image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
 
-  // image(grainy_gradient, 100, 0, grainy_gradient.width, grainy_gradient.height);
+  image(paintbrusharea.show(), -500, 0, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
+  image(paintbrusharea2.show(), -500, -100, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
+
+  // image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
+
+  // image(grainy_gradient, - width / 2, - height / 2, grainy_gradient.width, grainy_gradient.height);
+
 
   // BINOMIAL FUNCTION
   // for (var i = 0; i < binomial_points.length; i++) {

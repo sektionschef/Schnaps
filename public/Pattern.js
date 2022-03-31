@@ -358,12 +358,13 @@ class Pattern {
 
 class DumbAgent {
     constructor(custom_width, custom_height, colorObject) {
-        this.stepSize = 1;
+        this.stepSize = 5;  // 1
         this.agentSize = 1;
-        this.opacityLevel = 2;
+        this.opacityLevel = 1;
         this.opacityLevel2 = 30;
-        this.lineLength = 20;
-        this.loopSize = 100000;
+        this.lineLength = 80;
+        this.loopSize = 10000;
+        this.numberAgents = 5;
 
         this.color = color(colorObject.levels[0], colorObject.levels[1], colorObject.levels[2], this.opacityLevel);
         this.buffer = createGraphics(custom_width, custom_height);
@@ -377,63 +378,63 @@ class DumbAgent {
 
     show() {
 
-        for (var i = 0; i < this.loopSize; i++) {
+        for (var v = 0; v < this.numberAgents; v++) {
+            for (var i = 0; i < this.loopSize; i++) {
 
-            let directive = getRandomFromList([
-                "up",
-                "up-right",
-                "right",
-                "right-down",
-                "down",
-                "down-left",
-                "left",
-                "left-up"
-            ]);
+                let directive = getRandomFromList([
+                    "up",
+                    "up-right",
+                    "right",
+                    "right-down",
+                    "down",
+                    "down-left",
+                    "left",
+                    "left-up"
+                ]);
 
-            if (directive == "up") {
-                this.posY -= this.stepSize;
-            } else if (directive == "up-right") {
-                this.posX += this.stepSize;
-                this.posY -= this.stepSize;
-            } else if (directive == "right") {
-                this.posX += this.stepSize;
-            } else if (directive == "right-down") {
-                this.posX += this.stepSize;
-                this.posY += this.stepSize;
-            } else if (directive == "down") {
-                this.posY += this.stepSize;
-            } else if (directive == "down-left") {
-                this.posX -= this.stepSize;
-                this.posY += this.stepSize;
-            } else if (directive == "left") {
-                this.posX -= this.stepSize;
-            } else if (directive == "left-up") {
-                this.posX -= this.stepSize;
-                this.posY -= this.stepSize;
+                if (directive == "up") {
+                    this.posY -= this.stepSize;
+                } else if (directive == "up-right") {
+                    this.posX += this.stepSize;
+                    this.posY -= this.stepSize;
+                } else if (directive == "right") {
+                    this.posX += this.stepSize;
+                } else if (directive == "right-down") {
+                    this.posX += this.stepSize;
+                    this.posY += this.stepSize;
+                } else if (directive == "down") {
+                    this.posY += this.stepSize;
+                } else if (directive == "down-left") {
+                    this.posX -= this.stepSize;
+                    this.posY += this.stepSize;
+                } else if (directive == "left") {
+                    this.posX -= this.stepSize;
+                } else if (directive == "left-up") {
+                    this.posX -= this.stepSize;
+                    this.posY -= this.stepSize;
+                }
+
+                if (this.posX > this.buffer.width | this.posX < 0) {
+                    this.posX = getRandomFromInterval(0, this.buffer.width)
+                }
+                if (this.posY > this.buffer.height | this.posY < 0) {
+                    this.posY = getRandomFromInterval(0, this.buffer.height)
+                }
+
+                this.buffer.push();
+
+                this.buffer.translate(this.posX, this.posY);
+                this.buffer.strokeWeight(this.agentSize);
+                this.buffer.stroke(this.color);
+                this.buffer.rotate(i % PI);
+                this.buffer.line(0, 0, this.lineLength, this.lineLength);
+
+                // optional
+                this.buffer.stroke(color(this.color.levels[0], this.color.levels[1], this.color.levels[2], this.opacityLevel2));
+                this.buffer.point(0, 0);
+                this.buffer.point(this.lineLength, this.lineLength);
+                this.buffer.pop();
             }
-
-            if (this.posX > this.buffer.width | this.posX < 0) {
-                this.posX = getRandomFromInterval(0, this.buffer.width)
-            }
-            if (this.posY > this.buffer.height | this.posY < 0) {
-                this.posY = getRandomFromInterval(0, this.buffer.height)
-            }
-
-            this.buffer.push();
-            // this.buffer.strokeWeight(this.agentSize);
-            // this.buffer.stroke(this.color);
-            // this.buffer.point(this.posX, this.posY);
-
-            this.buffer.translate(this.posX, this.posY);
-            this.buffer.strokeWeight(this.agentSize);
-            this.buffer.stroke(this.color);
-            this.buffer.rotate(i % PI);
-            this.buffer.line(0, 0, this.lineLength, this.lineLength);
-
-            this.buffer.stroke(color(this.color.levels[0], this.color.levels[1], this.color.levels[2], this.opacityLevel2));
-            this.buffer.point(0, 0);
-            this.buffer.point(this.lineLength, this.lineLength);
-            this.buffer.pop();
         }
     }
 

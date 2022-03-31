@@ -95,7 +95,7 @@ class PaintBrushArea {
     // has an overlap with some brushstrokes additional to the specified width and height
 
     constructor(custom_width, custom_height, colorObject) {
-        this.NumberBrushStrokes = 150;
+        this.NumberBrushStrokes = 1050;
         this.brushLength = 50;  // default
         this.sizeStroke = 2;
         this.numberFibres = 15;  // default
