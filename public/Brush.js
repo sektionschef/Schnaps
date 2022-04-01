@@ -96,9 +96,9 @@ class PaintBrushArea {
 
     constructor(custom_width, custom_height, colorObject) {
         this.NumberBrushStrokes = 1050;
-        this.brushLength = 50;  // default
-        this.sizeStroke = 2;
-        this.numberFibres = 15;  // default
+        this.brushLength = 60;  // default - 50
+        this.sizeStroke = 2;  // - 2
+        this.numberFibres = 15;  // default - 15
         this.overlap = 30;  // adding to desired size
 
         this.brightnessNoise = 20;
