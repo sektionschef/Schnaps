@@ -1,12 +1,13 @@
 class Fibre {
-    constructor(buffer, colorObject, brushStartX, brushStartY, brushStopX, brushStrokeSize, angle) {
-        this.curveTightness = 3;  // shape of curve, between 0 and 5; little effect
-        this.colorNoise = 5;
-        this.brightnessNoise = 10;
-        this.strokeSizeNoise = 0.2;
-        this.startXNoise = 5;  // start earlier or later
-        this.yNoise = 1;  // noise of fibre along the y axis in the middle
-        this.rotationNoise = PI / 80;
+    constructor(buffer, colorObject, brushStartX, brushStartY, brushStopX, brushStrokeSize, angle, data) {
+        this.data = data
+        this.fibreCurveTightness = data.fibreCurveTightness;  // shape of curve, between 0 and 5; little effect
+        this.fibreColorNoise = data.fibreColorNoise;
+        this.fibreBrightnessNoise = data.fibreBrightnessNoise;
+        this.fibreStrokeSizeNoise = data.fibreStrokeSizeNoise;
+        this.fibreStartXNoise = data.fibreStartXNoise;  // start earlier or later
+        this.fibreYNoise = data.fibreYNoise;  // noise of fibre along the y axis in the middle
+        this.fibreRotationNoise = data.fibreRotationNoise;
 
         this.complete = false;
         this.baseColor = colorObject;
@@ -15,12 +16,12 @@ class Fibre {
         this.buffer = buffer;
         this.angle = angle;
 
-        this.posMiddleY = getRandomFromInterval(-this.yNoise, this.yNoise);
-        this.sizeStroke = brushStrokeSize + getRandomFromInterval(-this.strokeSizeNoise, this.strokeSizeNoise);  // size of fibre
-        this.startX = brushStartX + getRandomFromInterval(-this.startXNoise, this.startXNoise);  // // where the fibre starts
-        this.stopX = brushStopX + getRandomFromInterval(-this.startXNoise, this.startXNoise);  // where the fibre stops
-        this.colorFibre = brightenColor(distortColor(color(this.baseColor), this.colorNoise), this.brightnessNoise)
-        this.angleFibre = this.angle + getRandomFromInterval(-this.rotationNoise, this.rotationNoise);
+        this.posMiddleY = getRandomFromInterval(-this.fibreYNoise, this.fibreYNoise);
+        this.sizeStroke = brushStrokeSize + getRandomFromInterval(-this.fibreStrokeSizeNoise, this.fibreStrokeSizeNoise);  // size of fibre
+        this.startX = brushStartX + getRandomFromInterval(-this.fibreStartXNoise, this.fibreStartXNoise);  // // where the fibre starts
+        this.stopX = brushStopX + getRandomFromInterval(-this.fibreStartXNoise, this.fibreStartXNoise);  // where the fibre stops
+        this.colorFibre = brightenColor(distortColor(color(this.baseColor), this.fibreColorNoise), this.fibreBrightnessNoise)
+        this.angleFibre = this.angle + getRandomFromInterval(-this.fibreRotationNoise, this.fibreRotationNoise);
     }
 
     show(i) {
@@ -30,7 +31,7 @@ class Fibre {
             this.buffer.translate(this.startX, this.startY)
             this.buffer.rotate(this.angleFibre);
             this.buffer.noFill();
-            this.buffer.curveTightness(this.curveTightness);
+            this.buffer.curveTightness(this.fibreCurveTightness);
             this.buffer.stroke(this.colorFibre);
             this.buffer.strokeWeight(this.sizeStroke);
 
@@ -51,8 +52,9 @@ class Fibre {
 }
 
 class Brush {
-    constructor(buffer, colorObject, posX, posY, widthX, sizeStroke, numberFibres) {
-        this.angleNoise = PI / 30;
+    constructor(buffer, colorObject, posX, posY, widthX, sizeStroke, numberFibres, angleNoise, data) {
+        this.data = data
+        this.angleNoise = angleNoise;
 
         this.brushStartX = posX;
         this.brushStopX = posX + widthX;
@@ -73,7 +75,8 @@ class Brush {
                 this.brushStartY,
                 this.brushStopX,
                 this.sizeStroke,
-                this.angle
+                this.angle,
+                this.data
             ));
         }
 
@@ -94,22 +97,24 @@ class Brush {
 class PaintBrushArea {
     // has an overlap with some brushstrokes additional to the specified width and height
 
-    constructor(custom_width, custom_height, colorObject) {
-        this.NumberBrushStrokes = 1050;
-        this.brushLength = 60;  // default - 50
-        this.sizeStroke = 2;  // - 2
-        this.numberFibres = 15;  // default - 15
-        this.overlap = 30;  // adding to desired size
+    constructor(data) {
+        this.data = data;
+        this.NumberBrushStrokes = data.NumberBrushStrokes;
+        this.brushLength = data.brushLength;  // default
+        this.sizeStroke = data.sizeStroke;
+        this.numberFibres = data.numberFibres;  // default
+        this.overlap = data.overlap;
 
-        this.brightnessNoise = 20;
-        this.colorNoise = 5;
-        this.opacityBoost = 0;
-        this.brushLengthNoise = 0.2;
-        this.numberFibresNoise = 0.2;
+        this.brightnessNoise = data.brightnessNoise;
+        this.colorNoise = data.colorNoise;
+        this.opacityBoost = data.opacityBoost;
+        this.brushLengthNoise = data.brushLengthNoise;
+        this.numberFibresNoise = data.numberFibresNoise;
+        this.angleNoise = data.angleNoise;
 
-        this.colorObject = colorObject;  // default color
+        this.colorObject = color(data.colorObject);  // default color
 
-        this.buffer = createGraphics(custom_width + this.overlap, custom_height + this.overlap);
+        this.buffer = createGraphics(data.custom_width + this.overlap, data.custom_height + this.overlap);
         this.brushStrokes = [];
 
         for (var i = 0; i < this.NumberBrushStrokes; i++) {
@@ -126,7 +131,7 @@ class PaintBrushArea {
                 var posY = getRandomFromInterval(this.overlap, this.buffer.height - this.overlap - numberFibres_ * this.sizeStroke);
             }
 
-            this.brushStrokes.push(new Brush(this.buffer, colorBrush, posX, posY, brushLength_, this.sizeStroke, numberFibres_));
+            this.brushStrokes.push(new Brush(this.buffer, colorBrush, posX, posY, brushLength_, this.sizeStroke, numberFibres_, this.angleNoise, this.data));
         }
     }
 
@@ -138,3 +143,4 @@ class PaintBrushArea {
         return this.buffer;
     }
 }
+

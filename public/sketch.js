@@ -115,49 +115,49 @@ function setup() {
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
-  sphere = Pattern.painted_sphere(
-    width - 200,
-    height - 400,
-    color3,
-    70,  // margin
-    10,  // colorObjectSpread
-    30,  // fillColorOpacityMax
-    50,  // strokeColorBoost
-    40  // strokeOpacityMax
-  );
+  // sphere = Pattern.painted_sphere(
+  //   width - 200,
+  //   height - 400,
+  //   color3,
+  //   70,  // margin
+  //   10,  // colorObjectSpread
+  //   30,  // fillColorOpacityMax
+  //   50,  // strokeColorBoost
+  //   40  // strokeOpacityMax
+  // );
 
-  backup = Pattern.painted_sphere(
-    width,
-    200,
-    color4,
-    70,  // margin
-    10,  // colorObjectSpread
-    30,  // fillColorOpacityMax
-    50,  // strokeColorBoost
-    40  // strokeOpacityMax
-  );
+  // backup = Pattern.painted_sphere(
+  //   width,
+  //   200,
+  //   color4,
+  //   70,  // margin
+  //   10,  // colorObjectSpread
+  //   30,  // fillColorOpacityMax
+  //   50,  // strokeColorBoost
+  //   40  // strokeOpacityMax
+  // );
 
-  backmiddle = Pattern.painted_sphere(
-    width,
-    200,
-    color1,
-    70,  // margin
-    10,  // colorObjectSpread
-    30,  // fillColorOpacityMax
-    50,  // strokeColorBoost
-    40  // strokeOpacityMax
-  );
+  // backmiddle = Pattern.painted_sphere(
+  //   width,
+  //   200,
+  //   color1,
+  //   70,  // margin
+  //   10,  // colorObjectSpread
+  //   30,  // fillColorOpacityMax
+  //   50,  // strokeColorBoost
+  //   40  // strokeOpacityMax
+  // );
 
-  backdown = Pattern.painted_sphere(
-    width,
-    height - backup.height - backmiddle.height,
-    color4,
-    70,  // margin
-    10,  // colorObjectSpread
-    30,  // fillColorOpacityMax
-    50,  // strokeColorBoost
-    40  // strokeOpacityMax
-  );
+  // backdown = Pattern.painted_sphere(
+  //   width,
+  //   height - backup.height - backmiddle.height,
+  //   color4,
+  //   70,  // margin
+  //   10,  // colorObjectSpread
+  //   30,  // fillColorOpacityMax
+  //   50,  // strokeColorBoost
+  //   40  // strokeOpacityMax
+  // );
 
   // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
 
@@ -165,12 +165,37 @@ function setup() {
 
   // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
-  agent = new DumbAgent(width, height, color2);
+  // agent = new DumbAgent(width, height, color2);
 
-  paintbrusharea = new PaintBrushArea(900, 400, color3);
-  paintbrusharea2 = new PaintBrushArea(900, 200, color4);
-  paintbrusharea3 = new PaintBrushArea(900, 100, color1);
-  paintbrusharea4 = new PaintBrushArea(900, 200, color2);
+
+  let brushData = {
+    custom_width: 900,
+    custom_height: 400,
+    colorObject: color("#DD4A48"),
+    NumberBrushStrokes: 1050,
+    brushLength: 60,
+    sizeStroke: 2,
+    numberFibres: 15,
+    overlap: 30,  // adding to desired size
+    brightnessNoise: 20,
+    colorNoise: 5,
+    opacityBoost: 0,
+    brushLengthNoise: 0.2,
+    numberFibresNoise: 0.2,
+    angleNoise: PI / 30,
+    fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
+    fibreColorNoise: 5,
+    fibreBrightnessNoise: 10,
+    fibreStrokeSizeNoise: 0.2,
+    fibreStartXNoise: 5,  // start earlier or later
+    fibreYNoise: 1,  // noise of fibre along the y axis in the middle
+    fibreRotationNoise: PI / 80,
+  }
+
+  paintbrusharea = new PaintBrushArea(brushData);
+  // paintbrusharea2 = new PaintBrushArea(900, 200, color4);
+  // paintbrusharea3 = new PaintBrushArea(900, 100, color1);
+  // paintbrusharea4 = new PaintBrushArea(900, 200, color2);
 
   // paper = paper.get()
   // paper.mask(noise_fog);
@@ -228,20 +253,20 @@ function draw() {
   // PERLIN NOISE
   // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
 
-  image(backup, - width / 2, - height / 2, backup.width * SCALING_FACTOR, backup.height * SCALING_FACTOR);
-  image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
+  // image(backup, - width / 2, - height / 2, backup.width * SCALING_FACTOR, backup.height * SCALING_FACTOR);
+  // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
 
   image(paintbrusharea.show(), -500, 0, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
-  image(paintbrusharea2.show(), -500, -50, paintbrusharea2.width * SCALING_FACTOR, paintbrusharea2.height * SCALING_FACTOR)
-  image(paintbrusharea3.show(), -500, -200, paintbrusharea3.width * SCALING_FACTOR, paintbrusharea3.height * SCALING_FACTOR)
-  image(paintbrusharea4.show(), -500, -400, paintbrusharea4.width * SCALING_FACTOR, paintbrusharea4.height * SCALING_FACTOR)
+  // image(paintbrusharea2.show(), -500, -50, paintbrusharea2.width * SCALING_FACTOR, paintbrusharea2.height * SCALING_FACTOR)
+  // image(paintbrusharea3.show(), -500, -200, paintbrusharea3.width * SCALING_FACTOR, paintbrusharea3.height * SCALING_FACTOR)
+  // image(paintbrusharea4.show(), -500, -400, paintbrusharea4.width * SCALING_FACTOR, paintbrusharea4.height * SCALING_FACTOR)
 
-  image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
+  // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
 
-  image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
+  // image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
 
 
-  image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
+  // image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
 
   // image(grainy_gradient, - width / 2, - height / 2, grainy_gradient.width, grainy_gradient.height);
 
