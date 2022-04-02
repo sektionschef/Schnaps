@@ -30,10 +30,22 @@ const PRIMARY_STROKE_WEIGHT_MAX = 4;
 const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, PRIMARY_STROKE_WEIGHT_MAX);
 
 // palette = https://colorhunt.co/palette/97bfb4f5eedcdd4a484f091d
-const COLOR_1_HEX = "#97BFB4";
-const COLOR_2_HEX = "#F5EEDC";
-const COLOR_3_HEX = "#DD4A48";
-const COLOR_4_HEX = "#4F091D";
+// const COLOR_1_HEX = "#97BFB4";
+// const COLOR_2_HEX = "#F5EEDC";
+// const COLOR_3_HEX = "#DD4A48";
+// const COLOR_4_HEX = "#4F091D";
+
+// https://colorhunt.co/palette/22577e5584ac95d1ccfaffaf
+// const COLOR_1_HEX = "#22577E";
+// const COLOR_2_HEX = "#5584AC";
+// const COLOR_3_HEX = "#95D1CC";
+// const COLOR_4_HEX = "#FAFFAF";
+
+// https://colorhunt.co/palette/21325e3e497af1d00af0f0f0
+const COLOR_1_HEX = "#21325E";
+const COLOR_2_HEX = "#3E497A";
+const COLOR_3_HEX = "#F1D00A";  // yellow
+const COLOR_4_HEX = "#F0F0F0";
 
 // variable stuff
 let SCALING_FACTOR = 1;
@@ -178,7 +190,7 @@ function setup() {
 
   // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
-  // agent = new DumbAgent(width, height, color2);
+  agent = new DumbAgent(width, height, color3);
 
 
   brushData = {
@@ -207,42 +219,56 @@ function setup() {
     fibreRotationNoise: PI / 80,
   }
 
-  baba = new paintedSphere(sphereData);
 
   paintbrushareas = [];
   // CLASS aus spheres
   paintedSpheres = [];
 
   loopNumber = 100;
+  loopNumberSpheres = 200;
   for (var i = 0; i < loopNumber; i++) {
+    // PARAMS FOR BRUSHDATA
     brushData.custom_width = getRandomFromInterval(50, 500);
     brushData.custom_height = getRandomFromInterval(50, 500);
-    brushData.posX = getRandomFromInterval(-50 - width / 2, width / 2 + 50);
-    brushData.posY = getRandomFromInterval(-50 - height / 2, height / 2 + 50);
+    brushData.posX = getRandomFromInterval(-brushData.custom_width / 2 - width / 2, width / 2 + brushData.custom_width / 2);
+    brushData.posY = getRandomFromInterval(-brushData.custom_height / 2 - height / 2, height / 2 + brushData.custom_height / 2);
     brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
-    // brushData.NumberBrushStrokes = getRandomFromInterval(50, 200);  // map this variable with size
-    brushData.brushLength = getRandomFromInterval(30, 90);
+    brushData.NumberBrushStrokes = getRandomFromInterval(50, 150);  // map this variable with size
+    brushData.brushLength = getRandomFromInterval(30, 60);
     brushData.sizeStroke = getRandomFromInterval(1, 2);
     brushData.numberFibres = getRandomFromInterval(15, 20);
     brushData.overlap = getRandomFromInterval(10, 60);
-    brushData.brightnessNoise = getRandomFromInterval(15, 25);
-    // colorNoise: 5,
-    brushData.opacityBoost = getRandomFromInterval(0, 150);
+    brushData.brightnessNoise = getRandomFromInterval(15, 35);
+    brushData.colorNoise = getRandomFromInterval(5, 10);
+    brushData.opacityBoost = getRandomFromInterval(0, 255);
     // brushLengthNoise: 0.2,
     // numberFibresNoise: 0.2,
-    // angleNoise: PI / 30,
+    brushData.angleNoise = getRandomFromInterval(0, PI);
     // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
     // fibreColorNoise: 5,
-    // fibreBrightnessNoise: 10,
-    // fibreStrokeSizeNoise: 0.2,
+    brushData.fibreBrightnessNoise = getRandomFromInterval(5, 30);
+    brushData.fibreStrokeSizeNoise = 0.05;
     // fibreStartXNoise: 5,  // start earlier or later
-    // fibreYNoise: 1,  // noise of fibre along the y axis in the middle
+    brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
     // fibreRotationNoise: PI / 80,
 
-    // paintbrushareas.push(new PaintBrushArea(brushData));
-    // paintedSpheres.push(new paintedSphere(sphereData));
+    paintbrushareas.push(new PaintBrushArea(brushData));
   }
-  // paintbrusharea = new PaintBrushArea(brushData);
+
+  for (var i = 0; i < loopNumberSpheres; i++) {  // PARAMS FOR SPHERE
+    sphereData.custom_width = getRandomFromInterval(100, 300);
+    sphereData.custom_height = getRandomFromInterval(100, 300);
+    sphereData.posX = getRandomFromInterval(-sphereData.custom_width / 2 - width / 2, width / 2 + sphereData.custom_width / 2);
+    sphereData.posY = getRandomFromInterval(-sphereData.custom_height / 2 - height / 2, height / 2 + sphereData.custom_height / 2);;
+    sphereData.colorObject = getRandomFromList([color1, color2, color4]);;
+    sphereData.margin = 50;
+    sphereData.colorObjectSpread = 10;
+    sphereData.fillColorOpacityMax = 70;
+    sphereData.strokeColorBoost = 50;
+    sphereData.strokeOpacityMax = 40;
+
+    paintedSpheres.push(new paintedSphere(sphereData));
+  }
 
   // paper = paper.get()
   // paper.mask(noise_fog);
@@ -304,19 +330,20 @@ function draw() {
   // image(backup, - width / 2, - height / 2, backup.width * SCALING_FACTOR, backup.height * SCALING_FACTOR);
   // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
 
-  // image(paintbrusharea.show(), paintbrusharea.posX, paintbrusharea.posY, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
-  for (var i = 0; i < loopNumber; i++) {
-    // image(paintedSpheres[i], paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].width * SCALING_FACTOR, paintedSpheres[i].height * SCALING_FACTOR);
-    // image(paintbrushareas[i].show(), paintbrushareas[i].posX, paintbrushareas[i].posY, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
+  for (var i = 0; i < loopNumberSpheres; i++) {
+    image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
   }
 
-  image(baba.buffer, baba.posX, baba.posY, baba.buffer.width, baba.buffer.height);
+  for (var i = 0; i < loopNumber; i++) {
+    image(paintbrushareas[i].show(), paintbrushareas[i].posX, paintbrushareas[i].posY, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
+  }
+
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
 
   // image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
 
 
-  // image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
+  image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
 
   // image(grainy_gradient, - width / 2, - height / 2, grainy_gradient.width, grainy_gradient.height);
 
@@ -340,7 +367,7 @@ function draw() {
   //   preview_called = true;
   // }
 
-
+  noLoop();
 
 }
 

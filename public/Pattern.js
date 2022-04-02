@@ -316,7 +316,7 @@ class paintedSphere {
         this.colorObjectBlue = this.colorObject.levels[2];
 
         this.area = this.custom_width * this.custom_height;
-        this.shapeNumber = this.area / 1000 * 5;  // relative to size
+        this.shapeNumber = this.area / 1000 * 7;  // relative to size
 
         this.buffer = createGraphics(this.custom_width, this.custom_height);
 
@@ -344,10 +344,12 @@ class paintedSphere {
             this.buffer.push();
             this.buffer.stroke(strokeColor);
             this.buffer.strokeWeight(strokeSize);
+            // ATTENTION - no Stroke
+            // this.buffer.noStroke();
             this.buffer.fill(fillColor);
 
-            let widthShape = getRandomFromInterval(0, 120);
-            let heightShape = getRandomFromInterval(0, 80);
+            let widthShape = getRandomFromInterval((this.custom_width - this.margin * 2) * 0.1, (this.custom_width - this.margin * 2) * 0.5);
+            let heightShape = getRandomFromInterval((this.custom_height - this.margin * 2) * 0.1, (this.custom_height - this.margin * 2) * 0.5);
 
             this.buffer.ellipse(getRandomFromInterval(this.margin, this.buffer.width - this.margin), getRandomFromInterval(this.margin, this.buffer.height - this.margin), widthShape, heightShape);
             this.buffer.rect(getRandomFromInterval(this.margin, this.buffer.width - this.margin - widthShape), getRandomFromInterval(this.margin, this.buffer.height - this.margin - heightShape), widthShape, heightShape);
@@ -364,11 +366,11 @@ class DumbAgent {
     constructor(custom_width, custom_height, colorObject) {
         this.stepSize = 1;  // 1 - 5
         this.agentSize = 1;
-        this.opacityLevel = 1;
+        this.opacityLevel = 0;
         this.opacityLevel2 = 30;
         this.lineLength = 80;
         this.loopSize = 10000;
-        this.numberAgents = 5;
+        this.numberAgents = 15;
 
         this.color = color(colorObject.levels[0], colorObject.levels[1], colorObject.levels[2], this.opacityLevel);
         this.buffer = createGraphics(custom_width, custom_height);
