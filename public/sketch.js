@@ -75,7 +75,7 @@ function setup() {
   color3 = color(COLOR_3_HEX);
   color4 = color(COLOR_4_HEX);
 
-  slider = createSlider(0.01, 0.2, 0.05);
+  slider = createSlider(10, 60, 30);
   slider.position(10, 10);
   slider.style('width', '300px');
 
@@ -168,11 +168,13 @@ function setup() {
   // agent = new DumbAgent(width, height, color2);
 
 
-  let brushData = {
-    custom_width: 900,
-    custom_height: 400,
+  brushData = {
+    custom_width: 300,
+    custom_height: 100,
+    posX: -500,
+    posY: 0,
     colorObject: color("#DD4A48"),
-    NumberBrushStrokes: 1050,
+    NumberBrushStrokes: 300,
     brushLength: 60,
     sizeStroke: 2,
     numberFibres: 15,
@@ -191,8 +193,8 @@ function setup() {
     fibreYNoise: 1,  // noise of fibre along the y axis in the middle
     fibreRotationNoise: PI / 80,
   }
-
   paintbrusharea = new PaintBrushArea(brushData);
+
   // paintbrusharea2 = new PaintBrushArea(900, 200, color4);
   // paintbrusharea3 = new PaintBrushArea(900, 100, color1);
   // paintbrusharea4 = new PaintBrushArea(900, 200, color2);
@@ -219,7 +221,8 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  let val = slider.value();
+  // let val = slider.value();
+  // brushData.brushLength = slider.value();
 
   background(color2);
 
@@ -256,7 +259,7 @@ function draw() {
   // image(backup, - width / 2, - height / 2, backup.width * SCALING_FACTOR, backup.height * SCALING_FACTOR);
   // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
 
-  image(paintbrusharea.show(), -500, 0, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
+  image(paintbrusharea.show(), paintbrusharea.posX, paintbrusharea.posY, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
   // image(paintbrusharea2.show(), -500, -50, paintbrusharea2.width * SCALING_FACTOR, paintbrusharea2.height * SCALING_FACTOR)
   // image(paintbrusharea3.show(), -500, -200, paintbrusharea3.width * SCALING_FACTOR, paintbrusharea3.height * SCALING_FACTOR)
   // image(paintbrusharea4.show(), -500, -400, paintbrusharea4.width * SCALING_FACTOR, paintbrusharea4.height * SCALING_FACTOR)

@@ -99,6 +99,8 @@ class PaintBrushArea {
 
     constructor(data) {
         this.data = data;
+        this.posX = data.posX;
+        this.posY = data.posY;
         this.NumberBrushStrokes = data.NumberBrushStrokes;
         this.brushLength = data.brushLength;  // default
         this.sizeStroke = data.sizeStroke;
