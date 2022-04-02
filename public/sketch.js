@@ -118,6 +118,8 @@ function setup() {
   sphereData = {
     custom_width: 400,
     custom_height: 200,
+    posX: 0,
+    posY: 0,
     colorObject: color3,
     margin: 70,
     colorObjectSpread: 10,
@@ -205,8 +207,14 @@ function setup() {
     fibreRotationNoise: PI / 80,
   }
 
+  baba = new paintedSphere(sphereData);
+
   paintbrushareas = [];
-  for (var i = 0; i < 100; i++) {
+  // CLASS aus spheres
+  paintedSpheres = [];
+
+  loopNumber = 100;
+  for (var i = 0; i < loopNumber; i++) {
     brushData.custom_width = getRandomFromInterval(50, 500);
     brushData.custom_height = getRandomFromInterval(50, 500);
     brushData.posX = getRandomFromInterval(-50 - width / 2, width / 2 + 50);
@@ -231,7 +239,8 @@ function setup() {
     // fibreYNoise: 1,  // noise of fibre along the y axis in the middle
     // fibreRotationNoise: PI / 80,
 
-    paintbrushareas.push(new PaintBrushArea(brushData));
+    // paintbrushareas.push(new PaintBrushArea(brushData));
+    // paintedSpheres.push(new paintedSphere(sphereData));
   }
   // paintbrusharea = new PaintBrushArea(brushData);
 
@@ -296,10 +305,12 @@ function draw() {
   // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
 
   // image(paintbrusharea.show(), paintbrusharea.posX, paintbrusharea.posY, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
-  for (var paintbrusharea of paintbrushareas) {
-    image(paintbrusharea.show(), paintbrusharea.posX, paintbrusharea.posY, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
+  for (var i = 0; i < loopNumber; i++) {
+    // image(paintedSpheres[i], paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].width * SCALING_FACTOR, paintedSpheres[i].height * SCALING_FACTOR);
+    // image(paintbrushareas[i].show(), paintbrushareas[i].posX, paintbrushareas[i].posY, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
   }
 
+  image(baba.buffer, baba.posX, baba.posY, baba.buffer.width, baba.buffer.height);
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
 
   // image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);

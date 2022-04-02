@@ -293,49 +293,52 @@ class Pattern {
         return this.buffer;
 
     }
+}
 
+//inspired by Robert Ryman, https://openprocessing.org/sketch/1110176/ 
+class paintedSphere {
 
-    //inspired by Robert Ryman, https://openprocessing.org/sketch/1110176/ 
-    static painted_sphere(
-        custom_width,
-        custom_height,
-        colorObject,
-        margin,
-        colorObjectSpread,
-        fillColorOpacityMax,
-        strokeColorBoost,
-        strokeOpacityMax
-    ) {
+    constructor(data) {
+        this.custom_width = data.custom_width;
+        this.custom_height = data.custom_height;
+        this.posX = data.posX;
+        this.posY = data.posY;
+        this.colorObject = data.colorObject;
+        this.margin = data.margin;
+        this.colorObjectSpread = data.colorObjectSpread;
+        this.fillColorOpacityMax = data.fillColorOpacityMax;
+        this.strokeColorBoost = data.strokeColorBoost;
+        this.strokeOpacityMax = data.strokeOpacityMax;
 
-        // let strokColorWhitenessMin = 
-        let colorObjectRed = colorObject.levels[0];
-        let colorObjectGreen = colorObject.levels[1];
-        let colorObjectBlue = colorObject.levels[2];
+        // this.strokColorWhitenessMin = 
+        this.colorObjectRed = this.colorObject.levels[0];
+        this.colorObjectGreen = this.colorObject.levels[1];
+        this.colorObjectBlue = this.colorObject.levels[2];
 
-        let area = custom_width * custom_height;
-        let shapeNumber = area / 1000 * 5;  // relative to size
+        this.area = this.custom_width * this.custom_height;
+        this.shapeNumber = this.area / 1000 * 5;  // relative to size
 
-        this.buffer = createGraphics(custom_width, custom_height);
+        this.buffer = createGraphics(this.custom_width, this.custom_height);
 
         // debug
         // this.buffer.rect(0, 0, this.buffer.width, this.buffer.height);
-        for (var i = 0; i < shapeNumber; i++) {
+        for (var i = 0; i < this.shapeNumber; i++) {
             // blue value remains in example
             // let fillColorRed = getRandomFromInterval(200, 235);
             // let fillColorGreen = getRandomFromInterval(200, 235);
             // let fillColorBlue = getRandomFromInterval(255, 255);
             // let fillColorOpacity = getRandomFromInterval(0, 40);
 
-            let fillColorRed = getRandomFromInterval(colorObjectRed - colorObjectSpread, colorObjectRed + colorObjectSpread);
-            let fillColorGreen = getRandomFromInterval(colorObjectGreen - colorObjectSpread, colorObjectGreen + colorObjectSpread);
-            let fillColorBlue = getRandomFromInterval(colorObjectBlue - colorObjectSpread, colorObjectBlue + colorObjectSpread);
-            let fillColorOpacity = getRandomFromInterval(0, fillColorOpacityMax);
+            let fillColorRed = getRandomFromInterval(this.colorObjectRed - this.colorObjectSpread, this.colorObjectRed + this.colorObjectSpread);
+            let fillColorGreen = getRandomFromInterval(this.colorObjectGreen - this.colorObjectSpread, this.colorObjectGreen + this.colorObjectSpread);
+            let fillColorBlue = getRandomFromInterval(this.colorObjectBlue - this.colorObjectSpread, this.colorObjectBlue + this.colorObjectSpread);
+            let fillColorOpacity = getRandomFromInterval(0, this.fillColorOpacityMax);
 
             let strokeSize = getRandomFromInterval(0, 50);
-            let strokeColorOpacity = getRandomFromInterval(0, strokeOpacityMax);
+            let strokeColorOpacity = getRandomFromInterval(0, this.strokeOpacityMax);
 
             // let strokeColor = color(strokColorWhiteness, strokColorWhiteness, strokColorWhiteness, strokeColorOpacity);
-            let strokeColor = color(colorObjectRed + strokeColorBoost, colorObjectGreen + strokeColorBoost, colorObjectBlue + strokeColorBoost, strokeColorOpacity);
+            let strokeColor = color(this.colorObjectRed + this.strokeColorBoost, this.colorObjectGreen + this.strokeColorBoost, this.colorObjectBlue + this.strokeColorBoost, strokeColorOpacity);
             let fillColor = color(fillColorRed, fillColorGreen, fillColorBlue, fillColorOpacity);
 
             this.buffer.push();
@@ -346,14 +349,15 @@ class Pattern {
             let widthShape = getRandomFromInterval(0, 120);
             let heightShape = getRandomFromInterval(0, 80);
 
-            this.buffer.ellipse(getRandomFromInterval(margin, this.buffer.width - margin), getRandomFromInterval(margin, this.buffer.height - margin), widthShape, heightShape);
-            this.buffer.rect(getRandomFromInterval(margin, this.buffer.width - margin - widthShape), getRandomFromInterval(margin, this.buffer.height - margin - heightShape), widthShape, heightShape);
+            this.buffer.ellipse(getRandomFromInterval(this.margin, this.buffer.width - this.margin), getRandomFromInterval(this.margin, this.buffer.height - this.margin), widthShape, heightShape);
+            this.buffer.rect(getRandomFromInterval(this.margin, this.buffer.width - this.margin - widthShape), getRandomFromInterval(this.margin, this.buffer.height - this.margin - heightShape), widthShape, heightShape);
             this.buffer.pop();
         }
 
-        return this.buffer;
+        // return this.buffer;
     }
 }
+
 
 
 class DumbAgent {

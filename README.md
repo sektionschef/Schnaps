@@ -1,5 +1,6 @@
 # Schnaps
 
+* alles in constructor bei paintbrush class
 * schiefe rechtecke
 * framerate browser?? - fr = createP(''); // fr.html(floor(frameRate()));
 * reset brauch ich wieder
