@@ -1,16 +1,10 @@
 # Schnaps
 
-* slider adding for dingsi
-* primary color - 70 20 10 oder s0
+* schiefe rechtecke
 * framerate browser?? - fr = createP(''); // fr.html(floor(frameRate()));
 * reset brauch ich wieder
 * paint area with zig zag
-* perlin with more layers transparency + combine to one image
 * intersection
-* random dots for math function
-* lines
-* canvas dann drüber, als static method? https://www.w3schools.com/js/js_class_static.asp 
-* schiefe rechtecke
 * resize - check the image stuff
 
 * paint by image. paper plane, noc - https://editor.p5js.org/steinlav/sketches/dxdxe98f5

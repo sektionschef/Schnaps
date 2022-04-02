@@ -75,9 +75,9 @@ function setup() {
   color3 = color(COLOR_3_HEX);
   color4 = color(COLOR_4_HEX);
 
-  slider = createSlider(10, 60, 30);
-  slider.position(10, 10);
-  slider.style('width', '300px');
+  // slider = createSlider(10, 60, 30);
+  // slider.position(10, 10);
+  // slider.style('width', '300px');
 
 
   // flowfield = new FlowField(600, 300);
@@ -114,6 +114,17 @@ function setup() {
   canvasOverlay = Pattern.create_canvas(width, height);
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
+
+  sphereData = {
+    custom_width: 400,
+    custom_height: 200,
+    colorObject: color3,
+    margin: 70,
+    colorObjectSpread: 10,
+    fillColorOpacityMax: 30,
+    strokeColorBoost: 50,
+    strokeOpacityMax: 40
+  }
 
   // sphere = Pattern.painted_sphere(
   //   width - 200,
@@ -174,7 +185,7 @@ function setup() {
     posX: -500,
     posY: 0,
     colorObject: color("#DD4A48"),
-    NumberBrushStrokes: 300,
+    NumberBrushStrokes: 100,
     brushLength: 60,
     sizeStroke: 2,
     numberFibres: 15,
@@ -193,11 +204,36 @@ function setup() {
     fibreYNoise: 1,  // noise of fibre along the y axis in the middle
     fibreRotationNoise: PI / 80,
   }
-  paintbrusharea = new PaintBrushArea(brushData);
 
-  // paintbrusharea2 = new PaintBrushArea(900, 200, color4);
-  // paintbrusharea3 = new PaintBrushArea(900, 100, color1);
-  // paintbrusharea4 = new PaintBrushArea(900, 200, color2);
+  paintbrushareas = [];
+  for (var i = 0; i < 100; i++) {
+    brushData.custom_width = getRandomFromInterval(50, 500);
+    brushData.custom_height = getRandomFromInterval(50, 500);
+    brushData.posX = getRandomFromInterval(-50 - width / 2, width / 2 + 50);
+    brushData.posY = getRandomFromInterval(-50 - height / 2, height / 2 + 50);
+    brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
+    // brushData.NumberBrushStrokes = getRandomFromInterval(50, 200);  // map this variable with size
+    brushData.brushLength = getRandomFromInterval(30, 90);
+    brushData.sizeStroke = getRandomFromInterval(1, 2);
+    brushData.numberFibres = getRandomFromInterval(15, 20);
+    brushData.overlap = getRandomFromInterval(10, 60);
+    brushData.brightnessNoise = getRandomFromInterval(15, 25);
+    // colorNoise: 5,
+    brushData.opacityBoost = getRandomFromInterval(0, 150);
+    // brushLengthNoise: 0.2,
+    // numberFibresNoise: 0.2,
+    // angleNoise: PI / 30,
+    // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
+    // fibreColorNoise: 5,
+    // fibreBrightnessNoise: 10,
+    // fibreStrokeSizeNoise: 0.2,
+    // fibreStartXNoise: 5,  // start earlier or later
+    // fibreYNoise: 1,  // noise of fibre along the y axis in the middle
+    // fibreRotationNoise: PI / 80,
+
+    paintbrushareas.push(new PaintBrushArea(brushData));
+  }
+  // paintbrusharea = new PaintBrushArea(brushData);
 
   // paper = paper.get()
   // paper.mask(noise_fog);
@@ -259,10 +295,10 @@ function draw() {
   // image(backup, - width / 2, - height / 2, backup.width * SCALING_FACTOR, backup.height * SCALING_FACTOR);
   // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
 
-  image(paintbrusharea.show(), paintbrusharea.posX, paintbrusharea.posY, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
-  // image(paintbrusharea2.show(), -500, -50, paintbrusharea2.width * SCALING_FACTOR, paintbrusharea2.height * SCALING_FACTOR)
-  // image(paintbrusharea3.show(), -500, -200, paintbrusharea3.width * SCALING_FACTOR, paintbrusharea3.height * SCALING_FACTOR)
-  // image(paintbrusharea4.show(), -500, -400, paintbrusharea4.width * SCALING_FACTOR, paintbrusharea4.height * SCALING_FACTOR)
+  // image(paintbrusharea.show(), paintbrusharea.posX, paintbrusharea.posY, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
+  for (var paintbrusharea of paintbrushareas) {
+    image(paintbrusharea.show(), paintbrusharea.posX, paintbrusharea.posY, paintbrusharea.width * SCALING_FACTOR, paintbrusharea.height * SCALING_FACTOR)
+  }
 
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
 

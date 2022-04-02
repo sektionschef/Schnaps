@@ -358,7 +358,7 @@ class Pattern {
 
 class DumbAgent {
     constructor(custom_width, custom_height, colorObject) {
-        this.stepSize = 5;  // 1
+        this.stepSize = 1;  // 1 - 5
         this.agentSize = 1;
         this.opacityLevel = 1;
         this.opacityLevel2 = 30;
