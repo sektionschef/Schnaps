@@ -361,11 +361,11 @@ class paintedSphere {
 
 class DumbAgent {
     constructor(custom_width, custom_height, colorObject) {
-        this.stepSize = 1;  // 1 - 5
-        this.agentSize = 1;
-        this.opacityLevel = 0;
+        this.stepSize = 10;  // 10 is hero
+        this.agentSize = 13;
+        this.opacityLevel = 2;
         this.opacityLevel2 = 30;
-        this.lineLength = 80;
+        this.lineLength = 3;
         this.loopSize = 10000;
         this.numberAgents = 15;
 
@@ -382,6 +382,8 @@ class DumbAgent {
     show() {
 
         for (var v = 0; v < this.numberAgents; v++) {
+            let angle = getRandomFromInterval(PI / 2, PI);
+            let colory = color(getRandomFromInterval(100, 150), this.opacityLevel);
             for (var i = 0; i < this.loopSize; i++) {
 
                 let directive = getRandomFromList([
@@ -428,14 +430,17 @@ class DumbAgent {
 
                 this.buffer.translate(this.posX, this.posY);
                 this.buffer.strokeWeight(this.agentSize);
-                this.buffer.stroke(this.color);
-                this.buffer.rotate(i % PI);
+                // this.buffer.stroke(this.color);
+                this.buffer.stroke(colory);
+                // this.buffer.rotate(i % PI);
+                this.buffer.rotate(angle);
                 this.buffer.line(0, 0, this.lineLength, this.lineLength);
 
                 // optional
-                this.buffer.stroke(color(this.color.levels[0], this.color.levels[1], this.color.levels[2], this.opacityLevel2));
-                this.buffer.point(0, 0);
-                this.buffer.point(this.lineLength, this.lineLength);
+                // this.buffer.stroke(color(this.color.levels[0], this.color.levels[1], this.color.levels[2], this.opacityLevel2));
+                // this.buffer.point(0, 0);
+                // this.buffer.point(this.lineLength, this.lineLength);
+
                 this.buffer.pop();
             }
         }

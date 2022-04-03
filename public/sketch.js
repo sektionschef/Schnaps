@@ -142,7 +142,7 @@ function setup() {
 
   // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
-  // agent = new DumbAgent(width, height, color3);
+  agent = new DumbAgent(width, height, color(0));
 
   sphereData = {
     custom_width: 400,
@@ -203,6 +203,7 @@ function setup() {
 
   loopNumberPaintbrush = 100;
   loopNumberSpheres = 200;
+  // PAINTBRUSH
   for (var i = 0; i < loopNumberPaintbrush; i++) {
     // PARAMS FOR BRUSHDATA
     if (i < loopNumberPaintbrush * 0.75) {  // last quarter is smaller
@@ -233,7 +234,7 @@ function setup() {
     brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
     brushData.fibreRotationNoise = PI / 80;
 
-    paintbrushareas.push(new PaintBrushArea(brushData));
+    // paintbrushareas.push(new PaintBrushArea(brushData));
 
     // console.log(paintbrushareas[i]);
   }
@@ -325,21 +326,22 @@ function draw() {
     // image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
   }
 
-  for (var i = 0; i < loopNumberPaintbrush; i++) {
-    push();
-    translate(paintbrushareas[i].posX, paintbrushareas[i].posY);
-    if (fxrand() > 0.8) {
-      rotate(PI / 2);
-    }
-    image(paintbrushareas[i].show(), 0, 0, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
-    pop();
-  }
+  // PAINTBRUSH
+  // for (var i = 0; i < loopNumberPaintbrush; i++) {
+  //   push();
+  //   translate(paintbrushareas[i].posX, paintbrushareas[i].posY);
+  //   if (fxrand() > 0.8) {
+  //     rotate(PI / 2);
+  //   }
+  //   image(paintbrushareas[i].show(), 0, 0, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
+  //   pop();
+  // }
 
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
 
   // image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
 
-  // image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
+  image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
 
   // image(grainy_gradient, - width / 2, - height / 2, grainy_gradient.width, grainy_gradient.height);
 
