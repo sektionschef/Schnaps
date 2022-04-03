@@ -1,8 +1,8 @@
 # Schnaps
 
 * cool, dass es rechts unten ist und abstand - wieso
-* splatter  
 * zweiter loop mit kleinerer fläche
+* drehen von areas
 * drüber dumbagent
 
 * alles in constructor bei paintbrush class

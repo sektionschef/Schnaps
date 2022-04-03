@@ -210,16 +210,16 @@ function setup() {
     brushData.opacityBoost = getRandomFromInterval(0, 255);
     // brushLengthNoise: 0.2,
     // numberFibresNoise: 0.2,
-    brushData.angleNoise = getRandomFromInterval(0, PI / 10);  // 0, PI
+    brushData.angleNoise = getRandomFromInterval(PI / 60, PI / 20);  // 0, PI
     // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
     // fibreColorNoise: 5,
     brushData.fibreBrightnessNoise = getRandomFromInterval(5, 30);
     brushData.fibreStrokeSizeNoise = 0.05;
     // fibreStartXNoise: 5,  // start earlier or later
     brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
-    // fibreRotationNoise: PI / 80,
+    brushData.fibreRotationNoise = PI / 80;
 
-    // paintbrushareas.push(new PaintBrushArea(brushData));
+    paintbrushareas.push(new PaintBrushArea(brushData));
 
     // console.log(paintbrushareas[i]);
   }
@@ -312,7 +312,13 @@ function draw() {
   }
 
   for (var i = 0; i < loopNumberPaintbrush; i++) {
-    // image(paintbrushareas[i].show(), paintbrushareas[i].posX, paintbrushareas[i].posY, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
+    push();
+    translate(paintbrushareas[i].posX, paintbrushareas[i].posY);
+    if (fxrand() > 0.8) {
+      rotate(PI / 2);
+    }
+    image(paintbrushareas[i].show(), 0, 0, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
+    pop();
   }
 
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
