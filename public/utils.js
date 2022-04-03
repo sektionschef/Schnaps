@@ -76,9 +76,9 @@ function resize_canvas() {
 
 function keyTyped() {
     if (key === 's') {
-        noLoop();
+        // noLoop();
         saveCanvas(canvas, 'snapshot', 'jpg');
-        loop();
+        // loop();
     } else if (key === "r") {
         reset_camera()
     } else if (key === "c") {

@@ -101,7 +101,6 @@ class PaintBrushArea {
         this.data = data;
         this.posX = data.posX;
         this.posY = data.posY;
-        this.NumberBrushStrokes = data.NumberBrushStrokes;
         this.brushLength = data.brushLength;  // default
         this.sizeStroke = data.sizeStroke;
         this.numberFibres = data.numberFibres;  // default
@@ -117,6 +116,9 @@ class PaintBrushArea {
         this.colorObject = color(data.colorObject);  // default color
 
         this.buffer = createGraphics(data.custom_width + this.overlap, data.custom_height + this.overlap);
+        this.area = data.custom_width * data.custom_height;  // without overlap
+        this.NumberBrushStrokes = floor(this.area / (this.numberFibres * this.brushLength * this.sizeStroke)) * 2;
+
         this.brushStrokes = [];
 
         for (var i = 0; i < this.NumberBrushStrokes; i++) {
@@ -138,6 +140,13 @@ class PaintBrushArea {
     }
 
     show() {
+
+        // debug
+        // this.buffer.push();
+        // this.buffer.noFill();
+        // this.buffer.rect(0, 0, this.buffer.width, this.buffer.height);
+        // this.buffer.pop();
+
         for (var brushtroke of this.brushStrokes) {
             brushtroke.show();
         }

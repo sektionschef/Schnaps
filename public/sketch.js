@@ -127,6 +127,14 @@ function setup() {
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
+  // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
+
+  // splatter = Pattern.create_splatter_splitter(width, height);
+
+  // grainy_gradient = Pattern.create_grainy_gradient(width, height);
+
+  // agent = new DumbAgent(width, height, color3);
+
   sphereData = {
     custom_width: 400,
     custom_height: 200,
@@ -140,58 +148,6 @@ function setup() {
     strokeOpacityMax: 40
   }
 
-  // sphere = Pattern.painted_sphere(
-  //   width - 200,
-  //   height - 400,
-  //   color3,
-  //   70,  // margin
-  //   10,  // colorObjectSpread
-  //   30,  // fillColorOpacityMax
-  //   50,  // strokeColorBoost
-  //   40  // strokeOpacityMax
-  // );
-
-  // backup = Pattern.painted_sphere(
-  //   width,
-  //   200,
-  //   color4,
-  //   70,  // margin
-  //   10,  // colorObjectSpread
-  //   30,  // fillColorOpacityMax
-  //   50,  // strokeColorBoost
-  //   40  // strokeOpacityMax
-  // );
-
-  // backmiddle = Pattern.painted_sphere(
-  //   width,
-  //   200,
-  //   color1,
-  //   70,  // margin
-  //   10,  // colorObjectSpread
-  //   30,  // fillColorOpacityMax
-  //   50,  // strokeColorBoost
-  //   40  // strokeOpacityMax
-  // );
-
-  // backdown = Pattern.painted_sphere(
-  //   width,
-  //   height - backup.height - backmiddle.height,
-  //   color4,
-  //   70,  // margin
-  //   10,  // colorObjectSpread
-  //   30,  // fillColorOpacityMax
-  //   50,  // strokeColorBoost
-  //   40  // strokeOpacityMax
-  // );
-
-  // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
-
-  // splatter = Pattern.create_splatter_splitter(width, height);
-
-  // grainy_gradient = Pattern.create_grainy_gradient(width, height);
-
-  agent = new DumbAgent(width, height, color3);
-
 
   brushData = {
     custom_width: 300,
@@ -199,7 +155,6 @@ function setup() {
     posX: -500,
     posY: 0,
     colorObject: color("#DD4A48"),
-    NumberBrushStrokes: 100,
     brushLength: 60,
     sizeStroke: 2,
     numberFibres: 15,
@@ -224,16 +179,15 @@ function setup() {
   // CLASS aus spheres
   paintedSpheres = [];
 
-  loopNumber = 100;
+  loopNumberPaintbrush = 100;
   loopNumberSpheres = 200;
-  for (var i = 0; i < loopNumber; i++) {
+  for (var i = 0; i < loopNumberPaintbrush; i++) {
     // PARAMS FOR BRUSHDATA
     brushData.custom_width = getRandomFromInterval(50, 500);
     brushData.custom_height = getRandomFromInterval(50, 500);
-    brushData.posX = getRandomFromInterval(-brushData.custom_width / 2 - width / 2, width / 2 + brushData.custom_width / 2);
-    brushData.posY = getRandomFromInterval(-brushData.custom_height / 2 - height / 2, height / 2 + brushData.custom_height / 2);
+    brushData.posX = getRandomFromInterval(brushData.custom_width / 2 - width / 2, width / 2 - brushData.custom_width / 2);
+    brushData.posY = getRandomFromInterval(brushData.custom_height / 2 - height / 2, height / 2 - brushData.custom_height / 2);
     brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
-    brushData.NumberBrushStrokes = getRandomFromInterval(50, 150);  // map this variable with size
     brushData.brushLength = getRandomFromInterval(30, 60);
     brushData.sizeStroke = getRandomFromInterval(1, 2);
     brushData.numberFibres = getRandomFromInterval(15, 20);
@@ -243,7 +197,7 @@ function setup() {
     brushData.opacityBoost = getRandomFromInterval(0, 255);
     // brushLengthNoise: 0.2,
     // numberFibresNoise: 0.2,
-    brushData.angleNoise = getRandomFromInterval(0, PI);
+    brushData.angleNoise = getRandomFromInterval(0, PI / 10);  // 0, PI
     // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
     // fibreColorNoise: 5,
     brushData.fibreBrightnessNoise = getRandomFromInterval(5, 30);
@@ -253,6 +207,8 @@ function setup() {
     // fibreRotationNoise: PI / 80,
 
     paintbrushareas.push(new PaintBrushArea(brushData));
+
+    // console.log(paintbrushareas[i]);
   }
 
   for (var i = 0; i < loopNumberSpheres; i++) {  // PARAMS FOR SPHERE
@@ -267,7 +223,7 @@ function setup() {
     sphereData.strokeColorBoost = 50;
     sphereData.strokeOpacityMax = 40;
 
-    paintedSpheres.push(new paintedSphere(sphereData));
+    // paintedSpheres.push(new paintedSphere(sphereData));
   }
 
   // paper = paper.get()
@@ -295,7 +251,8 @@ function draw() {
   // let val = slider.value();
   // brushData.brushLength = slider.value();
 
-  background(color2);
+  // background(color2);
+  background(130);
 
   // image(paper);
   // shape = createGraphics(width, height);
@@ -331,10 +288,10 @@ function draw() {
   // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
 
   for (var i = 0; i < loopNumberSpheres; i++) {
-    image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
+    // image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
   }
 
-  for (var i = 0; i < loopNumber; i++) {
+  for (var i = 0; i < loopNumberPaintbrush; i++) {
     image(paintbrushareas[i].show(), paintbrushareas[i].posX, paintbrushareas[i].posY, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
   }
 
@@ -342,8 +299,7 @@ function draw() {
 
   // image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
 
-
-  image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
+  // image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
 
   // image(grainy_gradient, - width / 2, - height / 2, grainy_gradient.width, grainy_gradient.height);
 
