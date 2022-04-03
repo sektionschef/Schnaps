@@ -36,16 +36,24 @@ const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, P
 // const COLOR_4_HEX = "#4F091D";
 
 // https://colorhunt.co/palette/22577e5584ac95d1ccfaffaf
-const COLOR_1_HEX = "#22577E";
-const COLOR_2_HEX = "#5584AC";
-const COLOR_3_HEX = "#95D1CC";
-const COLOR_4_HEX = "#FAFFAF";
+// const COLOR_1_HEX = "#22577E";
+// const COLOR_2_HEX = "#5584AC";
+// const COLOR_3_HEX = "#95D1CC";
+// const COLOR_4_HEX = "#FAFFAF";
 
 // https://colorhunt.co/palette/21325e3e497af1d00af0f0f0
 // const COLOR_1_HEX = "#21325E";
 // const COLOR_2_HEX = "#3E497A";
 // const COLOR_3_HEX = "#F1D00A";  // yellow
 // const COLOR_4_HEX = "#F0F0F0";
+
+// https://colorhunt.co/palette/000957344cb7577bc1ebe645
+const COLOR_1_HEX = "#000957";
+const COLOR_2_HEX = "#344CB7";
+const COLOR_3_HEX = "#577BC1";
+const COLOR_4_HEX = "#EBE645"; // yellow
+
+
 
 // variable stuff
 let SCALING_FACTOR = 1;
@@ -76,7 +84,8 @@ function setup() {
   pixelDensity(1);
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
-  let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
+  // let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL);
 
   fxhash_number = hashFnv32a(fxhash);
   logging.info("hash number: " + fxhash_number);
@@ -153,7 +162,7 @@ function setup() {
     custom_height: height,
     posX: -width / 2,
     posY: -height / 2,
-    colorObject: color(230),
+    colorObject: color(210),
     margin: 10,
     colorObjectSpread: 20,
     fillColorOpacityMax: 30,
@@ -196,18 +205,23 @@ function setup() {
   loopNumberSpheres = 200;
   for (var i = 0; i < loopNumberPaintbrush; i++) {
     // PARAMS FOR BRUSHDATA
-    brushData.custom_width = getRandomFromInterval(50, 500);
-    brushData.custom_height = getRandomFromInterval(50, 500);
+    if (i < loopNumberPaintbrush * 0.75) {  // last quarter is smaller
+      brushData.custom_width = getRandomFromInterval(50, 500);
+      brushData.custom_height = getRandomFromInterval(50, 500);
+    } else {
+      brushData.custom_width = getRandomFromInterval(50, 100);
+      brushData.custom_height = getRandomFromInterval(50, 100);
+    }
     brushData.posX = getRandomFromInterval(brushData.custom_width / 2 - width / 2, width / 2 - brushData.custom_width / 2);
     brushData.posY = getRandomFromInterval(brushData.custom_height / 2 - height / 2, height / 2 - brushData.custom_height / 2);
     brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
-    brushData.brushLength = getRandomFromInterval(30, 60);
-    brushData.sizeStroke = getRandomFromInterval(1, 2);
+    brushData.brushLength = getRandomFromInterval(50, 70);
+    brushData.sizeStroke = getRandomFromInterval(1.5, 2);
     brushData.numberFibres = getRandomFromInterval(15, 20);
     brushData.overlap = getRandomFromInterval(10, 60);
     brushData.brightnessNoise = getRandomFromInterval(15, 35);
     brushData.colorNoise = getRandomFromInterval(5, 10);
-    brushData.opacityBoost = getRandomFromInterval(0, 255);
+    brushData.opacityBoost = getRandomFromInterval(150, 255);
     // brushLengthNoise: 0.2,
     // numberFibresNoise: 0.2,
     brushData.angleNoise = getRandomFromInterval(PI / 60, PI / 20);  // 0, PI
