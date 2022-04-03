@@ -211,26 +211,19 @@ class Pattern {
     static create_splatter_splitter(
         custom_width,
         custom_height,
-        incMin,
-        incMax,
-        noiseDetailLod,
-        noiseDetailFalloff,
-        opacityValue,
-        blackness,
-        perlinThreshold
+        inc = 0.05,
+        noiseDetailLod = 16,
+        noiseDetailFalloff = 0.9,
+        opacityValue = 150,
+        blackness = 145,  // amount of grey
+        perlinThreshold = 0.90  // minimum to get drawn 
     ) {
-        // let incMax = 0.5;
-        // let incMin = 0.3
-        // noiseDetail(8, 0.6);
-        // let opacityValue = 50;
-        // let blackness = 160;
-        // let perlinThreshold = 0.90;  // minimum to get drawn
 
-        let inc = getRandomFromInterval(incMin, incMax);
         noiseDetail(noiseDetailLod, noiseDetailFalloff)
         let buffer = createGraphics(custom_width, custom_height);
 
         let yoff = 0;
+        // buffer.fill(240);
         buffer.loadPixels();
         for (let y = 0; y < buffer.height; y++) {
             let xoff = 0;
@@ -243,8 +236,12 @@ class Pattern {
                     buffer.pixels[index + 1] = perlinValue * blackness;
                     buffer.pixels[index + 2] = perlinValue * blackness;
                     buffer.pixels[index + 3] = opacityValue;
+                } else {
+                    buffer.pixels[index + 0] = 0;
+                    buffer.pixels[index + 1] = 0;
+                    buffer.pixels[index + 2] = 0;
+                    buffer.pixels[index + 3] = 0;
                 }
-
 
                 xoff += inc;
             }

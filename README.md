@@ -1,8 +1,10 @@
 # Schnaps
 
 * cool, dass es rechts unten ist und abstand - wieso
+* splatter  
 * zweiter loop mit kleinerer fläche
-* vlt. paint statt den spheres?
+* drüber dumbagent
+
 * alles in constructor bei paintbrush class
 * schiefe rechtecke
 * framerate browser?? - fr = createP(''); // fr.html(floor(frameRate()));

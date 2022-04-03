@@ -36,16 +36,16 @@ const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, P
 // const COLOR_4_HEX = "#4F091D";
 
 // https://colorhunt.co/palette/22577e5584ac95d1ccfaffaf
-// const COLOR_1_HEX = "#22577E";
-// const COLOR_2_HEX = "#5584AC";
-// const COLOR_3_HEX = "#95D1CC";
-// const COLOR_4_HEX = "#FAFFAF";
+const COLOR_1_HEX = "#22577E";
+const COLOR_2_HEX = "#5584AC";
+const COLOR_3_HEX = "#95D1CC";
+const COLOR_4_HEX = "#FAFFAF";
 
 // https://colorhunt.co/palette/21325e3e497af1d00af0f0f0
-const COLOR_1_HEX = "#21325E";
-const COLOR_2_HEX = "#3E497A";
-const COLOR_3_HEX = "#F1D00A";  // yellow
-const COLOR_4_HEX = "#F0F0F0";
+// const COLOR_1_HEX = "#21325E";
+// const COLOR_2_HEX = "#3E497A";
+// const COLOR_3_HEX = "#F1D00A";  // yellow
+// const COLOR_4_HEX = "#F0F0F0";
 
 // variable stuff
 let SCALING_FACTOR = 1;
@@ -117,10 +117,10 @@ function setup() {
   // }
 
 
-  // painted_area = new Paint(200, 400, -200, -200, color1);
-  // painted_area_2 = new Paint(300, 500, 0, -250, color4);
+  // painted_area = new Paint(200, 400, -500, -500, color1);
+  // painted_area_2 = new Paint(300, 500, -300, -550, color4);
 
-  // paper = Pattern.create_corroded_area(width, height, color1);
+  // paper = Pattern.create_corroded_area(width, height, color(240));
   // dots = Pattern.create_dots(width, height);
   // normal_noise = Pattern.create_noise(100, 100);
   canvasOverlay = Pattern.create_canvas(width, height);
@@ -129,7 +129,7 @@ function setup() {
 
   // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
 
-  // splatter = Pattern.create_splatter_splitter(width, height);
+  splatter = Pattern.create_splatter_splitter(width, height);
 
   // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
@@ -143,6 +143,19 @@ function setup() {
     colorObject: color3,
     margin: 70,
     colorObjectSpread: 10,
+    fillColorOpacityMax: 150,
+    strokeColorBoost: 50,
+    strokeOpacityMax: 40
+  }
+
+  sphereBackgroundData = {
+    custom_width: width,
+    custom_height: height,
+    posX: -width / 2,
+    posY: -height / 2,
+    colorObject: color(230),
+    margin: 10,
+    colorObjectSpread: 20,
     fillColorOpacityMax: 30,
     strokeColorBoost: 50,
     strokeOpacityMax: 40
@@ -206,7 +219,7 @@ function setup() {
     brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
     // fibreRotationNoise: PI / 80,
 
-    paintbrushareas.push(new PaintBrushArea(brushData));
+    // paintbrushareas.push(new PaintBrushArea(brushData));
 
     // console.log(paintbrushareas[i]);
   }
@@ -225,6 +238,8 @@ function setup() {
 
     // paintedSpheres.push(new paintedSphere(sphereData));
   }
+
+  backgroundSphere = new paintedSphere(sphereBackgroundData);
 
   // paper = paper.get()
   // paper.mask(noise_fog);
@@ -261,7 +276,12 @@ function draw() {
   // paper.mask
 
   // image(paper, - width / 2, - height / 2, paper.width * SCALING_FACTOR, paper.height * SCALING_FACTOR);
-  // image(splatter, - width / 2, - height / 2, splatter.width, splatter.height);
+
+  image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width, backgroundSphere.buffer.height);
+  image(splatter, - width / 2, - height / 2, splatter.width, splatter.height);
+
+  // CANVAS
+  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -292,7 +312,7 @@ function draw() {
   }
 
   for (var i = 0; i < loopNumberPaintbrush; i++) {
-    image(paintbrushareas[i].show(), paintbrushareas[i].posX, paintbrushareas[i].posY, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
+    // image(paintbrushareas[i].show(), paintbrushareas[i].posX, paintbrushareas[i].posY, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
   }
 
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
@@ -313,8 +333,6 @@ function draw() {
   // }
 
 
-  // CANVAS
-  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
 
   // if (grid.boxes_completely_run == true && preview_called == false) {
