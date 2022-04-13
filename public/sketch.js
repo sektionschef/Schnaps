@@ -36,10 +36,10 @@ const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, P
 // const COLOR_4_HEX = "#4F091D";
 
 // https://colorhunt.co/palette/22577e5584ac95d1ccfaffaf
-// const COLOR_1_HEX = "#22577E";
-// const COLOR_2_HEX = "#5584AC";
-// const COLOR_3_HEX = "#95D1CC";
-// const COLOR_4_HEX = "#FAFFAF";
+const COLOR_1_HEX = "#22577E";
+const COLOR_2_HEX = "#5584AC";
+const COLOR_3_HEX = "#95D1CC";
+const COLOR_4_HEX = "#FAFFAF";
 
 // https://colorhunt.co/palette/21325e3e497af1d00af0f0f0
 // const COLOR_1_HEX = "#21325E";
@@ -48,10 +48,10 @@ const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, P
 // const COLOR_4_HEX = "#F0F0F0";
 
 // https://colorhunt.co/palette/000957344cb7577bc1ebe645
-const COLOR_1_HEX = "#000957";
-const COLOR_2_HEX = "#344CB7";
-const COLOR_3_HEX = "#577BC1";
-const COLOR_4_HEX = "#EBE645"; // yellow
+// const COLOR_1_HEX = "#000957";
+// const COLOR_2_HEX = "#344CB7";
+// const COLOR_3_HEX = "#577BC1";
+// const COLOR_4_HEX = "#EBE645"; // yellow
 
 
 
@@ -142,7 +142,7 @@ function setup() {
 
   // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
-  agent = new DumbAgent(width, height, color(0));
+  // agent = new DumbAgent(width, height, color(0));
 
   sphereData = {
     custom_width: 400,
@@ -234,7 +234,7 @@ function setup() {
     brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
     brushData.fibreRotationNoise = PI / 80;
 
-    // paintbrushareas.push(new PaintBrushArea(brushData));
+    paintbrushareas.push(new PaintBrushArea(brushData));
 
     // console.log(paintbrushareas[i]);
   }
@@ -327,21 +327,21 @@ function draw() {
   }
 
   // PAINTBRUSH
-  // for (var i = 0; i < loopNumberPaintbrush; i++) {
-  //   push();
-  //   translate(paintbrushareas[i].posX, paintbrushareas[i].posY);
-  //   if (fxrand() > 0.8) {
-  //     rotate(PI / 2);
-  //   }
-  //   image(paintbrushareas[i].show(), 0, 0, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
-  //   pop();
-  // }
+  for (var i = 0; i < loopNumberPaintbrush; i++) {
+    push();
+    translate(paintbrushareas[i].posX, paintbrushareas[i].posY);
+    if (fxrand() > 0.8) {
+      rotate(PI / 2);
+    }
+    image(paintbrushareas[i].show(), 0, 0, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
+    pop();
+  }
 
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
 
   // image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
 
-  image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
+  // image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
 
   // image(grainy_gradient, - width / 2, - height / 2, grainy_gradient.width, grainy_gradient.height);
 

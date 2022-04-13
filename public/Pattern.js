@@ -362,8 +362,8 @@ class paintedSphere {
 class DumbAgent {
     constructor(custom_width, custom_height, colorObject) {
         this.stepSize = 10;  // 10 is hero
-        this.agentSize = 13;
-        this.opacityLevel = 2;
+        this.agentSize = 1;
+        this.opacityLevel = 20;
         this.opacityLevel2 = 30;
         this.lineLength = 3;
         this.loopSize = 10000;
