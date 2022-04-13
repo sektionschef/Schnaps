@@ -403,9 +403,30 @@ function draw() {
     // console.log("no overlap");
   } else {
     console.log("overlap");
+
+
+    if (rect2.posX - rect2.width / 2 < rect1.posX - rect1.width / 2) {
+      var widthNew = (rect2.posX - rect2.width / 2 + rect2.width) - (rect1.posX - rect1.width / 2);
+      var posXNew = (rect1.posX - rect1.width / 2) + widthNew / 2;
+      // console.log("lasdfaf");
+    } else {
+      var widthNew = rect2.width;
+      var posXNew = rect2.posX;
+    }
+
+    var posYNew = Math.max(rect2.posY - rect2.height / 2, rect1.posY - rect1.height / 2);
+    var heightNew = Math.min(rect1.height, rect2.height) - posYNew;
+    var OnTopLayer = 0;
+
+    push();
+    fill("purple");
+    translate(posXNew, posYNew, OnTopLayer);
+    box(widthNew, heightNew, 0);
+    pop();
   }
 
-
+  point(rect2.posX - rect2.width / 2 + rect2.width, 0);
+  point(rect1.posX - rect1.width / 2, 0);
   // noLoop();
 
 }
