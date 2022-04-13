@@ -396,14 +396,7 @@ function draw() {
 
   if (
     (rect2.posX - rect2.width / 2 > rect1.posX - rect1.width / 2 + rect1.width) ||
-    (rect2.posX - rect2.width / 2 + rect2.width < rect1.posX - rect1.width / 2)
-  ) {
-    // console.log("no overlap");
-  } else {
-    // console.log("overlap");
-  }
-
-  if (
+    (rect2.posX - rect2.width / 2 + rect2.width < rect1.posX - rect1.width / 2) ||
     (rect2.posY - rect2.height / 2 > rect1.posY - rect1.height / 2 + rect1.height) ||
     (rect2.posY - rect2.height / 2 + rect2.height < rect1.posY - rect1.height / 2)
   ) {
