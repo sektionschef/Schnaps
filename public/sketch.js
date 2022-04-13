@@ -203,41 +203,41 @@ function setup() {
 
   loopNumberPaintbrush = 100;
   loopNumberSpheres = 200;
-  // PAINTBRUSH
-  for (var i = 0; i < loopNumberPaintbrush; i++) {
-    // PARAMS FOR BRUSHDATA
-    if (i < loopNumberPaintbrush * 0.75) {  // last quarter is smaller
-      brushData.custom_width = getRandomFromInterval(50, 500);
-      brushData.custom_height = getRandomFromInterval(50, 500);
-    } else {
-      brushData.custom_width = getRandomFromInterval(50, 100);
-      brushData.custom_height = getRandomFromInterval(50, 100);
-    }
-    brushData.posX = getRandomFromInterval(brushData.custom_width / 2 - width / 2, width / 2 - brushData.custom_width / 2);
-    brushData.posY = getRandomFromInterval(brushData.custom_height / 2 - height / 2, height / 2 - brushData.custom_height / 2);
-    brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
-    brushData.brushLength = getRandomFromInterval(50, 70);
-    brushData.sizeStroke = getRandomFromInterval(1.5, 2);
-    brushData.numberFibres = getRandomFromInterval(15, 20);
-    brushData.overlap = getRandomFromInterval(10, 60);
-    brushData.brightnessNoise = getRandomFromInterval(15, 35);
-    brushData.colorNoise = getRandomFromInterval(5, 10);
-    brushData.opacityBoost = getRandomFromInterval(150, 255);
-    // brushLengthNoise: 0.2,
-    // numberFibresNoise: 0.2,
-    brushData.angleNoise = getRandomFromInterval(PI / 60, PI / 20);  // 0, PI
-    // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
-    // fibreColorNoise: 5,
-    brushData.fibreBrightnessNoise = getRandomFromInterval(5, 30);
-    brushData.fibreStrokeSizeNoise = 0.05;
-    // fibreStartXNoise: 5,  // start earlier or later
-    brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
-    brushData.fibreRotationNoise = PI / 80;
+  // PAINTBRUSH befor rects
+  // for (var i = 0; i < loopNumberPaintbrush; i++) {
+  //   // PARAMS FOR BRUSHDATA
+  //   if (i < loopNumberPaintbrush * 0.75) {  // last quarter is smaller
+  //     brushData.custom_width = getRandomFromInterval(50, 500);
+  //     brushData.custom_height = getRandomFromInterval(50, 500);
+  //   } else {
+  //     brushData.custom_width = getRandomFromInterval(50, 100);
+  //     brushData.custom_height = getRandomFromInterval(50, 100);
+  //   }
+  //   brushData.posX = getRandomFromInterval(brushData.custom_width / 2 - width / 2, width / 2 - brushData.custom_width / 2);
+  //   brushData.posY = getRandomFromInterval(brushData.custom_height / 2 - height / 2, height / 2 - brushData.custom_height / 2);
+  //   brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
+  //   brushData.brushLength = getRandomFromInterval(50, 70);
+  //   brushData.sizeStroke = getRandomFromInterval(1.5, 2);
+  //   brushData.numberFibres = getRandomFromInterval(15, 20);
+  //   brushData.overlap = getRandomFromInterval(10, 60);
+  //   brushData.brightnessNoise = getRandomFromInterval(15, 35);
+  //   brushData.colorNoise = getRandomFromInterval(5, 10);
+  //   brushData.opacityBoost = getRandomFromInterval(150, 255);
+  //   // brushLengthNoise: 0.2,
+  //   // numberFibresNoise: 0.2,
+  //   brushData.angleNoise = getRandomFromInterval(PI / 60, PI / 20);  // 0, PI
+  //   // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
+  //   // fibreColorNoise: 5,
+  //   brushData.fibreBrightnessNoise = getRandomFromInterval(5, 30);
+  //   brushData.fibreStrokeSizeNoise = 0.05;
+  //   // fibreStartXNoise: 5,  // start earlier or later
+  //   brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
+  //   brushData.fibreRotationNoise = PI / 80;
 
-    paintbrushareas.push(new PaintBrushArea(brushData));
+  //   paintbrushareas.push(new PaintBrushArea(brushData));
 
-    // console.log(paintbrushareas[i]);
-  }
+  //   // console.log(paintbrushareas[i]);
+  // }
 
   for (var i = 0; i < loopNumberSpheres; i++) {  // PARAMS FOR SPHERE
     sphereData.custom_width = getRandomFromInterval(100, 300);
@@ -326,16 +326,16 @@ function draw() {
     // image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
   }
 
-  // PAINTBRUSH
-  for (var i = 0; i < loopNumberPaintbrush; i++) {
-    push();
-    translate(paintbrushareas[i].posX, paintbrushareas[i].posY);
-    if (fxrand() > 0.8) {
-      rotate(PI / 2);
-    }
-    image(paintbrushareas[i].show(), 0, 0, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
-    pop();
-  }
+  // PAINTBRUSH BEFORE Rects
+  // for (var i = 0; i < loopNumberPaintbrush; i++) {
+  //   push();
+  //   translate(paintbrushareas[i].posX, paintbrushareas[i].posY);
+  //   if (fxrand() > 0.8) {
+  //     rotate(PI / 2);
+  //   }
+  //   image(paintbrushareas[i].show(), 0, 0, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
+  //   pop();
+  // }
 
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
 
@@ -363,7 +363,57 @@ function draw() {
   //   preview_called = true;
   // }
 
-  noLoop();
+
+  rect1 = {
+    width: 200,
+    height: 100,
+    depth: 0,
+    posX: 0,
+    posY: 0,
+    posZ: 0,
+  }
+
+  rect2 = {
+    width: 100,
+    height: 200,
+    depth: 0,
+    posX: mouseX - width / 2,
+    posY: mouseY - height / 2,
+    posZ: 0,
+  }
+
+  push();
+  fill("red");
+  translate(rect1.posX, rect1.posY, rect1.posZ);
+  box(rect1.width, rect1.height, rect1.depth);
+  pop();
+
+  push();
+  fill("blue");
+  translate(rect2.posX, rect2.posY, rect2.posZ);
+  box(rect2.width, rect2.height, rect2.depth);
+  pop();
+
+  if (
+    (rect2.posX - rect2.width / 2 > rect1.posX - rect1.width / 2 + rect1.width) ||
+    (rect2.posX - rect2.width / 2 + rect2.width < rect1.posX - rect1.width / 2)
+  ) {
+    // console.log("no overlap");
+  } else {
+    // console.log("overlap");
+  }
+
+  if (
+    (rect2.posY - rect2.height / 2 > rect1.posY - rect1.height / 2 + rect1.height) ||
+    (rect2.posY - rect2.height / 2 + rect2.height < rect1.posY - rect1.height / 2)
+  ) {
+    // console.log("no overlap");
+  } else {
+    console.log("overlap");
+  }
+
+
+  // noLoop();
 
 }
 
