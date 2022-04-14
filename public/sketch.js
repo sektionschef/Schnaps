@@ -397,38 +397,58 @@ function draw() {
   // helper
   var r1Start = rect1.posX - rect1.width / 2;
   var r2Start = rect2.posX - rect2.width / 2;
-  var r1Full = rect1.posX - rect1.width / 2 + rect1.width;
-  var r2Full = rect2.posX - rect2.width / 2 + rect2.width;
+  var r1Full = r1Start + rect1.width;
+  var r2Full = r2Start + rect2.width;
+  var r1StartY = rect1.posY - rect1.height / 2;
+  var r2StartY = rect2.posY - rect2.height / 2;
+  var r1FullY = r1StartY + rect1.height;
+  var r2FullY = r2StartY + rect2.height;
 
   var posXNew;
   var widthNew;
+  var posYNew;
+  var heightNew;
 
   // no overlap
   if (
-    (rect2.posX - rect2.width / 2 > rect1.posX - rect1.width / 2 + rect1.width) ||
-    (rect2.posX - rect2.width / 2 + rect2.width < rect1.posX - rect1.width / 2) ||
+    (r2Start > r1Full) ||
+    (r2Full < r1Start) ||
     (rect2.posY - rect2.height / 2 > rect1.posY - rect1.height / 2 + rect1.height) ||
     (rect2.posY - rect2.height / 2 + rect2.height < rect1.posY - rect1.height / 2)
   ) {
     // overlap
   } else {
-    // x-axis | rect 2 overlaps from left
-    if (rect2.posX - rect2.width / 2 < rect1.posX - rect1.width / 2) {
-      widthNew = (rect2.posX - rect2.width / 2 + rect2.width) - (rect1.posX - rect1.width / 2);
-      posXNew = (rect1.posX - rect1.width / 2) + widthNew / 2;
+    if (r2Start < r1Start) {
+      // x-axis | rect 2 overlaps from left
+      widthNew = (r2Full) - (r1Start);
+      posXNew = (r1Start) + widthNew / 2;
+    } else if (r2Full > r1Full) {
       // x-axis | rect 2 overlaps from right
-    } else if (rect2.posX - rect2.width / 2 + rect2.width > rect1.posX - rect1.width / 2 + rect1.width) {
-      console.log("oiad");
       widthNew = r1Full - r2Start;
       posXNew = r1Full - widthNew / 2;
-      // x-axis | overlaps fully
     } else {
+      // x-axis | overlaps fully
       widthNew = rect2.width;
       posXNew = rect2.posX;
     }
 
-    var posYNew = Math.max(rect2.posY - rect2.height / 2, rect1.posY - rect1.height / 2);
-    var heightNew = Math.min(rect1.height, rect2.height) - posYNew;
+    if (r2StartY < r1StartY) {
+      // y-axis | rect2 above
+      heightNew = Math.min(r2FullY, r1FullY) - r1StartY;
+      posYNew = r1StartY + heightNew / 2;
+    } else if (r2FullY > r1FullY) {
+      heightNew = r1FullY - r2StartY;
+      posYNew = r1FullY - heightNew / 2;
+    } else {
+      heightNew = rect2.height;
+      posYNew = rect2.posY;
+    }
+
+
+
+
+    // var posYNew = Math.max(rect2.posY - rect2.height / 2, rect1.posY - rect1.height / 2);
+    // var heightNew = Math.min(rect1.height, rect2.height) - posYNew;
     var OnTopLayer = 0;
 
     push();
@@ -438,8 +458,6 @@ function draw() {
     pop();
   }
 
-  point(rect2.posX - rect2.width / 2 + rect2.width, 0);
-  point(rect1.posX - rect1.width / 2, 0);
   // noLoop();
 
 }
