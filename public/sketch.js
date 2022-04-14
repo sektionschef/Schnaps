@@ -365,8 +365,8 @@ function draw() {
 
 
   rect1 = {
-    width: 200,
-    height: 100,
+    width: 100,
+    height: 200,
     depth: 0,
     posX: 0,
     posY: 0,
@@ -374,8 +374,8 @@ function draw() {
   }
 
   rect2 = {
-    width: 100,
-    height: 200,
+    width: 200,
+    height: 100,
     depth: 0,
     posX: mouseX - width / 2,
     posY: mouseY - height / 2,
@@ -420,7 +420,7 @@ function draw() {
   } else {
     if (r2Start < r1Start) {
       // x-axis | rect 2 overlaps from left
-      widthNew = (r2Full) - (r1Start);
+      widthNew = Math.min(r2Full, r1Full) - r1Start;
       posXNew = (r1Start) + widthNew / 2;
     } else if (r2Full > r1Full) {
       // x-axis | rect 2 overlaps from right
