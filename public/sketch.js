@@ -394,24 +394,37 @@ function draw() {
   box(rect2.width, rect2.height, rect2.depth);
   pop();
 
+  // helper
+  var r1Start = rect1.posX - rect1.width / 2;
+  var r2Start = rect2.posX - rect2.width / 2;
+  var r1Full = rect1.posX - rect1.width / 2 + rect1.width;
+  var r2Full = rect2.posX - rect2.width / 2 + rect2.width;
+
+  var posXNew;
+  var widthNew;
+
+  // no overlap
   if (
     (rect2.posX - rect2.width / 2 > rect1.posX - rect1.width / 2 + rect1.width) ||
     (rect2.posX - rect2.width / 2 + rect2.width < rect1.posX - rect1.width / 2) ||
     (rect2.posY - rect2.height / 2 > rect1.posY - rect1.height / 2 + rect1.height) ||
     (rect2.posY - rect2.height / 2 + rect2.height < rect1.posY - rect1.height / 2)
   ) {
-    // console.log("no overlap");
+    // overlap
   } else {
-    console.log("overlap");
-
-
+    // x-axis | rect 2 overlaps from left
     if (rect2.posX - rect2.width / 2 < rect1.posX - rect1.width / 2) {
-      var widthNew = (rect2.posX - rect2.width / 2 + rect2.width) - (rect1.posX - rect1.width / 2);
-      var posXNew = (rect1.posX - rect1.width / 2) + widthNew / 2;
-      // console.log("lasdfaf");
+      widthNew = (rect2.posX - rect2.width / 2 + rect2.width) - (rect1.posX - rect1.width / 2);
+      posXNew = (rect1.posX - rect1.width / 2) + widthNew / 2;
+      // x-axis | rect 2 overlaps from right
+    } else if (rect2.posX - rect2.width / 2 + rect2.width > rect1.posX - rect1.width / 2 + rect1.width) {
+      console.log("oiad");
+      widthNew = r1Full - r2Start;
+      posXNew = r1Full - widthNew / 2;
+      // x-axis | overlaps fully
     } else {
-      var widthNew = rect2.width;
-      var posXNew = rect2.posX;
+      widthNew = rect2.width;
+      posXNew = rect2.posX;
     }
 
     var posYNew = Math.max(rect2.posY - rect2.height / 2, rect1.posY - rect1.height / 2);
