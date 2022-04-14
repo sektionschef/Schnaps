@@ -259,6 +259,9 @@ function setup() {
   // paper = paper.get()
   // paper.mask(noise_fog);
 
+  intersectGrid = new IntersectGrid();
+  intersectGrid.getIntersections();
+
   resize_canvas();
 
   // binomial_points = [];
@@ -363,8 +366,30 @@ function draw() {
   //   preview_called = true;
   // }
 
-  intersectGrid = new IntersectGrid();
+  rect1 = {
+    width: 100,
+    height: 200,
+    depth: 0,
+    posX: 0,
+    posY: 0,
+    posZ: 0,
+  }
+
+  rect2 = {
+    width: 200,
+    height: 100,
+    depth: 0,
+    posX: mouseX - width / 2,
+    posY: mouseY - height / 2,
+    posZ: 0,
+  }
+
   intersectGrid.show();
+
+
+  // intersectRect = new IntersectRect(rect1, rect2);
+  // intersectRect.update();
+  // intersectRect.show();
 
   // noLoop();
 
