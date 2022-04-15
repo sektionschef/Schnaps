@@ -63,7 +63,7 @@ class IntersectRect {
         var OnTopLayer = 0;
 
         push();
-        fill("purple");
+        fill(distortColor(color("purple"), 60));
         translate(this.posXNew, this.posYNew, OnTopLayer);
         box(this.widthNew, this.heightNew, 0);
         pop();
@@ -73,12 +73,13 @@ class IntersectRect {
 class IntersectGrid {
     constructor() {
         this.MIN = 30;
-        this.MAX = 250
+        this.MAX = 200;
+        this.numberRects = 30
 
         this.rects = []
         this.interactionRects = []
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < this.numberRects; i++) {
             this.rects.push(
                 {
                     width: getRandomFromInterval(this.MIN, this.MAX),
@@ -90,6 +91,8 @@ class IntersectGrid {
                 }
             )
         }
+
+        this.getIntersections();
     }
 
     getIntersections() {
@@ -104,6 +107,41 @@ class IntersectGrid {
         this.update();
     }
 
+    createPaintbrushAreas() {
+
+
+        // PARAMS FOR BRUSHDATA
+        if (i < loopNumberPaintbrush * 0.75) {  // last quarter is smaller
+            brushData.custom_width = getRandomFromInterval(50, 500);
+            brushData.custom_height = getRandomFromInterval(50, 500);
+        } else {
+            brushData.custom_width = getRandomFromInterval(50, 100);
+            brushData.custom_height = getRandomFromInterval(50, 100);
+        }
+        brushData.posX = getRandomFromInterval(brushData.custom_width / 2 - width / 2, width / 2 - brushData.custom_width / 2);
+        brushData.posY = getRandomFromInterval(brushData.custom_height / 2 - height / 2, height / 2 - brushData.custom_height / 2);
+        brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
+        brushData.brushLength = getRandomFromInterval(50, 70);
+        brushData.sizeStroke = getRandomFromInterval(1.5, 2);
+        brushData.numberFibres = getRandomFromInterval(15, 20);
+        brushData.overlap = getRandomFromInterval(10, 60);
+        brushData.brightnessNoise = getRandomFromInterval(15, 35);
+        brushData.colorNoise = getRandomFromInterval(5, 10);
+        brushData.opacityBoost = getRandomFromInterval(150, 255);
+        // brushLengthNoise: 0.2,
+        // numberFibresNoise: 0.2,
+        brushData.angleNoise = getRandomFromInterval(PI / 60, PI / 20);  // 0, PI
+        // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
+        // fibreColorNoise: 5,
+        brushData.fibreBrightnessNoise = getRandomFromInterval(5, 30);
+        brushData.fibreStrokeSizeNoise = 0.05;
+        // fibreStartXNoise: 5,  // start earlier or later
+        brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
+        brushData.fibreRotationNoise = PI / 80;
+
+        paintbrushareas.push(new PaintBrushArea(brushData));
+    }
+
     update() {
         for (let i = 0; i < this.interactionRects.length; i++) {
             this.interactionRects[i].update();
@@ -114,7 +152,7 @@ class IntersectGrid {
 
         for (let i = 0; i < this.rects.length; i++) {
             push();
-            fill("red");
+            fill(distortColor(color("red"), 60));
             translate(this.rects[i].posX, this.rects[i].posY, this.rects[i].posZ);
             box(this.rects[i].width, this.rects[i].height, this.rects[i].depth);
             pop();

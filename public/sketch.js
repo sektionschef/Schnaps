@@ -203,41 +203,7 @@ function setup() {
 
   loopNumberPaintbrush = 100;
   loopNumberSpheres = 200;
-  // PAINTBRUSH befor rects
-  // for (var i = 0; i < loopNumberPaintbrush; i++) {
-  //   // PARAMS FOR BRUSHDATA
-  //   if (i < loopNumberPaintbrush * 0.75) {  // last quarter is smaller
-  //     brushData.custom_width = getRandomFromInterval(50, 500);
-  //     brushData.custom_height = getRandomFromInterval(50, 500);
-  //   } else {
-  //     brushData.custom_width = getRandomFromInterval(50, 100);
-  //     brushData.custom_height = getRandomFromInterval(50, 100);
-  //   }
-  //   brushData.posX = getRandomFromInterval(brushData.custom_width / 2 - width / 2, width / 2 - brushData.custom_width / 2);
-  //   brushData.posY = getRandomFromInterval(brushData.custom_height / 2 - height / 2, height / 2 - brushData.custom_height / 2);
-  //   brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
-  //   brushData.brushLength = getRandomFromInterval(50, 70);
-  //   brushData.sizeStroke = getRandomFromInterval(1.5, 2);
-  //   brushData.numberFibres = getRandomFromInterval(15, 20);
-  //   brushData.overlap = getRandomFromInterval(10, 60);
-  //   brushData.brightnessNoise = getRandomFromInterval(15, 35);
-  //   brushData.colorNoise = getRandomFromInterval(5, 10);
-  //   brushData.opacityBoost = getRandomFromInterval(150, 255);
-  //   // brushLengthNoise: 0.2,
-  //   // numberFibresNoise: 0.2,
-  //   brushData.angleNoise = getRandomFromInterval(PI / 60, PI / 20);  // 0, PI
-  //   // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
-  //   // fibreColorNoise: 5,
-  //   brushData.fibreBrightnessNoise = getRandomFromInterval(5, 30);
-  //   brushData.fibreStrokeSizeNoise = 0.05;
-  //   // fibreStartXNoise: 5,  // start earlier or later
-  //   brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
-  //   brushData.fibreRotationNoise = PI / 80;
 
-  //   paintbrushareas.push(new PaintBrushArea(brushData));
-
-  //   // console.log(paintbrushareas[i]);
-  // }
 
   for (var i = 0; i < loopNumberSpheres; i++) {  // PARAMS FOR SPHERE
     sphereData.custom_width = getRandomFromInterval(100, 300);
@@ -260,7 +226,6 @@ function setup() {
   // paper.mask(noise_fog);
 
   intersectGrid = new IntersectGrid();
-  intersectGrid.getIntersections();
 
   resize_canvas();
 
@@ -325,9 +290,9 @@ function draw() {
   // image(backup, - width / 2, - height / 2, backup.width * SCALING_FACTOR, backup.height * SCALING_FACTOR);
   // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
 
-  for (var i = 0; i < loopNumberSpheres; i++) {
-    // image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
-  }
+  // for (var i = 0; i < loopNumberSpheres; i++) {
+  // image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
+  // }
 
   // PAINTBRUSH BEFORE Rects
   // for (var i = 0; i < loopNumberPaintbrush; i++) {
@@ -366,32 +331,9 @@ function draw() {
   //   preview_called = true;
   // }
 
-  rect1 = {
-    width: 100,
-    height: 200,
-    depth: 0,
-    posX: 0,
-    posY: 0,
-    posZ: 0,
-  }
-
-  rect2 = {
-    width: 200,
-    height: 100,
-    depth: 0,
-    posX: mouseX - width / 2,
-    posY: mouseY - height / 2,
-    posZ: 0,
-  }
-
   intersectGrid.show();
 
-
-  // intersectRect = new IntersectRect(rect1, rect2);
-  // intersectRect.update();
-  // intersectRect.show();
-
-  // noLoop();
+  noLoop();
 
 }
 
