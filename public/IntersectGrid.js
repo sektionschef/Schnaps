@@ -64,8 +64,10 @@ class IntersectRect {
         var OnTopLayer = 0;
 
         push();
-        fill(distortColor(color("purple"), 60));
-        translate(this.posXNew, this.posYNew, OnTopLayer);
+        stroke(0);
+        fill(lessenColor(distortColor(color1, 30), 250));
+        // noFill();
+        translate(this.posXNew - this.widthNew / 2, this.posYNew - this.heightNew / 2, OnTopLayer);
         box(this.widthNew, this.heightNew, 0);
         pop();
     }
@@ -74,8 +76,8 @@ class IntersectRect {
 // grid with rects and intersection rects
 class IntersectGrid {
     constructor() {
-        this.MIN = 30;
-        this.MAX = 200;
+        this.MIN = 10;
+        this.MAX = 300;
         this.numberRects = 30
 
         // for debug
@@ -162,7 +164,9 @@ class IntersectGrid {
 
         for (let i = 0; i < this.rects.length; i++) {
             push();
-            fill(distortColor(color("red"), 60));
+            stroke(0);
+            // fill(distortColor(color("red"), 60));
+            noFill();
             translate(this.rects[i].posX, this.rects[i].posY, this.rects[i].posZ);
             box(this.rects[i].width, this.rects[i].height, this.rects[i].depth);
             pop();
