@@ -3,6 +3,12 @@ class IntersectRect {
     constructor(rect1, rect2) {
         this.rect1 = rect1;
         this.rect2 = rect2;
+
+        this.posXNew;
+        this.widthNew;
+        this.posYNew;
+        this.heightNew;
+
     }
 
     update() {
@@ -15,11 +21,6 @@ class IntersectRect {
         var r2StartY = this.rect2.posY - this.rect2.height / 2;
         var r1FullY = r1StartY + this.rect1.height;
         var r2FullY = r2StartY + this.rect2.height;
-
-        this.posXNew;
-        this.widthNew;
-        this.posYNew;
-        this.heightNew;
 
         // no overlap
         if (
@@ -70,14 +71,16 @@ class IntersectRect {
     }
 }
 
+// grid with rects and intersection rects
 class IntersectGrid {
     constructor() {
         this.MIN = 30;
         this.MAX = 200;
         this.numberRects = 30
 
-        this.rects = []
-        this.interactionRects = []
+        // for debug
+        this.rects = [];
+        this.interactionRects = [];
 
         for (let i = 0; i < this.numberRects; i++) {
             this.rects.push(
@@ -90,9 +93,16 @@ class IntersectGrid {
                     posZ: 0,  // not used I think
                 }
             )
+            this.rects[i].paintedArea = this.createPaintbrushAreas(
+                this.rects[i].posX,
+                this.rects[i].posY,
+                this.rects[i].width,
+                this.rects[i].height
+            )
         }
 
         this.getIntersections();
+        this.update();
     }
 
     getIntersections() {
@@ -103,23 +113,15 @@ class IntersectGrid {
                 // }
             }
         }
-
-        this.update();
     }
 
-    createPaintbrushAreas() {
+    createPaintbrushAreas(posX, posY, rectWidth, rectHeight) {
 
-
-        // PARAMS FOR BRUSHDATA
-        if (i < loopNumberPaintbrush * 0.75) {  // last quarter is smaller
-            brushData.custom_width = getRandomFromInterval(50, 500);
-            brushData.custom_height = getRandomFromInterval(50, 500);
-        } else {
-            brushData.custom_width = getRandomFromInterval(50, 100);
-            brushData.custom_height = getRandomFromInterval(50, 100);
-        }
-        brushData.posX = getRandomFromInterval(brushData.custom_width / 2 - width / 2, width / 2 - brushData.custom_width / 2);
-        brushData.posY = getRandomFromInterval(brushData.custom_height / 2 - height / 2, height / 2 - brushData.custom_height / 2);
+        // OVERWRITE DEFAULT PARAMS FOR BRUSHDATA
+        brushData.custom_width = rectWidth;
+        brushData.custom_height = rectHeight;
+        brushData.posX = posX;
+        brushData.posY = posY;
         brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
         brushData.brushLength = getRandomFromInterval(50, 70);
         brushData.sizeStroke = getRandomFromInterval(1.5, 2);
@@ -139,12 +141,20 @@ class IntersectGrid {
         brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
         brushData.fibreRotationNoise = PI / 80;
 
-        paintbrushareas.push(new PaintBrushArea(brushData));
+        return new PaintBrushArea(brushData);
     }
 
     update() {
         for (let i = 0; i < this.interactionRects.length; i++) {
             this.interactionRects[i].update();
+            if (this.interactionRects[i].widthNew) {  // if empty
+                this.interactionRects[i].paintedArea = this.createPaintbrushAreas(
+                    this.interactionRects[i].posXNew,
+                    this.interactionRects[i].posYNew,
+                    this.interactionRects[i].widthNew,
+                    this.interactionRects[i].heightNew,
+                );
+            }
         }
     }
 
@@ -156,17 +166,28 @@ class IntersectGrid {
             translate(this.rects[i].posX, this.rects[i].posY, this.rects[i].posZ);
             box(this.rects[i].width, this.rects[i].height, this.rects[i].depth);
             pop();
+
+            this.showPainted(this.rects[i].paintedArea);
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {
             this.interactionRects[i].show();
+
+            if (this.interactionRects[i].paintedArea !== undefined) {
+                this.showPainted(this.interactionRects[i].paintedArea);
+            }
         }
 
-        // push();
-        // fill("blue");
-        // translate(this.rect2.posX, this.rect2.posY, this.rect2.posZ);
-        // box(this.rect2.width, this.rect2.height, this.rect2.depth);
-        // pop();
+    }
+
+    showPainted(object) {
+        push();
+        translate(object.posX, object.posY);
+        // if (fxrand() > 0.8) {
+        //     rotate(PI / 2);
+        // }
+        image(object.show(), 0, 0, object.width * SCALING_FACTOR, object.height * SCALING_FACTOR)
+        pop();
     }
 
 }
