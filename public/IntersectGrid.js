@@ -65,9 +65,9 @@ class IntersectRect {
 
         push();
         stroke(0);
-        fill(lessenColor(distortColor(color1, 30), 250));
-        // noFill();
-        translate(this.posXNew - this.widthNew / 2, this.posYNew - this.heightNew / 2, OnTopLayer);
+        // fill(lessenColor(distortColor(color1, 30), 250));
+        noFill();
+        translate(this.posXNew, this.posYNew, OnTopLayer);
         box(this.widthNew, this.heightNew, 0);
         pop();
     }
@@ -186,11 +186,12 @@ class IntersectGrid {
 
     showPainted(object) {
         push();
-        translate(object.posX, object.posY);
+        let rendimage = object.show();
+        translate(object.posX - (rendimage.width / 2), object.posY - (rendimage.height / 2));
         // if (fxrand() > 0.8) {
         //     rotate(PI / 2);
         // }
-        image(object.show(), 0, 0, object.width * SCALING_FACTOR, object.height * SCALING_FACTOR)
+        image(rendimage, 0, 0, rendimage.width * SCALING_FACTOR, rendimage.height * SCALING_FACTOR)
         pop();
     }
 
