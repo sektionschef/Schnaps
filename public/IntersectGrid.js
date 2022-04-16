@@ -64,11 +64,12 @@ class IntersectRect {
         var OnTopLayer = 0;
 
         push();
+        // noStroke();
         stroke(0);
         // fill(lessenColor(distortColor(color1, 30), 250));
         noFill();
-        translate(this.posXNew, this.posYNew, OnTopLayer);
-        box(this.widthNew, this.heightNew, 0);
+        translate(this.posXNew * SCALING_FACTOR, this.posYNew * SCALING_FACTOR, OnTopLayer);
+        box(this.widthNew * SCALING_FACTOR, this.heightNew * SCALING_FACTOR, 0);
         pop();
     }
 }
@@ -76,9 +77,9 @@ class IntersectRect {
 // grid with rects and intersection rects
 class IntersectGrid {
     constructor() {
-        this.MIN = 10;
-        this.MAX = 300;
-        this.numberRects = 30
+        this.MIN = 200;
+        this.MAX = 500;
+        this.numberRects = 4
 
         // for debug
         this.rects = [];
@@ -90,8 +91,8 @@ class IntersectGrid {
                     width: getRandomFromInterval(this.MIN, this.MAX),
                     height: getRandomFromInterval(this.MIN, this.MAX),
                     depth: 0,
-                    posX: getRandomFromInterval(- width / 2 + this.MAX, width / 2 - this.MAX),
-                    posY: getRandomFromInterval(- width / 2 + this.MAX, width / 2 - this.MAX),
+                    posX: getRandomFromInterval(- width / 2, width / 2),
+                    posY: getRandomFromInterval(- width / 2, width / 2),
                     posZ: 0,  // not used I think
                 }
             )
@@ -125,10 +126,11 @@ class IntersectGrid {
         brushData.posX = posX;
         brushData.posY = posY;
         brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
-        brushData.brushLength = getRandomFromInterval(50, 70);
+        brushData.brushLength = getRandomFromInterval(20, 30);
         brushData.sizeStroke = getRandomFromInterval(1.5, 2);
         brushData.numberFibres = getRandomFromInterval(15, 20);
-        brushData.overlap = getRandomFromInterval(10, 60);
+        brushData.numberBrushes = 8;
+        brushData.overlap = 0;
         brushData.brightnessNoise = getRandomFromInterval(15, 35);
         brushData.colorNoise = getRandomFromInterval(5, 10);
         brushData.opacityBoost = getRandomFromInterval(150, 255);
@@ -163,23 +165,24 @@ class IntersectGrid {
     show() {
 
         for (let i = 0; i < this.rects.length; i++) {
+            this.showPainted(this.rects[i].paintedArea);
+
             push();
             stroke(0);
+            // noStroke();
             // fill(distortColor(color("red"), 60));
             noFill();
-            translate(this.rects[i].posX, this.rects[i].posY, this.rects[i].posZ);
-            box(this.rects[i].width, this.rects[i].height, this.rects[i].depth);
+            translate(this.rects[i].posX * SCALING_FACTOR, this.rects[i].posY * SCALING_FACTOR, this.rects[i].posZ * SCALING_FACTOR);
+            box(this.rects[i].width * SCALING_FACTOR, this.rects[i].height * SCALING_FACTOR, this.rects[i].depth * SCALING_FACTOR);
             pop();
 
-            this.showPainted(this.rects[i].paintedArea);
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {
-            this.interactionRects[i].show();
-
             if (this.interactionRects[i].paintedArea !== undefined) {
                 this.showPainted(this.interactionRects[i].paintedArea);
             }
+            this.interactionRects[i].show();
         }
 
     }
@@ -187,12 +190,11 @@ class IntersectGrid {
     showPainted(object) {
         push();
         let rendimage = object.show();
-        translate(object.posX - (rendimage.width / 2), object.posY - (rendimage.height / 2));
+        // translate(object.posX - (rendimage.width / 2) * SCALING_FACTOR, object.posY - (rendimage.height / 2) * SCALING_FACTOR);
         // if (fxrand() > 0.8) {
         //     rotate(PI / 2);
         // }
-        image(rendimage, 0, 0, rendimage.width * SCALING_FACTOR, rendimage.height * SCALING_FACTOR)
+        image(rendimage, object.posX * SCALING_FACTOR - (rendimage.width / 2) * SCALING_FACTOR, object.posY * SCALING_FACTOR - (rendimage.height / 2) * SCALING_FACTOR, rendimage.width * SCALING_FACTOR, rendimage.height * SCALING_FACTOR)
         pop();
     }
-
 }

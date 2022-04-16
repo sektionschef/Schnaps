@@ -180,6 +180,7 @@ function setup() {
     brushLength: 60,
     sizeStroke: 2,
     numberFibres: 15,
+    numberBrushes: 4,
     overlap: 30,  // adding to desired size
     brightnessNoise: 20,
     colorNoise: 5,
@@ -260,8 +261,8 @@ function draw() {
 
   // image(paper, - width / 2, - height / 2, paper.width * SCALING_FACTOR, paper.height * SCALING_FACTOR);
 
-  image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width, backgroundSphere.buffer.height);
-  image(splatter, - width / 2, - height / 2, splatter.width, splatter.height);
+  image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
+  image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
 
   // CANVAS
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);

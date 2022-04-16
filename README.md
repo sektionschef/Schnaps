@@ -2,6 +2,7 @@
 
 * cool, dass es rechts unten ist und abstand - wieso
 * drüber dumbagent
+* 90 degrees wieder einbauen
 
 * intersections von rectangles: https://editor.p5js.org/eric/sketches/HkW2DRKnl 
 * color palette: https://geeksoutofthebox.com/2020/09/13/a-color-palette-generator-in-p5-js/ 
