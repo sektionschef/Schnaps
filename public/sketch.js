@@ -36,9 +36,9 @@ const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, P
 // const COLOR_4_HEX = "#4F091D";
 
 // https://colorhunt.co/palette/22577e5584ac95d1ccfaffaf
-// const COLOR_1_HEX = "#22577E";
-// const COLOR_2_HEX = "#5584AC";
-// const COLOR_3_HEX = "#95D1CC";
+const COLOR_1_HEX = "#22577E";
+const COLOR_2_HEX = "#5584AC";
+const COLOR_3_HEX = "#95D1CC";
 // const COLOR_4_HEX = "#FAFFAF";
 
 // https://colorhunt.co/palette/21325e3e497af1d00af0f0f0
@@ -60,9 +60,9 @@ const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, P
 // const COLOR_3_HEX = "#00092C";
 
 // https://colorhunt.co/palette/f1ddbf525e7578938a92ba92
-const COLOR_1_HEX = "#F1DDBF";
-const COLOR_2_HEX = "#525E75";
-const COLOR_3_HEX = "#92BA92";
+// const COLOR_1_HEX = "#F1DDBF";
+// const COLOR_2_HEX = "#525E75";
+// const COLOR_3_HEX = "#92BA92";
 
 
 // variable stuff

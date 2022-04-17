@@ -104,6 +104,9 @@ class IntersectGrid {
             )
         }
 
+        // sort by size
+        this.rects.sort(function (a, b) { return (b.width * b.height) - (a.width * a.height) });
+
         this.getIntersections();
         this.update();
     }
@@ -125,15 +128,15 @@ class IntersectGrid {
         brushData.custom_height = rectHeight;
         brushData.posX = posX;
         brushData.posY = posY;
-        brushData.colorObject = brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 30);
-        brushData.brushLength = getRandomFromList([20, 30, 60]);
-        brushData.sizeStroke = getRandomFromInterval(1.5, 2);
+        brushData.colorObject = brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 10);
+        brushData.brushLength = getRandomFromInterval(30, 60);
+        brushData.sizeStroke = getRandomFromInterval(1.5, 3);
         brushData.numberFibres = getRandomFromList([10, 20, 30]);
-        brushData.numberBrushes = getRandomFromList([1, 4, 8]);
+        brushData.numberBrushes = getRandomFromList([4, 8]);
         brushData.overlap = 20;
-        brushData.brightnessNoise = getRandomFromInterval(15, 35);
-        brushData.colorNoise = getRandomFromInterval(5, 10);
-        brushData.opacityBoost = getRandomFromInterval(150, 255);
+        brushData.brightnessNoise = getRandomFromInterval(1, 35);
+        brushData.colorNoise = getRandomFromInterval(1, 10);
+        brushData.opacityBoost = 255; // getRandomFromInterval(150, 255);
         // brushLengthNoise: 0.2,
         // numberFibresNoise: 0.2,
         brushData.angleNoise = getRandomFromInterval(PI / 160, PI / 120);  // 0, PI
