@@ -36,9 +36,9 @@ const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, P
 // const COLOR_4_HEX = "#4F091D";
 
 // https://colorhunt.co/palette/22577e5584ac95d1ccfaffaf
-const COLOR_1_HEX = "#22577E";
-const COLOR_2_HEX = "#5584AC";
-const COLOR_3_HEX = "#95D1CC";
+// const COLOR_1_HEX = "#22577E";
+// const COLOR_2_HEX = "#5584AC";
+// const COLOR_3_HEX = "#95D1CC";
 // const COLOR_4_HEX = "#FAFFAF";
 
 // https://colorhunt.co/palette/21325e3e497af1d00af0f0f0
@@ -63,6 +63,11 @@ const COLOR_3_HEX = "#95D1CC";
 // const COLOR_1_HEX = "#F1DDBF";
 // const COLOR_2_HEX = "#525E75";
 // const COLOR_3_HEX = "#92BA92";
+
+// https://colorhunt.co/palette/bff4ed280f34b30753f6c667
+const COLOR_1_HEX = "#280F34";
+const COLOR_2_HEX = "#B30753";
+const COLOR_3_HEX = "#F6C667";
 
 
 // variable stuff
@@ -181,33 +186,6 @@ function setup() {
   }
 
 
-  brushData = {
-    custom_width: 300,
-    custom_height: 100,
-    posX: -500,
-    posY: 0,
-    colorObject: color("#DD4A48"),
-    brushLength: 60,
-    sizeStroke: 2,
-    numberFibres: 15,
-    numberBrushes: 4,
-    overlap: 30,  // adding to desired size
-    brightnessNoise: 20,
-    colorNoise: 5,
-    opacityBoost: 0,
-    brushLengthNoise: 0.2,
-    numberFibresNoise: 0.2,
-    angleNoise: PI / 30,
-    fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
-    fibreColorNoise: 5,
-    fibreBrightnessNoise: 10,
-    fibreStrokeSizeNoise: 0.2,
-    fibreStartXNoise: 5,  // start earlier or later
-    fibreYNoise: 1,  // noise of fibre along the y axis in the middle
-    fibreRotationNoise: PI / 80,
-  }
-
-
   paintbrushareas = [];
   // CLASS aus spheres
   paintedSpheres = [];
@@ -274,9 +252,6 @@ function draw() {
   image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
   image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
 
-  // CANVAS
-  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
-
   // maska
   // brush.buffer = brush.buffer.get();
   // brush.buffer.mask(fog.buffer);
@@ -341,8 +316,11 @@ function draw() {
   //   fxpreview();
   //   preview_called = true;
   // }
+  // CANVAS
+  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
   intersectGrid.show();
+
 
   noLoop();
 

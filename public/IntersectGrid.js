@@ -9,6 +9,17 @@ class IntersectRect {
         this.posYNew;
         this.heightNew;
 
+        this.rect1.colorObject;
+        this.rect2.colorObject;
+
+        let allColors = new Set([color1, color2, color3]);
+        // console.log(allColors);
+        let usedColors = new Set([this.rect1.colorObject, this.rect2.colorObject]);
+        // console.log(usedColors);
+
+        this.colorIntersect = new Set([...allColors].filter(x => !usedColors.has(x)));
+        this.colorObject = [...this.colorIntersect][0];
+
     }
 
     update() {
@@ -77,9 +88,9 @@ class IntersectRect {
 // grid with rects and intersection rects
 class IntersectGrid {
     constructor() {
-        this.MIN = 200;
+        this.MIN = 100;
         this.MAX = 500;
-        this.numberRects = 20
+        this.numberRects = 5;
 
         // for debug
         this.rects = [];
@@ -94,13 +105,15 @@ class IntersectGrid {
                     posX: getRandomFromInterval(- width / 2, width / 2),
                     posY: getRandomFromInterval(- width / 2, width / 2),
                     posZ: 0,  // not used I think
+                    colorObject: getRandomFromList([color1, color2, color3]),
                 }
             )
             this.rects[i].paintedArea = this.createPaintbrushAreas(
                 this.rects[i].posX,
                 this.rects[i].posY,
                 this.rects[i].width,
-                this.rects[i].height
+                this.rects[i].height,
+                this.rects[i].colorObject
             )
         }
 
@@ -121,32 +134,34 @@ class IntersectGrid {
         }
     }
 
-    createPaintbrushAreas(posX, posY, rectWidth, rectHeight) {
+    createPaintbrushAreas(posX, posY, rectWidth, rectHeight, colorObject) {
 
-        // OVERWRITE DEFAULT PARAMS FOR BRUSHDATA
-        brushData.custom_width = rectWidth;
-        brushData.custom_height = rectHeight;
-        brushData.posX = posX;
-        brushData.posY = posY;
-        brushData.colorObject = brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 10);
-        brushData.brushLength = getRandomFromInterval(30, 60);
-        brushData.sizeStroke = getRandomFromInterval(1.5, 3);
-        brushData.numberFibres = getRandomFromList([10, 20, 30]);
-        brushData.numberBrushes = getRandomFromList([4, 8]);
-        brushData.overlap = 20;
-        brushData.brightnessNoise = getRandomFromInterval(1, 35);
-        brushData.colorNoise = getRandomFromInterval(1, 10);
-        brushData.opacityBoost = 255; // getRandomFromInterval(150, 255);
-        // brushLengthNoise: 0.2,
-        // numberFibresNoise: 0.2,
-        brushData.angleNoise = getRandomFromInterval(PI / 160, PI / 120);  // 0, PI
-        // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
-        // fibreColorNoise: 5,
-        brushData.fibreBrightnessNoise = getRandomFromInterval(5, 30);
-        brushData.fibreStrokeSizeNoise = 0.05;
-        // fibreStartXNoise: 5,  // start earlier or later
-        brushData.fibreYNoise = 1;  // noise of fibre along the y axis in the middle
-        brushData.fibreRotationNoise = PI / 80;
+        let brushData = {
+            custom_width: rectWidth,
+            custom_height: rectHeight,
+            posX: posX,
+            posY: posY,
+            // colorObject: brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 10),
+            colorObject: brightenColor(distortColor(colorObject, 10), 10),
+            brushLength: getRandomFromInterval(30, 60),
+            sizeStroke: getRandomFromInterval(1.5, 3),
+            numberFibres: getRandomFromList([10, 20, 30]),
+            numberBrushes: getRandomFromList([4, 8]),
+            overlap: 20,
+            brightnessNoise: 20,
+            colorNoise: 5,
+            opacityBoost: 0, // getRandomFromInterval(150, 255),
+            brushLengthNoise: 0.2,
+            numberFibresNoise: 0.2,
+            angleNoise: PI / 30,
+            fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
+            fibreColorNoise: 5,
+            fibreBrightnessNoise: 3,
+            fibreStrokeSizeNoise: 0.1,
+            fibreStartXNoise: 5,  // start earlier or later
+            fibreYNoise: 2,  // noise of fibre along the y axis in the middle
+            fibreRotationNoise: PI / 100,
+        }
 
         return new PaintBrushArea(brushData);
     }
@@ -160,6 +175,7 @@ class IntersectGrid {
                     this.interactionRects[i].posYNew,
                     this.interactionRects[i].widthNew,
                     this.interactionRects[i].heightNew,
+                    this.interactionRects[i].colorObject
                 );
             }
         }
@@ -196,11 +212,14 @@ class IntersectGrid {
     showPainted(object) {
         push();
         let rendimage = object.show();
-        // translate(object.posX - (rendimage.width / 2) * SCALING_FACTOR, object.posY - (rendimage.height / 2) * SCALING_FACTOR);
+        translate(
+            object.posX * SCALING_FACTOR - (rendimage.width / 2) * SCALING_FACTOR,
+            object.posY * SCALING_FACTOR - (rendimage.height / 2) * SCALING_FACTOR
+        );
         // if (fxrand() > 0.8) {
         //     rotate(PI / 2);
         // }
-        image(rendimage, object.posX * SCALING_FACTOR - (rendimage.width / 2) * SCALING_FACTOR, object.posY * SCALING_FACTOR - (rendimage.height / 2) * SCALING_FACTOR, rendimage.width * SCALING_FACTOR, rendimage.height * SCALING_FACTOR)
+        image(rendimage, 0, 0, rendimage.width * SCALING_FACTOR, rendimage.height * SCALING_FACTOR)
         pop();
     }
 }

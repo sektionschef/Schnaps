@@ -98,6 +98,35 @@ class PaintBrushArea {
     // has an overlap with some brushstrokes additional to the specified width and height
 
     constructor(data) {
+
+        if (typeof data === 'undefined') {
+            brushData = {
+                custom_width: 300,
+                custom_height: 100,
+                posX: -500,
+                posY: 0,
+                colorObject: color("#DD4A48"),
+                brushLength: 60,
+                sizeStroke: 2,
+                numberFibres: 15,
+                numberBrushes: 4,
+                overlap: 30,  // adding to desired size
+                brightnessNoise: 20,
+                colorNoise: 5,
+                opacityBoost: 0,
+                brushLengthNoise: 0.2,
+                numberFibresNoise: 0.2,
+                angleNoise: PI / 30,
+                fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
+                fibreColorNoise: 5,
+                fibreBrightnessNoise: 10,
+                fibreStrokeSizeNoise: 0.2,
+                fibreStartXNoise: 5,  // start earlier or later
+                fibreYNoise: 1,  // noise of fibre along the y axis in the middle
+                fibreRotationNoise: PI / 80,
+            }
+        }
+
         this.data = data;
         this.posX = data.posX;
         this.posY = data.posY;
@@ -128,11 +157,9 @@ class PaintBrushArea {
             var numberFibres_ = this.numberFibres + getRandomFromInterval(-this.numberFibres * this.numberFibresNoise, this.numberFibres * this.numberFibresNoise);
 
             // positioning
-            if (fxrand() > 1) {
-                // var posX = getRandomFromInterval(0, this.buffer.width - brushLength_);
-                // var posY = getRandomFromInterval(0, this.buffer.height - numberFibres_ * this.sizeStroke);
-                var posX = getRandomFromInterval(0, this.buffer.width);
-                var posY = getRandomFromInterval(0, this.buffer.height);
+            if (fxrand() > 0.85) {
+                var posX = getRandomFromInterval(0, this.buffer.width - brushLength_);
+                var posY = getRandomFromInterval(0, this.buffer.height - numberFibres_ * this.sizeStroke);
             } else {
                 var posX = getRandomFromInterval(this.overlap, this.buffer.width - this.overlap - brushLength_);
                 var posY = getRandomFromInterval(this.overlap, this.buffer.height - this.overlap - numberFibres_ * this.sizeStroke);
