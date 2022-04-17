@@ -79,7 +79,7 @@ class IntersectGrid {
     constructor() {
         this.MIN = 200;
         this.MAX = 500;
-        this.numberRects = 4
+        this.numberRects = 20
 
         // for debug
         this.rects = [];
@@ -125,18 +125,18 @@ class IntersectGrid {
         brushData.custom_height = rectHeight;
         brushData.posX = posX;
         brushData.posY = posY;
-        brushData.colorObject = getRandomFromList([color1, color2, color3, color4]);
-        brushData.brushLength = getRandomFromInterval(20, 30);
+        brushData.colorObject = brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 30);
+        brushData.brushLength = getRandomFromList([20, 30, 60]);
         brushData.sizeStroke = getRandomFromInterval(1.5, 2);
-        brushData.numberFibres = getRandomFromInterval(15, 20);
-        brushData.numberBrushes = 8;
-        brushData.overlap = 0;
+        brushData.numberFibres = getRandomFromList([10, 20, 30]);
+        brushData.numberBrushes = getRandomFromList([1, 4, 8]);
+        brushData.overlap = 20;
         brushData.brightnessNoise = getRandomFromInterval(15, 35);
         brushData.colorNoise = getRandomFromInterval(5, 10);
         brushData.opacityBoost = getRandomFromInterval(150, 255);
         // brushLengthNoise: 0.2,
         // numberFibresNoise: 0.2,
-        brushData.angleNoise = getRandomFromInterval(PI / 60, PI / 20);  // 0, PI
+        brushData.angleNoise = getRandomFromInterval(PI / 160, PI / 120);  // 0, PI
         // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
         // fibreColorNoise: 5,
         brushData.fibreBrightnessNoise = getRandomFromInterval(5, 30);
@@ -167,14 +167,15 @@ class IntersectGrid {
         for (let i = 0; i < this.rects.length; i++) {
             this.showPainted(this.rects[i].paintedArea);
 
-            push();
-            stroke(0);
-            // noStroke();
-            // fill(distortColor(color("red"), 60));
-            noFill();
-            translate(this.rects[i].posX * SCALING_FACTOR, this.rects[i].posY * SCALING_FACTOR, this.rects[i].posZ * SCALING_FACTOR);
-            box(this.rects[i].width * SCALING_FACTOR, this.rects[i].height * SCALING_FACTOR, this.rects[i].depth * SCALING_FACTOR);
-            pop();
+            // DEBUG
+            // push();
+            // stroke(0);
+            // // noStroke();
+            // // fill(distortColor(color("red"), 60));
+            // noFill();
+            // translate(this.rects[i].posX * SCALING_FACTOR, this.rects[i].posY * SCALING_FACTOR, this.rects[i].posZ * SCALING_FACTOR);
+            // box(this.rects[i].width * SCALING_FACTOR, this.rects[i].height * SCALING_FACTOR, this.rects[i].depth * SCALING_FACTOR);
+            // pop();
 
         }
 
@@ -182,7 +183,9 @@ class IntersectGrid {
             if (this.interactionRects[i].paintedArea !== undefined) {
                 this.showPainted(this.interactionRects[i].paintedArea);
             }
-            this.interactionRects[i].show();
+
+            // DEBUG
+            // this.interactionRects[i].show();
         }
 
     }

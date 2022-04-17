@@ -147,10 +147,10 @@ class PaintBrushArea {
     show() {
 
         // debug
-        this.buffer.push();
-        this.buffer.fill(100);
-        this.buffer.rect(0, 0, this.buffer.width, this.buffer.height);
-        this.buffer.pop();
+        // this.buffer.push();
+        // this.buffer.fill(100);
+        // this.buffer.rect(0, 0, this.buffer.width, this.buffer.height);
+        // this.buffer.pop();
 
         for (var brushtroke of this.brushStrokes) {
             brushtroke.show();

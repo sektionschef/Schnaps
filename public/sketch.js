@@ -36,10 +36,10 @@ const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, P
 // const COLOR_4_HEX = "#4F091D";
 
 // https://colorhunt.co/palette/22577e5584ac95d1ccfaffaf
-const COLOR_1_HEX = "#22577E";
-const COLOR_2_HEX = "#5584AC";
-const COLOR_3_HEX = "#95D1CC";
-const COLOR_4_HEX = "#FAFFAF";
+// const COLOR_1_HEX = "#22577E";
+// const COLOR_2_HEX = "#5584AC";
+// const COLOR_3_HEX = "#95D1CC";
+// const COLOR_4_HEX = "#FAFFAF";
 
 // https://colorhunt.co/palette/21325e3e497af1d00af0f0f0
 // const COLOR_1_HEX = "#21325E";
@@ -53,6 +53,16 @@ const COLOR_4_HEX = "#FAFFAF";
 // const COLOR_3_HEX = "#577BC1";
 // const COLOR_4_HEX = "#EBE645"; // yellow
 
+
+// https://colorhunt.co/palette/ff5f00b2060000092ceeeeee
+// const COLOR_1_HEX = "#FF5F00";
+// const COLOR_2_HEX = "#B20600";
+// const COLOR_3_HEX = "#00092C";
+
+// https://colorhunt.co/palette/f1ddbf525e7578938a92ba92
+const COLOR_1_HEX = "#F1DDBF";
+const COLOR_2_HEX = "#525E75";
+const COLOR_3_HEX = "#92BA92";
 
 
 // variable stuff
@@ -94,7 +104,7 @@ function setup() {
   color1 = color(COLOR_1_HEX);
   color2 = color(COLOR_2_HEX);
   color3 = color(COLOR_3_HEX);
-  color4 = color(COLOR_4_HEX);
+  // color4 = color(COLOR_4_HEX);
 
   // slider = createSlider(10, 60, 30);
   // slider.position(10, 10);
@@ -211,7 +221,7 @@ function setup() {
     sphereData.custom_height = getRandomFromInterval(100, 300);
     sphereData.posX = getRandomFromInterval(-sphereData.custom_width / 2 - width / 2, width / 2 + sphereData.custom_width / 2);
     sphereData.posY = getRandomFromInterval(-sphereData.custom_height / 2 - height / 2, height / 2 + sphereData.custom_height / 2);;
-    sphereData.colorObject = getRandomFromList([color1, color2, color4]);;
+    sphereData.colorObject = getRandomFromList([color1, color2, color3]);;
     sphereData.margin = 50;
     sphereData.colorObjectSpread = 10;
     sphereData.fillColorOpacityMax = 70;
