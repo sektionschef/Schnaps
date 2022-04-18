@@ -12,12 +12,14 @@ class IntersectRect {
         this.rect1.colorObject;
         this.rect2.colorObject;
 
-        this.getColor();
+        // this.getColor();
+        this.colorObject = color2;
 
     }
 
+    // get another color from used in both rects
     getColor() {
-        let allColors = new Set([color1, color2, color3]);
+        let allColors = new Set([color1, color2]);
         let usedColors = new Set([this.rect1.colorObject, this.rect2.colorObject]);
 
         this.colorIntersect = new Set([...allColors].filter(x => !usedColors.has(x)));
@@ -94,16 +96,16 @@ class IntersectGrid {
                     posX: getRandomFromInterval(- width / 2, width / 2),
                     posY: getRandomFromInterval(- width / 2, width / 2),
                     posZ: 0,  // not used I think
-                    colorObject: getRandomFromList([color1, color2, color3]),
+                    colorObject: getRandomFromList([color1]),
                 }
             )
-            // this.rects[i].paintedArea = this.createPaintbrushAreas(
-            //     this.rects[i].posX,
-            //     this.rects[i].posY,
-            //     this.rects[i].width,
-            //     this.rects[i].height,
-            //     this.rects[i].colorObject
-            // )
+            this.rects[i].paintedArea = this.createPaintbrushAreas(
+                this.rects[i].posX,
+                this.rects[i].posY,
+                this.rects[i].width,
+                this.rects[i].height,
+                this.rects[i].colorObject
+            )
         }
 
         // sort by size
@@ -132,7 +134,7 @@ class IntersectGrid {
             posX: posX,
             posY: posY,
             // colorObject: brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 10),
-            colorObject: brightenColor(distortColor(colorObject, 2), 20),
+            colorObject: brightenColor(distortColor(colorObject, 0), 50),
             brushLength: getRandomFromInterval(30, 60),
             sizeStroke: getRandomFromInterval(1.5, 3),
             numberFibres: getRandomFromList([10, 20, 30]),
@@ -160,13 +162,13 @@ class IntersectGrid {
         for (let i = 0; i < this.interactionRects.length; i++) {
             this.interactionRects[i].update();
             if (this.interactionRects[i].widthNew) {  // if empty
-                // this.interactionRects[i].paintedArea = this.createPaintbrushAreas(
-                //     this.interactionRects[i].posXNew,
-                //     this.interactionRects[i].posYNew,
-                //     this.interactionRects[i].widthNew,
-                //     this.interactionRects[i].heightNew,
-                //     this.interactionRects[i].colorObject
-                // );
+                this.interactionRects[i].paintedArea = this.createPaintbrushAreas(
+                    this.interactionRects[i].posXNew,
+                    this.interactionRects[i].posYNew,
+                    this.interactionRects[i].widthNew,
+                    this.interactionRects[i].heightNew,
+                    this.interactionRects[i].colorObject
+                );
             }
         }
     }
@@ -174,16 +176,16 @@ class IntersectGrid {
     show() {
 
         for (let i = 0; i < this.rects.length; i++) {
-            // this.showPainted(this.rects[i].paintedArea);
-            this.showDebug(this.rects[i]);
+            this.showPainted(this.rects[i].paintedArea);
+            // this.showDebug(this.rects[i]);
 
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {
             if (this.interactionRects[i].paintedArea !== undefined) {
-                // this.showPainted(this.interactionRects[i].paintedArea);
-                this.showDebug(this.interactionRects[i]);
+                this.showPainted(this.interactionRects[i].paintedArea);
             }
+            // this.showDebug(this.interactionRects[i]);
         }
 
     }
@@ -207,9 +209,9 @@ class IntersectGrid {
         push();
         stroke(0);
         // noStroke();
-        fill(lessenColor(distortColor(object.colorObject, 0), 0));
+        fill(brightenColor(object.colorObject, 50));
         // noFill();
-        console.log(typeof object.posXNew);
+
         if (typeof object.posXNew !== 'undefined') {
             translate(object.posXNew * SCALING_FACTOR, object.posYNew * SCALING_FACTOR, 0);
             box(object.widthNew * SCALING_FACTOR, object.heightNew * SCALING_FACTOR, 0);

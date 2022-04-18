@@ -65,15 +65,18 @@ const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, P
 // const COLOR_3_HEX = "#92BA92";
 
 // https://colorhunt.co/palette/bff4ed280f34b30753f6c667
-const COLOR_1_HEX = "#280F34";
-const COLOR_2_HEX = "#B30753";
-const COLOR_3_HEX = "#F6C667";
+// const COLOR_1_HEX = "#280F34";
+// const COLOR_2_HEX = "#B30753";
+// const COLOR_3_HEX = "#F6C667";
 
 // https://calcolor.co/palette/942409461
 // const COLOR_1_HEX = "#333333";
 // const COLOR_2_HEX = "#aaaaaa";
 // const COLOR_3_HEX = "#eeeeee";
 
+// color custom
+const COLOR_1_HEX = "#B30753";
+const COLOR_2_HEX = "#F6C667";
 
 // variable stuff
 let SCALING_FACTOR = 1;
@@ -113,7 +116,7 @@ function setup() {
 
   color1 = color(COLOR_1_HEX);
   color2 = color(COLOR_2_HEX);
-  color3 = color(COLOR_3_HEX);
+  // color3 = color(COLOR_3_HEX);
   // color4 = color(COLOR_4_HEX);
 
   // slider = createSlider(10, 60, 30);
@@ -169,7 +172,7 @@ function setup() {
     custom_height: 200,
     posX: 0,
     posY: 0,
-    colorObject: color3,
+    colorObject: color2,
     margin: 70,
     colorObjectSpread: 10,
     fillColorOpacityMax: 150,
@@ -204,7 +207,7 @@ function setup() {
     sphereData.custom_height = getRandomFromInterval(100, 300);
     sphereData.posX = getRandomFromInterval(-sphereData.custom_width / 2 - width / 2, width / 2 + sphereData.custom_width / 2);
     sphereData.posY = getRandomFromInterval(-sphereData.custom_height / 2 - height / 2, height / 2 + sphereData.custom_height / 2);;
-    sphereData.colorObject = getRandomFromList([color1, color2, color3]);;
+    sphereData.colorObject = getRandomFromList([color1, color2]);;
     sphereData.margin = 50;
     sphereData.colorObjectSpread = 10;
     sphereData.fillColorOpacityMax = 70;

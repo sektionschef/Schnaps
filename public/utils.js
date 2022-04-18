@@ -24,18 +24,27 @@ function distortColor(colorObject, max_diff) {
 }
 
 function brightenColor(colorObject, diff) {
-    let diff_constant = getRandomFromInterval(-diff, diff)
-    let red = (colorObject.levels[0] + diff_constant);
-    let green = (colorObject.levels[1] + diff_constant);
-    let blue = (colorObject.levels[2] + diff_constant);
-    let opacity = colorObject.levels[3];
 
-    // not larger than 255 and not smaller than 0
-    red = Math.min(Math.max(parseInt(red), 0), 255);
-    green = Math.min(Math.max(parseInt(green), 0), 255);
-    blue = Math.min(Math.max(parseInt(blue), 0), 255);
+    colorMode(HSB);
+    // console.log(colorObject)
+    brightnessNew = brightness(colorObject) + getRandomFromInterval(-diff, diff);
+    resultingColor = color(hue(colorObject), saturation(colorObject), brightnessNew);
 
-    return color(red, green, blue, opacity);
+    // let diff_constant = getRandomFromInterval(-diff, diff)
+    // let red = (colorObject.levels[0] + diff_constant);
+    // let green = (colorObject.levels[1] + diff_constant);
+    // let blue = (colorObject.levels[2] + diff_constant);
+    // let opacity = colorObject.levels[3];
+
+    // // not larger than 255 and not smaller than 0
+    // red = Math.min(Math.max(parseInt(red), 0), 255);
+    // green = Math.min(Math.max(parseInt(green), 0), 255);
+    // blue = Math.min(Math.max(parseInt(blue), 0), 255);
+
+    // return color(red, green, blue, opacity);
+    colorMode(RGB);
+    // return colorObject
+    return resultingColor
 }
 
 function lessenColor(colorObject, diff) {

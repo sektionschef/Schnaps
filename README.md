@@ -1,6 +1,14 @@
 # Schnaps
 
 
+this.MIN = 100;
+this.MAX = 500;
+this.numberRects = 10;
+brightencolor mit 50
+nur zwei farben - normal und überschneidungen
+
+
+
 Inspiration
 * intersections von rectangles: https://editor.p5js.org/eric/sketches/HkW2DRKnl 
 * color palette: https://geeksoutofthebox.com/2020/09/13/a-color-palette-generator-in-p5-js/ 
