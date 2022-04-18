@@ -222,7 +222,7 @@ function setup() {
   // paper = paper.get()
   // paper.mask(noise_fog);
 
-  intersectGrid = new IntersectGrid();
+  // intersectGrid = new IntersectGrid();
 
   resize_canvas();
 
@@ -233,6 +233,67 @@ function setup() {
   //   binomial_points.push(createVector(x_input, (betaPDF(x = 0.5, a = x_input, b = x_input) * 10)));
   // }
   // console.log(binomial_points);
+
+  // TEMP one PaintbrushArea
+  let oidaData = {
+    custom_width: 200,
+    custom_height: 400,
+    posX: -200,
+    posY: -200,
+    colorObject: color1,
+    brushLength: 30,  // 20-40
+    sizeStroke: 3,
+    numberFibres: 29,
+    numberBrushes: 4, //2-8
+    overlap: 20,
+    brightnessNoise: 5,
+    colorNoise: 5,
+    opacityBoost: 0, // getRandomFromInterval(150, 255),
+    brushLengthNoise: 0.2,
+    numberFibresNoise: 0.2,
+    angleNoise: PI / 30,
+    fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
+    fibreColorNoise: 2,
+    fibreBrightnessNoise: 2,
+    fibreStrokeSizeNoise: 1,
+    fibreStartXNoise: 5,  // start earlier or later
+    fibreYNoise: 0.5,  // noise of fibre along the y axis in the middle
+    fibreRotationNoise: PI / 200,
+  }
+
+  let boidaData = {
+    custom_width: 600,
+    custom_height: 200,
+    posX: 200,
+    posY: -200,
+    colorObject: color2,
+    brushLength: 30,  // 20-40
+    sizeStroke: 3,
+    numberFibres: 29,
+    numberBrushes: 4, //2-8
+    overlap: 20,
+    brightnessNoise: 5,
+    colorNoise: 5,
+    opacityBoost: 0, // getRandomFromInterval(150, 255),
+    brushLengthNoise: 0.2,
+    numberFibresNoise: 0.2,
+    angleNoise: PI / 30,
+    fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
+    fibreColorNoise: 2,
+    fibreBrightnessNoise: 2,
+    fibreStrokeSizeNoise: 1,
+    fibreStartXNoise: 5,  // start earlier or later
+    fibreYNoise: 0.5,  // noise of fibre along the y axis in the middle
+    fibreRotationNoise: PI / 200,
+  }
+
+  // paintBuffer = createGraphics(width, height);
+
+  oida = new PaintBrushArea(oidaData);
+  oidaimage = oida.show();
+
+  boida = new PaintBrushArea(boidaData);
+  boidaimage = boida.show();
 
 }
 
@@ -288,17 +349,6 @@ function draw() {
   // image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
   // }
 
-  // PAINTBRUSH BEFORE Rects
-  // for (var i = 0; i < loopNumberPaintbrush; i++) {
-  //   push();
-  //   translate(paintbrushareas[i].posX, paintbrushareas[i].posY);
-  //   if (fxrand() > 0.8) {
-  //     rotate(PI / 2);
-  //   }
-  //   image(paintbrushareas[i].show(), 0, 0, paintbrushareas[i].width * SCALING_FACTOR, paintbrushareas[i].height * SCALING_FACTOR)
-  //   pop();
-  // }
-
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
 
   // image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
@@ -327,8 +377,24 @@ function draw() {
   // CANVAS
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
-  intersectGrid.show();
+  // intersectGrid.show();
 
+
+  push();
+  translate(
+    oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,
+    oida.posY * SCALING_FACTOR - (oidaimage.height / 2) * SCALING_FACTOR
+  );
+  image(oidaimage, 0, 0, oidaimage.width * SCALING_FACTOR, oidaimage.height * SCALING_FACTOR)
+  pop();
+
+  push();
+  translate(
+    boida.posX * SCALING_FACTOR - (boidaimage.width / 2) * SCALING_FACTOR,
+    boida.posY * SCALING_FACTOR - (boidaimage.height / 2) * SCALING_FACTOR
+  );
+  image(boidaimage, 0, 0, boidaimage.width * SCALING_FACTOR, boidaimage.height * SCALING_FACTOR)
+  pop();
 
   noLoop();
 

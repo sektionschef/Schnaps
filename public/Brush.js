@@ -30,10 +30,10 @@ class Fibre {
             this.buffer.push();
             this.buffer.translate(this.startX, this.startY)
             this.buffer.rotate(this.angleFibre);
-            this.buffer.noFill();
             this.buffer.curveTightness(this.fibreCurveTightness);
             this.buffer.stroke(this.colorFibre);
             this.buffer.strokeWeight(this.sizeStroke);
+            this.buffer.noFill();
 
             this.buffer.beginShape();
             this.buffer.curveVertex(0, this.brushStrokeSize * i);
@@ -97,7 +97,7 @@ class Brush {
 class PaintBrushArea {
     // has an overlap with some brushstrokes additional to the specified width and height
 
-    constructor(data) {
+    constructor(data, buffer) {
 
         if (typeof data === 'undefined') {
             brushData = {
@@ -145,7 +145,11 @@ class PaintBrushArea {
 
         this.colorObject = color(data.colorObject);  // default color
 
-        this.buffer = createGraphics(data.custom_width + this.overlap * 2, data.custom_height + this.overlap * 2);
+        if (typeof this.buffer == "undefined") {
+            this.buffer = createGraphics(data.custom_width + this.overlap * 2, data.custom_height + this.overlap * 2);
+        } else {
+            this.buffer = buffer;
+        }
         this.area = data.custom_width * data.custom_height;  // without overlap
         this.NumberBrushStrokes = floor(this.area / (this.numberFibres * this.brushLength * this.sizeStroke)) * this.numberBrushes;
 
