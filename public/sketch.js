@@ -69,6 +69,11 @@ const COLOR_1_HEX = "#280F34";
 const COLOR_2_HEX = "#B30753";
 const COLOR_3_HEX = "#F6C667";
 
+// https://calcolor.co/palette/942409461
+// const COLOR_1_HEX = "#333333";
+// const COLOR_2_HEX = "#aaaaaa";
+// const COLOR_3_HEX = "#eeeeee";
+
 
 // variable stuff
 let SCALING_FACTOR = 1;

@@ -12,14 +12,16 @@ class IntersectRect {
         this.rect1.colorObject;
         this.rect2.colorObject;
 
+        this.getColor();
+
+    }
+
+    getColor() {
         let allColors = new Set([color1, color2, color3]);
-        // console.log(allColors);
         let usedColors = new Set([this.rect1.colorObject, this.rect2.colorObject]);
-        // console.log(usedColors);
 
         this.colorIntersect = new Set([...allColors].filter(x => !usedColors.has(x)));
-        this.colorObject = [...this.colorIntersect][0];
-
+        this.colorObject = getRandomFromList([...this.colorIntersect]);
     }
 
     update() {
@@ -70,19 +72,6 @@ class IntersectRect {
 
         }
     }
-
-    show() {
-        var OnTopLayer = 0;
-
-        push();
-        // noStroke();
-        stroke(0);
-        // fill(lessenColor(distortColor(color1, 30), 250));
-        noFill();
-        translate(this.posXNew * SCALING_FACTOR, this.posYNew * SCALING_FACTOR, OnTopLayer);
-        box(this.widthNew * SCALING_FACTOR, this.heightNew * SCALING_FACTOR, 0);
-        pop();
-    }
 }
 
 // grid with rects and intersection rects
@@ -90,7 +79,7 @@ class IntersectGrid {
     constructor() {
         this.MIN = 100;
         this.MAX = 500;
-        this.numberRects = 5;
+        this.numberRects = 30;
 
         // for debug
         this.rects = [];
@@ -121,6 +110,7 @@ class IntersectGrid {
         this.rects.sort(function (a, b) { return (b.width * b.height) - (a.width * a.height) });
 
         this.getIntersections();
+        this.interactionRects.sort(function (a, b) { return (b.width * b.height) - (a.width * a.height) });
         this.update();
     }
 
@@ -142,7 +132,7 @@ class IntersectGrid {
             posX: posX,
             posY: posY,
             // colorObject: brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 10),
-            colorObject: brightenColor(distortColor(colorObject, 10), 10),
+            colorObject: brightenColor(distortColor(colorObject, 2), 20),
             brushLength: getRandomFromInterval(30, 60),
             sizeStroke: getRandomFromInterval(1.5, 3),
             numberFibres: getRandomFromList([10, 20, 30]),
@@ -186,25 +176,15 @@ class IntersectGrid {
         for (let i = 0; i < this.rects.length; i++) {
             this.showPainted(this.rects[i].paintedArea);
 
-            // DEBUG
-            // push();
-            // stroke(0);
-            // // noStroke();
-            // // fill(distortColor(color("red"), 60));
-            // noFill();
-            // translate(this.rects[i].posX * SCALING_FACTOR, this.rects[i].posY * SCALING_FACTOR, this.rects[i].posZ * SCALING_FACTOR);
-            // box(this.rects[i].width * SCALING_FACTOR, this.rects[i].height * SCALING_FACTOR, this.rects[i].depth * SCALING_FACTOR);
-            // pop();
+            this.showDebug(this.rects[i]);
 
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {
             if (this.interactionRects[i].paintedArea !== undefined) {
                 this.showPainted(this.interactionRects[i].paintedArea);
+                this.showDebug(this.interactionRects[i]);
             }
-
-            // DEBUG
-            // this.interactionRects[i].show();
         }
 
     }
@@ -221,5 +201,26 @@ class IntersectGrid {
         // }
         image(rendimage, 0, 0, rendimage.width * SCALING_FACTOR, rendimage.height * SCALING_FACTOR)
         pop();
+    }
+
+    showDebug(object) {
+
+        push();
+        stroke(0);
+        // noStroke();
+        fill(lessenColor(distortColor(object.colorObject, 0), 0));
+        // noFill();
+        console.log(typeof object.posXNew);
+        if (typeof object.posXNew !== 'undefined') {
+            translate(object.posXNew * SCALING_FACTOR, object.posYNew * SCALING_FACTOR, 0);
+            box(object.widthNew * SCALING_FACTOR, object.heightNew * SCALING_FACTOR, 0);
+        } else {
+            translate(object.posX * SCALING_FACTOR, object.posY * SCALING_FACTOR, object.posZ * SCALING_FACTOR);
+            box(object.width * SCALING_FACTOR, object.height * SCALING_FACTOR, object.depth * SCALING_FACTOR);
+        }
+        pop();
+
+
+
     }
 }
