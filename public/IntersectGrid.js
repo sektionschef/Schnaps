@@ -79,7 +79,7 @@ class IntersectGrid {
     constructor() {
         this.MIN = 100;
         this.MAX = 500;
-        this.numberRects = 30;
+        this.numberRects = 10;
 
         // for debug
         this.rects = [];
@@ -97,13 +97,13 @@ class IntersectGrid {
                     colorObject: getRandomFromList([color1, color2, color3]),
                 }
             )
-            this.rects[i].paintedArea = this.createPaintbrushAreas(
-                this.rects[i].posX,
-                this.rects[i].posY,
-                this.rects[i].width,
-                this.rects[i].height,
-                this.rects[i].colorObject
-            )
+            // this.rects[i].paintedArea = this.createPaintbrushAreas(
+            //     this.rects[i].posX,
+            //     this.rects[i].posY,
+            //     this.rects[i].width,
+            //     this.rects[i].height,
+            //     this.rects[i].colorObject
+            // )
         }
 
         // sort by size
@@ -160,13 +160,13 @@ class IntersectGrid {
         for (let i = 0; i < this.interactionRects.length; i++) {
             this.interactionRects[i].update();
             if (this.interactionRects[i].widthNew) {  // if empty
-                this.interactionRects[i].paintedArea = this.createPaintbrushAreas(
-                    this.interactionRects[i].posXNew,
-                    this.interactionRects[i].posYNew,
-                    this.interactionRects[i].widthNew,
-                    this.interactionRects[i].heightNew,
-                    this.interactionRects[i].colorObject
-                );
+                // this.interactionRects[i].paintedArea = this.createPaintbrushAreas(
+                //     this.interactionRects[i].posXNew,
+                //     this.interactionRects[i].posYNew,
+                //     this.interactionRects[i].widthNew,
+                //     this.interactionRects[i].heightNew,
+                //     this.interactionRects[i].colorObject
+                // );
             }
         }
     }
@@ -174,15 +174,14 @@ class IntersectGrid {
     show() {
 
         for (let i = 0; i < this.rects.length; i++) {
-            this.showPainted(this.rects[i].paintedArea);
-
+            // this.showPainted(this.rects[i].paintedArea);
             this.showDebug(this.rects[i]);
 
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {
             if (this.interactionRects[i].paintedArea !== undefined) {
-                this.showPainted(this.interactionRects[i].paintedArea);
+                // this.showPainted(this.interactionRects[i].paintedArea);
                 this.showDebug(this.interactionRects[i]);
             }
         }
