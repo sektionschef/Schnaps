@@ -364,10 +364,10 @@ class DumbAgent {
         this.stepSize = 10;  // 10 is hero
         this.agentSize = 1;
         this.opacityLevel = 20;
-        this.opacityLevel2 = 30;
-        this.lineLength = 3;
+        this.opacityLevel2 = 20;
+        this.lineLength = 15;
         this.loopSize = 10000;
-        this.numberAgents = 15;
+        this.numberAgents = 5;
 
         this.color = color(colorObject.levels[0], colorObject.levels[1], colorObject.levels[2], this.opacityLevel);
         this.buffer = createGraphics(custom_width, custom_height);
@@ -382,9 +382,9 @@ class DumbAgent {
     show() {
 
         for (var v = 0; v < this.numberAgents; v++) {
-            let angle = getRandomFromInterval(PI / 2, PI);
-            let colory = color(getRandomFromInterval(100, 150), this.opacityLevel);
             for (var i = 0; i < this.loopSize; i++) {
+                // let colory = color(getRandomFromInterval(100, 150), this.opacityLevel);
+                let angle = getRandomFromInterval(PI / 2, PI);
 
                 let directive = getRandomFromList([
                     "up",
@@ -430,16 +430,18 @@ class DumbAgent {
 
                 this.buffer.translate(this.posX, this.posY);
                 this.buffer.strokeWeight(this.agentSize);
-                // this.buffer.stroke(this.color);
-                this.buffer.stroke(colory);
+                this.buffer.stroke(this.color);
+                // this.buffer.stroke(colory);
                 // this.buffer.rotate(i % PI);
                 this.buffer.rotate(angle);
                 this.buffer.line(0, 0, this.lineLength, this.lineLength);
 
                 // optional
                 // this.buffer.stroke(color(this.color.levels[0], this.color.levels[1], this.color.levels[2], this.opacityLevel2));
-                // this.buffer.point(0, 0);
-                // this.buffer.point(this.lineLength, this.lineLength);
+                // this.buffer.stroke(colory);
+                this.buffer.stroke(this.color);
+                this.buffer.point(0, 0);
+                this.buffer.point(this.lineLength, this.lineLength);
 
                 this.buffer.pop();
             }
