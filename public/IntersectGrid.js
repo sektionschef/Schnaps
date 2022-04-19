@@ -1,4 +1,3 @@
-
 class IntersectRect {
     constructor(rect1, rect2) {
         this.rect1 = rect1;
@@ -135,15 +134,14 @@ class IntersectGrid {
             // posY: posY,
             // // colorObject: brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 10),
             // colorObject: brightenColor(distortColor(colorObject, 0), 50),
-            // brushLength: getRandomFromInterval(30, 60),
+            // brushWidth: getRandomFromInterval(30, 60),
             // sizeStroke: getRandomFromInterval(1.5, 3),
             // numberFibres: getRandomFromList([10, 20, 30]),
-            // numberBrushes: getRandomFromList([4, 8]),
             // overlap: 20,
             // brightnessNoise: 20,
             // colorNoise: 5,
             // opacityBoost: 0, // getRandomFromInterval(150, 255),
-            // brushLengthNoise: 0.2,
+            // brushWidthNoise: 0.2,
             // numberFibresNoise: 0.2,
             // angleNoise: PI / 30,
             // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
@@ -157,16 +155,16 @@ class IntersectGrid {
             custom_height: rectHeight,
             posX: posX,
             posY: posY,
-            colorObject: brightenColor(distortColor(colorObject, 0), 50),
-            brushLength: 30,  // 20-40
-            sizeStroke: 3,
-            numberFibres: 20,
-            numberBrushes: 4, //2-8
+            colorObject: brightenColor(distortColor(colorObject, 0), 30),
+            brushWidth: getRandomFromInterval(20, 40),  // 20-40
+            sizeStroke: 2,
+            numberFibres: 10,
+            numberPaintLayers: 2,
             overlap: 20,
-            brightnessNoise: 5,
-            colorNoise: 5,
+            brightnessNoise: 6,
+            colorNoise: 6,
             opacityBoost: 0, // getRandomFromInterval(150, 255),
-            brushLengthNoise: 0.2,
+            brushWidthNoise: 0.2,
             numberFibresNoise: 0.2,
             angleNoise: PI / 30,
             fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect

@@ -106,15 +106,15 @@ class PaintBrushArea {
                 posX: -500,
                 posY: 0,
                 colorObject: color("#DD4A48"),
-                brushLength: 60,
+                brushWidth: 60,
                 sizeStroke: 2,
                 numberFibres: 15,
-                numberBrushes: 4,
+                numberPaintLayers: 2,
                 overlap: 30,  // adding to desired size
                 brightnessNoise: 20,
                 colorNoise: 5,
                 opacityBoost: 0,
-                brushLengthNoise: 0.2,
+                brushWidthNoise: 0.2,
                 numberFibresNoise: 0.2,
                 angleNoise: PI / 30,
                 fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
@@ -130,18 +130,18 @@ class PaintBrushArea {
         this.data = data;
         this.posX = data.posX;
         this.posY = data.posY;
-        this.brushLength = data.brushLength;  // default
+        this.brushWidth = data.brushWidth;  // default
         this.sizeStroke = data.sizeStroke;
         this.numberFibres = data.numberFibres;  // default
-        this.numberBrushes = data.numberBrushes;
         this.overlap = data.overlap;
 
         this.brightnessNoise = data.brightnessNoise;
         this.colorNoise = data.colorNoise;
         this.opacityBoost = data.opacityBoost;
-        this.brushLengthNoise = data.brushLengthNoise;
+        this.brushWidthNoise = data.brushWidthNoise;
         this.numberFibresNoise = data.numberFibresNoise;
         this.angleNoise = data.angleNoise;
+        this.numberPaintLayers = data.numberPaintLayers;
 
         this.colorObject = color(data.colorObject);  // default color
 
@@ -152,40 +152,56 @@ class PaintBrushArea {
             this.buffer = buffer;
         }
         this.area = data.custom_width * data.custom_height;  // without overlap
-        this.NumberBrushStrokes = floor(this.area / (this.numberFibres * this.brushLength * this.sizeStroke)) * this.numberBrushes;
+        // think not needed anymore
+        // this.NumberBrushStrokes = floor(this.area / (this.numberFibres * this.brushWidth * this.sizeStroke)) * this.numberBrushes;
+        this.brushHeight = this.numberFibres * this.sizeStroke + data.fibreYNoise * 2
 
         this.brushStrokes = [];
 
+        //old
         // for (var i = 0; i < this.NumberBrushStrokes; i++) {
-        for (var i = 0; i < 1; i++) {
-            var colorBrush = lessenColor(brightenColor(distortColor(color(this.colorObject), this.colorNoise), this.brightnessNoise), this.opacityBoost);
-            var brushLength_ = this.brushLength + getRandomFromInterval(-this.brushLength * this.brushLengthNoise, this.brushLength * this.brushLengthNoise);
-            var numberFibres_ = this.numberFibres + getRandomFromInterval(-this.numberFibres * this.numberFibresNoise, this.numberFibres * this.numberFibresNoise);
+        // for (var i = 0; i < 1; i++) {
 
-            // positioning
-            if (fxrand() > 0.85) {
-                var posX = getRandomFromInterval(0, this.buffer.width - brushLength_);
-                var posY = getRandomFromInterval(0, this.buffer.height - numberFibres_ * this.sizeStroke);
-            } else {
-                var posX = getRandomFromInterval(this.overlap, this.buffer.width - this.overlap - brushLength_);
-                var posY = getRandomFromInterval(this.overlap, this.buffer.height - this.overlap - numberFibres_ * this.sizeStroke);
+
+        for (let loopLayer = 0; loopLayer < this.numberPaintLayers; loopLayer += 1) {
+            // BACKGROUND layer
+            let greyRun = false;
+            if ((loopLayer == 0) && (this.numberPaintLayers > 1) && (fxrand() > 0.75)) {
+                var backgroundColor = color(getRandomFromInterval(50, 100));
+                greyRun = true;
             }
 
+            for (let x = this.overlap; x < this.buffer.width - 2 * this.overlap; x += this.brushWidth) {
+                for (let y = this.overlap; y < this.buffer.height - 2 * this.overlap; y += this.brushHeight) {
+
+                    // debug Rect for grid
+                    // this.buffer.noFill();
+                    // this.buffer.rect(x, y, sizeCell, sizeCell);
 
 
-            this.brushStrokes.push(new Brush(this.buffer, colorBrush, posX, posY, brushLength_, this.sizeStroke, numberFibres_, this.angleNoise, this.data));
+                    var colorBrush = lessenColor(brightenColor(distortColor(color(this.colorObject), this.colorNoise), this.brightnessNoise), this.opacityBoost);
+                    var brushWidth_ = this.brushWidth + getRandomFromInterval(-this.brushWidth * this.brushWidthNoise, this.brushWidth * this.brushWidthNoise);
+                    var numberFibres_ = this.numberFibres + getRandomFromInterval(-this.numberFibres * this.numberFibresNoise, this.numberFibres * this.numberFibresNoise);
 
-            const sizeCell = this.brushLength;
-            const numberCell = this.area / sizeCell;
-            const stepCell = this.buffer.width / sizeCell;
+                    // positioning random strokes in overlap
+                    if ((loopLayer > 0) && (fxrand() > 0.85)) {
+                        var posX = getRandomFromInterval(this.overlap / 2, this.buffer.width - brushWidth_ - this.overlap / 2);
+                        var posY = getRandomFromInterval(this.overlap / 2, this.buffer.height - numberFibres_ * this.sizeStroke - this.overlap / 2);
+                        this.brushStrokes.push(new Brush(this.buffer, colorBrush, posX, posY, brushWidth_, this.sizeStroke, numberFibres_, this.angleNoise, this.data));
+                    }
 
-            for (let x = 0; x < this.buffer.width; x += sizeCell) {
-                for (let y = 0; y < this.buffer.height; y += sizeCell) {
-                    this.buffer.noFill();
-                    this.buffer.rect(x, y, sizeCell, sizeCell);
+                    var posX = x;
+                    var posY = y;
+
+                    if (greyRun == true) {
+                        this.brushStrokes.push(new Brush(this.buffer, backgroundColor, posX, posY, brushWidth_, this.sizeStroke, numberFibres_, this.angleNoise, this.data));
+                    } else {
+                        this.brushStrokes.push(new Brush(this.buffer, colorBrush, posX, posY, brushWidth_, this.sizeStroke, numberFibres_, this.angleNoise, this.data));
+                    }
                 }
             }
         }
+
     }
 
     show() {

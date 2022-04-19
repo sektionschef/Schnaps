@@ -241,15 +241,15 @@ function setup() {
     posX: -200,
     posY: -200,
     colorObject: color1,
-    brushLength: 30,  // 20-40
+    brushWidth: 30,  // 20-40
     sizeStroke: 3,
     numberFibres: 10,
-    numberBrushes: 4, //2-8
+    numberPaintLayers: 2,
     overlap: 20,
     brightnessNoise: 5,
     colorNoise: 5,
     opacityBoost: 0, // getRandomFromInterval(150, 255),
-    brushLengthNoise: 0.2,
+    brushWidthNoise: 0.2,
     numberFibresNoise: 0.2,
     angleNoise: PI / 30,
     fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
@@ -267,15 +267,15 @@ function setup() {
     posX: 200,
     posY: -200,
     colorObject: color2,
-    brushLength: 30,  // 20-40
+    brushWidth: 30,  // 20-40
     sizeStroke: 3,
     numberFibres: 10,
-    numberBrushes: 4, //2-8
+    numberPaintLayers: 1,
     overlap: 20,
     brightnessNoise: 5,
     colorNoise: 5,
     opacityBoost: 0, // getRandomFromInterval(150, 255),
-    brushLengthNoise: 0.2,
+    brushWidthNoise: 0.2,
     numberFibresNoise: 0.2,
     angleNoise: PI / 30,
     fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
@@ -306,7 +306,7 @@ function draw() {
   ambientMaterial(255);
 
   // let val = slider.value();
-  // brushData.brushLength = slider.value();
+  // brushData.brushWidth = slider.value();
 
   // background(color2);
   background(130);
@@ -399,7 +399,7 @@ function draw() {
   image(boidaimage, 0, 0, boidaimage.width * SCALING_FACTOR, boidaimage.height * SCALING_FACTOR)
   pop();
 
-  noLoop();
+  // noLoop();
 
 }
 
