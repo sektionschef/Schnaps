@@ -145,6 +145,7 @@ class PaintBrushArea {
 
         this.colorObject = color(data.colorObject);  // default color
 
+        // use existing layer or create new
         if (typeof this.buffer == "undefined") {
             this.buffer = createGraphics(data.custom_width + this.overlap * 2, data.custom_height + this.overlap * 2);
         } else {
@@ -155,7 +156,8 @@ class PaintBrushArea {
 
         this.brushStrokes = [];
 
-        for (var i = 0; i < this.NumberBrushStrokes; i++) {
+        // for (var i = 0; i < this.NumberBrushStrokes; i++) {
+        for (var i = 0; i < 1; i++) {
             var colorBrush = lessenColor(brightenColor(distortColor(color(this.colorObject), this.colorNoise), this.brightnessNoise), this.opacityBoost);
             var brushLength_ = this.brushLength + getRandomFromInterval(-this.brushLength * this.brushLengthNoise, this.brushLength * this.brushLengthNoise);
             var numberFibres_ = this.numberFibres + getRandomFromInterval(-this.numberFibres * this.numberFibresNoise, this.numberFibres * this.numberFibresNoise);
@@ -167,11 +169,22 @@ class PaintBrushArea {
             } else {
                 var posX = getRandomFromInterval(this.overlap, this.buffer.width - this.overlap - brushLength_);
                 var posY = getRandomFromInterval(this.overlap, this.buffer.height - this.overlap - numberFibres_ * this.sizeStroke);
-                // var posX = getRandomFromInterval(this.overlap, this.buffer.width - this.overlap);
-                // var posY = getRandomFromInterval(this.overlap, this.buffer.height - this.overlap);
             }
 
+
+
             this.brushStrokes.push(new Brush(this.buffer, colorBrush, posX, posY, brushLength_, this.sizeStroke, numberFibres_, this.angleNoise, this.data));
+
+            const sizeCell = this.brushLength;
+            const numberCell = this.area / sizeCell;
+            const stepCell = this.buffer.width / sizeCell;
+
+            for (let x = 0; x < this.buffer.width; x += sizeCell) {
+                for (let y = 0; y < this.buffer.height; y += sizeCell) {
+                    this.buffer.noFill();
+                    this.buffer.rect(x, y, sizeCell, sizeCell);
+                }
+            }
         }
     }
 

@@ -228,7 +228,7 @@ function setup() {
 
   // binomial_points = [];
 
-  // for (var i = 0; i < 5000; i++) {
+  // for (var i = 0; i < 500; i++) {
   //   x_input = getRandomFromInterval(1, 600)
   //   binomial_points.push(createVector(x_input, (betaPDF(x = 0.5, a = x_input, b = x_input) * 10)));
   // }
@@ -243,7 +243,7 @@ function setup() {
     colorObject: color1,
     brushLength: 30,  // 20-40
     sizeStroke: 3,
-    numberFibres: 29,
+    numberFibres: 10,
     numberBrushes: 4, //2-8
     overlap: 20,
     brightnessNoise: 5,
@@ -269,7 +269,7 @@ function setup() {
     colorObject: color2,
     brushLength: 30,  // 20-40
     sizeStroke: 3,
-    numberFibres: 29,
+    numberFibres: 10,
     numberBrushes: 4, //2-8
     overlap: 20,
     brightnessNoise: 5,
@@ -289,6 +289,7 @@ function setup() {
 
   // paintBuffer = createGraphics(width, height);
 
+  // EXAMPLE PaintAreas
   oida = new PaintBrushArea(oidaData);
   oidaimage = oida.show();
 
@@ -336,8 +337,6 @@ function draw() {
   //   image(area.buffer, area.posX, area.posY, area.buffer.width, area.buffer.height);
   // }
 
-  // PERLIN Noise
-  // image(flowfield.update_noise(), -300, 0);
 
   // PERLIN NOISE
   // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
@@ -374,12 +373,16 @@ function draw() {
   //   fxpreview();
   //   preview_called = true;
   // }
+
   // CANVAS
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
   // intersectGrid.show();
 
+  // PERLIN Noise
+  // image(flowfield.update_noise(), -300, 0);
 
+  // EXAMPLE PaintAreas
   push();
   translate(
     oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,

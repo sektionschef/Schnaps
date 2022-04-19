@@ -129,30 +129,53 @@ class IntersectGrid {
     createPaintbrushAreas(posX, posY, rectWidth, rectHeight, colorObject) {
 
         let brushData = {
+            // custom_width: rectWidth,
+            // custom_height: rectHeight,
+            // posX: posX,
+            // posY: posY,
+            // // colorObject: brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 10),
+            // colorObject: brightenColor(distortColor(colorObject, 0), 50),
+            // brushLength: getRandomFromInterval(30, 60),
+            // sizeStroke: getRandomFromInterval(1.5, 3),
+            // numberFibres: getRandomFromList([10, 20, 30]),
+            // numberBrushes: getRandomFromList([4, 8]),
+            // overlap: 20,
+            // brightnessNoise: 20,
+            // colorNoise: 5,
+            // opacityBoost: 0, // getRandomFromInterval(150, 255),
+            // brushLengthNoise: 0.2,
+            // numberFibresNoise: 0.2,
+            // angleNoise: PI / 30,
+            // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
+            // fibreColorNoise: 5,
+            // fibreBrightnessNoise: 3,
+            // fibreStrokeSizeNoise: 0.1,
+            // fibreStartXNoise: 5,  // start earlier or later
+            // fibreYNoise: 2,  // noise of fibre along the y axis in the middle
+            // fibreRotationNoise: PI / 100,
             custom_width: rectWidth,
             custom_height: rectHeight,
             posX: posX,
             posY: posY,
-            // colorObject: brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 10),
             colorObject: brightenColor(distortColor(colorObject, 0), 50),
-            brushLength: getRandomFromInterval(30, 60),
-            sizeStroke: getRandomFromInterval(1.5, 3),
-            numberFibres: getRandomFromList([10, 20, 30]),
-            numberBrushes: getRandomFromList([4, 8]),
+            brushLength: 30,  // 20-40
+            sizeStroke: 3,
+            numberFibres: 20,
+            numberBrushes: 4, //2-8
             overlap: 20,
-            brightnessNoise: 20,
+            brightnessNoise: 5,
             colorNoise: 5,
             opacityBoost: 0, // getRandomFromInterval(150, 255),
             brushLengthNoise: 0.2,
             numberFibresNoise: 0.2,
             angleNoise: PI / 30,
-            fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
-            fibreColorNoise: 5,
-            fibreBrightnessNoise: 3,
-            fibreStrokeSizeNoise: 0.1,
+            fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
+            fibreColorNoise: 2,
+            fibreBrightnessNoise: 2,
+            fibreStrokeSizeNoise: 1,
             fibreStartXNoise: 5,  // start earlier or later
-            fibreYNoise: 2,  // noise of fibre along the y axis in the middle
-            fibreRotationNoise: PI / 100,
+            fibreYNoise: 0.5,  // noise of fibre along the y axis in the middle
+            fibreRotationNoise: PI / 200,
         }
 
         return new PaintBrushArea(brushData);
