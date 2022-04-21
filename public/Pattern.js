@@ -360,17 +360,38 @@ class paintedSphere {
 
 
 class DumbAgent {
-    constructor(custom_width, custom_height, colorObject) {
-        this.stepSize = 10;  // 10 is hero
-        this.agentSize = 1;
-        this.opacityLevel = 20;
-        this.opacityLevel2 = 20;
-        this.lineLength = 15;
-        this.loopSize = 10000;
-        this.numberAgents = 5;
+    constructor(data) {
+        if (typeof data === 'undefined') {
+            data = {
+                posXImage: 0,
+                posYImage: 0,
+                customWidth: width,
+                customHeight: height,
+                colorObject: color(100, 100, 100),
+                stepSize: 10,  // 10 is hero
+                agentSize: 1,
+                opacityLevel: 20,
+                opacityLevel2: 20,
+                lineLength: 15,
+                loopSize: 10000,
+                numberAgents: 5,
+            }
+        }
+        this.posXImage = data.posXImage;
+        this.posYImage = data.posYImage;
+        this.customWidth = data.customWidth;
+        this.customHeight = data.customHeight;
+        this.colorObject = data.colorObject;
+        this.stepSize = data.stepSize;
+        this.agentSize = data.agentSize;
+        this.opacityLevel = data.opacityLevel;
+        this.opacityLevel2 = data.opacityLevel2;
+        this.lineLength = data.lineLength;
+        this.loopSize = data.loopSize;
+        this.numberAgents = data.numberAgents;
 
-        this.color = color(colorObject.levels[0], colorObject.levels[1], colorObject.levels[2], this.opacityLevel);
-        this.buffer = createGraphics(custom_width, custom_height);
+        this.color = color(this.colorObject.levels[0], this.colorObject.levels[1], this.colorObject.levels[2], this.opacityLevel);
+        this.buffer = createGraphics(this.customWidth, this.customHeight);
 
         this.posX = getRandomFromInterval(0, this.buffer.width);
         this.posY = getRandomFromInterval(0, this.buffer.height);

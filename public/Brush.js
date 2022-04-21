@@ -164,11 +164,12 @@ class PaintBrushArea {
 
 
         for (let loopLayer = 0; loopLayer < this.numberPaintLayers; loopLayer += 1) {
+
             // BACKGROUND layer
             let greyRun = false;
             if ((loopLayer == 0) && (this.numberPaintLayers > 1) && (fxrand() > 0.75)) {
                 var backgroundColor = color(getRandomFromInterval(50, 100));
-                greyRun = true;
+                // greyRun = true;
             }
 
             for (let x = this.overlap; x < this.buffer.width - 2 * this.overlap; x += this.brushWidth) {
@@ -178,8 +179,8 @@ class PaintBrushArea {
                     // this.buffer.noFill();
                     // this.buffer.rect(x, y, sizeCell, sizeCell);
 
-
-                    var colorBrush = lessenColor(brightenColor(distortColor(color(this.colorObject), this.colorNoise), this.brightnessNoise), this.opacityBoost);
+                    // var colorBrush = lessenColor(brightenColor(distortColor(color(this.colorObject), this.colorNoise), this.brightnessNoise), this.opacityBoost);
+                    var colorBrush = brightenColor(distortColor(color(this.colorObject), this.colorNoise), this.brightnessNoise);
                     var brushWidth_ = this.brushWidth + getRandomFromInterval(-this.brushWidth * this.brushWidthNoise, this.brushWidth * this.brushWidthNoise);
                     var numberFibres_ = this.numberFibres + getRandomFromInterval(-this.numberFibres * this.numberFibresNoise, this.numberFibres * this.numberFibresNoise);
 
