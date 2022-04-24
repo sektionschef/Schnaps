@@ -123,7 +123,6 @@ function setup() {
   // slider.position(10, 10);
   // slider.style('width', '300px');
 
-
   // flowfield = new FlowField(600, 300);
 
   // RANDOM AREAS
@@ -157,7 +156,7 @@ function setup() {
   // normal_noise = Pattern.create_noise(100, 100);
 
   // ENDRESULT
-  // canvasOverlay = Pattern.create_canvas(width, height);
+  canvasOverlay = Pattern.create_canvas(width, height);
 
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
@@ -165,17 +164,18 @@ function setup() {
   // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
 
   // ENDRESULT
-  // splatter = Pattern.create_splatter_splitter(width, height);
+  splatter = Pattern.create_splatter_splitter(width, height);
 
   // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
-  // agent = new DumbAgent();
+  // ENDRESULT
+  canvasAgent = new DumbAgent();
 
   agentPaintbrushData = {
-    posXImage: 200,
-    posYImage: -200,
-    customWidth: 600,
-    customHeight: 200,
+    customWidth: width,
+    customHeight: height,
+    posXImage: 0,
+    posYImage: 0,
     colorObject: color(color1),
     stepSize: 5,
     agentSize: 1,
@@ -222,7 +222,6 @@ function setup() {
   loopNumberPaintbrush = 100;
   loopNumberSpheres = 200;
 
-
   for (var i = 0; i < loopNumberSpheres; i++) {  // PARAMS FOR SPHERE
     sphereData.custom_width = getRandomFromInterval(100, 300);
     sphereData.custom_height = getRandomFromInterval(100, 300);
@@ -239,12 +238,13 @@ function setup() {
   }
 
   // ENDRESULT
-  // backgroundSphere = new paintedSphere(sphereBackgroundData);
+  backgroundSphere = new paintedSphere(sphereBackgroundData);
 
   // paper = paper.get()
   // paper.mask(noise_fog);
 
-  // intersectGrid = new IntersectGrid();
+  // ENDRESULT
+  intersectGrid = new IntersectGrid();
 
   resize_canvas();
 
@@ -338,14 +338,14 @@ function setup() {
 
 
   // EXAMPLE PaintAreas
-  oida = new PaintBrushArea(oidaData);
-  oidaimage = oida.show();
+  // oida = new PaintBrushArea(oidaData);
+  // oidaimage = oida.show();
 
-  boida = new PaintBrushArea(boidaData);
-  boidaimage = boida.show();
+  // boida = new PaintBrushArea(boidaData);
+  // boidaimage = boida.show();
 
-  back = new PaintBrushArea(boidaBack);
-  backimage = back.show();
+  // back = new PaintBrushArea(boidaBack);
+  // backimage = back.show();
 
 }
 
@@ -372,9 +372,9 @@ function draw() {
   // image(paper, - width / 2, - height / 2, paper.width * SCALING_FACTOR, paper.height * SCALING_FACTOR);
 
   // ENDRESULT
-  // image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
+  image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
   // ENDRESULT
-  // image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
+  image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -429,43 +429,45 @@ function draw() {
 
   // ENDRESULT
   // CANVAS
-  // image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
+  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
-  // intersectGrid.show();
-  // image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
+  intersectGrid.show();
+
+  image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
 
 
   // PERLIN Noise
   // image(flowfield.update_noise(), -300, 0);
 
   // EXAMPLE PaintAreas
-  push();
-  translate(
-    back.posX * SCALING_FACTOR - (backimage.width / 2) * SCALING_FACTOR,
-    back.posY * SCALING_FACTOR - (backimage.height / 2) * SCALING_FACTOR
-  );
-  image(backimage, 0, 0, backimage.width * SCALING_FACTOR, backimage.height * SCALING_FACTOR)
-  pop();
+  // push();
+  // translate(
+  //   back.posX * SCALING_FACTOR - (backimage.width / 2) * SCALING_FACTOR,
+  //   back.posY * SCALING_FACTOR - (backimage.height / 2) * SCALING_FACTOR
+  // );
+  // image(backimage, 0, 0, backimage.width * SCALING_FACTOR, backimage.height * SCALING_FACTOR)
+  // pop();
 
-  push();
-  translate(
-    oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,
-    oida.posY * SCALING_FACTOR - (oidaimage.height / 2) * SCALING_FACTOR
-  );
-  image(oidaimage, 0, 0, oidaimage.width * SCALING_FACTOR, oidaimage.height * SCALING_FACTOR)
-  pop();
+  // push();
+  // translate(
+  //   oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,
+  //   oida.posY * SCALING_FACTOR - (oidaimage.height / 2) * SCALING_FACTOR
+  // );
+  // image(oidaimage, 0, 0, oidaimage.width * SCALING_FACTOR, oidaimage.height * SCALING_FACTOR)
+  // pop();
 
-  push();
-  translate(
-    boida.posX * SCALING_FACTOR - (boidaimage.width / 2) * SCALING_FACTOR,
-    boida.posY * SCALING_FACTOR - (boidaimage.height / 2) * SCALING_FACTOR
-  );
-  image(boidaimage, 0, 0, boidaimage.width * SCALING_FACTOR, boidaimage.height * SCALING_FACTOR)
-  pop();
+  // push();
+  // translate(
+  //   boida.posX * SCALING_FACTOR - (boidaimage.width / 2) * SCALING_FACTOR,
+  //   boida.posY * SCALING_FACTOR - (boidaimage.height / 2) * SCALING_FACTOR
+  // );
+  // image(boidaimage, 0, 0, boidaimage.width * SCALING_FACTOR, boidaimage.height * SCALING_FACTOR)
+  // pop();
 
+  // ENDRESULT
+  image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
 
-  image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - agentPaintbrush.buffer.width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - agentPaintbrush.buffer.height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
-  // noLoop();
+  noLoop();
 
 }
 
