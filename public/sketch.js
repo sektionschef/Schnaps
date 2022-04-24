@@ -244,7 +244,25 @@ function setup() {
   // paper.mask(noise_fog);
 
   // ENDRESULT
-  intersectGrid = new IntersectGrid();
+
+  let frontGridData = {
+    minSize: 50,
+    maxSize: 300,
+    numberRects: 30,
+    firstLevelColors: [color1],
+    secondLevelColors: [color2],
+  }
+
+  let backGridData = {
+    minSize: 100,
+    maxSize: 500,
+    numberRects: 10,
+    firstLevelColors: [color(150)],
+    secondLevelColors: [color(30)],
+  }
+
+  frontGrid = new IntersectGrid(frontGridData);
+  backGrid = new IntersectGrid(backGridData);
 
   resize_canvas();
 
@@ -431,7 +449,8 @@ function draw() {
   // CANVAS
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
-  intersectGrid.show();
+  backGrid.show();
+  frontGrid.show();
 
   image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
 

@@ -1,5 +1,5 @@
 class IntersectRect {
-    constructor(rect1, rect2) {
+    constructor(rect1, rect2, colorObject) {
         this.rect1 = rect1;
         this.rect2 = rect2;
 
@@ -12,7 +12,7 @@ class IntersectRect {
         this.rect2.colorObject;
 
         // this.getColor();
-        this.colorObject = color2;
+        this.colorObject = colorObject;
 
     }
 
@@ -77,10 +77,21 @@ class IntersectRect {
 
 // grid with rects and intersection rects
 class IntersectGrid {
-    constructor() {
-        this.MIN = 100;
-        this.MAX = 500;
-        this.numberRects = 10;
+    constructor(data) {
+        if (typeof data === 'undefined') {
+            data = {
+                minSize: 100,
+                maxSize: 500,
+                numberRects: 10,
+                firstLevelColors: [color1],
+                secondLevelColors: [color2],
+            }
+        }
+        this.minSize = data.minSize;
+        this.maxSize = data.maxSize;
+        this.numberRects = data.numberRects;
+        this.firstLevelColors = data.firstLevelColors;
+        this.secondLevelColors = data.secondLevelColors;
 
         // for debug
         this.rects = [];
@@ -89,13 +100,13 @@ class IntersectGrid {
         for (let i = 0; i < this.numberRects; i++) {
             this.rects.push(
                 {
-                    width: getRandomFromInterval(this.MIN, this.MAX),
-                    height: getRandomFromInterval(this.MIN, this.MAX),
+                    width: getRandomFromInterval(this.minSize, this.maxSize),
+                    height: getRandomFromInterval(this.minSize, this.maxSize),
                     depth: 0,
                     posX: getRandomFromInterval(- width / 2, width / 2),
                     posY: getRandomFromInterval(- width / 2, width / 2),
                     posZ: 0,  // not used I think
-                    colorObject: getRandomFromList([color1]),
+                    colorObject: getRandomFromList(this.firstLevelColors),
                 }
             )
             this.rects[i].paintedArea = this.createPaintbrushAreas(
@@ -119,7 +130,7 @@ class IntersectGrid {
         for (let i = 0; i < this.rects.length; i++) {
             for (let j = (0 + i + 1); j < this.rects.length; j++) {
                 // if (i != j) {
-                this.interactionRects.push(new IntersectRect(this.rects[i], this.rects[j]));
+                this.interactionRects.push(new IntersectRect(this.rects[i], this.rects[j], getRandomFromList(this.secondLevelColors)));
                 // }
             }
         }
