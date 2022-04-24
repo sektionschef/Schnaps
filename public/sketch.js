@@ -179,11 +179,11 @@ function setup() {
     colorObject: color(color1),
     stepSize: 5,
     agentSize: 1,
-    opacityLevel: 6,
+    opacityLevel: 10,
     // opacityLevel2: 15,
     lineLength: 30,
-    loopSize: 10000,
-    numberAgents: 5,
+    loopSize: 1000,
+    numberAgents: 15,
   }
 
   agentPaintbrush = new DumbAgent(agentPaintbrushData);
