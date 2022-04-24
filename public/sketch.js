@@ -155,29 +155,33 @@ function setup() {
   // paper = Pattern.create_corroded_area(width, height, color(240));
   // dots = Pattern.create_dots(width, height);
   // normal_noise = Pattern.create_noise(100, 100);
-  canvasOverlay = Pattern.create_canvas(width, height);
+
+  // ENDRESULT
+  // canvasOverlay = Pattern.create_canvas(width, height);
+
   // lines = Pattern.create_lines(width, height);
   // bars = Pattern.create_bars(width, height);
 
   // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
 
-  splatter = Pattern.create_splatter_splitter(width, height);
+  // ENDRESULT
+  // splatter = Pattern.create_splatter_splitter(width, height);
 
   // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
-  agent = new DumbAgent();
+  // agent = new DumbAgent();
 
   agentPaintbrushData = {
     posXImage: 200,
     posYImage: -200,
     customWidth: 600,
     customHeight: 200,
-    colorObject: color(30, 30, 30),
-    stepSize: 10,  // 10 is hero
+    colorObject: color(color1),
+    stepSize: 5,
     agentSize: 1,
-    opacityLevel: 3,
-    opacityLevel2: 15,
-    lineLength: 20,
+    opacityLevel: 6,
+    // opacityLevel2: 15,
+    lineLength: 30,
     loopSize: 10000,
     numberAgents: 5,
   }
@@ -234,7 +238,8 @@ function setup() {
     // paintedSpheres.push(new paintedSphere(sphereData));
   }
 
-  backgroundSphere = new paintedSphere(sphereBackgroundData);
+  // ENDRESULT
+  // backgroundSphere = new paintedSphere(sphereBackgroundData);
 
   // paper = paper.get()
   // paper.mask(noise_fog);
@@ -331,6 +336,7 @@ function setup() {
     fibreRotationNoise: PI / 200,
   }
 
+
   // EXAMPLE PaintAreas
   oida = new PaintBrushArea(oidaData);
   oidaimage = oida.show();
@@ -353,8 +359,9 @@ function draw() {
   // let val = slider.value();
   // brushData.brushWidth = slider.value();
 
-  // background(color2);
-  background(130);
+  // ENDRESULT
+  // background(130);
+  background(240);
 
   // image(paper);
   // shape = createGraphics(width, height);
@@ -364,8 +371,10 @@ function draw() {
 
   // image(paper, - width / 2, - height / 2, paper.width * SCALING_FACTOR, paper.height * SCALING_FACTOR);
 
-  image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
-  image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
+  // ENDRESULT
+  // image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
+  // ENDRESULT
+  // image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -418,11 +427,12 @@ function draw() {
   //   preview_called = true;
   // }
 
+  // ENDRESULT
   // CANVAS
-  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
+  // image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
   // intersectGrid.show();
-  image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
+  // image(agent.buffer, - width / 2, - height / 2, agent.buffer.width * SCALING_FACTOR, agent.buffer.height * SCALING_FACTOR);
 
 
   // PERLIN Noise
@@ -455,7 +465,7 @@ function draw() {
 
 
   image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - agentPaintbrush.buffer.width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - agentPaintbrush.buffer.height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
-  noLoop();
+  // noLoop();
 
 }
 

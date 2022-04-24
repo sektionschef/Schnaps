@@ -370,8 +370,8 @@ class DumbAgent {
                 colorObject: color(100, 100, 100),
                 stepSize: 10,  // 10 is hero
                 agentSize: 1,
-                opacityLevel: 20,
-                opacityLevel2: 20,
+                opacityLevel: 10,
+                // opacityLevel2: 20,
                 lineLength: 15,
                 loopSize: 10000,
                 numberAgents: 5,
@@ -385,12 +385,17 @@ class DumbAgent {
         this.stepSize = data.stepSize;
         this.agentSize = data.agentSize;
         this.opacityLevel = data.opacityLevel;
-        this.opacityLevel2 = data.opacityLevel2;
+        // this.opacityLevel2 = data.opacityLevel2;
         this.lineLength = data.lineLength;
         this.loopSize = data.loopSize;
         this.numberAgents = data.numberAgents;
 
-        this.color = color(this.colorObject.levels[0], this.colorObject.levels[1], this.colorObject.levels[2], this.opacityLevel);
+        this.color = color(
+            this.colorObject.levels[0],
+            this.colorObject.levels[1],
+            this.colorObject.levels[2],
+            this.opacityLevel
+        );
         this.buffer = createGraphics(this.customWidth, this.customHeight);
 
         this.posX = getRandomFromInterval(0, this.buffer.width);
@@ -406,6 +411,7 @@ class DumbAgent {
             for (var i = 0; i < this.loopSize; i++) {
                 // let colory = color(getRandomFromInterval(100, 150), this.opacityLevel);
                 let angle = getRandomFromInterval(PI / 2, PI);
+                // let angle = getRandomFromList([PI / 2, PI / 4, PI]);
 
                 let directive = getRandomFromList([
                     "up",
