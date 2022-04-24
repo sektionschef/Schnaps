@@ -261,8 +261,8 @@ function setup() {
     secondLevelColors: [color(30)],
   }
 
-  // frontGrid = new IntersectGrid(frontGridData);
-  // backGrid = new IntersectGrid(backGridData);
+  frontGrid = new IntersectGrid(frontGridData);
+  backGrid = new IntersectGrid(backGridData);
 
   // binomial_points = [];
 
@@ -290,41 +290,15 @@ function setup() {
     colorNoise: 5,
     opacityBoost: 0, // getRandomFromInterval(150, 255),
     brushLengthNoise: 0.2,
-    // numberFibresNoise: 0.2,  // brushBreadthNoise
+    numberFibresNoise: 0.2,  // brushBreadthNoise
     angleNoise: PI / 5,
     fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
     fibreColorNoise: 2,
     fibreBrightnessNoise: 2,
     fibreStrokeSizeNoise: 1,
     fibreStartXNoise: 5,  // start earlier or later
-    fibreYNoise: 0.1,  // noise of fibre along the y axis in the middle
+    fibreYNoise: 0.2,  // noise of fibre along the y axis in the middle
     fibreRotationNoise: PI / 200,
-
-    custom_width: 200,
-    custom_height: 400,
-    posX: -200,
-    posY: -200,
-    colorObject: color1,
-    orientation: "vertical",
-    brushLength: 30,  // 20-40
-    brushBreadth: 30,
-    sizeStroke: 3,
-    // numberFibres: 15,
-    numberPaintLayers: 2,
-    overlap: 20,
-    brightnessNoise: 5,
-    colorNoise: 5,
-    opacityBoost: 0, // getRandomFromInterval(150, 255),
-    brushLengthNoise: 0.2,
-    numberFibresNoise: 0,  // brushBreadthNoise
-    angleNoise: PI / 5,
-    fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
-    fibreColorNoise: 20,
-    fibreBrightnessNoise: 20,
-    fibreStrokeSizeNoise: 0.5,
-    fibreStartXNoise: 5,  // start earlier or later
-    fibreYNoise: 0,  // noise of fibre along the y axis in the middle
-    fibreRotationNoise: 0,
   }
 
   let boidaData = {
@@ -335,8 +309,9 @@ function setup() {
     colorObject: color2,
     orientation: "horizontal",
     brushLength: 30,  // 20-40
+    brushBreadth: 30,
     sizeStroke: 3,
-    numberFibres: 30,
+    // numberFibres: 30,
     numberPaintLayers: 1,
     overlap: 20,
     brightnessNoise: 5,
@@ -363,6 +338,7 @@ function setup() {
     // colorObject: color(200),
     orientation: "horizontal",
     brushLength: 50,  // 20-40
+    brushBreadth: 50,
     sizeStroke: 3,
     numberFibres: 30,
     numberPaintLayers: 1,
@@ -384,14 +360,14 @@ function setup() {
 
 
   // EXAMPLE PaintAreas
-  oida = new PaintBrushArea(oidaData);
-  oidaimage = oida.show();
+  // oida = new PaintBrushArea(oidaData);
+  // oidaimage = oida.show();
 
-  boida = new PaintBrushArea(boidaData);
-  boidaimage = boida.show();
+  // boida = new PaintBrushArea(boidaData);
+  // boidaimage = boida.show();
 
-  back = new PaintBrushArea(boidaBack);
-  backimage = back.show();
+  // back = new PaintBrushArea(boidaBack);
+  // backimage = back.show();
 
   resize_canvas();
 }
@@ -478,8 +454,8 @@ function draw() {
   // CANVAS
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
-  // backGrid.show();
-  // frontGrid.show();
+  backGrid.show();
+  frontGrid.show();
 
   image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
 
@@ -488,29 +464,29 @@ function draw() {
   // image(flowfield.update_noise(), -300, 0);
 
   // EXAMPLE PaintAreas
-  push();
-  translate(
-    back.posX * SCALING_FACTOR - (backimage.width / 2) * SCALING_FACTOR,
-    back.posY * SCALING_FACTOR - (backimage.height / 2) * SCALING_FACTOR
-  );
-  image(backimage, 0, 0, backimage.width * SCALING_FACTOR, backimage.height * SCALING_FACTOR)
-  pop();
+  // push();
+  // translate(
+  //   back.posX * SCALING_FACTOR - (backimage.width / 2) * SCALING_FACTOR,
+  //   back.posY * SCALING_FACTOR - (backimage.height / 2) * SCALING_FACTOR
+  // );
+  // image(backimage, 0, 0, backimage.width * SCALING_FACTOR, backimage.height * SCALING_FACTOR)
+  // pop();
 
-  push();
-  translate(
-    oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,
-    oida.posY * SCALING_FACTOR - (oidaimage.height / 2) * SCALING_FACTOR
-  );
-  image(oidaimage, 0, 0, oidaimage.width * SCALING_FACTOR, oidaimage.height * SCALING_FACTOR)
-  pop();
+  // push();
+  // translate(
+  //   oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,
+  //   oida.posY * SCALING_FACTOR - (oidaimage.height / 2) * SCALING_FACTOR
+  // );
+  // image(oidaimage, 0, 0, oidaimage.width * SCALING_FACTOR, oidaimage.height * SCALING_FACTOR)
+  // pop();
 
-  push();
-  translate(
-    boida.posX * SCALING_FACTOR - (boidaimage.width / 2) * SCALING_FACTOR,
-    boida.posY * SCALING_FACTOR - (boidaimage.height / 2) * SCALING_FACTOR
-  );
-  image(boidaimage, 0, 0, boidaimage.width * SCALING_FACTOR, boidaimage.height * SCALING_FACTOR)
-  pop();
+  // push();
+  // translate(
+  //   boida.posX * SCALING_FACTOR - (boidaimage.width / 2) * SCALING_FACTOR,
+  //   boida.posY * SCALING_FACTOR - (boidaimage.height / 2) * SCALING_FACTOR
+  // );
+  // image(boidaimage, 0, 0, boidaimage.width * SCALING_FACTOR, boidaimage.height * SCALING_FACTOR)
+  // pop();
 
   // ENDRESULT
   image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);

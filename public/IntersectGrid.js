@@ -139,43 +139,22 @@ class IntersectGrid {
     createPaintbrushAreas(posX, posY, rectWidth, rectHeight, colorObject) {
 
         let brushData = {
-            // custom_width: rectWidth,
-            // custom_height: rectHeight,
-            // posX: posX,
-            // posY: posY,
-            // // colorObject: brightenColor(distortColor(getRandomFromList([color1, color2, color3]), 10), 10),
-            // colorObject: brightenColor(distortColor(colorObject, 0), 50),
-            // brushWidth: getRandomFromInterval(30, 60),
-            // sizeStroke: getRandomFromInterval(1.5, 3),
-            // numberFibres: getRandomFromList([10, 20, 30]),
-            // overlap: 20,
-            // brightnessNoise: 20,
-            // colorNoise: 5,
-            // opacityBoost: 0, // getRandomFromInterval(150, 255),
-            // brushWidthNoise: 0.2,
-            // numberFibresNoise: 0.2,
-            // angleNoise: PI / 30,
-            // fibreCurveTightness: 3,  // shape of curve, between 0 and 5; little effect
-            // fibreColorNoise: 5,
-            // fibreBrightnessNoise: 3,
-            // fibreStrokeSizeNoise: 0.1,
-            // fibreStartXNoise: 5,  // start earlier or later
-            // fibreYNoise: 2,  // noise of fibre along the y axis in the middle
-            // fibreRotationNoise: PI / 100,
             custom_width: rectWidth,
             custom_height: rectHeight,
             posX: posX,
             posY: posY,
             colorObject: brightenColor(distortColor(colorObject, 0), 30),
-            brushWidth: getRandomFromInterval(20, 40),  // 20-40
+            orientation: getRandomFromList(["horizontal", "vertical"]),
+            brushLength: getRandomFromInterval(20, 40),  // 20-40
+            brushBreadth: 30,
             sizeStroke: 2,
-            numberFibres: 10,
+            // numberFibres: 10,
             numberPaintLayers: 2,
             overlap: 20,
             brightnessNoise: 6,
             colorNoise: 6,
             opacityBoost: 0, // getRandomFromInterval(150, 255),
-            brushWidthNoise: 0.2,
+            brushLengthNoise: 0.2,
             numberFibresNoise: 0.2,
             angleNoise: PI / 30,
             fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
