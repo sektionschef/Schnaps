@@ -180,6 +180,12 @@ class IntersectGrid {
                     this.interactionRects[i].heightNew,
                     this.interactionRects[i].colorObject
                 );
+                // this.interactionRects[i].lines = new Lines(
+                //     this.interactionRects[i].posXNew,
+                //     this.interactionRects[i].posYNew,
+                //     this.interactionRects[i].widthNew,
+                //     this.interactionRects[i].heightNew,
+                // )
             }
         }
     }

@@ -7,10 +7,14 @@ class Line {
         this.limit_x = limit_x;
         this.limit_y = limit_y;
         this.history = [];
-        this.line_color = distortColor(color(BACKGROUND_COLOR), STROKE_NOISE);
+        this.colorObject = color(100);
+        this.colorNoise = 10;
+        this.strokeSize = 10;
+        this.strokeSizeDistort = 0.5;
+        this.line_color = distortColor(color(this.colorObject), this.colorNoise);
 
         this.run_complete = false;
-        this.stroke_size_dynamic = STROKE_SIZE;
+        this.stroke_size_dynamic = this.strokeSize;
         this.stroke_speed = getRandomFromInterval(0.8, 1);
     }
 
@@ -21,14 +25,14 @@ class Line {
             if (this.orientation == "x") {
                 if (this.x <= this.limit_x) {
                     this.x += this.stroke_speed;
-                    this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                    this.y = this.y + getRandomFromInterval(-1 * this.strokeSizeDistort, this.strokeSizeDistort);
                 } else {
                     this.run_complete = true;
                 }
             } else if (this.orientation == "y") {
                 if (this.y <= this.limit_y) {
                     this.y += this.stroke_speed;
-                    this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                    this.x = this.x + getRandomFromInterval(-1 * this.strokeSizeDistort, this.strokeSizeDistort);
                 } else {
                     this.run_complete = true;
                 }
@@ -36,8 +40,8 @@ class Line {
                 if (this.x <= this.limit_x && this.y <= this.limit_y) {
                     this.x += this.stroke_speed;
                     this.y += this.stroke_speed;
-                    this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                    this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                    this.x = this.x + getRandomFromInterval(-1 * this.strokeSizeDistort, this.strokeSizeDistort);
+                    this.y = this.y + getRandomFromInterval(-1 * this.strokeSizeDistort, this.strokeSizeDistort);
                 } else {
                     this.run_complete = true;
                 }
@@ -45,8 +49,8 @@ class Line {
                 if (this.x <= this.limit_x && this.y >= this.limit_y) {
                     this.x += this.stroke_speed;
                     this.y -= this.stroke_speed;
-                    this.x = this.x + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
-                    this.y = this.y + getRandomFromInterval(-1 * STROKE_DISTORT, STROKE_DISTORT);
+                    this.x = this.x + getRandomFromInterval(-1 * this.strokeSizeDistort, this.strokeSizeDistort);
+                    this.y = this.y + getRandomFromInterval(-1 * this.strokeSizeDistort, this.strokeSizeDistort);
                 } else {
                     this.run_complete = true;
                 }
@@ -177,6 +181,29 @@ class Lines {
                 if (line.run_complete == false) {
                     this.all_lines_complete = false;
                 }
+            }
+        }
+    }
+}
+
+
+class NewLines {
+    constructor(posXImage, posYImage, custom_width, custom_height, colorObject, distance) {
+        this.posXImage = posXImage;
+        this.posYImage = posYImage;
+        this.buffer = createGraphics(custom_width, custom_height);
+        this.colorObject = colorObject;
+        this.distance = distance;
+        this.strokeSize = 3;
+
+        // for x orientation
+        this.limit = this.buffer.width;
+        this.limitJ = this.buffer.height;
+
+        for (var i = 0; i < this.limit; i++) {
+            for (var j = 0; j < this.limitJ; j = j + this.distance) {
+                this.buffer.fill(0);
+                this.buffer.circle(i, j, this.strokeSize);
             }
         }
     }

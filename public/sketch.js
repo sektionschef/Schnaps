@@ -261,8 +261,8 @@ function setup() {
     secondLevelColors: [color(30)],
   }
 
-  frontGrid = new IntersectGrid(frontGridData);
-  backGrid = new IntersectGrid(backGridData);
+  // frontGrid = new IntersectGrid(frontGridData);
+  // backGrid = new IntersectGrid(backGridData);
 
   // binomial_points = [];
 
@@ -360,14 +360,17 @@ function setup() {
 
 
   // EXAMPLE PaintAreas
-  // oida = new PaintBrushArea(oidaData);
-  // oidaimage = oida.show();
+  oida = new PaintBrushArea(oidaData);
+  oidaimage = oida.show();
 
   // boida = new PaintBrushArea(boidaData);
   // boidaimage = boida.show();
 
   // back = new PaintBrushArea(boidaBack);
   // backimage = back.show();
+
+  // EXAMPLE LINES
+  linesExample = new NewLines(200, 200, 600, 400, color(100), 30);
 
   resize_canvas();
 }
@@ -454,8 +457,8 @@ function draw() {
   // CANVAS
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
-  backGrid.show();
-  frontGrid.show();
+  // backGrid.show();
+  // frontGrid.show();
 
   image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
 
@@ -472,13 +475,13 @@ function draw() {
   // image(backimage, 0, 0, backimage.width * SCALING_FACTOR, backimage.height * SCALING_FACTOR)
   // pop();
 
-  // push();
-  // translate(
-  //   oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,
-  //   oida.posY * SCALING_FACTOR - (oidaimage.height / 2) * SCALING_FACTOR
-  // );
-  // image(oidaimage, 0, 0, oidaimage.width * SCALING_FACTOR, oidaimage.height * SCALING_FACTOR)
-  // pop();
+  push();
+  translate(
+    oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,
+    oida.posY * SCALING_FACTOR - (oidaimage.height / 2) * SCALING_FACTOR
+  );
+  image(oidaimage, 0, 0, oidaimage.width * SCALING_FACTOR, oidaimage.height * SCALING_FACTOR)
+  pop();
 
   // push();
   // translate(
@@ -487,6 +490,8 @@ function draw() {
   // );
   // image(boidaimage, 0, 0, boidaimage.width * SCALING_FACTOR, boidaimage.height * SCALING_FACTOR)
   // pop();
+
+  image(linesExample.buffer, (linesExample.posXImage - width / 2) * SCALING_FACTOR, (linesExample.posYImage - height / 2) * SCALING_FACTOR, linesExample.buffer.width * SCALING_FACTOR, linesExample.buffer.height * SCALING_FACTOR);
 
   // ENDRESULT
   image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
