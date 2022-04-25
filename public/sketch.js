@@ -360,8 +360,8 @@ function setup() {
 
 
   // EXAMPLE PaintAreas
-  oida = new PaintBrushArea(oidaData);
-  oidaimage = oida.show();
+  // oida = new PaintBrushArea(oidaData);
+  // oidaimage = oida.show();
 
   // boida = new PaintBrushArea(boidaData);
   // boidaimage = boida.show();
@@ -475,13 +475,13 @@ function draw() {
   // image(backimage, 0, 0, backimage.width * SCALING_FACTOR, backimage.height * SCALING_FACTOR)
   // pop();
 
-  push();
-  translate(
-    oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,
-    oida.posY * SCALING_FACTOR - (oidaimage.height / 2) * SCALING_FACTOR
-  );
-  image(oidaimage, 0, 0, oidaimage.width * SCALING_FACTOR, oidaimage.height * SCALING_FACTOR)
-  pop();
+  // push();
+  // translate(
+  //   oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,
+  //   oida.posY * SCALING_FACTOR - (oidaimage.height / 2) * SCALING_FACTOR
+  // );
+  // image(oidaimage, 0, 0, oidaimage.width * SCALING_FACTOR, oidaimage.height * SCALING_FACTOR)
+  // pop();
 
   // push();
   // translate(

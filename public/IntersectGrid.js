@@ -117,17 +117,20 @@ class IntersectGrid {
                 this.rects[i].colorObject
             )
 
-            this.rects[i].lines = new NewLines(data = {
-                posXImage: this.rects[i].posX,
-                posYImage: this.rects[i].posY,
-                custom_width: this.rects[i].width,
-                custom_height: this.rects[i].height,
-                colorObject: color(20),
-                distance: 20,
-                noise: 4,
-                strokeSize: 2,
-                curveTightness: 3,
-            });
+            if (fxrand() > 0.6) {
+                this.rects[i].lines = new NewLines(data = {
+                    posXImage: this.rects[i].posX,
+                    posYImage: this.rects[i].posY,
+                    custom_width: this.rects[i].width,
+                    custom_height: this.rects[i].height,
+                    colorObject: color(getRandomFromInterval(20, 200)),
+                    distance: 20,
+                    noise: 3,
+                    strokeSize: 2,
+                    // curveTightness: 3,
+                    curveTightness: 0,
+                });
+            }
         }
 
         // sort by size
@@ -202,11 +205,15 @@ class IntersectGrid {
             this.showPainted(this.rects[i].paintedArea);
             // this.showDebug(this.rects[i]);
 
-            push();
-            // image(this.rects[i].lines.buffer, this.rects[i].lines.posXImage * SCALING_FACTOR, this.rects[i].lines.posYImage * SCALING_FACTOR, this.rects[i].lines.buffer.width * SCALING_FACTOR, this.rects[i].lines.buffer.height * SCALING_FACTOR);
-            translate((this.rects[i].lines.posXImage - this.rects[i].lines.buffer.width / 2) * SCALING_FACTOR, (this.rects[i].lines.posYImage - this.rects[i].lines.buffer.height / 2) * SCALING_FACTOR)
-            image(this.rects[i].lines.buffer, 0, 0, this.rects[i].lines.buffer.width * SCALING_FACTOR, this.rects[i].lines.buffer.height * SCALING_FACTOR);
-            pop();
+            // own function?
+            if (this.rects[i].lines !== undefined) {
+                push();
+                noFill();
+                noStroke();
+                translate((this.rects[i].lines.posXImage - this.rects[i].lines.buffer.width / 2) * SCALING_FACTOR, (this.rects[i].lines.posYImage - this.rects[i].lines.buffer.height / 2) * SCALING_FACTOR)
+                image(this.rects[i].lines.buffer, 0, 0, this.rects[i].lines.buffer.width * SCALING_FACTOR, this.rects[i].lines.buffer.height * SCALING_FACTOR);
+                pop();
+            }
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {

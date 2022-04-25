@@ -23,10 +23,11 @@ class NewLines {
         this.strokeSize = data.strokeSize;
         this.curveTightness = data.curveTightness;
 
-        this.buffer.push();
-        this.buffer.noFill();
-        this.buffer.rect(0, 0, this.buffer.width, this.buffer.height);
-        this.buffer.pop();
+        // DEBUG
+        // this.buffer.push();
+        // this.buffer.noFill();
+        // this.buffer.rect(0, 0, this.buffer.width, this.buffer.height);
+        // this.buffer.pop();
 
         this.buffer.strokeWeight(this.strokeSize);
         this.buffer.stroke(this.colorObject);
