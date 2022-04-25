@@ -193,8 +193,8 @@ class NewLines {
             data = {
                 posXImage: 200,
                 posYImage: 200,
-                custom_width: 600,
-                custom_height: 600,
+                custom_width: 400,
+                custom_height: 200,
                 orientation: "vertical",
                 colorObject: color(100),
                 distance: 30,
@@ -212,18 +212,21 @@ class NewLines {
         this.noise = data.noise;
         this.strokeSize = data.strokeSize;
         this.curveTightness = data.curveTightness;
-        this.orientation = data.orientation;
 
         this.buffer.strokeWeight(this.strokeSize);
         this.buffer.stroke(this.colorObject);
         this.buffer.noFill();
         this.buffer.curveTightness(this.curveTightness);
 
-        // for x orientation
+        if (this.buffer.width > this.buffer.height) {
+            this.orientation = "vertical";
+        } else {
+            this.orientation = "horizontal";
+        }
 
         if (this.orientation == "horizontal") {
             this.limit = this.buffer.width;
-            for (var i = 0; i < this.limit; i = i + this.distance) {
+            for (var i = 0; i < this.buffer.height; i = i + this.distance) {
                 this.buffer.beginShape();
                 // first
                 this.buffer.curveVertex(0, i);
@@ -238,7 +241,7 @@ class NewLines {
             }
         } else if (this.orientation == "vertical") {
             this.limit = this.buffer.height;
-            for (var i = 0; i < this.limit; i = i + this.distance) {
+            for (var i = 0; i < this.buffer.width; i = i + this.distance) {
                 this.buffer.beginShape();
                 // first
                 this.buffer.curveVertex(i, 0);
