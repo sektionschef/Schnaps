@@ -370,7 +370,7 @@ function setup() {
   // backimage = back.show();
 
   // EXAMPLE LINES
-  linesExample = new NewLines(200, 200, 600, 400, color(100), 30);
+  linesExample = new NewLines();
 
   resize_canvas();
 }
