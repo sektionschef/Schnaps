@@ -194,33 +194,28 @@ class NewLines {
         this.buffer = createGraphics(custom_width, custom_height);
         this.colorObject = colorObject;
         this.distance = distance;
+        this.noise = 4;
         this.strokeSize = 2;
+        this.curveTightness = 3;
 
         // for x orientation
-        this.limitI = this.buffer.width;
-        this.limitJ = this.buffer.height;
+        this.limit = this.buffer.width;
 
-        for (var j = 0; j < this.limitJ; j = j + this.distance) {
-            this.buffer.strokeWeight(this.strokeSize);
-            this.buffer.noFill();
+        this.buffer.strokeWeight(this.strokeSize);
+        this.buffer.noFill();
+        this.buffer.curveTightness(this.curveTightness);
+        for (var i = 0; i < this.limit; i = i + this.distance) {
             this.buffer.beginShape();
-            // for (var i = 0; i < this.limitI; i++) {
             // first
-            this.buffer.curveVertex(0, j);
-            this.buffer.curveVertex(0, j);
+            this.buffer.curveVertex(0, i);
+            this.buffer.curveVertex(0, i);
             // middle
-            this.buffer.curveVertex((this.limitI) / 2, j);
+            this.buffer.curveVertex((this.limit) / 4, (i + getRandomFromInterval(- this.noise, this.noise)));
+            this.buffer.curveVertex((this.limit) * 3 / 4, (i + getRandomFromInterval(- this.noise, this.noise)));
             // last
-            this.buffer.curveVertex(this.limitI, j);
-            this.buffer.curveVertex(this.limitI, j);
-            // }
+            this.buffer.curveVertex(this.limit, i);
+            this.buffer.curveVertex(this.limit, i);
             this.buffer.endShape();
         }
-
-        // this.buffer.push();
-        // this.buffer.noStroke();
-        // this.buffer.fill(0);
-        // this.buffer.circle(i, j, this.strokeSize);
-        // this.buffer.pop();
     }
 }
