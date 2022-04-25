@@ -116,6 +116,18 @@ class IntersectGrid {
                 this.rects[i].height,
                 this.rects[i].colorObject
             )
+
+            this.rects[i].lines = new NewLines(data = {
+                posXImage: this.rects[i].posX,
+                posYImage: this.rects[i].posY,
+                custom_width: this.rects[i].width,
+                custom_height: this.rects[i].height,
+                colorObject: color(20),
+                distance: 20,
+                noise: 4,
+                strokeSize: 2,
+                curveTightness: 3,
+            });
         }
 
         // sort by size
@@ -179,13 +191,7 @@ class IntersectGrid {
                     this.interactionRects[i].widthNew,
                     this.interactionRects[i].heightNew,
                     this.interactionRects[i].colorObject
-                );
-                // this.interactionRects[i].lines = new Lines(
-                //     this.interactionRects[i].posXNew,
-                //     this.interactionRects[i].posYNew,
-                //     this.interactionRects[i].widthNew,
-                //     this.interactionRects[i].heightNew,
-                // )
+                )
             }
         }
     }
@@ -196,6 +202,11 @@ class IntersectGrid {
             this.showPainted(this.rects[i].paintedArea);
             // this.showDebug(this.rects[i]);
 
+            push();
+            // image(this.rects[i].lines.buffer, this.rects[i].lines.posXImage * SCALING_FACTOR, this.rects[i].lines.posYImage * SCALING_FACTOR, this.rects[i].lines.buffer.width * SCALING_FACTOR, this.rects[i].lines.buffer.height * SCALING_FACTOR);
+            translate((this.rects[i].lines.posXImage - this.rects[i].lines.buffer.width / 2) * SCALING_FACTOR, (this.rects[i].lines.posYImage - this.rects[i].lines.buffer.height / 2) * SCALING_FACTOR)
+            image(this.rects[i].lines.buffer, 0, 0, this.rects[i].lines.buffer.width * SCALING_FACTOR, this.rects[i].lines.buffer.height * SCALING_FACTOR);
+            pop();
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {

@@ -261,8 +261,8 @@ function setup() {
     secondLevelColors: [color(30)],
   }
 
-  // frontGrid = new IntersectGrid(frontGridData);
-  // backGrid = new IntersectGrid(backGridData);
+  frontGrid = new IntersectGrid(frontGridData);
+  backGrid = new IntersectGrid(backGridData);
 
   // binomial_points = [];
 
@@ -370,7 +370,7 @@ function setup() {
   // backimage = back.show();
 
   // EXAMPLE LINES
-  linesExample = new NewLines();
+  // linesExample = new NewLines();
 
   resize_canvas();
 }
@@ -457,8 +457,8 @@ function draw() {
   // CANVAS
   image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
-  // backGrid.show();
-  // frontGrid.show();
+  backGrid.show();
+  frontGrid.show();
 
   image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
 
@@ -491,7 +491,7 @@ function draw() {
   // image(boidaimage, 0, 0, boidaimage.width * SCALING_FACTOR, boidaimage.height * SCALING_FACTOR)
   // pop();
 
-  image(linesExample.buffer, (linesExample.posXImage - width / 2) * SCALING_FACTOR, (linesExample.posYImage - height / 2) * SCALING_FACTOR, linesExample.buffer.width * SCALING_FACTOR, linesExample.buffer.height * SCALING_FACTOR);
+  // image(linesExample.buffer, (linesExample.posXImage - width / 2) * SCALING_FACTOR, (linesExample.posYImage - height / 2) * SCALING_FACTOR, linesExample.buffer.width * SCALING_FACTOR, linesExample.buffer.height * SCALING_FACTOR);
 
   // ENDRESULT
   image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
