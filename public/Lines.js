@@ -194,17 +194,33 @@ class NewLines {
         this.buffer = createGraphics(custom_width, custom_height);
         this.colorObject = colorObject;
         this.distance = distance;
-        this.strokeSize = 3;
+        this.strokeSize = 2;
 
         // for x orientation
-        this.limit = this.buffer.width;
+        this.limitI = this.buffer.width;
         this.limitJ = this.buffer.height;
 
-        for (var i = 0; i < this.limit; i++) {
-            for (var j = 0; j < this.limitJ; j = j + this.distance) {
-                this.buffer.fill(0);
-                this.buffer.circle(i, j, this.strokeSize);
-            }
+        for (var j = 0; j < this.limitJ; j = j + this.distance) {
+            this.buffer.strokeWeight(this.strokeSize);
+            this.buffer.noFill();
+            this.buffer.beginShape();
+            // for (var i = 0; i < this.limitI; i++) {
+            // first
+            this.buffer.curveVertex(0, j);
+            this.buffer.curveVertex(0, j);
+            // middle
+            this.buffer.curveVertex((this.limitI) / 2, j);
+            // last
+            this.buffer.curveVertex(this.limitI, j);
+            this.buffer.curveVertex(this.limitI, j);
+            // }
+            this.buffer.endShape();
         }
+
+        // this.buffer.push();
+        // this.buffer.noStroke();
+        // this.buffer.fill(0);
+        // this.buffer.circle(i, j, this.strokeSize);
+        // this.buffer.pop();
     }
 }
