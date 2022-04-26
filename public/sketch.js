@@ -445,8 +445,6 @@ function draw() {
   // }
 
 
-
-
   // if (grid.boxes_completely_run == true && preview_called == false) {
   //   logging.debug("all work is done");
   //   fxpreview();
