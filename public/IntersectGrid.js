@@ -83,8 +83,9 @@ class IntersectGrid {
                 minSize: 100,
                 maxSize: 500,
                 numberRects: 10,
-                firstLevelColors: [color1],
-                secondLevelColors: [color2],
+                firstLevelColors: [color(100)],
+                secondLevelColors: [color(30)],
+                lineColor: color(230),
             }
         }
         this.minSize = data.minSize;
@@ -92,6 +93,7 @@ class IntersectGrid {
         this.numberRects = data.numberRects;
         this.firstLevelColors = data.firstLevelColors;
         this.secondLevelColors = data.secondLevelColors;
+        this.lineColor = data.lineColor;
 
         // for debug
         this.rects = [];
@@ -123,10 +125,10 @@ class IntersectGrid {
                     posYImage: this.rects[i].posY,
                     custom_width: this.rects[i].width,
                     custom_height: this.rects[i].height,
-                    colorObject: color(getRandomFromInterval(20, 200)),
-                    distance: 20,
-                    noise: 3,
-                    strokeSize: 2,
+                    colorObject: this.lineColor,
+                    distance: 10,
+                    noise: 1,
+                    strokeSize: 1,
                     // curveTightness: 3,
                     curveTightness: 0,
                 });
@@ -158,7 +160,7 @@ class IntersectGrid {
             custom_height: rectHeight,
             posX: posX,
             posY: posY,
-            colorObject: brightenColor(distortColor(colorObject, 0), 30),
+            colorObject: brightenColor(distortColor(colorObject, 6), 6),
             orientation: getRandomFromList(["horizontal", "vertical"]),
             brushLength: getRandomFromInterval(20, 40),  // 20-40
             brushBreadth: 30,

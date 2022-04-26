@@ -116,6 +116,13 @@ function setup() {
 
   color1 = color(COLOR_1_HEX);
   color2 = color(COLOR_2_HEX);
+
+  color1b = brightenColorStatic(color1, -30);
+  color2b = brightenColorStatic(color2, -30);
+
+  lineColor1 = brightenColorStatic(color1, +60);
+  lineColor1b = brightenColorStatic(color1b, +60);
+
   // color3 = color(COLOR_3_HEX);
   // color4 = color(COLOR_4_HEX);
 
@@ -251,14 +258,16 @@ function setup() {
     numberRects: 30,
     firstLevelColors: [color1],
     secondLevelColors: [color2],
+    lineColor: lineColor1,
   }
 
   let backGridData = {
     minSize: 100,
     maxSize: 500,
     numberRects: 10,
-    firstLevelColors: [color(150)],
-    secondLevelColors: [color(30)],
+    firstLevelColors: [color1b],
+    secondLevelColors: [color2b],
+    lineColor: lineColor1b,
   }
 
   frontGrid = new IntersectGrid(frontGridData);
