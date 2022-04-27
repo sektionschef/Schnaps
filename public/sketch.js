@@ -253,21 +253,23 @@ function setup() {
   // ENDRESULT
 
   let frontGridData = {
-    minSize: 50,
-    maxSize: 300,
-    numberRects: 30,
+    minSize: 50,  // 50
+    maxSize: 300,  // 300
+    numberRects: 15,  // 30
     firstLevelColors: [color1],
     secondLevelColors: [color2],
     lineColor: lineColor1,
+    padding: 50,
   }
 
   let backGridData = {
-    minSize: 100,
-    maxSize: 500,
-    numberRects: 10,
+    minSize: 100,  // 100
+    maxSize: 400,  // 500
+    numberRects: 7,  // 10
     firstLevelColors: [color1b],
     secondLevelColors: [color2b],
     lineColor: lineColor1b,
+    padding: 50,
   }
 
   frontGrid = new IntersectGrid(frontGridData);

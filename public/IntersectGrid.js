@@ -86,6 +86,7 @@ class IntersectGrid {
                 firstLevelColors: [color(100)],
                 secondLevelColors: [color(30)],
                 lineColor: color(230),
+                padding: 50,
             }
         }
         this.minSize = data.minSize;
@@ -94,19 +95,26 @@ class IntersectGrid {
         this.firstLevelColors = data.firstLevelColors;
         this.secondLevelColors = data.secondLevelColors;
         this.lineColor = data.lineColor;
+        this.padding = data.padding;
 
         // for debug
         this.rects = [];
         this.interactionRects = [];
 
         for (let i = 0; i < this.numberRects; i++) {
+
+            var width_ = getRandomFromInterval(this.minSize, this.maxSize);
+            var height_ = getRandomFromInterval(this.minSize, this.maxSize);
+            var posX_ = getRandomFromInterval(- (width / 2) + (width_ / 2) + this.padding, (width / 2) - (width_ / 2) - this.padding);
+            var posY_ = getRandomFromInterval(- (height / 2) + (height_ / 2) + this.padding, (height / 2) - (height_ / 2) - this.padding);
+
             this.rects.push(
                 {
-                    width: getRandomFromInterval(this.minSize, this.maxSize),
-                    height: getRandomFromInterval(this.minSize, this.maxSize),
+                    width: width_,
+                    height: height_,
                     depth: 0,
-                    posX: getRandomFromInterval(- width / 2, width / 2),
-                    posY: getRandomFromInterval(- width / 2, width / 2),
+                    posX: posX_,
+                    posY: posY_,
                     posZ: 0,  // not used I think
                     colorObject: getRandomFromList(this.firstLevelColors),
                 }
