@@ -126,13 +126,10 @@ function setup() {
   // color3 = color(COLOR_3_HEX);
   // color4 = color(COLOR_4_HEX);
 
-  // slider = createSlider(10, 60, 30);
-  // slider.position(10, 10);
-  // slider.style('width', '300px');
-
+  // NOT NECESSARY | 
   // flowfield = new FlowField(600, 300);
 
-  // RANDOM AREAS
+  // NOT NECESSARY | RANDOM AREAS
   // let minAreaSize = 100;
   // let maxAreaSize = 350;
   // let minPosX = - width / 2 - 50;
@@ -154,26 +151,20 @@ function setup() {
   //     ));
   // }
 
-
-  // painted_area = new Paint(200, 400, -500, -500, color1);
-  // painted_area_2 = new Paint(300, 500, -300, -550, color4);
-
+  // NOT NECESSARY |   
   // paper = Pattern.create_corroded_area(width, height, color(240));
   // dots = Pattern.create_dots(width, height);
   // normal_noise = Pattern.create_noise(100, 100);
+  // lines = Pattern.create_lines(width, height);
+  // bars = Pattern.create_bars(width, height);
+  // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
+  // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
   // ENDRESULT
   canvasOverlay = Pattern.create_canvas(width, height);
 
-  // lines = Pattern.create_lines(width, height);
-  // bars = Pattern.create_bars(width, height);
-
-  // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
-
   // ENDRESULT
   splatter = Pattern.create_splatter_splitter(width, height);
-
-  // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
   // ENDRESULT
   canvasAgent = new DumbAgent();
@@ -251,7 +242,6 @@ function setup() {
   // paper.mask(noise_fog);
 
   // ENDRESULT
-
   let frontGridData = {
     minSize: 50,  // 50
     maxSize: 300,  // 300
@@ -393,9 +383,6 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  // let val = slider.value();
-  // brushData.brushLength = slider.value();
-
   // ENDRESULT
   // background(130);
   background(240);
@@ -416,11 +403,6 @@ function draw() {
   // maska
   // brush.buffer = brush.buffer.get();
   // brush.buffer.mask(fog.buffer);
-
-  // painted_area.show();
-  // painted_area_2.show();
-  // image(painted_area.buffer, painted_area.posX, painted_area.posY, painted_area.buffer.width, painted_area.buffer.height);
-  // image(painted_area_2.buffer, painted_area_2.posX, painted_area_2.posY, painted_area_2.buffer.width, painted_area_2.buffer.height);
 
   // RANDOM AREAS
   // for (let area of all_areas) {

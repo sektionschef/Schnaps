@@ -1,5 +1,5 @@
 class Fibre {
-    constructor(buffer, colorObject, brushStartX, brushStartY, brushLength, brushStrokeSize, angle, data) {
+    constructor(buffer, colorObject, brushStartX, brushStartY, brushLength, brushStrokeSize, angle, index, data) {
         this.data = data
         this.fibreCurveTightness = data.fibreCurveTightness;  // shape of curve, between 0 and 5; little effect
         this.fibreColorNoise = data.fibreColorNoise;
@@ -20,12 +20,22 @@ class Fibre {
         this.brushStartX = brushStartX;
         this.brushStartY = brushStartY;
 
+
         this.posMiddle = getRandomFromInterval(-this.fibreBreadthNoise, this.fibreBreadthNoise);
         this.sizeStroke = brushStrokeSize + getRandomFromInterval(-this.fibreStrokeSizeNoise, this.fibreStrokeSizeNoise);  // size of fibre
-        this.startX = brushStartX + getRandomFromInterval(-this.fibreStartLengthNoise, this.fibreStartLengthNoise);  // // where the fibre starts
-        this.startY = brushStartY + getRandomFromInterval(-this.fibreStartLengthNoise, this.fibreStartLengthNoise);  // // where the fibre starts
-        this.stop = brushLength + getRandomFromInterval(-this.fibreStartLengthNoise, this.fibreStartLengthNoise);  // where the fibre stops
-        this.colorFibre = brightenColor(distortColor(color(this.baseColor), this.fibreColorNoise), this.fibreBrightnessNoise)
+        // this.startX = brushStartX + getRandomFromInterval(-this.fibreStartLengthNoise, this.fibreStartLengthNoise);  // // where the fibre starts    
+        this.startX = brushStartX - this.fibreStartLengthNoise + noise(index / 100) * this.fibreStartLengthNoise;  // // where the fibre starts    
+        // this.startY = brushStartY + getRandomFromInterval(-this.fibreStartLengthNoise, this.fibreStartLengthNoise);  // // where the fibre starts
+        this.startY = brushStartY - this.fibreStartLengthNoise + noise(index / 100) * this.fibreStartLengthNoise;  // // where the fibre starts
+        // this.stop = brushLength + getRandomFromInterval(-this.fibreStartLengthNoise, this.fibreStartLengthNoise);  // where the fibre stops
+        this.stop = brushLength - this.fibreStartLengthNoise + noise(index / 100) * this.fibreStartLengthNoise;  // where the fibre stops
+        // remove the noise before adding the noise of Perlin
+
+        if (fxrand() < 0.75) {
+            this.colorFibre = brightenColor(distortColor(color(this.baseColor), this.fibreColorNoise), this.fibreBrightnessNoise)
+        } else {
+            this.colorFibre = brightenColor(distortColor(color(this.baseColor), this.fibreColorNoise * 3), this.fibreBrightnessNoise * 3)
+        }
         this.angleFibre = this.angle + getRandomFromInterval(-this.fibreRotationNoise, this.fibreRotationNoise);
     }
 
@@ -93,6 +103,7 @@ class Brush {
                     posX + brushLength,
                     sizeStroke,
                     this.angle,
+                    i,
                     this.data
                 ));
             }
@@ -106,6 +117,7 @@ class Brush {
                     posY + brushLength,
                     sizeStroke,
                     this.angle,
+                    i,
                     this.data
                 ));
             }
