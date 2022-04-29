@@ -1,8 +1,3 @@
-
-
-
-
-
 class Fibre {
     constructor(buffer, colorObject, brushStartX, brushStartY, brushLength, brushStrokeSize, angle, index, data) {
         this.data = data
