@@ -186,8 +186,8 @@ class IntersectGrid {
             fibreColorNoise: 2,
             fibreBrightnessNoise: 2,
             fibreStrokeSizeNoise: 1,
-            fibreStartXNoise: 5,  // start earlier or later
-            fibreYNoise: 0.5,  // noise of fibre along the y axis in the middle
+            fibreStartLengthNoise: 5,  // start earlier or later
+            fibreBreadthNoise: 0.5,  // noise of fibre along the y axis in the middle
             fibreRotationNoise: PI / 200,
         }
 

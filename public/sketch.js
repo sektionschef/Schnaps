@@ -161,13 +161,13 @@ function setup() {
   // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
   // ENDRESULT
-  canvasOverlay = Pattern.create_canvas(width, height);
+  // canvasOverlay = Pattern.create_canvas(width, height);
 
   // ENDRESULT
-  splatter = Pattern.create_splatter_splitter(width, height);
+  // splatter = Pattern.create_splatter_splitter(width, height);
 
   // ENDRESULT
-  canvasAgent = new DumbAgent();
+  // canvasAgent = new DumbAgent();
 
   agentPaintbrushData = {
     customWidth: width,
@@ -184,7 +184,8 @@ function setup() {
     numberAgents: 15,
   }
 
-  agentPaintbrush = new DumbAgent(agentPaintbrushData);
+  // ENDRESULT
+  // agentPaintbrush = new DumbAgent(agentPaintbrushData);
 
   sphereData = {
     custom_width: 400,
@@ -236,7 +237,7 @@ function setup() {
   }
 
   // ENDRESULT
-  backgroundSphere = new paintedSphere(sphereBackgroundData);
+  // backgroundSphere = new paintedSphere(sphereBackgroundData);
 
   // paper = paper.get()
   // paper.mask(noise_fog);
@@ -262,8 +263,8 @@ function setup() {
     padding: 50,
   }
 
-  frontGrid = new IntersectGrid(frontGridData);
-  backGrid = new IntersectGrid(backGridData);
+  // frontGrid = new IntersectGrid(frontGridData);
+  // backGrid = new IntersectGrid(backGridData);
 
   // binomial_points = [];
 
@@ -273,102 +274,9 @@ function setup() {
   // }
   // console.log(binomial_points);
 
-  // TEMP one PaintbrushArea
-  let oidaData = {
-    custom_width: 200,
-    custom_height: 400,
-    posX: -200,
-    posY: -200,
-    colorObject: color1,
-    orientation: "vertical",
-    brushLength: 30,  // 20-40
-    brushBreadth: 30,
-    sizeStroke: 3,
-    // numberFibres: 15,
-    numberPaintLayers: 2,
-    overlap: 20,
-    brightnessNoise: 5,
-    colorNoise: 5,
-    opacityBoost: 0, // getRandomFromInterval(150, 255),
-    brushLengthNoise: 0.2,
-    numberFibresNoise: 0.2,  // brushBreadthNoise
-    angleNoise: PI / 5,
-    fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
-    fibreColorNoise: 2,
-    fibreBrightnessNoise: 2,
-    fibreStrokeSizeNoise: 1,
-    fibreStartXNoise: 5,  // start earlier or later
-    fibreYNoise: 0.2,  // noise of fibre along the y axis in the middle
-    fibreRotationNoise: PI / 200,
-  }
-
-  let boidaData = {
-    custom_width: 600,
-    custom_height: 200,
-    posX: 200,
-    posY: -200,
-    colorObject: color2,
-    orientation: "horizontal",
-    brushLength: 30,  // 20-40
-    brushBreadth: 30,
-    sizeStroke: 3,
-    // numberFibres: 30,
-    numberPaintLayers: 1,
-    overlap: 20,
-    brightnessNoise: 5,
-    colorNoise: 5,
-    opacityBoost: 0, // getRandomFromInterval(150, 255),
-    brushLengthNoise: 0.2,
-    numberFibresNoise: 0.2,
-    angleNoise: PI / 30,
-    fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
-    fibreColorNoise: 2,
-    fibreBrightnessNoise: 2,
-    fibreStrokeSizeNoise: 1,
-    fibreStartXNoise: 5,  // start earlier or later
-    fibreYNoise: 0.5,  // noise of fibre along the y axis in the middle
-    fibreRotationNoise: PI / 200,
-  }
-
-  let boidaBack = {
-    custom_width: 600,
-    custom_height: 200,
-    posX: 200,
-    posY: -200,
-    colorObject: color("#d0cc00"),
-    // colorObject: color(200),
-    orientation: "horizontal",
-    brushLength: 50,  // 20-40
-    brushBreadth: 50,
-    sizeStroke: 3,
-    numberFibres: 30,
-    numberPaintLayers: 1,
-    overlap: 20,
-    brightnessNoise: 5,
-    colorNoise: 5,
-    opacityBoost: 0, // getRandomFromInterval(150, 255),
-    brushLengthNoise: 0.2,
-    numberFibresNoise: 0.2,
-    angleNoise: PI / 130,
-    fibreCurveTightness: 2.5,  // shape of curve, between 0 and 5; little effect
-    fibreColorNoise: 2,
-    fibreBrightnessNoise: 2,
-    fibreStrokeSizeNoise: 1,
-    fibreStartXNoise: 5,  // start earlier or later
-    fibreYNoise: 0.1,  // noise of fibre along the y axis in the middle
-    fibreRotationNoise: PI / 200,
-  }
-
-
   // EXAMPLE PaintAreas
-  // oida = new PaintBrushArea(oidaData);
-  // oidaimage = oida.show();
-
-  // boida = new PaintBrushArea(boidaData);
-  // boidaimage = boida.show();
-
-  // back = new PaintBrushArea(boidaBack);
-  // backimage = back.show();
+  ExamplePaintBrushArea = new PaintBrushArea();
+  // ExamplePaintBrushAreaImage = ExamplePaintBrushArea.show();
 
   // EXAMPLE LINES
   // linesExample = new NewLines();
@@ -384,8 +292,7 @@ function draw() {
   ambientMaterial(255);
 
   // ENDRESULT
-  // background(130);
-  background(240);
+  background(240, 100);
 
   // image(paper);
   // shape = createGraphics(width, height);
@@ -396,9 +303,9 @@ function draw() {
   // image(paper, - width / 2, - height / 2, paper.width * SCALING_FACTOR, paper.height * SCALING_FACTOR);
 
   // ENDRESULT
-  image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
+  // image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
   // ENDRESULT
-  image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
+  // image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -446,12 +353,14 @@ function draw() {
 
   // ENDRESULT
   // CANVAS
-  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
+  // image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
-  backGrid.show();
-  frontGrid.show();
+  // ENDRESULT
+  // backGrid.show();
+  // frontGrid.show();
 
-  image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
+  // ENDRESULT
+  // image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
 
 
   // PERLIN Noise
@@ -460,33 +369,19 @@ function draw() {
   // EXAMPLE PaintAreas
   // push();
   // translate(
-  //   back.posX * SCALING_FACTOR - (backimage.width / 2) * SCALING_FACTOR,
-  //   back.posY * SCALING_FACTOR - (backimage.height / 2) * SCALING_FACTOR
+  //   ExamplePaintBrushArea.posX * SCALING_FACTOR - (ExamplePaintBrushAreaImage.width / 2) * SCALING_FACTOR,
+  //   ExamplePaintBrushArea.posY * SCALING_FACTOR - (ExamplePaintBrushAreaImage.height / 2) * SCALING_FACTOR
   // );
-  // image(backimage, 0, 0, backimage.width * SCALING_FACTOR, backimage.height * SCALING_FACTOR)
-  // pop();
-
-  // push();
-  // translate(
-  //   oida.posX * SCALING_FACTOR - (oidaimage.width / 2) * SCALING_FACTOR,
-  //   oida.posY * SCALING_FACTOR - (oidaimage.height / 2) * SCALING_FACTOR
-  // );
-  // image(oidaimage, 0, 0, oidaimage.width * SCALING_FACTOR, oidaimage.height * SCALING_FACTOR)
-  // pop();
-
-  // push();
-  // translate(
-  //   boida.posX * SCALING_FACTOR - (boidaimage.width / 2) * SCALING_FACTOR,
-  //   boida.posY * SCALING_FACTOR - (boidaimage.height / 2) * SCALING_FACTOR
-  // );
-  // image(boidaimage, 0, 0, boidaimage.width * SCALING_FACTOR, boidaimage.height * SCALING_FACTOR)
+  // image(ExamplePaintBrushAreaImage, 0, 0, ExamplePaintBrushAreaImage.width * SCALING_FACTOR, ExamplePaintBrushAreaImage.height * SCALING_FACTOR)
   // pop();
 
   // image(linesExample.buffer, (linesExample.posXImage - width / 2) * SCALING_FACTOR, (linesExample.posYImage - height / 2) * SCALING_FACTOR, linesExample.buffer.width * SCALING_FACTOR, linesExample.buffer.height * SCALING_FACTOR);
 
   // ENDRESULT
-  image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
+  // image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
 
+
+  ExamplePaintBrushArea.show();
   noLoop();
 
 }
