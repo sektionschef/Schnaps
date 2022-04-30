@@ -381,7 +381,7 @@ function draw() {
   // image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
 
 
-  // ExamplePaintBrushArea.show();
+  ExamplePaintBrushArea.show();
   noLoop();
 
 }
