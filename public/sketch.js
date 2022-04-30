@@ -276,7 +276,6 @@ function setup() {
 
   // EXAMPLE PaintAreas
   ExamplePaintBrushArea = new PaintBrushArea();
-  // console.log(ExamplePaintBrushArea);
 
   // EXAMPLE LINES
   // linesExample = new NewLines();
