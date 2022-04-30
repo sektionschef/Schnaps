@@ -171,71 +171,67 @@ class PaintBrushArea {
 
     show() {
 
-        // translate(this.posX, this.posY);
-
         // DEBUG
-        // push();
-        // fill(100, 100);
-        // translate(this.posX, this.posY);
-        // // translate(this.posX * SCALING_FACTOR - this.custom_width / 2 * SCALING_FACTOR, this.posY * SCALING_FACTOR - this.custom_height / 2 * SCALING_FACTOR);
-        // rect(0, 0, this.custom_width, this.custom_height);
-        // // rect(0, 0, this.custom_width * SCALING_FACTOR, this.custom_height * SCALING_FACTOR);
-        // pop();
+        push();
+        fill(100, 100);
+        translate((this.posX - this.custom_width / 2) * SCALING_FACTOR, (this.posY - this.custom_height / 2) * SCALING_FACTOR);
+        rect(0, 0, this.custom_width * SCALING_FACTOR, this.custom_height * SCALING_FACTOR);
+        pop();
 
         for (var brushStroke of this.brushStrokes) {
 
-            // debug grid
-            // push();
-            // strokeWeight(2);
-            // noFill();
-            // translate(brushStroke.brushPosX, brushStroke.brushPosY)
-            // rect(0, 0, this.brushLength, this.brushBreadth);
-            // pop();
+            // DEBUG Grid
+            push();
+            strokeWeight(1);
+            noFill();
+            translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) * SCALING_FACTOR, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) * SCALING_FACTOR)
+            rect(0, 0, this.brushLength * SCALING_FACTOR, this.brushBreadth * SCALING_FACTOR);
+            pop();
 
             for (var fibre of brushStroke.fibres) {
                 // console.log(fibre);
 
-                push();
-                if (this.orientation == "horizontal") {
-                    // translate(fibre.startX, brushStroke.brushPosY);
-                    translate(this.posX + fibre.startX, this.posY + brushStroke.brushPosY);
-                    // translate(this.startX * SCALING_FACTOR - (this.custom_width / 2) * SCALING_FACTOR, this.brushPosY * SCALING_FACTOR - (this.custom_height / 2) * SCALING_FACTOR);
-                    rotate(fibre.angleFibre);
-                } else if (this.orientation == "vertical") {
-                    translate(brushStroke.brushPosX, fibre.startY)
-                    rotate(fibre.angleFibre / PI / 2);
-                }
-                curveTightness(this.fibreCurveTightness);
-                stroke(fibre.colorFibre);
-                strokeWeight(fibre.sizeStrokeFibre);
-                noFill();
+                // push();
+                // if (this.orientation == "horizontal") {
+                //     // translate(fibre.startX, brushStroke.brushPosY);
+                //     translate(this.posX + fibre.startX, this.posY + brushStroke.brushPosY);
+                //     // translate(this.startX * SCALING_FACTOR - (this.custom_width / 2) * SCALING_FACTOR, this.brushPosY * SCALING_FACTOR - (this.custom_height / 2) * SCALING_FACTOR);
+                //     rotate(fibre.angleFibre);
+                // } else if (this.orientation == "vertical") {
+                //     translate(this.posX + brushStroke.brushPosX, this.posY + fibre.startY)
+                //     rotate(fibre.angleFibre / PI / 2);
+                // }
+                // curveTightness(this.fibreCurveTightness);
+                // stroke(fibre.colorFibre);
+                // strokeWeight(fibre.sizeStrokeFibre);
+                // noFill();
 
-                // default sizestroke oder ein anderer?? brush oder fibre??
-                beginShape();
-                if (this.orientation == "horizontal") {
-                    curveVertex(0, this.sizeStroke * fibre.i, 0);
-                    curveVertex(0, this.sizeStroke * fibre.i, 0);
-                } else if (this.orientation == "vertical") {
-                    curveVertex(this.sizeStroke * fibre.i, 0, 0);
-                    curveVertex(this.sizeStroke * fibre.i, 0, 0);
-                }
-                // middle
-                if (this.orientation == "horizontal") {
-                    curveVertex((fibre.stop - fibre.startX) / 2, fibre.posMiddle + this.sizeStroke * fibre.i, 0);
-                } else if (this.orientation == "vertical") {
-                    curveVertex(fibre.posMiddle + this.sizeStroke * fibre.i, (fibre.stop - fibre.startY) / 2, 0);
-                }
-                // end
-                if (this.orientation == "horizontal") {
-                    curveVertex((fibre.stop - fibre.startX), this.sizeStroke * fibre.i, 0);
-                    curveVertex((fibre.stop - fibre.startX), this.sizeStroke * fibre.i, 0);
-                } else if (this.orientation == "vertical") {
-                    curveVertex(this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
-                    curveVertex(this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
-                }
-                endShape();
+                // // default sizestroke oder ein anderer?? brush oder fibre??
+                // beginShape();
+                // if (this.orientation == "horizontal") {
+                //     curveVertex(0, this.sizeStroke * fibre.i, 0);
+                //     curveVertex(0, this.sizeStroke * fibre.i, 0);
+                // } else if (this.orientation == "vertical") {
+                //     curveVertex(this.sizeStroke * fibre.i, 0, 0);
+                //     curveVertex(this.sizeStroke * fibre.i, 0, 0);
+                // }
+                // // middle
+                // if (this.orientation == "horizontal") {
+                //     curveVertex((fibre.stop - fibre.startX) / 2, fibre.posMiddle + this.sizeStroke * fibre.i, 0);
+                // } else if (this.orientation == "vertical") {
+                //     curveVertex(fibre.posMiddle + this.sizeStroke * fibre.i, (fibre.stop - fibre.startY) / 2, 0);
+                // }
+                // // end
+                // if (this.orientation == "horizontal") {
+                //     curveVertex((fibre.stop - fibre.startX), this.sizeStroke * fibre.i, 0);
+                //     curveVertex((fibre.stop - fibre.startX), this.sizeStroke * fibre.i, 0);
+                // } else if (this.orientation == "vertical") {
+                //     curveVertex(this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
+                //     curveVertex(this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
+                // }
+                // endShape();
 
-                pop();
+                // pop();
             }
         }
 
