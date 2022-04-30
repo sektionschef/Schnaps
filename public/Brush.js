@@ -171,6 +171,8 @@ class PaintBrushArea {
 
     show() {
 
+        // translate(this.posX, this.posY);
+
         // DEBUG
         // push();
         // fill(100, 100);
@@ -195,7 +197,8 @@ class PaintBrushArea {
 
                 push();
                 if (this.orientation == "horizontal") {
-                    translate(fibre.startX, brushStroke.brushPosY);
+                    // translate(fibre.startX, brushStroke.brushPosY);
+                    translate(this.posX + fibre.startX, this.posY + brushStroke.brushPosY);
                     // translate(this.startX * SCALING_FACTOR - (this.custom_width / 2) * SCALING_FACTOR, this.brushPosY * SCALING_FACTOR - (this.custom_height / 2) * SCALING_FACTOR);
                     rotate(fibre.angleFibre);
                 } else if (this.orientation == "vertical") {
