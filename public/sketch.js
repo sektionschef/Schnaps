@@ -263,8 +263,8 @@ function setup() {
     padding: 50,
   }
 
-  // frontGrid = new IntersectGrid(frontGridData);
-  // backGrid = new IntersectGrid(backGridData);
+  frontGrid = new IntersectGrid(frontGridData);
+  backGrid = new IntersectGrid(backGridData);
 
   // binomial_points = [];
 
@@ -355,8 +355,8 @@ function draw() {
   // image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
   // ENDRESULT
-  // backGrid.show();
-  // frontGrid.show();
+  backGrid.show();
+  frontGrid.show();
 
   // ENDRESULT
   // image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);

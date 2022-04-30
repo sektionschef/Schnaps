@@ -173,7 +173,6 @@ class IntersectGrid {
             brushLength: getRandomFromInterval(20, 40),  // 20-40
             brushBreadth: 30,
             sizeStroke: 2,
-            // numberFibres: 10,
             numberPaintLayers: 2,
             overlap: 20,
             brightnessNoise: 6,
@@ -181,7 +180,7 @@ class IntersectGrid {
             opacityBoost: 0, // getRandomFromInterval(150, 255),
             brushLengthNoise: 0.2,
             numberFibresNoise: 0.2,
-            angleNoise: PI / 30,
+            brushAngleNoise: PI / 30,
             fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
             fibreColorNoise: 2,
             fibreBrightnessNoise: 2,

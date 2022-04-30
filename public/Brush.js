@@ -172,23 +172,23 @@ class PaintBrushArea {
     show() {
 
         // DEBUG
-        push();
-        fill(100, 100);
-        translate(this.posX, this.posY);
-        // translate(this.posX * SCALING_FACTOR - this.custom_width / 2 * SCALING_FACTOR, this.posY * SCALING_FACTOR - this.custom_height / 2 * SCALING_FACTOR);
-        rect(0, 0, this.custom_width, this.custom_height);
-        // rect(0, 0, this.custom_width * SCALING_FACTOR, this.custom_height * SCALING_FACTOR);
-        pop();
+        // push();
+        // fill(100, 100);
+        // translate(this.posX, this.posY);
+        // // translate(this.posX * SCALING_FACTOR - this.custom_width / 2 * SCALING_FACTOR, this.posY * SCALING_FACTOR - this.custom_height / 2 * SCALING_FACTOR);
+        // rect(0, 0, this.custom_width, this.custom_height);
+        // // rect(0, 0, this.custom_width * SCALING_FACTOR, this.custom_height * SCALING_FACTOR);
+        // pop();
 
         for (var brushStroke of this.brushStrokes) {
 
             // debug grid
-            push();
-            strokeWeight(2);
-            noFill();
-            translate(brushStroke.brushPosX, brushStroke.brushPosY)
-            rect(0, 0, this.brushLength, this.brushBreadth);
-            pop();
+            // push();
+            // strokeWeight(2);
+            // noFill();
+            // translate(brushStroke.brushPosX, brushStroke.brushPosY)
+            // rect(0, 0, this.brushLength, this.brushBreadth);
+            // pop();
 
             for (var fibre of brushStroke.fibres) {
                 // console.log(fibre);
