@@ -213,7 +213,9 @@ class IntersectGrid {
         for (let i = 0; i < this.rects.length; i++) {
             this.rects[i].paintedArea.show();
 
-            // this.showDebug(this.rects[i]);
+            if (logging.getLevel() <= 1) {
+                this.showDebug(this.rects[i]);
+            }
 
             if (this.rects[i].lines !== undefined) {
                 this.rects[i].lines.show();
@@ -224,7 +226,9 @@ class IntersectGrid {
             if (this.interactionRects[i].paintedArea !== undefined) {
                 this.interactionRects[i].paintedArea.show();
             }
-            // this.showDebug(this.interactionRects[i]);
+            if (logging.getLevel() <= 1) {
+                this.showDebug(this.interactionRects[i]);
+            }
         }
 
     }
