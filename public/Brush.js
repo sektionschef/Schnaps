@@ -62,7 +62,6 @@ class Brush {
 
 }
 
-// painted area has an overlap with some brushstrokes additional to the specified width and height
 class PaintBrushArea {
     constructor(data) {
 
@@ -138,8 +137,8 @@ class PaintBrushArea {
             }
 
             if (this.orientation == "horizontal") {
-                for (let x = this.overlap; x < this.custom_width - 2 * this.overlap; x += this.brushLength) {
-                    for (let y = this.overlap; y < this.custom_height - 2 * this.overlap; y += this.brushBreadth) {
+                for (let x = 0; x < this.custom_width; x += this.brushLength) {
+                    for (let y = 0; y < this.custom_height; y += this.brushBreadth) {
 
                         this.brushStrokes.push(new Brush(this, x, y, loopLayer));
 
@@ -153,8 +152,8 @@ class PaintBrushArea {
                     }
                 }
             } else if (this.orientation == "vertical") {
-                for (let y = this.overlap; y < this.custom_height - 2 * this.overlap; y += this.brushLength) {
-                    for (let x = this.overlap; x < this.custom_width - 2 * this.overlap; x += this.brushBreadth) {
+                for (let y = 0; y < this.custom_height; y += this.brushLength) {
+                    for (let x = 0; x < this.custom_width; x += this.brushBreadth) {
 
                         this.brushStrokes.push(new Brush(this, x, y, loopLayer));
 
@@ -174,22 +173,26 @@ class PaintBrushArea {
 
     show() {
 
-        // DEBUG
-        push();
-        fill(100, 100);
-        translate((this.posX - this.custom_width / 2) * SCALING_FACTOR, (this.posY - this.custom_height / 2) * SCALING_FACTOR);
-        rect(0, 0, this.custom_width * SCALING_FACTOR, this.custom_height * SCALING_FACTOR);
-        pop();
+        if (logging.getLevel() <= 1) {
+            // DEBUG RECT for AREA
+            push();
+            fill(100, 100);
+            translate((this.posX - this.custom_width / 2) * SCALING_FACTOR, (this.posY - this.custom_height / 2) * SCALING_FACTOR);
+            rect(0, 0, this.custom_width * SCALING_FACTOR, this.custom_height * SCALING_FACTOR);
+            pop();
+        }
 
         for (var brushStroke of this.brushStrokes) {
 
-            // DEBUG Grid
-            push();
-            strokeWeight(1);
-            noFill();
-            translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) * SCALING_FACTOR, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) * SCALING_FACTOR)
-            rect(0, 0, this.brushLength * SCALING_FACTOR, this.brushBreadth * SCALING_FACTOR);
-            pop();
+            if (logging.getLevel() <= 1) {
+                // DEBUG Grid
+                push();
+                strokeWeight(1);
+                noFill();
+                translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) * SCALING_FACTOR, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) * SCALING_FACTOR)
+                rect(0, 0, this.brushLength * SCALING_FACTOR, this.brushBreadth * SCALING_FACTOR);
+                pop();
+            }
 
             for (var fibre of brushStroke.fibres) {
                 // console.log(fibre);

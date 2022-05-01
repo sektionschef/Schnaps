@@ -212,7 +212,6 @@ class IntersectGrid {
 
         for (let i = 0; i < this.rects.length; i++) {
             this.rects[i].paintedArea.show();
-            // this.showPainted(this.rects[i].paintedArea);
             // this.showDebug(this.rects[i]);
 
             // own function?
@@ -229,27 +228,11 @@ class IntersectGrid {
         for (let i = 0; i < this.interactionRects.length; i++) {
             if (this.interactionRects[i].paintedArea !== undefined) {
                 this.interactionRects[i].paintedArea.show();
-                // this.showPainted(this.interactionRects[i].paintedArea);
             }
             // this.showDebug(this.interactionRects[i]);
         }
 
     }
-
-    // old buffer way
-    // showPainted(object) {
-    //     push();
-    //     let rendimage = object.show();
-    //     translate(
-    //         object.posX * SCALING_FACTOR - (rendimage.width / 2) * SCALING_FACTOR,
-    //         object.posY * SCALING_FACTOR - (rendimage.height / 2) * SCALING_FACTOR
-    //     );
-    //     // if (fxrand() > 0.8) {
-    //     //     rotate(PI / 2);
-    //     // }
-    //     image(rendimage, 0, 0, rendimage.width * SCALING_FACTOR, rendimage.height * SCALING_FACTOR)
-    //     pop();
-    // }
 
     showDebug(object) {
 
