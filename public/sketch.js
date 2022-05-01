@@ -1,7 +1,7 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-// const SWITCH_LOGGING_LEVEL = "info";
-const SWITCH_LOGGING_LEVEL = "debug";
+const SWITCH_LOGGING_LEVEL = "info";
+// const SWITCH_LOGGING_LEVEL = "debug";
 
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = CANVAS_WIDTH;
