@@ -248,7 +248,7 @@ function setup() {
   let frontGridData = {
     minSize: 100,  // 50
     maxSize: 300,  // 300
-    numberRects: 15,  // 30
+    numberRects: 10,  // 30
     firstLevelColors: [color1],
     secondLevelColors: [color2],
     lineColor: lineColor1,
@@ -377,6 +377,7 @@ function draw() {
 
   // EXAMPLE PaintAreas
   examplePaintBrushArea.show();
+
   noLoop();
 
 }

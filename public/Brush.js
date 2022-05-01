@@ -66,14 +66,14 @@ class PaintBrushArea {
 
         if (typeof data === 'undefined') {
             data = {
-                custom_width: 400,
+                custom_width: 600,
                 custom_height: 400,
                 posX: -100,
                 posY: -100,
                 colorObject: color1,
-                orientation: "horizontal",
-                brushLength: 60,  // 20-40
-                brushBreadth: 60,
+                orientation: "vertical",
+                brushLength: 30,  // 20-40
+                brushBreadth: 30,
                 sizeStroke: 2,
                 numberPaintLayers: 2,
                 overlap: 20,
@@ -123,15 +123,18 @@ class PaintBrushArea {
             var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
             this.brushLength = this.custom_width / brushLengthNeeded;
 
-            var brushHeightNeeded = Math.round(this.custom_height / this.brushLength);
+            var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
             this.brushBreadth = this.custom_height / brushHeightNeeded
 
         } else if (this.orientation == "vertical") {
-            var brushLengthNeeded = Math.round(this.custom_height / this.brushLength);
-            this.brushLength = this.custom_height / brushLengthNeeded;
+            var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
+            this.brushLength = this.custom_height / brushHeightNeeded;
+            console.log(brushHeightNeeded);
 
-            var brushHeightNeeded = Math.round(this.custom_width / this.brushLength);
-            this.brushBreadth = this.custom_width / brushHeightNeeded
+            var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
+            console.log(brushLengthNeeded);
+            this.brushBreadth = this.custom_width / brushLengthNeeded
+            console.log(brushLengthNeeded);
         }
 
         this.numberFibres = this.brushBreadth / this.sizeStroke
@@ -249,12 +252,11 @@ class PaintBrushArea {
         if (logging.getLevel() <= 1) {
             // DEBUG RECT for AREA
             push();
-            fill(100, 100);
+            fill(30);
             translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2));
             rect(0, 0, this.custom_width, this.custom_height);
             pop();
         }
-
 
     }
 }

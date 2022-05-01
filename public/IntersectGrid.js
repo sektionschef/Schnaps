@@ -244,7 +244,7 @@ class IntersectGrid {
         if (typeof object.posXNew !== 'undefined') {
             translate(object.posXNew, object.posYNew, 0);
             box(object.widthNew, object.heightNew, 0);
-        } else {
+        } else if (typeof object.posX !== 'undefined') {
             translate(object.posX, object.posY, object.posZ);
             box(object.width, object.height, object.depth);
         }
