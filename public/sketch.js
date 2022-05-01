@@ -279,7 +279,7 @@ function setup() {
   // console.log(binomial_points);
 
   // EXAMPLE PaintAreas
-  examplePaintBrushArea = new PaintBrushArea();
+  // examplePaintBrushArea = new PaintBrushArea();
 
   // EXAMPLE LINES
   // linesExample = new NewLines();
@@ -376,7 +376,7 @@ function draw() {
   // image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
 
   // EXAMPLE PaintAreas
-  examplePaintBrushArea.show();
+  // examplePaintBrushArea.show();
 
   noLoop();
 

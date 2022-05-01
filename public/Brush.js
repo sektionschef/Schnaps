@@ -129,12 +129,9 @@ class PaintBrushArea {
         } else if (this.orientation == "vertical") {
             var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
             this.brushLength = this.custom_height / brushHeightNeeded;
-            console.log(brushHeightNeeded);
 
             var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
-            console.log(brushLengthNeeded);
             this.brushBreadth = this.custom_width / brushLengthNeeded
-            console.log(brushLengthNeeded);
         }
 
         this.numberFibres = this.brushBreadth / this.sizeStroke
