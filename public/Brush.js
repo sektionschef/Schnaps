@@ -14,7 +14,6 @@ class Fibre {
         if (brush.area.orientation == "horizontal") {
             this.stop = brush.brushPosX + brush.brushLength_ + noise(this.i / this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // where the fibre stops
         } else if (brush.area.orientation == "vertical") {
-            console.log = "muis"
             this.stop = brush.brushPosY + brush.brushLength_ + noise(this.i / this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // where the fibre stops
         }
 
@@ -195,7 +194,6 @@ class PaintBrushArea {
             }
 
             for (var fibre of brushStroke.fibres) {
-                // console.log(fibre);
 
                 push();
                 if (this.orientation == "horizontal") {

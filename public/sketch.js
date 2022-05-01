@@ -1,7 +1,7 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-const SWITCH_LOGGING_LEVEL = "info";
-// const SWITCH_LOGGING_LEVEL = "debug";
+// const SWITCH_LOGGING_LEVEL = "info";
+const SWITCH_LOGGING_LEVEL = "debug";
 
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = CANVAS_WIDTH;
@@ -244,7 +244,7 @@ function setup() {
 
   // ENDRESULT
   let frontGridData = {
-    minSize: 50,  // 50
+    minSize: 100,  // 50
     maxSize: 300,  // 300
     numberRects: 15,  // 30
     firstLevelColors: [color1],
@@ -254,8 +254,8 @@ function setup() {
   }
 
   let backGridData = {
-    minSize: 100,  // 100
-    maxSize: 400,  // 500
+    minSize: 200,  // 100
+    maxSize: 500,  // 500
     numberRects: 7,  // 10
     firstLevelColors: [color1b],
     secondLevelColors: [color2b],
@@ -374,7 +374,6 @@ function draw() {
   // image(ExamplePaintBrushAreaImage, 0, 0, ExamplePaintBrushAreaImage.width * SCALING_FACTOR, ExamplePaintBrushAreaImage.height * SCALING_FACTOR)
   // pop();
 
-  // image(linesExample.buffer, (linesExample.posXImage - width / 2) * SCALING_FACTOR, (linesExample.posYImage - height / 2) * SCALING_FACTOR, linesExample.buffer.width * SCALING_FACTOR, linesExample.buffer.height * SCALING_FACTOR);
   linesExample.show()
 
   // ENDRESULT

@@ -6,9 +6,9 @@ class NewLines {
                 posY: 200,
                 custom_width: 400,
                 custom_height: 200,
-                colorObject: color(100),
+                colorObject: color(0),
                 distance: 30,
-                noise: 4,
+                noise: 1,
                 strokeSize: 2,
                 curveTightness: 3,
             }
@@ -27,62 +27,68 @@ class NewLines {
         if (this.custom_width > this.custom_height) {
             this.orientation = "vertical";
 
-            this.nOfLines = Math.floor(this.custom_width / this.distance * SCALING_FACTOR);
-            this.distance_ = (this.custom_width - this.strokeSize * this.nOfLines) / this.nOfLines * SCALING_FACTOR;
+            this.nOfLines = Math.floor(this.custom_width / this.distance);
+            this.distance_ = (this.custom_width - this.strokeSize * this.nOfLines) / this.nOfLines;
         } else {
             this.orientation = "horizontal";
 
-            this.nOfLines = Math.floor(this.custom_height / this.distance * SCALING_FACTOR);
-            this.distance_ = (this.custom_height - this.strokeSize * this.nOfLines) / this.nOfLines * SCALING_FACTOR;
+            this.nOfLines = Math.floor(this.custom_height / this.distance);
+            this.distance_ = (this.custom_height - this.strokeSize * this.nOfLines) / this.nOfLines;
         }
     }
 
     show() {
         push();
 
+        translate((this.posX - width / 2) * SCALING_FACTOR, (this.posY - height / 2) * SCALING_FACTOR, 0);
+
+        if (logging.getLevel() <= 1) {
+            // DEBUG
+            noStroke();
+            fill(150);
+            rect(0, 0, this.custom_width * SCALING_FACTOR, this.custom_height * SCALING_FACTOR, 0);
+        }
+
         strokeWeight(this.strokeSize);
         stroke(this.colorObject);
         noFill();
         curveTightness(this.curveTightness);
 
-        translate((this.posX - width / 2) * SCALING_FACTOR, (this.posY - height / 2) * SCALING_FACTOR, 0);
-
-        if (logging.getLevel() <= 1) {
-            // DEBUG
-            rect(0, 0, this.custom_width * SCALING_FACTOR, this.custom_height * SCALING_FACTOR);
-        }
-
-        console.log(this.orientation);
 
         if (this.orientation == "horizontal") {
             this.limit = this.custom_width * SCALING_FACTOR;
-            for (var i = 0; i < this.custom_height * SCALING_FACTOR; i += this.distance_) {
-                beginShape();
-                // first
-                curveVertex(0, i);
-                curveVertex(0, i);
-                // middle
-                curveVertex((this.limit) / 4, (i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR)));
-                curveVertex((this.limit) * 3 / 4, (i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR)));
-                // last
-                curveVertex(this.limit, i);
-                curveVertex(this.limit, i);
-                endShape();
+            for (var i = 0; i < this.custom_height * SCALING_FACTOR; i += this.distance_ * SCALING_FACTOR) {
+
+                if (i != 0) { // skip to draw first line
+                    beginShape();
+                    // first
+                    curveVertex(0, i, 0);
+                    curveVertex(0, i, 0);
+                    // middle
+                    curveVertex(this.limit / 4, i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR), 0);
+                    curveVertex(this.limit * 3 / 4, i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR), 0);
+                    // last
+                    curveVertex(this.limit, i, 0);
+                    curveVertex(this.limit, i, 0);
+                    endShape();
+                }
             }
         } else if (this.orientation == "vertical") {
             this.limit = this.custom_height * SCALING_FACTOR;
-            for (var i = 0; i < (this.custom_width * SCALING_FACTOR); i += this.distance_) {
-                beginShape();
-                // first
-                curveVertex(i, 0);
-                curveVertex(i, 0);
-                // middle
-                curveVertex((i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR)), (this.limit) / 4);
-                curveVertex((i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR)), (this.limit) * 3 / 4);
-                // last
-                curveVertex(i, this.limit);
-                curveVertex(i, this.limit);
-                endShape();
+            for (var i = 0; i < (this.custom_width * SCALING_FACTOR); i += this.distance_ * SCALING_FACTOR) {
+                if (i != 0) {  // skip to draw first line
+                    beginShape();
+                    // first
+                    curveVertex(i, 0, 0);
+                    curveVertex(i, 0, 0);
+                    // middle
+                    curveVertex((i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR)), (this.limit) / 4, 0);
+                    curveVertex((i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR)), (this.limit) * 3 / 4, 0);
+                    // last
+                    curveVertex(i, this.limit, 0);
+                    curveVertex(i, this.limit, 0);
+                    endShape();
+                }
             }
         }
 

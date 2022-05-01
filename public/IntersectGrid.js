@@ -210,25 +210,18 @@ class IntersectGrid {
     show() {
 
         for (let i = 0; i < this.rects.length; i++) {
-            // this.rects[i].paintedArea.show();
+            this.rects[i].paintedArea.show();
 
             // this.showDebug(this.rects[i]);
 
-            // own function?
             if (this.rects[i].lines !== undefined) {
                 this.rects[i].lines.show();
-                // push();
-                // noFill();
-                // noStroke();
-                // translate((this.rects[i].lines.posXImage - this.rects[i].lines.buffer.width / 2) * SCALING_FACTOR, (this.rects[i].lines.posYImage - this.rects[i].lines.buffer.height / 2) * SCALING_FACTOR)
-                // image(this.rects[i].lines.buffer, 0, 0, this.rects[i].lines.buffer.width * SCALING_FACTOR, this.rects[i].lines.buffer.height * SCALING_FACTOR);
-                // pop();
             }
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {
             if (this.interactionRects[i].paintedArea !== undefined) {
-                // this.interactionRects[i].paintedArea.show();
+                this.interactionRects[i].paintedArea.show();
             }
             // this.showDebug(this.interactionRects[i]);
         }
