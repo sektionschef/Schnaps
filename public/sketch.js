@@ -266,6 +266,8 @@ function setup() {
   // frontGrid = new IntersectGrid(frontGridData);
   // backGrid = new IntersectGrid(backGridData);
 
+  exampleGrid = new IntersectGrid();
+
   // binomial_points = [];
 
   // for (var i = 0; i < 500; i++) {
@@ -278,7 +280,7 @@ function setup() {
   // ExamplePaintBrushArea = new PaintBrushArea();
 
   // EXAMPLE LINES
-  linesExample = new NewLines();
+  // linesExample = new NewLines();
 
   resize_canvas();
 }
@@ -358,6 +360,8 @@ function draw() {
   // backGrid.show();
   // frontGrid.show();
 
+  exampleGrid.show();
+
   // ENDRESULT
   // image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
 
@@ -374,7 +378,7 @@ function draw() {
   // image(ExamplePaintBrushAreaImage, 0, 0, ExamplePaintBrushAreaImage.width * SCALING_FACTOR, ExamplePaintBrushAreaImage.height * SCALING_FACTOR)
   // pop();
 
-  linesExample.show()
+  // linesExample.show()
 
   // ENDRESULT
   // image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);

@@ -40,12 +40,12 @@ class NewLines {
     show() {
         push();
 
-        translate((this.posX - width / 2) * SCALING_FACTOR, (this.posY - height / 2) * SCALING_FACTOR, 0);
+        translate((this.posX - this.custom_width / 2) * SCALING_FACTOR, (this.posY - this.custom_height / 2) * SCALING_FACTOR, 0);
 
         if (logging.getLevel() <= 1) {
             // DEBUG
             noStroke();
-            fill(150);
+            fill("red");
             rect(0, 0, this.custom_width * SCALING_FACTOR, this.custom_height * SCALING_FACTOR, 0);
         }
 

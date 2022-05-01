@@ -82,11 +82,11 @@ class IntersectGrid {
             data = {
                 minSize: 100,
                 maxSize: 500,
-                numberRects: 10,
+                numberRects: 5,
                 firstLevelColors: [color(100)],
                 secondLevelColors: [color(30)],
                 lineColor: color(230),
-                padding: 50,
+                padding: 50,  // frame to the edge of the canvas
             }
         }
         this.minSize = data.minSize;
@@ -137,7 +137,7 @@ class IntersectGrid {
                     distance: 10,
                     noise: 1,
                     strokeSize: 1,
-                    curveTightness: 0,
+                    curveTightness: 3,
                 });
             }
         }
