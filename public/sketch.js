@@ -126,6 +126,8 @@ function setup() {
   // color3 = color(COLOR_3_HEX);
   // color4 = color(COLOR_4_HEX);
 
+  resize_canvas();
+
   // NOT NECESSARY | 
   // flowfield = new FlowField(600, 300);
 
@@ -281,8 +283,6 @@ function setup() {
 
   // EXAMPLE LINES
   // linesExample = new NewLines();
-
-  resize_canvas();
 }
 
 

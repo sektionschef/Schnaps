@@ -40,13 +40,13 @@ class NewLines {
     show() {
         push();
 
-        translate((this.posX - this.custom_width / 2) * SCALING_FACTOR, (this.posY - this.custom_height / 2) * SCALING_FACTOR, 0);
+        translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2), 0);
 
         if (logging.getLevel() <= 1) {
             // DEBUG
             noStroke();
             fill("red");
-            rect(0, 0, this.custom_width * SCALING_FACTOR, this.custom_height * SCALING_FACTOR, 0);
+            rect(0, 0, this.custom_width, this.custom_height, 0);
         }
 
         strokeWeight(this.strokeSize);
@@ -56,8 +56,8 @@ class NewLines {
 
 
         if (this.orientation == "horizontal") {
-            this.limit = this.custom_width * SCALING_FACTOR;
-            for (var i = 0; i < this.custom_height * SCALING_FACTOR; i += this.distance_ * SCALING_FACTOR) {
+            this.limit = this.custom_width;
+            for (var i = 0; i < this.custom_height; i += this.distance_) {
 
                 if (i != 0) { // skip to draw first line
                     beginShape();
@@ -65,8 +65,8 @@ class NewLines {
                     curveVertex(0, i, 0);
                     curveVertex(0, i, 0);
                     // middle
-                    curveVertex(this.limit / 4, i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR), 0);
-                    curveVertex(this.limit * 3 / 4, i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR), 0);
+                    curveVertex(this.limit / 4, i + getRandomFromInterval(- this.noise, this.noise), 0);
+                    curveVertex(this.limit * 3 / 4, i + getRandomFromInterval(- this.noise, this.noise), 0);
                     // last
                     curveVertex(this.limit, i, 0);
                     curveVertex(this.limit, i, 0);
@@ -74,16 +74,16 @@ class NewLines {
                 }
             }
         } else if (this.orientation == "vertical") {
-            this.limit = this.custom_height * SCALING_FACTOR;
-            for (var i = 0; i < (this.custom_width * SCALING_FACTOR); i += this.distance_ * SCALING_FACTOR) {
+            this.limit = this.custom_height;
+            for (var i = 0; i < (this.custom_width); i += this.distance_) {
                 if (i != 0) {  // skip to draw first line
                     beginShape();
                     // first
                     curveVertex(i, 0, 0);
                     curveVertex(i, 0, 0);
                     // middle
-                    curveVertex((i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR)), (this.limit) / 4, 0);
-                    curveVertex((i + getRandomFromInterval(- this.noise * SCALING_FACTOR, this.noise * SCALING_FACTOR)), (this.limit) * 3 / 4, 0);
+                    curveVertex((i + getRandomFromInterval(- this.noise, this.noise)), (this.limit) / 4, 0);
+                    curveVertex((i + getRandomFromInterval(- this.noise, this.noise)), (this.limit) * 3 / 4, 0);
                     // last
                     curveVertex(i, this.limit, 0);
                     curveVertex(i, this.limit, 0);
