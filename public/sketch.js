@@ -163,13 +163,13 @@ function setup() {
   // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
   // ENDRESULT
-  canvasOverlay = Pattern.create_canvas(width, height);
+  // canvasOverlay = Pattern.create_canvas(width, height);
 
   // ENDRESULT
-  splatter = Pattern.create_splatter_splitter(width, height);
+  // splatter = Pattern.create_splatter_splitter(width, height);
 
   // ENDRESULT
-  canvasAgent = new DumbAgent();
+  // canvasAgent = new DumbAgent();
 
   agentPaintbrushData = {
     customWidth: width,
@@ -196,22 +196,9 @@ function setup() {
     posY: 0,
     colorObject: color2,
     margin: 70,
-    colorObjectSpread: 10,
+    fillColorNoise: 10,
     fillColorOpacityMax: 150,
-    strokeColorBoost: 50,
-    strokeOpacityMax: 40
-  }
-
-  sphereBackgroundData = {
-    custom_width: width,
-    custom_height: height,
-    posX: -width / 2,
-    posY: -height / 2,
-    colorObject: color(210),
-    margin: 10,
-    colorObjectSpread: 20,
-    fillColorOpacityMax: 30,
-    strokeColorBoost: 50,
+    strokeColorNoise: 50,
     strokeOpacityMax: 40
   }
 
@@ -230,16 +217,17 @@ function setup() {
     sphereData.posY = getRandomFromInterval(-sphereData.custom_height / 2 - height / 2, height / 2 + sphereData.custom_height / 2);;
     sphereData.colorObject = getRandomFromList([color1, color2]);;
     sphereData.margin = 50;
-    sphereData.colorObjectSpread = 10;
+    sphereData.fillColorNoise = 10;
     sphereData.fillColorOpacityMax = 70;
-    sphereData.strokeColorBoost = 50;
+    sphereData.strokeColorNoise = 50;
     sphereData.strokeOpacityMax = 40;
+    sphereData.strokeWeight = 10;
 
     // paintedSpheres.push(new paintedSphere(sphereData));
   }
 
   // ENDRESULT
-  backgroundSphere = new paintedSphere(sphereBackgroundData);
+  backgroundSphere = new paintedSphere();
 
   // paper = paper.get()
   // paper.mask(noise_fog);
@@ -266,8 +254,8 @@ function setup() {
   }
 
   // END RESULT
-  frontGrid = new IntersectGrid(frontGridData);
-  backGrid = new IntersectGrid(backGridData);
+  // frontGrid = new IntersectGrid(frontGridData);
+  // backGrid = new IntersectGrid(backGridData);
 
   // exampleGrid = new IntersectGrid();
 
@@ -294,7 +282,7 @@ function draw() {
   ambientMaterial(255);
 
   // ENDRESULT
-  background(240, 100);
+  background(255);
 
   // image(paper);
   // shape = createGraphics(width, height);
@@ -305,9 +293,11 @@ function draw() {
   // image(paper, - width / 2, - height / 2, paper.width * SCALING_FACTOR, paper.height * SCALING_FACTOR);
 
   // ENDRESULT
-  image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
+  backgroundSphere.show();
+  // image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
+
   // ENDRESULT
-  image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
+  // image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -327,7 +317,7 @@ function draw() {
   // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
 
   // for (var i = 0; i < loopNumberSpheres; i++) {
-  // image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
+  //   image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
   // }
 
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
@@ -355,16 +345,16 @@ function draw() {
 
   // ENDRESULT
   // CANVAS
-  image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
+  // image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
   // ENDRESULT
-  backGrid.show();
-  frontGrid.show();
+  // backGrid.show();
+  // frontGrid.show();
 
   // exampleGrid.show();
 
   // ENDRESULT
-  image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
+  // image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
 
 
   // PERLIN Noise
@@ -374,7 +364,7 @@ function draw() {
   // linesExample.show()
 
   // ENDRESULT
-  image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
+  // image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
 
   // EXAMPLE PaintAreas
   // examplePaintBrushArea.show();

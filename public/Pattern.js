@@ -296,15 +296,34 @@ class Pattern {
 class paintedSphere {
 
     constructor(data) {
+
+        if (typeof data === 'undefined') {
+            data = {
+                custom_width: width,
+                custom_height: height,
+                posX: -width / 2,
+                posY: -height / 2,
+                colorObject: color(210),
+                margin: 50 * SCALING_FACTOR,
+                fillColorNoise: 20,
+                fillColorOpacityMax: 30,
+                strokeWeight: 10,
+                strokeColorNoise: 50,
+                strokeOpacityMax: 20
+            }
+        }
+
+
         this.custom_width = data.custom_width;
         this.custom_height = data.custom_height;
         this.posX = data.posX;
         this.posY = data.posY;
         this.colorObject = data.colorObject;
         this.margin = data.margin;
-        this.colorObjectSpread = data.colorObjectSpread;
+        this.fillColorNoise = data.fillColorNoise;
         this.fillColorOpacityMax = data.fillColorOpacityMax;
-        this.strokeColorBoost = data.strokeColorBoost;
+        this.strokeWeight = data.strokeWeight;
+        this.strokeColorNoise = data.strokeColorNoise;
         this.strokeOpacityMax = data.strokeOpacityMax;
 
         // this.strokColorWhitenessMin = 
@@ -313,48 +332,50 @@ class paintedSphere {
         this.colorObjectBlue = this.colorObject.levels[2];
 
         this.area = this.custom_width * this.custom_height;
-        this.shapeNumber = this.area / 1000 * 7;  // relative to size
+        this.shapeNumber = this.area / 1000 * 1;  // relative to size
 
-        this.buffer = createGraphics(this.custom_width, this.custom_height);
+        this.elements = []
 
-        // debug
-        // this.buffer.rect(0, 0, this.buffer.width, this.buffer.height);
         for (var i = 0; i < this.shapeNumber; i++) {
-            // blue value remains in example
-            // let fillColorRed = getRandomFromInterval(200, 235);
-            // let fillColorGreen = getRandomFromInterval(200, 235);
-            // let fillColorBlue = getRandomFromInterval(255, 255);
-            // let fillColorOpacity = getRandomFromInterval(0, 40);
+            // easier with hsb?
+            let fillColorRed = getRandomFromInterval(this.colorObjectRed - this.fillColorNoise, this.colorObjectRed + this.fillColorNoise);
+            let fillColorGreen = getRandomFromInterval(this.colorObjectGreen - this.fillColorNoise, this.colorObjectGreen + this.fillColorNoise);
+            let fillColorBlue = getRandomFromInterval(this.colorObjectBlue - this.fillColorNoise, this.colorObjectBlue + this.fillColorNoise);
+            let fillColorOpacity = getRandomFromInterval(this.fillColorOpacityMax / 2, this.fillColorOpacityMax);
+            let strokeColorOpacity = getRandomFromInterval(this.strokeOpacityMax / 2, this.strokeOpacityMax);
+            let widthShape = getRandomFromInterval((this.custom_width - this.margin * 2) * 0.1, (this.custom_width - this.margin * 2) * 0.1);
+            let heightShape = getRandomFromInterval((this.custom_height - this.margin * 2) * 0.1, (this.custom_height - this.margin * 2) * 0.1);
 
-            let fillColorRed = getRandomFromInterval(this.colorObjectRed - this.colorObjectSpread, this.colorObjectRed + this.colorObjectSpread);
-            let fillColorGreen = getRandomFromInterval(this.colorObjectGreen - this.colorObjectSpread, this.colorObjectGreen + this.colorObjectSpread);
-            let fillColorBlue = getRandomFromInterval(this.colorObjectBlue - this.colorObjectSpread, this.colorObjectBlue + this.colorObjectSpread);
-            let fillColorOpacity = getRandomFromInterval(0, this.fillColorOpacityMax);
-
-            let strokeSize = getRandomFromInterval(0, 50);
-            let strokeColorOpacity = getRandomFromInterval(0, this.strokeOpacityMax);
-
-            // let strokeColor = color(strokColorWhiteness, strokColorWhiteness, strokColorWhiteness, strokeColorOpacity);
-            let strokeColor = color(this.colorObjectRed + this.strokeColorBoost, this.colorObjectGreen + this.strokeColorBoost, this.colorObjectBlue + this.strokeColorBoost, strokeColorOpacity);
-            let fillColor = color(fillColorRed, fillColorGreen, fillColorBlue, fillColorOpacity);
-
-            this.buffer.push();
-            this.buffer.stroke(strokeColor);
-            this.buffer.strokeWeight(strokeSize);
-            // ATTENTION - no Stroke
-            // this.buffer.noStroke();
-            this.buffer.fill(fillColor);
-
-            let widthShape = getRandomFromInterval((this.custom_width - this.margin * 2) * 0.1, (this.custom_width - this.margin * 2) * 0.5);
-            let heightShape = getRandomFromInterval((this.custom_height - this.margin * 2) * 0.1, (this.custom_height - this.margin * 2) * 0.5);
-
-            this.buffer.ellipse(getRandomFromInterval(this.margin, this.buffer.width - this.margin), getRandomFromInterval(this.margin, this.buffer.height - this.margin), widthShape, heightShape);
-            this.buffer.rect(getRandomFromInterval(this.margin, this.buffer.width - this.margin - widthShape), getRandomFromInterval(this.margin, this.buffer.height - this.margin - heightShape), widthShape, heightShape);
-            this.buffer.pop();
+            this.elements.push({
+                strokeColor: color(this.colorObjectRed + this.strokeColorNoise, this.colorObjectGreen + this.strokeColorNoise, this.colorObjectBlue + this.strokeColorNoise, strokeColorOpacity),
+                fillColor: color(fillColorRed, fillColorGreen, fillColorBlue, fillColorOpacity),
+                widthShape: widthShape,
+                heightShape: heightShape,
+                strokeSize: this.strokeWeight,
+                posXEl: getRandomFromInterval(this.margin, this.custom_width - this.margin),
+                posYEl: getRandomFromInterval(this.margin, this.custom_height - this.margin),
+                posXRe: getRandomFromInterval(this.margin, this.custom_width - this.margin - widthShape),
+                posYRe: getRandomFromInterval(this.margin, this.custom_height - this.margin - heightShape),
+            })
         }
-
-        // return this.buffer;
     }
+
+    show() {
+
+        for (var element of this.elements) {
+            push();
+            translate(this.posX, this.posY);
+            stroke(element.strokeColor);
+            strokeWeight(element.strokeSize);
+            fill(element.fillColor);
+
+            ellipse(element.posXEl, element.posYEl, element.widthShape, element.heightShape);
+            rect(element.posXRe, element.posYRe, element.widthShape, element.heightShape);
+            pop();
+            // return
+        }
+    }
+
 }
 
 
