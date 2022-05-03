@@ -220,13 +220,14 @@ class paintedSphere {
                 custom_height: height,
                 posX: -width / 2,
                 posY: -height / 2,
-                colorObject: color(5),
+                colorObject: color(200),
                 margin: 50 * SCALING_FACTOR,
                 fillColorNoise: 20,
-                fillColorOpacityMax: 255,
-                strokeWeight: 1,
-                strokeColorNoise: 50,
-                strokeOpacityMax: 0
+                fillColorOpacityMax: 100,
+                noStroke: true,
+                strokeWeight: 10,
+                strokeColorNoise: 20,
+                strokeOpacityMax: 250
             }
         }
 
@@ -239,6 +240,7 @@ class paintedSphere {
         this.margin = data.margin;
         this.fillColorNoise = data.fillColorNoise;
         this.fillColorOpacityMax = data.fillColorOpacityMax;
+        this.noStroke = data.noStroke;
         this.strokeWeight = data.strokeWeight;
         this.strokeColorNoise = data.strokeColorNoise;
         this.strokeOpacityMax = data.strokeOpacityMax;
@@ -249,7 +251,7 @@ class paintedSphere {
         this.colorObjectBlue = this.colorObject.levels[2];
 
         this.area = this.custom_width * this.custom_height;
-        this.shapeNumber = this.area / 1000 * 1;  // relative to size
+        this.shapeNumber = this.area / 1000 * 4;  // relative to size
 
         this.elements = []
 
@@ -260,14 +262,15 @@ class paintedSphere {
             let fillColorBlue = getRandomFromInterval(this.colorObjectBlue - this.fillColorNoise, this.colorObjectBlue + this.fillColorNoise);
             // let fillColorOpacity = getRandomFromInterval(this.fillColorOpacityMax / 2, this.fillColorOpacityMax);
             let fillColorOpacity = this.fillColorOpacityMax;
-            let strokeColorOpacity = getRandomFromInterval(this.strokeOpacityMax / 2, this.strokeOpacityMax);
+            // let strokeColorOpacity = getRandomFromInterval(this.strokeOpacityMax / 2, this.strokeOpacityMax);
+            let strokeColorOpacity = this.strokeOpacityMax;
             let widthShape = getRandomFromInterval((this.custom_width - this.margin * 2) * 0.1, (this.custom_width - this.margin * 2) * 0.1);
             let heightShape = getRandomFromInterval((this.custom_height - this.margin * 2) * 0.1, (this.custom_height - this.margin * 2) * 0.1);
 
             this.elements.push({
-                strokeColor: color(this.colorObjectRed + this.strokeColorNoise, this.colorObjectGreen + this.strokeColorNoise, this.colorObjectBlue + this.strokeColorNoise, strokeColorOpacity),
+                // strokeColor: color(this.colorObjectRed + this.strokeColorNoise, this.colorObjectGreen + this.strokeColorNoise, this.colorObjectBlue + this.strokeColorNoise, strokeColorOpacity),
+                strokeColor: color(fillColorRed, fillColorGreen, fillColorBlue, strokeColorOpacity),
                 fillColor: color(fillColorRed, fillColorGreen, fillColorBlue, fillColorOpacity),
-                // fillColor: color("red"),
                 widthShape: widthShape,
                 heightShape: heightShape,
                 strokeSize: this.strokeWeight,
@@ -284,11 +287,13 @@ class paintedSphere {
         for (var element of this.elements) {
             push();
             translate(this.posX, this.posY);
-            stroke(element.strokeColor);
-            strokeWeight(element.strokeSize);
+            if (this.noStroke == true) {
+                noStroke();
+            } else {
+                stroke(element.strokeColor);
+                strokeWeight(element.strokeSize);
+            }
             fill(element.fillColor);
-            // ATTENZIONE
-            noStroke();
 
             ellipse(element.posXEl, element.posYEl, element.widthShape, element.heightShape);
             rect(element.posXRe, element.posYRe, element.widthShape, element.heightShape);

@@ -223,13 +223,14 @@ function setup() {
     custom_height: height,
     posX: -width / 2,
     posY: -height / 2,
-    colorObject: color(240),
-    margin: 50 * SCALING_FACTOR,
-    fillColorNoise: 20,
-    fillColorOpacityMax: 10,
-    strokeWeight: 10,
-    strokeColorNoise: 5,
-    strokeOpacityMax: 5
+    colorObject: color(255),
+    margin: -50 * SCALING_FACTOR,
+    fillColorNoise: 100,
+    fillColorOpacityMax: 5,
+    noStroke: true,
+    strokeWeight: 1,
+    strokeColorNoise: 0,
+    strokeOpacityMax: 250
   }
 
   // ENDRESULT
@@ -286,6 +287,7 @@ function draw() {
 
   // ENDRESULT
   // background(255);
+  background(0);
 
   // MASKING example
   // image(paper);
