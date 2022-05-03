@@ -147,43 +147,6 @@ class Pattern {
         return this.buffer;
     }
 
-    // CORRODED - bubbles that hide background
-    static create_corroded_area(custom_width, custom_height, colorObject) {
-        // const background_color = 250;
-        // const foreground_color = 255;
-        const diff = 5;
-        let foreground_color = colorObject;
-        let background_color = color(
-            colorObject.levels[0] - diff,
-            colorObject.levels[1] - diff,
-            colorObject.levels[2] - diff,
-        );
-
-        const d = 1  // 2 - 1 - 1.5 - 1.3 - 1.2
-        const radius = 5;  // 3 - 3 - 3 - 3.5 - 3.5
-        const maxCell = 260;
-        const cell = maxCell * d;
-
-        this.buffer = createGraphics(custom_width, custom_height);
-        this.buffer.background(245);
-        const scl = this.buffer.width / cell;
-
-        this.buffer.background(background_color);
-        for (let x = 0; x < this.buffer.width; x += scl) {
-            for (let y = 0; y < this.buffer.height; y += scl) {
-                const c = brightenColor(color(foreground_color), 5);
-                const r = getRandomFromInterval(0, radius);
-                // if (r > d) {
-                this.buffer.stroke(c);
-                this.buffer.strokeWeight(r * d);
-                this.buffer.line(x + r, y - r, x, y);
-                // }
-            }
-        }
-
-        return this.buffer;
-    }
-
     // BARS
     static create_bars(custom_width, custom_height) {
         const d = 1.3;
@@ -257,13 +220,13 @@ class paintedSphere {
                 custom_height: height,
                 posX: -width / 2,
                 posY: -height / 2,
-                colorObject: color(210),
+                colorObject: color(5),
                 margin: 50 * SCALING_FACTOR,
                 fillColorNoise: 20,
-                fillColorOpacityMax: 30,
-                strokeWeight: 10,
+                fillColorOpacityMax: 255,
+                strokeWeight: 1,
                 strokeColorNoise: 50,
-                strokeOpacityMax: 20
+                strokeOpacityMax: 0
             }
         }
 
@@ -295,15 +258,16 @@ class paintedSphere {
             let fillColorRed = getRandomFromInterval(this.colorObjectRed - this.fillColorNoise, this.colorObjectRed + this.fillColorNoise);
             let fillColorGreen = getRandomFromInterval(this.colorObjectGreen - this.fillColorNoise, this.colorObjectGreen + this.fillColorNoise);
             let fillColorBlue = getRandomFromInterval(this.colorObjectBlue - this.fillColorNoise, this.colorObjectBlue + this.fillColorNoise);
-            let fillColorOpacity = getRandomFromInterval(this.fillColorOpacityMax / 2, this.fillColorOpacityMax);
+            // let fillColorOpacity = getRandomFromInterval(this.fillColorOpacityMax / 2, this.fillColorOpacityMax);
+            let fillColorOpacity = this.fillColorOpacityMax;
             let strokeColorOpacity = getRandomFromInterval(this.strokeOpacityMax / 2, this.strokeOpacityMax);
             let widthShape = getRandomFromInterval((this.custom_width - this.margin * 2) * 0.1, (this.custom_width - this.margin * 2) * 0.1);
             let heightShape = getRandomFromInterval((this.custom_height - this.margin * 2) * 0.1, (this.custom_height - this.margin * 2) * 0.1);
 
             this.elements.push({
-                strokeColor: this.colorObject,
-                // strokeColor: color(this.colorObjectRed + this.strokeColorNoise, this.colorObjectGreen + this.strokeColorNoise, this.colorObjectBlue + this.strokeColorNoise, strokeColorOpacity),
+                strokeColor: color(this.colorObjectRed + this.strokeColorNoise, this.colorObjectGreen + this.strokeColorNoise, this.colorObjectBlue + this.strokeColorNoise, strokeColorOpacity),
                 fillColor: color(fillColorRed, fillColorGreen, fillColorBlue, fillColorOpacity),
+                // fillColor: color("red"),
                 widthShape: widthShape,
                 heightShape: heightShape,
                 strokeSize: this.strokeWeight,
@@ -323,6 +287,8 @@ class paintedSphere {
             stroke(element.strokeColor);
             strokeWeight(element.strokeSize);
             fill(element.fillColor);
+            // ATTENZIONE
+            noStroke();
 
             ellipse(element.posXEl, element.posYEl, element.widthShape, element.heightShape);
             rect(element.posXRe, element.posYRe, element.widthShape, element.heightShape);
@@ -522,4 +488,56 @@ class SplitterSplatter {
     show() {
         image(this.buffer, this.posX, this.posY, this.buffer.width, this.buffer.height);
     }
+}
+
+
+// CORRODED - bubbles that hide background
+class Corroded {
+    constructor(custom_width, custom_height, posX, posY, colorObject) {
+
+        this.custom_width = custom_width;
+        this.custom_height = custom_height;
+        this.posX = posX;
+        this.posY = posY;
+
+        const diff = 5;
+        this.foreground_color = colorObject;
+        this.background_color = color(
+            colorObject.levels[0] - diff,
+            colorObject.levels[1] - diff,
+            colorObject.levels[2] - diff,
+        );
+
+        this.d = 1  // 2 - 1 - 1.5 - 1.3 - 1.2
+        this.radius = 5;  // 3 - 3 - 3 - 3.5 - 3.5
+        this.maxCell = 260;
+        this.cell = this.maxCell * this.d;
+
+        // this.buffer = createGraphics(custom_width, custom_height);
+        // this.buffer.background(245);
+        this.scl = this.custom_width / this.cell;
+    }
+
+    show() {
+
+        push();
+        translate(this.posX, this.posY);
+        // background(this.background_color);
+        background(0, 0);
+        for (let x = 0; x < this.custom_width; x += this.scl) {
+            for (let y = 0; y < this.custom_height; y += this.scl) {
+                var c = brightenColor(color(this.foreground_color), 5);
+                var r = getRandomFromInterval(0, this.radius);
+                // if (r > d) {
+                stroke(c);
+                strokeWeight(r * this.d);
+                line(x + r, y - r, x, y);
+                // }
+            }
+        }
+        pop();
+
+        // return this.buffer;
+    }
+
 }

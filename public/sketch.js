@@ -156,7 +156,7 @@ function setup() {
   // }
 
   // NOT NECESSARY |   
-  paper = Pattern.create_corroded_area(width, height, color(240));
+  paper = new Corroded(width, height, - width / 2, - height / 2, color(240));
   // dots = Pattern.create_dots(width, height);
   // normal_noise = Pattern.create_noise(100, 100);
   // lines = Pattern.create_lines(width, height);
@@ -285,8 +285,9 @@ function draw() {
   ambientMaterial(255);
 
   // ENDRESULT
-  background(230);
+  // background(255);
 
+  // MASKING example
   // image(paper);
   // shape = createGraphics(width, height);
   // shape.ellipse(200, 200, 200, 200);
@@ -296,9 +297,7 @@ function draw() {
 
   // ENDRESULT
   backgroundSphere.show();
-  image(paper, - width / 2, - height / 2, paper.width * SCALING_FACTOR, paper.height * SCALING_FACTOR);
-  fill(color(255, 255, 255, 255));
-  circle(0, 0, 160);
+  // paper.show();
 
   // ENDRESULT
   splatter.show();
