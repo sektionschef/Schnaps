@@ -6,6 +6,8 @@ const SWITCH_LOGGING_LEVEL = "info";
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = CANVAS_WIDTH;
 
+let VAG = 0;
+
 
 // LINES
 const STROKE_SIZE_MIN = 0.1
@@ -154,7 +156,7 @@ function setup() {
   // }
 
   // NOT NECESSARY |   
-  // paper = Pattern.create_corroded_area(width, height, color(240));
+  paper = Pattern.create_corroded_area(width, height, color(240));
   // dots = Pattern.create_dots(width, height);
   // normal_noise = Pattern.create_noise(100, 100);
   // lines = Pattern.create_lines(width, height);
@@ -166,7 +168,7 @@ function setup() {
   // canvasOverlay = Pattern.create_canvas(width, height);
 
   // ENDRESULT
-  // splatter = Pattern.create_splatter_splitter(width, height);
+  splatter = new SplitterSplatter();
 
   // ENDRESULT
   // canvasAgent = new DumbAgent();
@@ -205,32 +207,33 @@ function setup() {
 
   paintbrushareas = [];
   // CLASS aus spheres
-  paintedSpheres = [];
 
   loopNumberPaintbrush = 100;
   loopNumberSpheres = 200;
 
-  for (var i = 0; i < loopNumberSpheres; i++) {  // PARAMS FOR SPHERE
-    sphereData.custom_width = getRandomFromInterval(100, 300);
-    sphereData.custom_height = getRandomFromInterval(100, 300);
-    sphereData.posX = getRandomFromInterval(-sphereData.custom_width / 2 - width / 2, width / 2 + sphereData.custom_width / 2);
-    sphereData.posY = getRandomFromInterval(-sphereData.custom_height / 2 - height / 2, height / 2 + sphereData.custom_height / 2);;
-    sphereData.colorObject = getRandomFromList([color1, color2]);;
-    sphereData.margin = 50;
-    sphereData.fillColorNoise = 10;
-    sphereData.fillColorOpacityMax = 70;
-    sphereData.strokeColorNoise = 50;
-    sphereData.strokeOpacityMax = 40;
-    sphereData.strokeWeight = 10;
 
-    // paintedSpheres.push(new paintedSphere(sphereData));
-  }
-
-  // ENDRESULT
-  backgroundSphere = new paintedSphere();
+  // example
+  // exampleBackgroundSphere = new paintedSphere();
 
   // paper = paper.get()
   // paper.mask(noise_fog);
+
+  backgroundSphereData = {
+    custom_width: width,
+    custom_height: height,
+    posX: -width / 2,
+    posY: -height / 2,
+    colorObject: color(240),
+    margin: 50 * SCALING_FACTOR,
+    fillColorNoise: 20,
+    fillColorOpacityMax: 10,
+    strokeWeight: 10,
+    strokeColorNoise: 5,
+    strokeOpacityMax: 5
+  }
+
+  // ENDRESULT
+  backgroundSphere = new paintedSphere(backgroundSphereData);
 
   // ENDRESULT
   let frontGridData = {
@@ -282,7 +285,7 @@ function draw() {
   ambientMaterial(255);
 
   // ENDRESULT
-  background(255);
+  background(230);
 
   // image(paper);
   // shape = createGraphics(width, height);
@@ -290,14 +293,15 @@ function draw() {
   // paper = paper.get(); // convert to image
   // paper.mask
 
-  // image(paper, - width / 2, - height / 2, paper.width * SCALING_FACTOR, paper.height * SCALING_FACTOR);
 
   // ENDRESULT
   backgroundSphere.show();
-  // image(backgroundSphere.buffer, - width / 2, - height / 2, backgroundSphere.buffer.width * SCALING_FACTOR, backgroundSphere.buffer.height * SCALING_FACTOR);
+  image(paper, - width / 2, - height / 2, paper.width * SCALING_FACTOR, paper.height * SCALING_FACTOR);
+  fill(color(255, 255, 255, 255));
+  circle(0, 0, 160);
 
   // ENDRESULT
-  // image(splatter, - width / 2, - height / 2, splatter.width * SCALING_FACTOR, splatter.height * SCALING_FACTOR);
+  splatter.show();
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -316,16 +320,11 @@ function draw() {
   // image(backup, - width / 2, - height / 2, backup.width * SCALING_FACTOR, backup.height * SCALING_FACTOR);
   // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
 
-  // for (var i = 0; i < loopNumberSpheres; i++) {
-  //   image(paintedSpheres[i].buffer, paintedSpheres[i].posX, paintedSpheres[i].posY, paintedSpheres[i].buffer.width * SCALING_FACTOR, paintedSpheres[i].buffer.height * SCALING_FACTOR);
-  // }
-
   // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
 
   // image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
-
-
   // image(grainy_gradient, - width / 2, - height / 2, grainy_gradient.width, grainy_gradient.height);
+
 
 
   // BINOMIAL FUNCTION
@@ -368,6 +367,9 @@ function draw() {
 
   // EXAMPLE PaintAreas
   // examplePaintBrushArea.show();
+
+  // Example
+  // exampleBackgroundSphere.show();
 
   noLoop();
 

@@ -207,52 +207,6 @@ class Pattern {
         return this.buffer;
     }
 
-    // random artefacts as shapes. maxs of perlin noise colored.
-    static create_splatter_splitter(
-        custom_width,
-        custom_height,
-        inc = 0.05,
-        noiseDetailLod = 16,
-        noiseDetailFalloff = 0.9,
-        opacityValue = 150,
-        blackness = 145,  // amount of grey
-        perlinThreshold = 0.90  // minimum to get drawn 
-    ) {
-
-        noiseDetail(noiseDetailLod, noiseDetailFalloff)
-        let buffer = createGraphics(custom_width, custom_height);
-
-        let yoff = 0;
-        // buffer.fill(240);
-        buffer.loadPixels();
-        for (let y = 0; y < buffer.height; y++) {
-            let xoff = 0;
-            for (let x = 0; x < buffer.width; x++) {
-                let index = (x + y * buffer.width) * 4;
-
-                let perlinValue = noise(xoff, yoff)
-                if (perlinValue >= perlinThreshold) {
-                    buffer.pixels[index + 0] = perlinValue * blackness;
-                    buffer.pixels[index + 1] = perlinValue * blackness;
-                    buffer.pixels[index + 2] = perlinValue * blackness;
-                    buffer.pixels[index + 3] = opacityValue;
-                } else {
-                    buffer.pixels[index + 0] = 0;
-                    buffer.pixels[index + 1] = 0;
-                    buffer.pixels[index + 2] = 0;
-                    buffer.pixels[index + 3] = 0;
-                }
-
-                xoff += inc;
-            }
-            yoff += inc;
-        }
-        buffer.updatePixels();
-
-        return buffer;
-    }
-
-
     static create_grainy_gradient(custom_width, custom_height) {
         this.numberRows = 5;
         this.numberParticlesPerStepMax = 350;
@@ -347,7 +301,8 @@ class paintedSphere {
             let heightShape = getRandomFromInterval((this.custom_height - this.margin * 2) * 0.1, (this.custom_height - this.margin * 2) * 0.1);
 
             this.elements.push({
-                strokeColor: color(this.colorObjectRed + this.strokeColorNoise, this.colorObjectGreen + this.strokeColorNoise, this.colorObjectBlue + this.strokeColorNoise, strokeColorOpacity),
+                strokeColor: this.colorObject,
+                // strokeColor: color(this.colorObjectRed + this.strokeColorNoise, this.colorObjectGreen + this.strokeColorNoise, this.colorObjectBlue + this.strokeColorNoise, strokeColorOpacity),
                 fillColor: color(fillColorRed, fillColorGreen, fillColorBlue, fillColorOpacity),
                 widthShape: widthShape,
                 heightShape: heightShape,
@@ -496,4 +451,75 @@ class DumbAgent {
         }
     }
 
+}
+
+
+// random artefacts as shapes. maxs of perlin noise colored.
+class SplitterSplatter {
+    constructor(data) {
+        if (typeof data === 'undefined') {
+            data = {
+                custom_width: width,
+                custom_height: height,
+                posX: -width / 2,
+                posY: -height / 2,
+                inc: 0.05,
+                noiseDetailLod: 16,
+                noiseDetailFalloff: 0.9,
+                opacityValue: 150,
+                blackness: 145,  // amount of grey
+                perlinThreshold: 0.90  // minimum to get drawn 
+            }
+        }
+
+        this.custom_width = data.custom_width;
+        this.custom_height = data.custom_height;
+        this.posX = data.posX;
+        this.posY = data.posY;
+        this.inc = data.inc;
+        this.noiseDetailLod = data.noiseDetailLod;
+        this.noiseDetailFalloff = data.noiseDetailFalloff;
+        this.opacityValue = data.opacityValue;
+        this.blackness = data.blackness;  // amount of grey
+        this.perlinThreshold = data.perlinThreshold;  // minimum to get drawn 
+
+        this.create_buffer();
+    }
+
+    create_buffer() {
+        this.buffer = createGraphics(this.custom_width, this.custom_height);
+        noiseDetail(this.noiseDetailLod, this.noiseDetailFalloff)
+
+        let yoff = 0;
+        this.buffer.loadPixels();
+        loadPixels();
+        fill(0);
+        for (let y = 0; y < this.custom_height; y++) {
+            let xoff = 0;
+            for (let x = 0; x < this.custom_width; x++) {
+                let index = (x + y * this.custom_width) * 4;
+
+                let perlinValue = noise(xoff, yoff)
+                if (perlinValue >= this.perlinThreshold) {
+                    this.buffer.pixels[index + 0] = perlinValue * this.blackness;
+                    this.buffer.pixels[index + 1] = perlinValue * this.blackness;
+                    this.buffer.pixels[index + 2] = perlinValue * this.blackness;
+                    this.buffer.pixels[index + 3] = this.opacityValue;
+                } else {
+                    this.buffer.pixels[index + 0] = 0;
+                    this.buffer.pixels[index + 1] = 0;
+                    this.buffer.pixels[index + 2] = 0;
+                    this.buffer.pixels[index + 3] = 0;
+                }
+
+                xoff += this.inc;
+            }
+            yoff += this.inc;
+        }
+        this.buffer.updatePixels();
+    }
+
+    show() {
+        image(this.buffer, this.posX, this.posY, this.buffer.width, this.buffer.height);
+    }
 }
