@@ -251,7 +251,7 @@ class paintedSphere {
         this.colorObjectBlue = this.colorObject.levels[2];
 
         this.area = this.custom_width * this.custom_height;
-        this.shapeNumber = this.area / 1000 * 4;  // relative to size
+        this.shapeNumber = this.area / 1000 * 5;  // relative to size
 
         this.elements = []
 
@@ -498,28 +498,36 @@ class SplitterSplatter {
 
 // CORRODED - bubbles that hide background
 class Corroded {
-    constructor(custom_width, custom_height, posX, posY, colorObject) {
+    constructor(data) {
+        if (typeof data === 'undefined') {
+            data = {
+                custom_width: width,
+                custom_height: height,
+                posX: -width / 2,
+                posY: -height / 2,
+                colorObject: color(100),
+            }
+        }
 
-        this.custom_width = custom_width;
-        this.custom_height = custom_height;
-        this.posX = posX;
-        this.posY = posY;
+        this.custom_width = data.custom_width;
+        this.custom_height = data.custom_height;
+        this.posX = data.posX;
+        this.posY = data.posY;
+        this.colorObject = data.colorObject
 
         const diff = 5;
-        this.foreground_color = colorObject;
-        this.background_color = color(
-            colorObject.levels[0] - diff,
-            colorObject.levels[1] - diff,
-            colorObject.levels[2] - diff,
-        );
+        this.foreground_color = this.colorObject;
+        // this.background_color = color(
+        //     this.colorObject.levels[0] - diff,
+        //     this.colorObject.levels[1] - diff,
+        //     this.colorObject.levels[2] - diff,
+        // );
 
         this.d = 1  // 2 - 1 - 1.5 - 1.3 - 1.2
         this.radius = 5;  // 3 - 3 - 3 - 3.5 - 3.5
         this.maxCell = 260;
         this.cell = this.maxCell * this.d;
 
-        // this.buffer = createGraphics(custom_width, custom_height);
-        // this.buffer.background(245);
         this.scl = this.custom_width / this.cell;
     }
 
@@ -528,7 +536,7 @@ class Corroded {
         push();
         translate(this.posX, this.posY);
         // background(this.background_color);
-        background(0, 0);
+        // background(0, 0);
         for (let x = 0; x < this.custom_width; x += this.scl) {
             for (let y = 0; y < this.custom_height; y += this.scl) {
                 var c = brightenColor(color(this.foreground_color), 5);

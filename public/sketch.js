@@ -155,8 +155,17 @@ function setup() {
   //     ));
   // }
 
+  paperData = {
+    custom_width: width,
+    custom_height: height,
+    posX: - width / 2,
+    posY: - height / 2,
+    colorObject: color(255, 5),
+  }
+
+  paper = new Corroded(paperData);
+
   // NOT NECESSARY |   
-  paper = new Corroded(width, height, - width / 2, - height / 2, color(240));
   // dots = Pattern.create_dots(width, height);
   // normal_noise = Pattern.create_noise(100, 100);
   // lines = Pattern.create_lines(width, height);
@@ -214,9 +223,6 @@ function setup() {
 
   // example
   // exampleBackgroundSphere = new paintedSphere();
-
-  // paper = paper.get()
-  // paper.mask(noise_fog);
 
   backgroundSphereData = {
     custom_width: width,
@@ -276,6 +282,10 @@ function setup() {
 
   // EXAMPLE LINES
   // linesExample = new NewLines();
+
+
+  // paper = paper.get()
+  // paper.mask(noise_fog);
 }
 
 
@@ -286,8 +296,7 @@ function draw() {
   ambientMaterial(255);
 
   // ENDRESULT
-  // background(255);
-  background(0);
+
 
   // MASKING example
   // image(paper);
@@ -298,10 +307,10 @@ function draw() {
 
 
   // ENDRESULT
+  background(200);
+  // background(0);
   backgroundSphere.show();
-  // paper.show();
-
-  // ENDRESULT
+  paper.show();
   splatter.show();
 
   // maska
