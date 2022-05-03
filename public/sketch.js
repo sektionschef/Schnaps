@@ -232,7 +232,7 @@ function setup() {
     colorObject: color(255),
     margin: -50 * SCALING_FACTOR,
     fillColorNoise: 100,
-    fillColorOpacityMax: 5,
+    fillColorOpacityMax: 10,
     noStroke: true,
     strokeWeight: 1,
     strokeColorNoise: 0,

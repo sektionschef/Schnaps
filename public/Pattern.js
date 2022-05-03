@@ -251,7 +251,7 @@ class paintedSphere {
         this.colorObjectBlue = this.colorObject.levels[2];
 
         this.area = this.custom_width * this.custom_height;
-        this.shapeNumber = this.area / 1000 * 5;  // relative to size
+        this.shapeNumber = this.area / 1000 * 4;  // relative to size
 
         this.elements = []
 
