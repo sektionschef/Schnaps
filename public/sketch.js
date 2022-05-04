@@ -173,8 +173,16 @@ function setup() {
   // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
   // grainy_gradient = Pattern.create_grainy_gradient(width, height);
 
+  canvasData = {
+    custom_width: width,
+    custom_height: height,
+    posX: -width / 2,
+    posY: -height / 2,
+    colorObject: color(230),
+  }
+
   // ENDRESULT
-  // canvasOverlay = Pattern.create_canvas(width, height);
+  canvas = new CanvasOverlay(canvasData);
 
   // ENDRESULT
   splatter = new SplitterSplatter();
@@ -200,20 +208,6 @@ function setup() {
   // ENDRESULT
   agentPaintbrush = new DumbAgent(agentPaintbrushData);
 
-  sphereData = {
-    custom_width: 400,
-    custom_height: 200,
-    posX: 0,
-    posY: 0,
-    colorObject: color2,
-    margin: 70,
-    fillColorNoise: 10,
-    fillColorOpacityMax: 150,
-    strokeColorNoise: 50,
-    strokeOpacityMax: 40
-  }
-
-
   paintbrushareas = [];
   // CLASS aus spheres
 
@@ -231,7 +225,7 @@ function setup() {
     posY: -height / 2,
     colorObject: color(255),
     margin: -50 * SCALING_FACTOR,
-    fillColorNoise: 100,
+    fillColorNoise: 50,
     fillColorOpacityMax: 10,
     noStroke: true,
     strokeWeight: 1,
@@ -264,8 +258,8 @@ function setup() {
   }
 
   // END RESULT
-  // frontGrid = new IntersectGrid(frontGridData);
-  // backGrid = new IntersectGrid(backGridData);
+  frontGrid = new IntersectGrid(frontGridData);
+  backGrid = new IntersectGrid(backGridData);
 
   // exampleGrid = new IntersectGrid();
 
@@ -308,10 +302,14 @@ function draw() {
 
   // ENDRESULT
   background(200);
-  // background(0);
   backgroundSphere.show();
-  paper.show();
+  // paper.show();
   splatter.show();
+  canvas.show();
+
+  // ENDRESULT
+  backGrid.show();
+  frontGrid.show();
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -352,13 +350,7 @@ function draw() {
   //   preview_called = true;
   // }
 
-  // ENDRESULT
-  // CANVAS
-  // image(canvasOverlay, - width / 2, - height / 2, canvasOverlay.width * SCALING_FACTOR, canvasOverlay.height * SCALING_FACTOR);
 
-  // ENDRESULT
-  // backGrid.show();
-  // frontGrid.show();
 
   // exampleGrid.show();
 
