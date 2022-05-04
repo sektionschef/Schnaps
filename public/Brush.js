@@ -1,6 +1,7 @@
 class Fibre {
     constructor(brush, i) {
 
+        noiseSeed(FXHASHNUMBER + this.i);
         this.i = i;
         this.brush = brush;
 
@@ -18,10 +19,13 @@ class Fibre {
         }
 
         if (fxrand() < 0.75) {
-            this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise), brush.area.fibreBrightnessNoise)
+            this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise), brush.area.fibreBrightnessNoise);
         } else {
-            this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise * 3), brush.area.fibreBrightnessNoise * 3)
+            this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise * 3), brush.area.fibreBrightnessNoise * 3);
         }
+
+        this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * 0.1) * 55 + 150);
+
         this.angleFibre = brush.angle + getRandomFromInterval(-brush.area.fibreRotationNoise, brush.area.fibreRotationNoise);
     }
 

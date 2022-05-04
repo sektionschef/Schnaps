@@ -112,9 +112,9 @@ function setup() {
   // let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL);
 
-  fxhash_number = hashFnv32a(fxhash);
-  logging.info("hash number: " + fxhash_number);
-  noiseSeed(fxhash_number);
+  FXHASHNUMBER = hashFnv32a(fxhash);
+  logging.info("hash number: " + FXHASHNUMBER);
+  noiseSeed(FXHASHNUMBER);
 
   color1 = color(COLOR_1_HEX);
   color2 = color(COLOR_2_HEX);
@@ -155,15 +155,14 @@ function setup() {
   //     ));
   // }
 
-  paperData = {
-    custom_width: width,
-    custom_height: height,
-    posX: - width / 2,
-    posY: - height / 2,
-    colorObject: color(255, 5),
-  }
-
-  paper = new Corroded(paperData);
+  // paperData = {
+  //   custom_width: width,
+  //   custom_height: height,
+  //   posX: - width / 2,
+  //   posY: - height / 2,
+  //   colorObject: color(255, 5),
+  // }
+  // paper = new Corroded(paperData);
 
   // NOT NECESSARY |   
   // dots = Pattern.create_dots(width, height);
@@ -206,13 +205,13 @@ function setup() {
   }
 
   // ENDRESULT
-  agentPaintbrush = new DumbAgent(agentPaintbrushData);
+  // agentPaintbrush = new DumbAgent(agentPaintbrushData);
 
-  paintbrushareas = [];
+  // paintbrushareas = [];
   // CLASS aus spheres
 
-  loopNumberPaintbrush = 100;
-  loopNumberSpheres = 200;
+  // loopNumberPaintbrush = 100;
+  // loopNumberSpheres = 200;
 
 
   // example
@@ -261,6 +260,7 @@ function setup() {
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
 
+
   // exampleGrid = new IntersectGrid();
 
   // binomial_points = [];
@@ -303,8 +303,8 @@ function draw() {
   // ENDRESULT
   background(200);
   backgroundSphere.show();
-  // paper.show();
-  splatter.show();
+  // paper.show();  // out
+  // splatter.show();  // out
   canvas.show();
 
   // ENDRESULT
@@ -373,6 +373,7 @@ function draw() {
   // Example
   // exampleBackgroundSphere.show();
 
+  console.log("done");
   noLoop();
 
 }

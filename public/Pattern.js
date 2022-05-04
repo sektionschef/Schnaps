@@ -51,7 +51,7 @@ class Pattern {
         opacityValue,
     ) {
 
-        noiseDetail(noiseDetailLod, noiseDetailFalloff);
+        // noiseDetail(noiseDetailLod, noiseDetailFalloff);
         let buffer = createGraphics(custom_width, custom_height);
 
         let yoff = 0;
@@ -433,7 +433,7 @@ class SplitterSplatter {
 
     create_buffer() {
         this.buffer = createGraphics(this.custom_width, this.custom_height);
-        noiseDetail(this.noiseDetailLod, this.noiseDetailFalloff)
+        // noiseDetail(this.noiseDetailLod, this.noiseDetailFalloff)
 
         let yoff = 0;
         this.buffer.loadPixels();
