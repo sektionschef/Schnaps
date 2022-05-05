@@ -229,7 +229,8 @@ function setup() {
     noStroke: true,
     strokeWeight: 1,
     strokeColorNoise: 0,
-    strokeOpacityMax: 250
+    strokeOpacityMax: 250,
+    numberQuantisizer: 4 * SCALING_FACTOR,
   }
 
   // ENDRESULT
@@ -257,8 +258,8 @@ function setup() {
   }
 
   // END RESULT
-  frontGrid = new IntersectGrid(frontGridData);
-  backGrid = new IntersectGrid(backGridData);
+  // frontGrid = new IntersectGrid(frontGridData);
+  // backGrid = new IntersectGrid(backGridData);
 
 
   // exampleGrid = new IntersectGrid();
@@ -272,7 +273,7 @@ function setup() {
   // console.log(binomial_points);
 
   // EXAMPLE PaintAreas
-  // examplePaintBrushArea = new PaintBrushArea();
+  examplePaintBrushArea = new PaintBrushArea();
 
   // EXAMPLE LINES
   // linesExample = new NewLines();
@@ -305,11 +306,12 @@ function draw() {
   backgroundSphere.show();
   // paper.show();  // out
   // splatter.show();  // out
-  canvas.show();
 
   // ENDRESULT
-  backGrid.show();
-  frontGrid.show();
+  // backGrid.show();
+  // frontGrid.show();
+
+  canvas.show();
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -368,7 +370,7 @@ function draw() {
   // image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
 
   // EXAMPLE PaintAreas
-  // examplePaintBrushArea.show();
+  examplePaintBrushArea.show();
 
   // Example
   // exampleBackgroundSphere.show();

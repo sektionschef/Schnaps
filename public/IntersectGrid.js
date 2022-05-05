@@ -188,6 +188,7 @@ class IntersectGrid {
             fibreStartLengthNoise: 5 * SCALING_FACTOR,  // start earlier or later
             fibreBreadthNoise: 0.5 * SCALING_FACTOR,  // noise of fibre along the y axis in the middle
             fibreRotationNoise: PI / 200,
+            fibreOpacityNoiseBase: 150,
         }
 
         return new PaintBrushArea(brushData);

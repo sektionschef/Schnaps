@@ -1,21 +1,21 @@
 class Fibre {
     constructor(brush, i) {
 
-        noiseSeed(FXHASHNUMBER + this.i);
         this.i = i;
         this.brush = brush;
 
-        this.noiseZoomLevel = 2
+        this.noiseZoomLevel = 0.2
 
         // this.complete = false;
         this.posMiddle = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
         this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
-        this.startX = brush.brushPosX + noise(this.i / this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // // where the fibre starts    
-        this.startY = brush.brushPosY + noise(this.i / this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // // where the fibre starts
+        this.startX = brush.brushPosX + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // // where the fibre starts    
+        this.startY = brush.brushPosY + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // // where the fibre starts
+
         if (brush.area.orientation == "horizontal") {
-            this.stop = brush.brushPosX + brush.brushLength_ + noise(this.i / this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // where the fibre stops
+            this.stop = brush.brushPosX + brush.brushLength_ + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // where the fibre stops
         } else if (brush.area.orientation == "vertical") {
-            this.stop = brush.brushPosY + brush.brushLength_ + noise(this.i / this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // where the fibre stops
+            this.stop = brush.brushPosY + brush.brushLength_ + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // where the fibre stops
         }
 
         if (fxrand() < 0.75) {
@@ -24,7 +24,11 @@ class Fibre {
             this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise * 3), brush.area.fibreBrightnessNoise * 3);
         }
 
-        this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * 0.1) * 55 + 150);
+        if (fxrand() < 0.75) {
+            this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * 0.1) * (255 - brush.area.fibreOpacityNoiseBase) + brush.area.fibreOpacityNoiseBase);
+        } else {
+            this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * 0.1) * 255);
+        }
 
         this.angleFibre = brush.angle + getRandomFromInterval(-brush.area.fibreRotationNoise, brush.area.fibreRotationNoise);
     }
@@ -58,9 +62,11 @@ class Brush {
             }
         }
 
+        noiseSeed(FXHASHNUMBER + fxrand() * 10);
         for (var i = 0; i < this.numberFibres_; i++) {
             this.fibres.push(new Fibre(this, i));
         }
+        noiseSeed(FXHASHNUMBER);
     }
 
 }
@@ -94,6 +100,8 @@ class PaintBrushArea {
                 fibreStartLengthNoise: 15,  // start earlier or later
                 fibreBreadthNoise: 0.5,  // noise of fibre along the y axis in the middle
                 fibreRotationNoise: PI / 200,
+                fibreOpacityNoiseBase: 155,
+
             }
         }
 
@@ -119,8 +127,9 @@ class PaintBrushArea {
         this.fibreBrightnessNoise = data.fibreBrightnessNoise;
         this.fibreStrokeSizeNoise = data.fibreStrokeSizeNoise;
         this.fibreStartLengthNoise = data.fibreStartLengthNoise;
-        this.fibreBreadthNoise = data.fibreBreadthNoise
-        this.fibreRotationNoise = data.fibreRotationNoise
+        this.fibreBreadthNoise = data.fibreBreadthNoise;
+        this.fibreRotationNoise = data.fibreRotationNoise;
+        this.fibreOpacityNoiseBase = data.fibreOpacityNoiseBase;
 
         // make sure the brushes nicely fill the area and do not overlap, calc the optimal solution
         if (this.orientation == "horizontal") {

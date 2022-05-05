@@ -201,7 +201,8 @@ class paintedSphere {
                 noStroke: true,
                 strokeWeight: 10,
                 strokeColorNoise: 20,
-                strokeOpacityMax: 250
+                strokeOpacityMax: 250,
+                numberQuantisizer: 4,
             }
         }
 
@@ -218,6 +219,7 @@ class paintedSphere {
         this.strokeWeight = data.strokeWeight;
         this.strokeColorNoise = data.strokeColorNoise;
         this.strokeOpacityMax = data.strokeOpacityMax;
+        this.numberQuantisizer = data.numberQuantisizer;
 
         // this.strokColorWhitenessMin = 
         this.colorObjectRed = this.colorObject.levels[0];
@@ -225,7 +227,7 @@ class paintedSphere {
         this.colorObjectBlue = this.colorObject.levels[2];
 
         this.area = this.custom_width * this.custom_height;
-        this.shapeNumber = this.area / 1000 * 4;  // relative to size
+        this.shapeNumber = this.area / 1000 * this.numberQuantisizer;  // relative to size
 
         this.elements = []
 
