@@ -260,9 +260,19 @@ class paintedSphere {
 
     show() {
 
+        // if (logging.getLevel() <= 1) {
+        push();
+        noFill();
+        strokeWeight(2);
+        stroke("black");
+        translate(this.posX - width / 2, this.posY - height / 2);
+        rect(0, 0, this.custom_width, this.custom_height);
+        pop();
+        // }
+
         for (var element of this.elements) {
             push();
-            translate(this.posX, this.posY);
+            translate(this.posX - width / 2, this.posY - height / 2);
             if (this.noStroke == true) {
                 noStroke();
             } else {
@@ -271,7 +281,9 @@ class paintedSphere {
             }
             fill(element.fillColor);
 
+            ellipseMode(CENTER);
             ellipse(element.posXEl, element.posYEl, element.widthShape, element.heightShape);
+            rectMode(CENTER);
             rect(element.posXRe, element.posYRe, element.widthShape, element.heightShape);
             pop();
             // return

@@ -181,10 +181,9 @@ function setup() {
   }
 
   // ENDRESULT
-  canvas = new CanvasOverlay(canvasData);
+  // canvas = new CanvasOverlay(canvasData);
 
-  // ENDRESULT
-  splatter = new SplitterSplatter();
+  // splatter = new SplitterSplatter();
 
   // ENDRESULT
   // canvasAgent = new DumbAgent();
@@ -220,8 +219,8 @@ function setup() {
   backgroundSphereData = {
     custom_width: width,
     custom_height: height,
-    posX: -width / 2,
-    posY: -height / 2,
+    posX: 0,
+    posY: 0,
     colorObject: color(255),
     margin: -50 * SCALING_FACTOR,
     fillColorNoise: 50,
@@ -233,8 +232,27 @@ function setup() {
     numberQuantisizer: 4 * SCALING_FACTOR,
   }
 
+
+  exampleSphereData = {
+    custom_width: 600,
+    custom_height: 400,
+    posX: -100 + 200,
+    posY: -100 + 300,
+    colorObject: color(30),
+    margin: 0 * SCALING_FACTOR,
+    fillColorNoise: 50,
+    fillColorOpacityMax: 10,
+    noStroke: true,
+    strokeWeight: 1,
+    strokeColorNoise: 0,
+    strokeOpacityMax: 250,
+    numberQuantisizer: 8 * SCALING_FACTOR,
+  }
+
   // ENDRESULT
   backgroundSphere = new paintedSphere(backgroundSphereData);
+
+  exampleSphere = new paintedSphere(exampleSphereData);
 
   // ENDRESULT
   let frontGridData = {
@@ -274,6 +292,7 @@ function setup() {
 
   // EXAMPLE PaintAreas
   examplePaintBrushArea = new PaintBrushArea();
+  // examplePaintBrushArea2 = new PaintBrushArea();
 
   // EXAMPLE LINES
   // linesExample = new NewLines();
@@ -304,6 +323,8 @@ function draw() {
   // ENDRESULT
   background(200);
   backgroundSphere.show();
+
+
   // paper.show();  // out
   // splatter.show();  // out
 
@@ -311,7 +332,7 @@ function draw() {
   // backGrid.show();
   // frontGrid.show();
 
-  canvas.show();
+  // canvas.show();
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -369,13 +390,16 @@ function draw() {
   // ENDRESULT
   // image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
 
+  // example
+  exampleSphere.show();
+
   // EXAMPLE PaintAreas
   examplePaintBrushArea.show();
+  // examplePaintBrushArea2.show();
 
   // Example
   // exampleBackgroundSphere.show();
 
-  console.log("done");
   noLoop();
 
 }

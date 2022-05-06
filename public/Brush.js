@@ -9,8 +9,8 @@ class Fibre {
         // this.complete = false;
         this.posMiddle = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
         this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
-        this.startX = brush.brushPosX + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // // where the fibre starts    
-        this.startY = brush.brushPosY + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // // where the fibre starts
+        this.startX = brush.brushPosX + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts    
+        this.startY = brush.brushPosY + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts
 
         if (brush.area.orientation == "horizontal") {
             this.stop = brush.brushPosX + brush.brushLength_ + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // where the fibre stops
@@ -100,7 +100,7 @@ class PaintBrushArea {
                 fibreStartLengthNoise: 15,  // start earlier or later
                 fibreBreadthNoise: 0.5,  // noise of fibre along the y axis in the middle
                 fibreRotationNoise: PI / 200,
-                fibreOpacityNoiseBase: 155,
+                fibreOpacityNoiseBase: 150,
 
             }
         }
