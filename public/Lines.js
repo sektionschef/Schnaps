@@ -30,13 +30,13 @@ class NewLines {
             // number of lines is 1 lower than number of distances.
 
             // this.nOfLines = Math.round(this.custom_width / this.distance);
-            this.nOfLines = Math.floor((this.custom_width - this.distance) / (this.distance + this.strokeSize));
+            this.nOfLines = Math.round((this.custom_width - this.distance) / (this.distance + this.strokeSize));
             this.distance_ = this.custom_width / (this.nOfLines + 1);
         } else {
             this.orientation = "horizontal";
 
             // this.nOfLines = Math.round(this.custom_height / this.distance);
-            this.nOfLines = Math.floor((this.custom_height - this.distance) / (this.distance + this.strokeSize));
+            this.nOfLines = Math.round((this.custom_height - this.distance) / (this.distance + this.strokeSize));
             this.distance_ = this.custom_height / (this.nOfLines + 1);
         }
     }
