@@ -62,11 +62,11 @@ class Brush {
             }
         }
 
-        noiseSeed(FXHASHNUMBER + fxrand() * 10);
+        noiseSeed(NOISESEED + fxrand() * 10);
         for (var i = 0; i < this.numberFibres_; i++) {
             this.fibres.push(new Fibre(this, i));
         }
-        noiseSeed(FXHASHNUMBER);
+        noiseSeed(NOISESEED);
     }
 
 }

@@ -112,9 +112,9 @@ function setup() {
   // let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL);
 
-  FXHASHNUMBER = hashFnv32a(fxhash);
-  logging.info("hash number: " + FXHASHNUMBER);
-  noiseSeed(FXHASHNUMBER);
+  NOISESEED = hashFnv32a(fxhash);
+  logging.debug("Noise seed: " + NOISESEED);
+  noiseSeed(NOISESEED);
 
   color1 = color(COLOR_1_HEX);
   color2 = color(COLOR_2_HEX);
@@ -236,8 +236,8 @@ function setup() {
   exampleSphereData = {
     custom_width: 600,
     custom_height: 400,
-    posX: -100 + 200,
-    posY: -100 + 300,
+    posX: -100,
+    posY: -100,
     colorObject: color(30),
     margin: 0 * SCALING_FACTOR,
     fillColorNoise: 50,
@@ -252,7 +252,7 @@ function setup() {
   // ENDRESULT
   backgroundSphere = new paintedSphere(backgroundSphereData);
 
-  exampleSphere = new paintedSphere(exampleSphereData);
+  // exampleSphere = new paintedSphere(exampleSphereData);
 
   // ENDRESULT
   let frontGridData = {
@@ -276,8 +276,8 @@ function setup() {
   }
 
   // END RESULT
-  // frontGrid = new IntersectGrid(frontGridData);
-  // backGrid = new IntersectGrid(backGridData);
+  frontGrid = new IntersectGrid(frontGridData);
+  backGrid = new IntersectGrid(backGridData);
 
 
   // exampleGrid = new IntersectGrid();
@@ -291,7 +291,7 @@ function setup() {
   // console.log(binomial_points);
 
   // EXAMPLE PaintAreas
-  examplePaintBrushArea = new PaintBrushArea();
+  // examplePaintBrushArea = new PaintBrushArea();
   // examplePaintBrushArea2 = new PaintBrushArea();
 
   // EXAMPLE LINES
@@ -329,8 +329,8 @@ function draw() {
   // splatter.show();  // out
 
   // ENDRESULT
-  // backGrid.show();
-  // frontGrid.show();
+  backGrid.show();
+  frontGrid.show();
 
   // canvas.show();
 
@@ -390,11 +390,11 @@ function draw() {
   // ENDRESULT
   // image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
 
-  // example
-  exampleSphere.show();
+  // example for background layer of paintbrush
+  // exampleSphere.show();
 
   // EXAMPLE PaintAreas
-  examplePaintBrushArea.show();
+  // examplePaintBrushArea.show();
   // examplePaintBrushArea2.show();
 
   // Example

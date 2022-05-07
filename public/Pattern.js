@@ -260,19 +260,20 @@ class paintedSphere {
 
     show() {
 
-        // if (logging.getLevel() <= 1) {
-        push();
-        noFill();
-        strokeWeight(2);
-        stroke("black");
-        translate(this.posX - width / 2, this.posY - height / 2);
-        rect(0, 0, this.custom_width, this.custom_height);
-        pop();
-        // }
+        if (logging.getLevel() <= 1) {
+            push();
+            noFill();
+            strokeWeight(2);
+            stroke("black");
+            // translate(this.posX - width / 2, this.posY - height / 2);
+            translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2));
+            rect(0, 0, this.custom_width, this.custom_height);
+            pop();
+        }
 
         for (var element of this.elements) {
             push();
-            translate(this.posX - width / 2, this.posY - height / 2);
+            translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2));
             if (this.noStroke == true) {
                 noStroke();
             } else {
