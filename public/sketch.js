@@ -231,28 +231,9 @@ function setup() {
     strokeOpacityMax: 250,
     numberQuantisizer: 4 * SCALING_FACTOR,
   }
-
-
-  exampleSphereData = {
-    custom_width: 600,
-    custom_height: 400,
-    posX: -100,
-    posY: -100,
-    colorObject: color(30),
-    margin: 0 * SCALING_FACTOR,
-    fillColorNoise: 50,
-    fillColorOpacityMax: 10,
-    noStroke: true,
-    strokeWeight: 1,
-    strokeColorNoise: 0,
-    strokeOpacityMax: 250,
-    numberQuantisizer: 8 * SCALING_FACTOR,
-  }
-
   // ENDRESULT
   backgroundSphere = new paintedSphere(backgroundSphereData);
 
-  // exampleSphere = new paintedSphere(exampleSphereData);
 
   // ENDRESULT
   let frontGridData = {
@@ -276,8 +257,8 @@ function setup() {
   }
 
   // END RESULT
-  frontGrid = new IntersectGrid(frontGridData);
-  backGrid = new IntersectGrid(backGridData);
+  // frontGrid = new IntersectGrid(frontGridData);
+  // backGrid = new IntersectGrid(backGridData);
 
 
   // exampleGrid = new IntersectGrid();
@@ -290,16 +271,74 @@ function setup() {
   // }
   // console.log(binomial_points);
 
-  // EXAMPLE PaintAreas
-  // examplePaintBrushArea = new PaintBrushArea();
-  // examplePaintBrushArea2 = new PaintBrushArea();
+  // paper = paper.get()
+  // paper.mask(noise_fog);
 
   // EXAMPLE LINES
   // linesExample = new NewLines();
 
+  // EXAMPLE PaintAreas
+  // examplePaintBrushArea = new PaintBrushArea();
+  // examplePaintBrushArea2 = new PaintBrushArea();
 
-  // paper = paper.get()
-  // paper.mask(noise_fog);
+  testExamplePaintData = {
+    custom_width: 300,
+    custom_height: 370,
+    posX: -100,
+    posY: -100,
+    colorObject: color1,
+    orientation: "vertical",
+    brushLength: 30,  // 20-40
+    brushBreadth: 30,
+    sizeStroke: 2,
+    numberPaintLayers: 2,
+    overlap: 20,
+    brightnessNoise: 5,
+    colorNoise: 5,
+    opacityBoost: 0, // getRandomFromInterval(150, 255),
+    brushLengthNoise: 0.2,
+    numberFibresNoise: 0.2,  // brushBreadthNoise
+    brushAngleNoise: PI / 20,
+    fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
+    fibreColorNoise: 2,
+    fibreBrightnessNoise: 2,
+    fibreStrokeSizeNoise: 1,
+    fibreStartLengthNoise: 15,  // start earlier or later
+    fibreBreadthNoise: 0.5,  // noise of fibre along the y axis in the middle
+    fibreRotationNoise: PI / 200,
+    fibreOpacityNoiseBase: 150,
+  }
+  testPaint = new PaintBrushArea(testExamplePaintData);
+
+  testLinesData = {
+    posX: -100,
+    posY: -100,
+    custom_width: 300,
+    custom_height: 370,
+    colorObject: color(0),
+    distance: 20,
+    noise: 1,
+    strokeSize: 2,
+    curveTightness: 3,
+  }
+  testLines = new NewLines(testLinesData);
+
+  testSphereData = {
+    custom_width: 300,
+    custom_height: 370,
+    posX: -100,
+    posY: -100,
+    colorObject: color(30),
+    margin: 0 * SCALING_FACTOR,
+    fillColorNoise: 50,
+    fillColorOpacityMax: 10,
+    noStroke: true,
+    strokeWeight: 1,
+    strokeColorNoise: 0,
+    strokeOpacityMax: 250,
+    numberQuantisizer: 8 * SCALING_FACTOR,
+  }
+  testSphere = new paintedSphere(testSphereData);
 }
 
 
@@ -329,8 +368,8 @@ function draw() {
   // splatter.show();  // out
 
   // ENDRESULT
-  backGrid.show();
-  frontGrid.show();
+  // backGrid.show();
+  // frontGrid.show();
 
   // canvas.show();
 
@@ -385,20 +424,25 @@ function draw() {
   // image(flowfield.update_noise(), -300, 0);
 
 
+
+  // Example
+  // exampleBackgroundSphere.show();
+
+  // EXAMPLE PaintAreas
+  // examplePaintBrushArea.show();
+  // examplePaintBrushArea2.show();
+
   // linesExample.show()
 
   // ENDRESULT
   // image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
 
   // example for background layer of paintbrush
-  // exampleSphere.show();
+  testSphere.show();
 
-  // EXAMPLE PaintAreas
-  // examplePaintBrushArea.show();
-  // examplePaintBrushArea2.show();
+  testPaint.show();
 
-  // Example
-  // exampleBackgroundSphere.show();
+  testLines.show();
 
   noLoop();
 

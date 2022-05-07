@@ -101,7 +101,6 @@ class PaintBrushArea {
                 fibreBreadthNoise: 0.5,  // noise of fibre along the y axis in the middle
                 fibreRotationNoise: PI / 200,
                 fibreOpacityNoiseBase: 150,
-
             }
         }
 
