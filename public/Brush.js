@@ -156,26 +156,11 @@ class PaintBrushArea {
     createBrushes() {
         for (let loopLayer = 0; loopLayer < this.numberPaintLayers; loopLayer += 1) {
 
-            // BACKGROUND layer
-            let greyRun = false;
-            if ((loopLayer == 0) && (this.numberPaintLayers > 1) && (fxrand() > 0)) {
-                var backgroundColor = color(100);
-                // greyRun = true;
-            }
-
             if (this.orientation == "horizontal") {
                 for (let x = 0; x < this.custom_width; x += this.brushLength) {
                     for (let y = 0; y < this.custom_height; y += this.brushBreadth) {
 
                         this.brushStrokes.push(new Brush(this, x, y, loopLayer));
-
-                        if (greyRun == true) {
-                            // this.brushStrokes.push(new Brush(this.data));
-                            // this.brushStrokes.push(this.createBrushes());
-                        } else {
-                            // this.brushStrokes.push(new Brush(this.data));
-                            // this.brushStrokes.push(this.createBrushes());
-                        }
                     }
                 }
             } else if (this.orientation == "vertical") {
@@ -183,15 +168,6 @@ class PaintBrushArea {
                     for (let x = 0; x < this.custom_width; x += this.brushBreadth) {
 
                         this.brushStrokes.push(new Brush(this, x, y, loopLayer));
-
-                        if (greyRun == true) {
-                            // egg - here backgroundColor statt colorbrush
-                            // this.brushStrokes.push(new Brush(this.data));
-                            // this.brushStrokes.push(this.createBrush());
-                        } else {
-                            // this.brushStrokes.push(new Brush(this.data));
-                            // this.brushStrokes.push(this.createBrush());
-                        }
                     }
                 }
             }

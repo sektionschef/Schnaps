@@ -141,7 +141,26 @@ class IntersectGrid {
                     curveTightness: 3,
                 });
             }
+
+            if (fxrand() > 0) {
+                this.rects[i].spheres = new paintedSphere(data = {
+                    custom_width: this.rects[i].width,
+                    custom_height: this.rects[i].height,
+                    posX: this.rects[i].posX,
+                    posY: this.rects[i].posY,
+                    colorObject: color(getRandomFromInterval(30, 80)),
+                    margin: 0 * SCALING_FACTOR,
+                    fillColorNoise: 50,
+                    fillColorOpacityMax: 20,
+                    noStroke: true,
+                    strokeWeight: 1,
+                    strokeColorNoise: 0,
+                    strokeOpacityMax: 1,
+                    numberQuantisizer: 15 * SCALING_FACTOR,
+                });
+            }
         }
+
 
         // sort by size
         this.rects.sort(function (a, b) { return (b.width * b.height) - (a.width * a.height) });
@@ -212,6 +231,11 @@ class IntersectGrid {
     show() {
 
         for (let i = 0; i < this.rects.length; i++) {
+
+            if (this.rects[i].spheres !== undefined) {
+                this.rects[i].spheres.show();
+            }
+
             this.rects[i].paintedArea.show();
 
             if (logging.getLevel() <= 1) {
