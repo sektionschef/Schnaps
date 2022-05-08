@@ -77,8 +77,8 @@ const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, P
 // const COLOR_3_HEX = "#eeeeee";
 
 // color custom
-const COLOR_1_HEX = "#B30753";
-const COLOR_2_HEX = "#F6C667";
+// const COLOR_1_HEX = "#B30753";
+// const COLOR_2_HEX = "#F6C667";
 
 // variable stuff
 let SCALING_FACTOR = 1;
@@ -116,8 +116,15 @@ function setup() {
   logging.debug("Noise seed: " + NOISESEED);
   noiseSeed(NOISESEED);
 
-  color1 = color(COLOR_1_HEX);
-  color2 = color(COLOR_2_HEX);
+  colorPalette = new ColorPalette();
+
+  // color1 = color(COLOR_1_HEX);
+  // color2 = color(COLOR_2_HEX);
+  color1 = colorPalette.primaryColor;
+  color2 = colorPalette.secondaryColor;
+
+  logging.info(color1);
+  logging.info(color2);
 
   color1b = brightenColorStatic(color1, -30);
   color2b = brightenColorStatic(color2, -30);
@@ -180,13 +187,7 @@ function setup() {
     colorObject: color(230),
   }
 
-  // ENDRESULT
-  // canvas = new CanvasOverlay(canvasData);
-
   // splatter = new SplitterSplatter();
-
-  // ENDRESULT
-  canvasAgent = new DumbAgent();
 
   agentPaintbrushData = {
     customWidth: width,
@@ -203,8 +204,6 @@ function setup() {
     numberAgents: 15,
   }
 
-  // ENDRESULT
-  agentPaintbrush = new DumbAgent(agentPaintbrushData);
 
   // paintbrushareas = [];
   // CLASS aus spheres
@@ -231,8 +230,6 @@ function setup() {
     strokeOpacityMax: 250,
     numberQuantisizer: 4 * SCALING_FACTOR,
   }
-  // ENDRESULT
-  backgroundSphere = new paintedSphere(backgroundSphereData);
 
 
   // ENDRESULT
@@ -257,8 +254,12 @@ function setup() {
   }
 
   // END RESULT
-  // frontGrid = new IntersectGrid(frontGridData);
-  // backGrid = new IntersectGrid(backGridData);
+  canvas = new CanvasOverlay(canvasData);
+  canvasAgent = new DumbAgent();
+  agentPaintbrush = new DumbAgent(agentPaintbrushData);
+  backgroundSphere = new paintedSphere(backgroundSphereData);
+  frontGrid = new IntersectGrid(frontGridData);
+  backGrid = new IntersectGrid(backGridData);
 
 
   // exampleGrid = new IntersectGrid();
@@ -349,8 +350,6 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  // ENDRESULT
-
 
   // MASKING example
   // image(paper);
@@ -360,19 +359,19 @@ function draw() {
   // paper.mask
 
 
-  // ENDRESULT
-  background(200);
-  backgroundSphere.show();
-
-
   // paper.show();  // out
   // splatter.show();  // out
 
-  // ENDRESULT
-  // backGrid.show();
-  // frontGrid.show();
 
-  // canvas.show();
+
+  // ENDRESULT
+  background(200);
+  backgroundSphere.show();
+  backGrid.show();
+  frontGrid.show();
+  canvas.show();
+  canvasAgent.show();
+  agentPaintbrush.show();
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -383,7 +382,6 @@ function draw() {
   //   area.show();
   //   image(area.buffer, area.posX, area.posY, area.buffer.width, area.buffer.height);
   // }
-
 
   // PERLIN NOISE
   // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
@@ -417,9 +415,6 @@ function draw() {
 
   // exampleGrid.show();
 
-  // ENDRESULT
-  canvasAgent.show();
-
 
   // PERLIN Noise
   // image(flowfield.update_noise(), -300, 0);
@@ -435,8 +430,6 @@ function draw() {
 
   // linesExample.show()
 
-  // ENDRESULT
-  agentPaintbrush.show();
 
   // example for background layer of paintbrush
   // testSphere.show();
@@ -477,3 +470,4 @@ function lnBetaFunc(a, b) {
   }
   return foo
 }
+
