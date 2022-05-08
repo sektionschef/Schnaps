@@ -304,11 +304,11 @@ class DumbAgent {
                 customWidth: width,
                 customHeight: height,
                 colorObject: color(100, 100, 100),
-                stepSize: 10,  // 10 is hero
-                agentSize: 1,
+                stepSize: 10 * SCALING_FACTOR,  // 10 is hero
+                agentSize: 1 * SCALING_FACTOR,
                 opacityLevel: 10,
                 // opacityLevel2: 20,
-                lineLength: 15,
+                lineLength: 15 * SCALING_FACTOR,
                 loopSize: 10000,
                 numberAgents: 5,
             }
@@ -332,20 +332,20 @@ class DumbAgent {
             this.colorObject.levels[2],
             this.opacityLevel
         );
-        this.buffer = createGraphics(this.customWidth, this.customHeight);
+        // this.buffer = createGraphics(this.customWidth, this.customHeight);
 
-        this.posX = getRandomFromInterval(0, this.buffer.width);
-        this.posY = getRandomFromInterval(0, this.buffer.height);
+        this.posX = getRandomFromInterval(0, this.customWidth);
+        this.posY = getRandomFromInterval(0, this.customHeight);
         this.complete = false;
-
-        this.show();
     }
 
     show() {
 
         for (var v = 0; v < this.numberAgents; v++) {
             for (var i = 0; i < this.loopSize; i++) {
+
                 // let colory = color(getRandomFromInterval(100, 150), this.opacityLevel);
+
                 let angle = getRandomFromInterval(PI / 2, PI);
                 // let angle = getRandomFromList([PI / 2, PI / 4, PI]);
 
@@ -382,31 +382,31 @@ class DumbAgent {
                     this.posY -= this.stepSize;
                 }
 
-                if (this.posX > this.buffer.width | this.posX < 0) {
-                    this.posX = getRandomFromInterval(0, this.buffer.width)
+                if (this.posX > this.customWidth | this.posX < 0) {
+                    this.posX = getRandomFromInterval(0, this.customWidth)
                 }
-                if (this.posY > this.buffer.height | this.posY < 0) {
-                    this.posY = getRandomFromInterval(0, this.buffer.height)
+                if (this.posY > this.customHeight | this.posY < 0) {
+                    this.posY = getRandomFromInterval(0, this.customHeight)
                 }
 
-                this.buffer.push();
+                push();
 
-                this.buffer.translate(this.posX, this.posY);
-                this.buffer.strokeWeight(this.agentSize);
-                this.buffer.stroke(this.color);
-                // this.buffer.stroke(colory);
-                // this.buffer.rotate(i % PI);
-                this.buffer.rotate(angle);
-                this.buffer.line(0, 0, this.lineLength, this.lineLength);
+                translate(this.posX - width / 2, this.posY - height / 2);
+                strokeWeight(this.agentSize);
+                stroke(this.color);
+                // stroke(colory);
+                // rotate(i % PI);
+                rotate(angle);
+                line(0, 0, this.lineLength, this.lineLength);
 
                 // optional
-                // this.buffer.stroke(color(this.color.levels[0], this.color.levels[1], this.color.levels[2], this.opacityLevel2));
-                // this.buffer.stroke(colory);
-                this.buffer.stroke(this.color);
-                this.buffer.point(0, 0);
-                this.buffer.point(this.lineLength, this.lineLength);
+                // stroke(color(this.color.levels[0], this.color.levels[1], this.color.levels[2], this.opacityLevel2));
+                // stroke(colory);
+                stroke(this.color);
+                point(0, 0);
+                point(this.lineLength, this.lineLength);
 
-                this.buffer.pop();
+                pop();
             }
         }
     }

@@ -186,7 +186,7 @@ function setup() {
   // splatter = new SplitterSplatter();
 
   // ENDRESULT
-  // canvasAgent = new DumbAgent();
+  canvasAgent = new DumbAgent();
 
   agentPaintbrushData = {
     customWidth: width,
@@ -194,17 +194,17 @@ function setup() {
     posXImage: 0,
     posYImage: 0,
     colorObject: color(color1),
-    stepSize: 5,
-    agentSize: 1,
+    stepSize: 5 * SCALING_FACTOR,
+    agentSize: 1 * SCALING_FACTOR,
     opacityLevel: 10,
     // opacityLevel2: 15,
-    lineLength: 30,
+    lineLength: 30 * SCALING_FACTOR,
     loopSize: 1000,
     numberAgents: 15,
   }
 
   // ENDRESULT
-  // agentPaintbrush = new DumbAgent(agentPaintbrushData);
+  agentPaintbrush = new DumbAgent(agentPaintbrushData);
 
   // paintbrushareas = [];
   // CLASS aus spheres
@@ -418,7 +418,7 @@ function draw() {
   // exampleGrid.show();
 
   // ENDRESULT
-  // image(canvasAgent.buffer, - width / 2, - height / 2, canvasAgent.buffer.width * SCALING_FACTOR, canvasAgent.buffer.height * SCALING_FACTOR);
+  canvasAgent.show();
 
 
   // PERLIN Noise
@@ -436,7 +436,7 @@ function draw() {
   // linesExample.show()
 
   // ENDRESULT
-  // image(agentPaintbrush.buffer, (agentPaintbrush.posXImage - width / 2) * SCALING_FACTOR, (agentPaintbrush.posYImage - height / 2) * SCALING_FACTOR, agentPaintbrush.buffer.width * SCALING_FACTOR, agentPaintbrush.buffer.height * SCALING_FACTOR);
+  agentPaintbrush.show();
 
   // example for background layer of paintbrush
   // testSphere.show();
