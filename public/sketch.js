@@ -254,12 +254,12 @@ function setup() {
   }
 
   // END RESULT
-  canvas = new CanvasOverlay(canvasData);
-  canvasAgent = new DumbAgent();
-  agentPaintbrush = new DumbAgent(agentPaintbrushData);
-  backgroundSphere = new paintedSphere(backgroundSphereData);
-  frontGrid = new IntersectGrid(frontGridData);
-  backGrid = new IntersectGrid(backGridData);
+  // canvas = new CanvasOverlay(canvasData);
+  // canvasAgent = new DumbAgent();
+  // agentPaintbrush = new DumbAgent(agentPaintbrushData);
+  // backgroundSphere = new paintedSphere(backgroundSphereData);
+  // frontGrid = new IntersectGrid(frontGridData);
+  // backGrid = new IntersectGrid(backGridData);
 
 
   // exampleGrid = new IntersectGrid();
@@ -283,34 +283,34 @@ function setup() {
   // examplePaintBrushArea2 = new PaintBrushArea();
 
   // SINGLE TESTS
-  // testExamplePaintData = {
-  //   custom_width: 300,
-  //   custom_height: 370,
-  //   posX: -100,
-  //   posY: -100,
-  //   colorObject: color1,
-  //   orientation: "vertical",
-  //   brushLength: 30,  // 20-40
-  //   brushBreadth: 30,
-  //   sizeStroke: 1,
-  //   numberPaintLayers: 2,
-  //   overlap: 20,
-  //   brightnessNoise: 5,
-  //   colorNoise: 5,
-  //   opacityBoost: 0, // getRandomFromInterval(150, 255),
-  //   brushLengthNoise: 0.2,
-  //   numberFibresNoise: 0.2,  // brushBreadthNoise
-  //   brushAngleNoise: PI / 20,
-  //   fibreCurveTightness: 1,  // shape of curve, between 0 and 5; little effect
-  //   fibreColorNoise: 2,
-  //   fibreBrightnessNoise: 2,
-  //   fibreStrokeSizeNoise: 2,  // new
-  //   fibreStartLengthNoise: 15,  // start earlier or later
-  //   fibreBreadthNoise: 1,  // noise of fibre along the y axis in the middle
-  //   fibreRotationNoise: PI / 200,
-  //   fibreOpacityNoiseBase: 150,
-  // }
-  // testPaint = new PaintBrushArea(testExamplePaintData);
+  testExamplePaintData = {
+    custom_width: 300,
+    custom_height: 370,
+    posX: -100,
+    posY: -100,
+    colorObject: color1,
+    orientation: "vertical",
+    brushLength: 30,  // 20-40
+    brushBreadth: 30,
+    sizeStroke: 1,  // 1-10
+    numberPaintLayers: 2,
+    overlap: 20,
+    brightnessNoise: 15,  // 5-15
+    colorNoise: 15,  // 5-15
+    opacityBoost: 0, // getRandomFromInterval(150, 255),
+    brushLengthNoise: 0.2,
+    brushBreadthNoise: 0.2,  // brushBreadthNoise
+    brushAngleNoise: PI / 1, // PI/1-10
+    fibreCurveTightness: 2,  // shape of curve, between 0 and 5; little effect
+    fibreColorNoise: 2,
+    fibreBrightnessNoise: 4,  // 4-15
+    fibreStrokeSizeNoise: 1,
+    fibreStartLengthNoise: 30,  // 10-30
+    fibreBreadthNoise: 5,  // 1-5
+    fibreRotationNoise: PI / 100,
+    fibreOpacityNoiseBase: 200,  // 50-200
+  }
+  testPaint = new PaintBrushArea(testExamplePaintData);
 
   // testLinesData = {
   //   posX: -100,
@@ -325,22 +325,22 @@ function setup() {
   // }
   // testLines = new NewLines(testLinesData);
 
-  // testSphereData = {
-  //   custom_width: 300,
-  //   custom_height: 370,
-  //   posX: -100,
-  //   posY: -100,
-  //   colorObject: color(10),
-  //   margin: -10 * SCALING_FACTOR,
-  //   fillColorNoise: 50,
-  //   fillColorOpacityMax: 20,
-  //   noStroke: true,
-  //   strokeWeight: 1,
-  //   strokeColorNoise: 0,
-  //   strokeOpacityMax: 1,
-  //   numberQuantisizer: 10 * SCALING_FACTOR,
-  // }
-  // testSphere = new paintedSphere(testSphereData);
+  testSphereData = {
+    custom_width: 300,
+    custom_height: 370,
+    posX: -100,
+    posY: -100,
+    colorObject: color(0),
+    margin: -10 * SCALING_FACTOR,
+    fillColorNoise: 50,
+    fillColorOpacityMax: 20,
+    noStroke: true,
+    strokeWeight: 1,
+    strokeColorNoise: 0,
+    strokeOpacityMax: 1,
+    numberQuantisizer: 10 * SCALING_FACTOR,
+  }
+  testSphere = new paintedSphere(testSphereData);
 }
 
 
@@ -366,12 +366,12 @@ function draw() {
 
   // ENDRESULT
   background(200);
-  backgroundSphere.show();
-  backGrid.show();
-  frontGrid.show();
-  canvas.show();
-  canvasAgent.show();
-  agentPaintbrush.show();
+  // backgroundSphere.show();
+  // backGrid.show();
+  // frontGrid.show();
+  // canvas.show();
+  // canvasAgent.show();
+  // agentPaintbrush.show();
 
   // maska
   // brush.buffer = brush.buffer.get();
@@ -432,9 +432,9 @@ function draw() {
 
 
   // example for background layer of paintbrush
-  // testSphere.show();
+  testSphere.show();
 
-  // testPaint.show();
+  testPaint.show();
 
   // testLines.show();
 

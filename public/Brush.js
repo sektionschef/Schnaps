@@ -7,7 +7,8 @@ class Fibre {
         this.noiseZoomLevel = 0.2
 
         // this.complete = false;
-        this.posMiddle = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
+        this.posMiddle14 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
+        this.posMiddle34 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
         this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
         this.startX = brush.brushPosX + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts    
         this.startY = brush.brushPosY + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts
@@ -44,7 +45,7 @@ class Brush {
         this.brushPosY = y;
         this.colorBrush = brightenColor(distortColor(color(this.area.colorObject), this.area.colorNoise), this.area.brightnessNoise);
         this.brushLength_ = this.area.brushLength + getRandomFromInterval(-this.area.brushLength * this.area.brushLengthNoise, this.area.brushLength * this.area.brushLengthNoise);
-        this.numberFibres_ = this.area.numberFibres + getRandomFromInterval(-this.area.numberFibres * this.area.numberFibresNoise, this.area.numberFibres * this.area.numberFibresNoise);
+        this.numberFibres_ = this.area.numberFibres + getRandomFromInterval(-this.area.numberFibres * this.area.brushBreadthNoise, this.area.numberFibres * this.area.brushBreadthNoise);
         this.angle = getRandomFromInterval(-this.area.brushAngleNoise, this.area.brushAngleNoise);
 
         this.fibres = []
@@ -91,7 +92,7 @@ class PaintBrushArea {
                 colorNoise: 5,
                 opacityBoost: 0, // getRandomFromInterval(150, 255),
                 brushLengthNoise: 0.2,
-                numberFibresNoise: 0.2,  // brushBreadthNoise
+                brushBreadthNoise: 0.2,  // brushBreadthNoise
                 brushAngleNoise: PI / 20,
                 fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
                 fibreColorNoise: 2,
@@ -119,7 +120,7 @@ class PaintBrushArea {
         this.colorNoise = data.colorNoise;
         this.opacityBoost = data.opacityBoost;
         this.brushLengthNoise = data.brushLengthNoise;
-        this.numberFibresNoise = data.numberFibresNoise;
+        this.brushBreadthNoise = data.brushBreadthNoise;
         this.brushAngleNoise = data.brushAngleNoise;
         this.fibreCurveTightness = data.fibreCurveTightness;
         this.fibreColorNoise = data.fibreColorNoise;
@@ -188,12 +189,15 @@ class PaintBrushArea {
                     translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + fibre.startY))
                     rotate(fibre.angleFibre / PI / 2);
                 }
-                curveTightness(this.fibreCurveTightness);
                 stroke(fibre.colorFibre);
                 strokeWeight(fibre.sizeStrokeFibre);
                 noFill();
+                if (fxrand() > 0.75) {
+                    curveTightness(4);
+                } else {
+                    curveTightness(this.fibreCurveTightness);
+                }
 
-                // default sizestroke oder ein anderer?? brush oder fibre??
                 beginShape();
                 if (this.orientation == "horizontal") {
                     curveVertex(0, this.sizeStroke * fibre.i, 0);
@@ -204,11 +208,11 @@ class PaintBrushArea {
                 }
                 // middle
                 if (this.orientation == "horizontal") {
-                    curveVertex((fibre.stop - fibre.startX) / 4, (fibre.posMiddle + this.sizeStroke * fibre.i), 0);
-                    curveVertex((fibre.stop - fibre.startX) / 4 * 3, (fibre.posMiddle + this.sizeStroke * fibre.i), 0);
+                    curveVertex((fibre.stop - fibre.startX) / 4, (fibre.posMiddle14 + this.sizeStroke * fibre.i), 0);
+                    curveVertex((fibre.stop - fibre.startX) / 4 * 3, (fibre.posMiddle34 + this.sizeStroke * fibre.i), 0);
                 } else if (this.orientation == "vertical") {
-                    curveVertex((fibre.posMiddle + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4, 0);
-                    curveVertex((fibre.posMiddle + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4 * 3, 0);
+                    curveVertex((fibre.posMiddle14 + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4, 0);
+                    curveVertex((fibre.posMiddle34 + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4 * 3, 0);
                 }
                 // end
                 if (this.orientation == "horizontal") {
