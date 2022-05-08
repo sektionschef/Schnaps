@@ -257,8 +257,8 @@ function setup() {
   }
 
   // END RESULT
-  frontGrid = new IntersectGrid(frontGridData);
-  backGrid = new IntersectGrid(backGridData);
+  // frontGrid = new IntersectGrid(frontGridData);
+  // backGrid = new IntersectGrid(backGridData);
 
 
   // exampleGrid = new IntersectGrid();
@@ -329,7 +329,7 @@ function setup() {
   //   custom_height: 370,
   //   posX: -100,
   //   posY: -100,
-  //   colorObject: color(30),
+  //   colorObject: color(10),
   //   margin: -10 * SCALING_FACTOR,
   //   fillColorNoise: 50,
   //   fillColorOpacityMax: 20,
@@ -369,8 +369,8 @@ function draw() {
   // splatter.show();  // out
 
   // ENDRESULT
-  backGrid.show();
-  frontGrid.show();
+  // backGrid.show();
+  // frontGrid.show();
 
   // canvas.show();
 
