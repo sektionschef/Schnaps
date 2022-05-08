@@ -201,7 +201,7 @@ class paintedSphere {
                 noStroke: true,
                 strokeWeight: 10,
                 strokeColorNoise: 20,
-                strokeOpacityMax: 250,
+                strokeOpacityMax: 50,
                 numberQuantisizer: 4,
             }
         }
@@ -240,8 +240,8 @@ class paintedSphere {
             let fillColorOpacity = this.fillColorOpacityMax;
             // let strokeColorOpacity = getRandomFromInterval(this.strokeOpacityMax / 2, this.strokeOpacityMax);
             let strokeColorOpacity = this.strokeOpacityMax;
-            let widthShape = getRandomFromInterval((this.custom_width - this.margin * 2) * 0.1, (this.custom_width - this.margin * 2) * 0.1);
-            let heightShape = getRandomFromInterval((this.custom_height - this.margin * 2) * 0.1, (this.custom_height - this.margin * 2) * 0.1);
+            let widthShape = getRandomFromInterval((this.custom_width - this.margin * 2) * 0.05, (this.custom_width - this.margin * 2) * 0.05);
+            let heightShape = getRandomFromInterval((this.custom_height - this.margin * 2) * 0.05, (this.custom_height - this.margin * 2) * 0.05);
 
             this.elements.push({
                 // strokeColor: color(this.colorObjectRed + this.strokeColorNoise, this.colorObjectGreen + this.strokeColorNoise, this.colorObjectBlue + this.strokeColorNoise, strokeColorOpacity),

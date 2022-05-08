@@ -82,9 +82,9 @@ class PaintBrushArea {
                 posY: -100,
                 colorObject: color1,
                 orientation: "vertical",
-                brushLength: 30,  // 20-40
-                brushBreadth: 30,
-                sizeStroke: 2,
+                brushLength: 30 * SCALING_FACTOR,  // 20-40
+                brushBreadth: 30 * SCALING_FACTOR,
+                sizeStroke: 2 * SCALING_FACTOR,
                 numberPaintLayers: 2,
                 overlap: 20,
                 brightnessNoise: 5,
@@ -228,9 +228,11 @@ class PaintBrushArea {
                 }
                 // middle
                 if (this.orientation == "horizontal") {
-                    curveVertex((fibre.stop - fibre.startX) / 2, (fibre.posMiddle + this.sizeStroke * fibre.i), 0);
+                    curveVertex((fibre.stop - fibre.startX) / 4, (fibre.posMiddle + this.sizeStroke * fibre.i), 0);
+                    curveVertex((fibre.stop - fibre.startX) / 4 * 3, (fibre.posMiddle + this.sizeStroke * fibre.i), 0);
                 } else if (this.orientation == "vertical") {
-                    curveVertex((fibre.posMiddle + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 2, 0);
+                    curveVertex((fibre.posMiddle + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4, 0);
+                    curveVertex((fibre.posMiddle + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4 * 3, 0);
                 }
                 // end
                 if (this.orientation == "horizontal") {

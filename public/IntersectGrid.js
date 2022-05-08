@@ -170,7 +170,7 @@ class IntersectGrid {
             posY: posY,
             colorObject: brightenColor(distortColor(colorObject, 6), 6),
             orientation: getRandomFromList(["horizontal", "vertical"]),
-            brushLength: getRandomFromInterval(20, 40),  // 20-40
+            brushLength: getRandomFromInterval(20, 40) * SCALING_FACTOR,  // 20-40
             brushBreadth: 30 * SCALING_FACTOR,
             sizeStroke: 2 * SCALING_FACTOR,
             numberPaintLayers: 2,
