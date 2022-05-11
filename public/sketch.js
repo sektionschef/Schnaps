@@ -6,8 +6,11 @@ const SWITCH_LOGGING_LEVEL = "info";
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = CANVAS_WIDTH;
 
-let VAG = 0;
 
+// FEATURES
+
+
+/// OLD STUFF
 
 // LINES
 const STROKE_SIZE_MIN = 0.1
@@ -106,6 +109,7 @@ function preload() {
 }
 
 function setup() {
+
   pixelDensity(1);
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
@@ -126,18 +130,36 @@ function setup() {
   logging.info(color1);
   logging.info(color2);
 
-  color1b = brightenColorStatic(color1, -30);
-  color2b = brightenColorStatic(color2, -30);
+  color1b = brightenColorStatic(color1, -10);
+  color2b = brightenColorStatic(color2, -10);
 
-  lineColor1 = brightenColorStatic(color1, +60);
-  lineColor1b = brightenColorStatic(color1b, +60);
+  // lineColor1 = brightenColorStatic(color1, +60);
+  // lineColor1b = brightenColorStatic(color1b, +60);
+  lineColor1 = color(20);
+  lineColor1b = color(20);
 
   // color3 = color(COLOR_3_HEX);
   // color4 = color(COLOR_4_HEX);
 
   resize_canvas();
 
-  // NOT NECESSARY | 
+  FRONTNUMBERRECTS = 5 // 10-30
+  BACKNUMBERRECTS = 5 // 7-10
+  BRUSHLENGTHANDBREADTH = 20 // getRandomFromInterval(20, 40);
+  BRUSHSTROKESIZE = 2 // getRandomFromInterval(1, 5);
+  BRUSHBRIGHTNESSNOISE = 10 // getRandomFromInterval(5, 15);
+  BRUSHCOLORNOISE = 10 // getRandomFromInterval(5, 15);
+  BRUSHANGLENOISE = PI / 40 // getRandomFromInterval(PI / 100, PI / 40);
+  FIBRECURVETIGHTNESS = 2 // getRandomFromInterval(2, 5);
+  FIBREBRIGHTNESSNOISE = 4 // getRandomFromInterval(4, 15);
+  FIBRESTROKESIZENOISE = 2;
+  FIBRESTARTLENGTHNOISE = 10 // getRandomFromInterval(10, 30);
+  FIBREBREADTHNOISE = 1 // getRandomFromInterval(1, 5);
+  FIBREROTATIONNOISE = PI / 100;
+  FIBREOPACITYNOISEBASE = 200 // getRandomFromInterval(50, 200)
+
+
+  //  NOT NECESSARY | 
   // flowfield = new FlowField(600, 300);
 
   // NOT NECESSARY | RANDOM AREAS
@@ -236,7 +258,7 @@ function setup() {
   let frontGridData = {
     minSize: 100,  // 50
     maxSize: 300,  // 300
-    numberRects: 10,  // 30
+    numberRects: FRONTNUMBERRECTS,
     firstLevelColors: [color1],
     secondLevelColors: [color2],
     lineColor: lineColor1,
@@ -246,7 +268,7 @@ function setup() {
   let backGridData = {
     minSize: 200,  // 100
     maxSize: 500,  // 500
-    numberRects: 7,  // 10
+    numberRects: BACKNUMBERRECTS,
     firstLevelColors: [color1b],
     secondLevelColors: [color2b],
     lineColor: lineColor1b,
@@ -254,12 +276,12 @@ function setup() {
   }
 
   // END RESULT
-  // canvas = new CanvasOverlay(canvasData);
-  // canvasAgent = new DumbAgent();
-  // agentPaintbrush = new DumbAgent(agentPaintbrushData);
-  // backgroundSphere = new paintedSphere(backgroundSphereData);
-  // frontGrid = new IntersectGrid(frontGridData);
-  // backGrid = new IntersectGrid(backGridData);
+  canvas = new CanvasOverlay(canvasData);
+  canvasAgent = new DumbAgent();
+  agentPaintbrush = new DumbAgent(agentPaintbrushData);
+  backgroundSphere = new paintedSphere(backgroundSphereData);
+  frontGrid = new IntersectGrid(frontGridData);
+  backGrid = new IntersectGrid(backGridData);
 
 
   // exampleGrid = new IntersectGrid();
@@ -366,10 +388,10 @@ function draw() {
 
   // ENDRESULT
   background(200);
-  // backgroundSphere.show();
-  // backGrid.show();
-  // frontGrid.show();
-  // canvas.show();
+  backgroundSphere.show();
+  backGrid.show();
+  frontGrid.show();
+  canvas.show();
   // canvasAgent.show();
   // agentPaintbrush.show();
 
@@ -432,9 +454,9 @@ function draw() {
 
 
   // example for background layer of paintbrush
-  testSphere.show();
+  // testSphere.show();
 
-  testPaint.show();
+  // testPaint.show();
 
   // testLines.show();
 

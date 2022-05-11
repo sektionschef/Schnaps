@@ -189,25 +189,25 @@ class IntersectGrid {
             posY: posY,
             colorObject: brightenColor(distortColor(colorObject, 6), 6),
             orientation: getRandomFromList(["horizontal", "vertical"]),
-            brushLength: getRandomFromInterval(20, 40) * SCALING_FACTOR,  // 20-40
-            brushBreadth: 30 * SCALING_FACTOR,
-            sizeStroke: 2 * SCALING_FACTOR,
+            brushLength: BRUSHLENGTHANDBREADTH * SCALING_FACTOR,
+            brushBreadth: BRUSHLENGTHANDBREADTH * SCALING_FACTOR,
+            sizeStroke: BRUSHSTROKESIZE * SCALING_FACTOR,
             numberPaintLayers: 2,
             overlap: 20 * SCALING_FACTOR,
-            brightnessNoise: 6,
-            colorNoise: 6,
+            brightnessNoise: BRUSHBRIGHTNESSNOISE,
+            colorNoise: BRUSHCOLORNOISE,
             opacityBoost: 0, // getRandomFromInterval(150, 255),
             brushLengthNoise: 0.2 * SCALING_FACTOR,
             brushBreadthNoise: 0.2 * SCALING_FACTOR,
-            brushAngleNoise: PI / 30,
-            fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
+            brushAngleNoise: BRUSHANGLENOISE,
+            fibreCurveTightness: FIBRECURVETIGHTNESS,  // shape of curve, between 0 and 5; little effect
             fibreColorNoise: 2,
-            fibreBrightnessNoise: 2,
-            fibreStrokeSizeNoise: 1 * SCALING_FACTOR,
-            fibreStartLengthNoise: 5 * SCALING_FACTOR,  // start earlier or later
-            fibreBreadthNoise: 0.5 * SCALING_FACTOR,  // noise of fibre along the y axis in the middle
-            fibreRotationNoise: PI / 200,
-            fibreOpacityNoiseBase: 150,
+            fibreBrightnessNoise: FIBREBRIGHTNESSNOISE,
+            fibreStrokeSizeNoise: FIBRESTROKESIZENOISE * SCALING_FACTOR,
+            fibreStartLengthNoise: FIBRESTARTLENGTHNOISE * SCALING_FACTOR,  // start earlier or later
+            fibreBreadthNoise: FIBREBREADTHNOISE * SCALING_FACTOR,  // noise of fibre along the y axis in the middle
+            fibreRotationNoise: FIBREROTATIONNOISE,
+            fibreOpacityNoiseBase: FIBREOPACITYNOISEBASE,
         }
 
         return new PaintBrushArea(brushData);
