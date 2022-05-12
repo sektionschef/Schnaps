@@ -142,23 +142,23 @@ class IntersectGrid {
                 });
             }
 
-            if (fxrand() > 0) {
-                this.rects[i].spheres = new paintedSphere(data = {
-                    custom_width: this.rects[i].width,
-                    custom_height: this.rects[i].height,
-                    posX: this.rects[i].posX,
-                    posY: this.rects[i].posY,
-                    colorObject: color(getRandomFromList([20, 40])),
-                    margin: -10 * SCALING_FACTOR,
-                    fillColorNoise: 50,
-                    fillColorOpacityMax: 20,
-                    noStroke: true,
-                    strokeWeight: 1,
-                    strokeColorNoise: 0,
-                    strokeOpacityMax: 1,
-                    numberQuantisizer: 15 * SCALING_FACTOR,
-                });
-            }
+            // if (fxrand() > 0) {
+            this.rects[i].spheres = new paintedSphere(data = {
+                custom_width: this.rects[i].width,
+                custom_height: this.rects[i].height,
+                posX: this.rects[i].posX,
+                posY: this.rects[i].posY,
+                colorObject: color(getRandomFromList([20, 40, 200, 240])),
+                margin: 0 * SCALING_FACTOR,
+                fillColorNoise: 50,
+                fillColorOpacityMax: 60,
+                noStroke: true,
+                strokeWeight: 1,
+                strokeColorNoise: 0,
+                strokeOpacityMax: 1,
+                numberQuantisizer: 15 * SCALING_FACTOR,
+            });
+            // }
         }
 
 
@@ -192,7 +192,7 @@ class IntersectGrid {
             brushLength: BRUSHLENGTHANDBREADTH * SCALING_FACTOR,
             brushBreadth: BRUSHLENGTHANDBREADTH * SCALING_FACTOR,
             sizeStroke: BRUSHSTROKESIZE * SCALING_FACTOR,
-            numberPaintLayers: 2,
+            numberPaintLayers: NUMBERPAINTLAYERS,
             overlap: 20 * SCALING_FACTOR,
             brightnessNoise: BRUSHBRIGHTNESSNOISE,
             colorNoise: BRUSHCOLORNOISE,

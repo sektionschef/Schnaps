@@ -144,19 +144,20 @@ function setup() {
   resize_canvas();
 
   FRONTNUMBERRECTS = 5 // 10-30
-  BACKNUMBERRECTS = 5 // 7-10
-  BRUSHLENGTHANDBREADTH = 20 // getRandomFromInterval(20, 40);
+  BACKNUMBERRECTS = 4 // 7-10
+  NUMBERPAINTLAYERS = 3;
+  BRUSHLENGTHANDBREADTH = 30 // getRandomFromInterval(20, 40);
   BRUSHSTROKESIZE = 2 // getRandomFromInterval(1, 5);
   BRUSHBRIGHTNESSNOISE = 10 // getRandomFromInterval(5, 15);
-  BRUSHCOLORNOISE = 10 // getRandomFromInterval(5, 15);
+  BRUSHCOLORNOISE = 10 // getRandomFromInterval(5, 15);  // mit 20 besser
   BRUSHANGLENOISE = PI / 40 // getRandomFromInterval(PI / 100, PI / 40);
   FIBRECURVETIGHTNESS = 2 // getRandomFromInterval(2, 5);
   FIBREBRIGHTNESSNOISE = 4 // getRandomFromInterval(4, 15);
   FIBRESTROKESIZENOISE = 2;
   FIBRESTARTLENGTHNOISE = 10 // getRandomFromInterval(10, 30);
-  FIBREBREADTHNOISE = 1 // getRandomFromInterval(1, 5);
+  FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
   FIBREROTATIONNOISE = PI / 100;
-  FIBREOPACITYNOISEBASE = 200 // getRandomFromInterval(50, 200)
+  FIBREOPACITYNOISEBASE = 30 // getRandomFromInterval(50, 200)
 
 
   //  NOT NECESSARY | 
@@ -269,8 +270,8 @@ function setup() {
     minSize: 200,  // 100
     maxSize: 500,  // 500
     numberRects: BACKNUMBERRECTS,
-    firstLevelColors: [color1b],
-    secondLevelColors: [color2b],
+    firstLevelColors: [color2],
+    secondLevelColors: [color1],
     lineColor: lineColor1b,
     padding: 50,
   }
