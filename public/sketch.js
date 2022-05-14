@@ -43,8 +43,29 @@ function setup() {
   logging.debug(color1);
   logging.debug(color2);
 
-  color1b = brightenColorStatic(color1, -40);
-  color2b = brightenColorStatic(color2, -40);
+
+  resize_canvas();
+
+  FRONTNUMBERRECTS = 30 // 30
+  BACKNUMBERRECTS = 20 // 20
+  GRIDBRIGHTNESSDIFF = -10;
+  NUMBERPAINTLAYERS = 2;  // 2-3??
+  BRUSHLENGTHANDBREADTH = 30 // getRandomFromInterval(20, 40);
+  BRUSHSTROKESIZE = 1 // getRandomFromInterval(1, );
+  BRUSHBRIGHTNESSNOISE = 10 // getRandomFromInterval(5, 15);
+  BRUSHCOLORNOISE = 20 // getRandomFromInterval(5, 15);  // mit 20 besser
+  BRUSHANGLENOISE = PI / 40 // getRandomFromInterval(PI / 100, PI / 40);
+  FIBRECURVETIGHTNESS = 2 // getRandomFromInterval(2, 5);
+  FIBREBRIGHTNESSNOISE = 4 // getRandomFromInterval(4, 15);
+  FIBRESTROKESIZENOISE = 0.2;
+  FIBRESTARTLENGTHNOISE = 10 // getRandomFromInterval(10, 30);
+  FIBREBREADTHNOISE = 0.02 // getRandomFromInterval(1, 5); cool 0.2
+  FIBREROTATIONNOISE = PI / 100;
+  FIBREOPACITYNOISEBASE = 120 // 120-
+
+
+  color1b = saturateColorStatic(brightenColorStatic(color1, GRIDBRIGHTNESSDIFF), GRIDBRIGHTNESSDIFF);
+  color2b = saturateColorStatic(brightenColorStatic(color2, GRIDBRIGHTNESSDIFF), GRIDBRIGHTNESSDIFF);
 
   // lineColor1 = brightenColorStatic(color1, +60);
   // lineColor1b = brightenColorStatic(color1b, +60);
@@ -52,24 +73,6 @@ function setup() {
   // lineColor1b = color(20, 150);
   lineColor1 = color(color2);
   lineColor1b = color(color2b);
-
-  resize_canvas();
-
-  FRONTNUMBERRECTS = 30 // 10-30
-  BACKNUMBERRECTS = 20 // 7-10
-  NUMBERPAINTLAYERS = 2;
-  BRUSHLENGTHANDBREADTH = 30 // getRandomFromInterval(20, 40);
-  BRUSHSTROKESIZE = 2 // getRandomFromInterval(1, 5);
-  BRUSHBRIGHTNESSNOISE = 20 // getRandomFromInterval(5, 15);
-  BRUSHCOLORNOISE = 20 // getRandomFromInterval(5, 15);  // mit 20 besser
-  BRUSHANGLENOISE = PI / 40 // getRandomFromInterval(PI / 100, PI / 40);
-  FIBRECURVETIGHTNESS = 2 // getRandomFromInterval(2, 5);
-  FIBREBRIGHTNESSNOISE = 4 // getRandomFromInterval(4, 15);
-  FIBRESTROKESIZENOISE = 2;
-  FIBRESTARTLENGTHNOISE = 10 // getRandomFromInterval(10, 30);
-  FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
-  FIBREROTATIONNOISE = PI / 100;
-  FIBREOPACITYNOISEBASE = 150 // getRandomFromInterval(50, 200)
 
   canvasData = {
     custom_width: width,
@@ -150,11 +153,11 @@ function draw() {
   // ENDRESULT
   background(200);
   backgroundSphere.show();
+  canvasAgent.show();
   backGrid.show();
   frontGrid.show();
   canvas.show();
-  canvasAgent.show();
-  agentPaintbrush.show();
+  // agentPaintbrush.show();
 
   noLoop();
 

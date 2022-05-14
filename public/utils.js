@@ -55,6 +55,14 @@ function brightenColorStatic(colorObject, diff) {
     return resultingColor
 }
 
+function saturateColorStatic(colorObject, diff) {
+    colorMode(HSB);
+    saturationNew = saturation(colorObject) + diff;
+    resultingColor = color(hue(colorObject), saturationNew, brightness(colorObject));
+    colorMode(RGB);
+    return resultingColor
+}
+
 function lessenColor(colorObject, diff) {
     let diff_constant = getRandomFromInterval(0, -diff)
     let red = colorObject.levels[0];

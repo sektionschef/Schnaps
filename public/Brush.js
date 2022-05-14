@@ -4,33 +4,29 @@ class Fibre {
         this.i = i;
         this.brush = brush;
 
-        this.noiseZoomLevel = 0.2
+        this.fibreLengthNoise = 0.6
+        this.fibreOpacityNoise = 0.3
 
         // this.complete = false;
         this.posMiddle14 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
         this.posMiddle34 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
         this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
-        this.startX = brush.brushPosX + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts    
-        this.startY = brush.brushPosY + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts
+        this.startX = brush.brushPosX + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts    
+        this.startY = brush.brushPosY + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts
 
         if (brush.area.orientation == "horizontal") {
-            this.stop = brush.brushPosX + brush.brushLength_ + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // where the fibre stops
+            this.stop = brush.brushPosX + brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;  // where the fibre stops
         } else if (brush.area.orientation == "vertical") {
-            this.stop = brush.brushPosY + brush.brushLength_ + noise(this.i * this.noiseZoomLevel) * brush.area.fibreStartLengthNoise;  // where the fibre stops
-        }
-
-        if (fxrand() < 0.75) {
-            this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise), brush.area.fibreBrightnessNoise);
-        } else {
-            this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise * 3), brush.area.fibreBrightnessNoise * 3);
+            this.stop = brush.brushPosY + brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;  // where the fibre stops
         }
 
         // if (fxrand() < 0.75) {
-        this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * 0.1) * (255 - brush.area.fibreOpacityNoiseBase) + brush.area.fibreOpacityNoiseBase);
+        this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise), brush.area.fibreBrightnessNoise);
         // } else {
-        // this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * 0.1) * 255);
+        // this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise * 3), brush.area.fibreBrightnessNoise * 3);
         // }
 
+        this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * this.fibreOpacityNoise) * (255 - brush.area.fibreOpacityNoiseBase) + brush.area.fibreOpacityNoiseBase);
         this.angleFibre = brush.angle + getRandomFromInterval(-brush.area.fibreRotationNoise, brush.area.fibreRotationNoise);
     }
 
@@ -192,11 +188,11 @@ class PaintBrushArea {
                 stroke(fibre.colorFibre);
                 strokeWeight(fibre.sizeStrokeFibre);
                 noFill();
-                if (fxrand() > 0.75) {
-                    curveTightness(4);
-                } else {
-                    curveTightness(this.fibreCurveTightness);
-                }
+                // if (fxrand() > 0.75) {
+                //     curveTightness(4);
+                // } else {
+                //     curveTightness(this.fibreCurveTightness);
+                // }
 
                 // beginShape();
                 // if (this.orientation == "horizontal") {

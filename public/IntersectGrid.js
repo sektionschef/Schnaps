@@ -143,21 +143,21 @@ class IntersectGrid {
             }
 
             // if (fxrand() > 0) {
-            this.rects[i].spheres = new paintedSphere(data = {
-                custom_width: this.rects[i].width,
-                custom_height: this.rects[i].height,
-                posX: this.rects[i].posX,
-                posY: this.rects[i].posY,
-                colorObject: color(getRandomFromList([20, 40, 200, 240])),
-                margin: 0 * SCALING_FACTOR,
-                fillColorNoise: 50,
-                fillColorOpacityMax: 60,
-                noStroke: true,
-                strokeWeight: 1,
-                strokeColorNoise: 0,
-                strokeOpacityMax: 1,
-                numberQuantisizer: 15 * SCALING_FACTOR,
-            });
+            // this.rects[i].spheres = new paintedSphere(data = {
+            //     custom_width: this.rects[i].width,
+            //     custom_height: this.rects[i].height,
+            //     posX: this.rects[i].posX,
+            //     posY: this.rects[i].posY,
+            //     colorObject: color(getRandomFromList([20, 40, 200, 240])),
+            //     margin: 0 * SCALING_FACTOR,
+            //     fillColorNoise: 50,
+            //     fillColorOpacityMax: 60,
+            //     noStroke: true,
+            //     strokeWeight: 1,
+            //     strokeColorNoise: 0,
+            //     strokeOpacityMax: 1,
+            //     numberQuantisizer: 55 * SCALING_FACTOR,
+            // });
             // }
         }
 

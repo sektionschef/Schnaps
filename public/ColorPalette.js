@@ -2,8 +2,8 @@ class ColorPalette {
     constructor() {
 
         this.primaryColorHue = Math.round(getRandomFromInterval(0, 360));
-        this.primaryColorSaturation = Math.round(getRandomFromInterval(80, 85));
-        this.primaryColorBrightness = Math.round(getRandomFromInterval(80, 85));
+        this.primaryColorSaturation = 85 // Math.round(getRandomFromInterval(90, 91));
+        this.primaryColorBrightness = 85 // Math.round(getRandomFromInterval(90, 91));
 
         this.secondaryColorHue = this.primaryColorHue - (360 / 2) + 1;
         if (this.secondaryColorHue < 0) {
