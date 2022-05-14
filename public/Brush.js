@@ -198,31 +198,37 @@ class PaintBrushArea {
                     curveTightness(this.fibreCurveTightness);
                 }
 
-                beginShape();
+                // beginShape();
+                // if (this.orientation == "horizontal") {
+                //     curveVertex(0, this.sizeStroke * fibre.i, 0);
+                //     curveVertex(0, this.sizeStroke * fibre.i, 0);
+                // } else if (this.orientation == "vertical") {
+                //     curveVertex(this.sizeStroke * fibre.i, 0, 0);
+                //     curveVertex(this.sizeStroke * fibre.i, 0, 0);
+                // }
+                // // middle
+                // if (this.orientation == "horizontal") {
+                //     curveVertex((fibre.stop - fibre.startX) / 4, (fibre.posMiddle14 + this.sizeStroke * fibre.i), 0);
+                //     curveVertex((fibre.stop - fibre.startX) / 4 * 3, (fibre.posMiddle34 + this.sizeStroke * fibre.i), 0);
+                // } else if (this.orientation == "vertical") {
+                //     curveVertex((fibre.posMiddle14 + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4, 0);
+                //     curveVertex((fibre.posMiddle34 + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4 * 3, 0);
+                // }
+                // // end
+                // if (this.orientation == "horizontal") {
+                //     curveVertex((fibre.stop - fibre.startX), this.sizeStroke * fibre.i, 0);
+                //     curveVertex((fibre.stop - fibre.startX), this.sizeStroke * fibre.i, 0);
+                // } else if (this.orientation == "vertical") {
+                //     curveVertex(this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
+                //     curveVertex(this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
+                // }
+                // endShape();
+
                 if (this.orientation == "horizontal") {
-                    curveVertex(0, this.sizeStroke * fibre.i, 0);
-                    curveVertex(0, this.sizeStroke * fibre.i, 0);
+                    line(0, this.sizeStroke * fibre.i, 0, fibre.stop - fibre.startX, this.sizeStroke * fibre.i, 0);
                 } else if (this.orientation == "vertical") {
-                    curveVertex(this.sizeStroke * fibre.i, 0, 0);
-                    curveVertex(this.sizeStroke * fibre.i, 0, 0);
+                    line(this.sizeStroke * fibre.i, 0, 0, this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
                 }
-                // middle
-                if (this.orientation == "horizontal") {
-                    curveVertex((fibre.stop - fibre.startX) / 4, (fibre.posMiddle14 + this.sizeStroke * fibre.i), 0);
-                    curveVertex((fibre.stop - fibre.startX) / 4 * 3, (fibre.posMiddle34 + this.sizeStroke * fibre.i), 0);
-                } else if (this.orientation == "vertical") {
-                    curveVertex((fibre.posMiddle14 + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4, 0);
-                    curveVertex((fibre.posMiddle34 + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4 * 3, 0);
-                }
-                // end
-                if (this.orientation == "horizontal") {
-                    curveVertex((fibre.stop - fibre.startX), this.sizeStroke * fibre.i, 0);
-                    curveVertex((fibre.stop - fibre.startX), this.sizeStroke * fibre.i, 0);
-                } else if (this.orientation == "vertical") {
-                    curveVertex(this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
-                    curveVertex(this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
-                }
-                endShape();
 
                 pop();
 
