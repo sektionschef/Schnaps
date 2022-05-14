@@ -7,82 +7,6 @@ const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = CANVAS_WIDTH;
 
 
-// FEATURES
-
-
-/// OLD STUFF
-
-// LINES
-const STROKE_SIZE_MIN = 0.1
-const STROKE_SIZE_MAX = 1
-const STROKE_SIZE = getRandomFromInterval(STROKE_SIZE_MIN, STROKE_SIZE_MAX);
-const STROKE_DISTORT = getRandomFromInterval(0, 0.2);
-const STROKE_NOISE = 5;
-let distanceBetweenLines;
-
-// PAINT
-const BORDER_FRAME_MIN = 5;
-const BORDER_FRAME_MAX = 35;
-BORDER_FRAME = getRandomFromInterval(BORDER_FRAME_MIN, BORDER_FRAME_MAX);
-const BRUSH_SIZE_MIN = 10;
-const BRUSH_SIZE_MAX = 30;
-const BRUSH_SIZE = getRandomFromInterval(BRUSH_SIZE_MIN, BRUSH_SIZE_MAX);
-const BRUSH_TIGHTNESS_MIN = 0;
-const BRUSH_TIGHTNESS_MAX = 5;
-const BRUSH_TIGHTNESS = getRandomFromInterval(BRUSH_TIGHTNESS_MIN, BRUSH_TIGHTNESS_MAX);
-const PRIMARY_STROKE_WEIGHT_MIN = 2;
-const PRIMARY_STROKE_WEIGHT_MAX = 4;
-const PRIMARY_STROKE_WEIGHT = getRandomFromInterval(PRIMARY_STROKE_WEIGHT_MIN, PRIMARY_STROKE_WEIGHT_MAX);
-
-// palette = https://colorhunt.co/palette/97bfb4f5eedcdd4a484f091d
-// const COLOR_1_HEX = "#97BFB4";
-// const COLOR_2_HEX = "#F5EEDC";
-// const COLOR_3_HEX = "#DD4A48";
-// const COLOR_4_HEX = "#4F091D";
-
-// https://colorhunt.co/palette/22577e5584ac95d1ccfaffaf
-// const COLOR_1_HEX = "#22577E";
-// const COLOR_2_HEX = "#5584AC";
-// const COLOR_3_HEX = "#95D1CC";
-// const COLOR_4_HEX = "#FAFFAF";
-
-// https://colorhunt.co/palette/21325e3e497af1d00af0f0f0
-// const COLOR_1_HEX = "#21325E";
-// const COLOR_2_HEX = "#3E497A";
-// const COLOR_3_HEX = "#F1D00A";  // yellow
-// const COLOR_4_HEX = "#F0F0F0";
-
-// https://colorhunt.co/palette/000957344cb7577bc1ebe645
-// const COLOR_1_HEX = "#000957";
-// const COLOR_2_HEX = "#344CB7";
-// const COLOR_3_HEX = "#577BC1";
-// const COLOR_4_HEX = "#EBE645"; // yellow
-
-
-// https://colorhunt.co/palette/ff5f00b2060000092ceeeeee
-// const COLOR_1_HEX = "#FF5F00";
-// const COLOR_2_HEX = "#B20600";
-// const COLOR_3_HEX = "#00092C";
-
-// https://colorhunt.co/palette/f1ddbf525e7578938a92ba92
-// const COLOR_1_HEX = "#F1DDBF";
-// const COLOR_2_HEX = "#525E75";
-// const COLOR_3_HEX = "#92BA92";
-
-// https://colorhunt.co/palette/bff4ed280f34b30753f6c667
-// const COLOR_1_HEX = "#280F34";
-// const COLOR_2_HEX = "#B30753";
-// const COLOR_3_HEX = "#F6C667";
-
-// https://calcolor.co/palette/942409461
-// const COLOR_1_HEX = "#333333";
-// const COLOR_2_HEX = "#aaaaaa";
-// const COLOR_3_HEX = "#eeeeee";
-
-// color custom
-// const COLOR_1_HEX = "#B30753";
-// const COLOR_2_HEX = "#F6C667";
-
 // variable stuff
 let SCALING_FACTOR = 1;
 let rescaling_width;
@@ -95,17 +19,8 @@ let xoff = 0;
 
 logging.info("FXHASH: " + fxhash);
 // logging.info("Grid: " + GRID);
-// logging.info("Paired boxes: " + PAIRING_COUNT);
-// logging.info("Palette: " + chosenPalette.name);
-// logging.info("Camera flight: " + chosenCameraFlight.name);
-// logging.info("Paint frame: " + label_feature(BORDER_FRAME, BORDER_FRAME_MIN, BORDER_FRAME_MAX)); //+ Math.round(BORDER_FRAME));
-// logging.info("Brush region: " + label_feature(BRUSH_SIZE, BRUSH_SIZE_MIN, BRUSH_SIZE_MAX)); //+ Math.round(BRUSH_SIZE));
-// logging.info("Brush size: " + label_feature(PRIMARY_STROKE_WEIGHT, PRIMARY_STROKE_WEIGHT_MIN, PRIMARY_STROKE_WEIGHT_MAX)); //+ Math.round(PRIMARY_STROKE_WEIGHT));
-// logging.info("Brush tightness: " + label_feature(BRUSH_TIGHTNESS, BRUSH_TIGHTNESS_MIN, BRUSH_TIGHTNESS_MAX));// + Math.round(BRUSH_TIGHTNESS));
-// logging.info("Line Stroke weight: " + label_feature(STROKE_SIZE, STROKE_SIZE_MIN, STROKE_SIZE_MAX));// + Math.round((STROKE_SIZE + Number.EPSILON) * 100) / 100);
 
 function preload() {
-  // font = loadFont('SourceSansPro-Regular.otf');
 }
 
 function setup() {
@@ -122,16 +37,14 @@ function setup() {
 
   colorPalette = new ColorPalette();
 
-  // color1 = color(COLOR_1_HEX);
-  // color2 = color(COLOR_2_HEX);
   color1 = colorPalette.primaryColor;
   color2 = colorPalette.secondaryColor;
 
-  logging.info(color1);
-  logging.info(color2);
+  logging.debug(color1);
+  logging.debug(color2);
 
-  color1b = brightenColorStatic(color1, -10);
-  color2b = brightenColorStatic(color2, -10);
+  color1b = brightenColorStatic(color1, -40);
+  color2b = brightenColorStatic(color2, -40);
 
   // lineColor1 = brightenColorStatic(color1, +60);
   // lineColor1b = brightenColorStatic(color1b, +60);
@@ -140,14 +53,11 @@ function setup() {
   lineColor1 = color(color2);
   lineColor1b = color(color2b);
 
-  // color3 = color(COLOR_3_HEX);
-  // color4 = color(COLOR_4_HEX);
-
   resize_canvas();
 
-  FRONTNUMBERRECTS = 45 // 10-30
-  BACKNUMBERRECTS = 4 // 7-10
-  NUMBERPAINTLAYERS = 4;
+  FRONTNUMBERRECTS = 30 // 10-30
+  BACKNUMBERRECTS = 20 // 7-10
+  NUMBERPAINTLAYERS = 2;
   BRUSHLENGTHANDBREADTH = 30 // getRandomFromInterval(20, 40);
   BRUSHSTROKESIZE = 2 // getRandomFromInterval(1, 5);
   BRUSHBRIGHTNESSNOISE = 20 // getRandomFromInterval(5, 15);
@@ -159,50 +69,7 @@ function setup() {
   FIBRESTARTLENGTHNOISE = 10 // getRandomFromInterval(10, 30);
   FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
   FIBREROTATIONNOISE = PI / 100;
-  FIBREOPACITYNOISEBASE = 30 // getRandomFromInterval(50, 200)
-
-
-  //  NOT NECESSARY | 
-  // flowfield = new FlowField(600, 300);
-
-  // NOT NECESSARY | RANDOM AREAS
-  // let minAreaSize = 100;
-  // let maxAreaSize = 350;
-  // let minPosX = - width / 2 - 50;
-  // let minPosY = - height / 2 - 50;
-  // let maxPosX = width / 2 + 50;
-  // let maxPosY = height / 2 + 50;
-  // // let colorArea = own color for each area
-  // all_areas = []
-  // for (let i = 0; i < 180; i++) {
-  //   let random_color_code = getRandomFromList(["#123456", "#babdff", "#a0a3e8", "#9fa2ed", "#9799d1", "#fadc57"]);
-  //   // let random_color_code = ("#babdff" + getRandomFromList(["f3", "cc", "99", "43"]))
-  //   all_areas.push(
-  //     new Paint(
-  //       getRandomFromInterval(minAreaSize, maxAreaSize),
-  //       getRandomFromInterval(minAreaSize, maxAreaSize),
-  //       getRandomFromInterval(minPosX, maxPosX),
-  //       getRandomFromInterval(minPosY, maxPosY),
-  //       random_color_code
-  //     ));
-  // }
-
-  // paperData = {
-  //   custom_width: width,
-  //   custom_height: height,
-  //   posX: - width / 2,
-  //   posY: - height / 2,
-  //   colorObject: color(255, 5),
-  // }
-  // paper = new Corroded(paperData);
-
-  // NOT NECESSARY |   
-  // dots = Pattern.create_dots(width, height);
-  // normal_noise = Pattern.create_noise(100, 100);
-  // lines = Pattern.create_lines(width, height);
-  // bars = Pattern.create_bars(width, height);
-  // noise_fog = Pattern.create_noise_fog(width, height, color1, color3, 0.009, 12, 0.5, 255);
-  // grainy_gradient = Pattern.create_grainy_gradient(width, height);
+  FIBREOPACITYNOISEBASE = 150 // getRandomFromInterval(50, 200)
 
   canvasData = {
     custom_width: width,
@@ -211,8 +78,6 @@ function setup() {
     posY: -height / 2,
     colorObject: color(230),
   }
-
-  // splatter = new SplitterSplatter();
 
   agentPaintbrushData = {
     customWidth: width,
@@ -230,16 +95,6 @@ function setup() {
   }
 
 
-  // paintbrushareas = [];
-  // CLASS aus spheres
-
-  // loopNumberPaintbrush = 100;
-  // loopNumberSpheres = 200;
-
-
-  // example
-  // exampleBackgroundSphere = new paintedSphere();
-
   backgroundSphereData = {
     custom_width: width,
     custom_height: height,
@@ -256,8 +111,6 @@ function setup() {
     numberQuantisizer: 4 * SCALING_FACTOR,
   }
 
-
-  // ENDRESULT
   let frontGridData = {
     minSize: 50,  // 50
     maxSize: 200,  // 300
@@ -269,103 +122,22 @@ function setup() {
   }
 
   let backGridData = {
-    minSize: 200,  // 100
-    maxSize: 500,  // 500
+    minSize: 100,  // 100
+    maxSize: 300,  // 500
     numberRects: BACKNUMBERRECTS,
-    firstLevelColors: [color2],
-    secondLevelColors: [color1],
+    firstLevelColors: [color2b],
+    secondLevelColors: [color1b],
     lineColor: lineColor1b,
     padding: 50,
   }
 
-  // END RESULT
   canvas = new CanvasOverlay(canvasData);
   canvasAgent = new DumbAgent();
   agentPaintbrush = new DumbAgent(agentPaintbrushData);
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
-  // backGrid = new IntersectGrid(backGridData);
+  backGrid = new IntersectGrid(backGridData);
 
-
-  // exampleGrid = new IntersectGrid();
-
-  // binomial_points = [];
-
-  // for (var i = 0; i < 500; i++) {
-  //   x_input = getRandomFromInterval(1, 600)
-  //   binomial_points.push(createVector(x_input, (betaPDF(x = 0.5, a = x_input, b = x_input) * 10)));
-  // }
-  // console.log(binomial_points);
-
-  // paper = paper.get()
-  // paper.mask(noise_fog);
-
-  // EXAMPLE LINES
-  // linesExample = new NewLines();
-
-  // EXAMPLE PaintAreas
-  // examplePaintBrushArea = new PaintBrushArea();
-  // examplePaintBrushArea2 = new PaintBrushArea();
-
-  // SINGLE TESTS
-  testExamplePaintData = {
-    custom_width: 300,
-    custom_height: 370,
-    posX: -100,
-    posY: -100,
-    colorObject: color1,
-    orientation: "vertical",
-    brushLength: 30,  // 20-40
-    brushBreadth: 30,
-    sizeStroke: 1,  // 1-10
-    numberPaintLayers: 2,
-    overlap: 20,
-    brightnessNoise: 15,  // 5-15
-    colorNoise: 15,  // 5-15
-    opacityBoost: 0, // getRandomFromInterval(150, 255),
-    brushLengthNoise: 0.2,
-    brushBreadthNoise: 0.2,  // brushBreadthNoise
-    brushAngleNoise: PI / 1, // PI/1-10
-    fibreCurveTightness: 2,  // shape of curve, between 0 and 5; little effect
-    fibreColorNoise: 2,
-    fibreBrightnessNoise: 4,  // 4-15
-    fibreStrokeSizeNoise: 1,
-    fibreStartLengthNoise: 30,  // 10-30
-    fibreBreadthNoise: 5,  // 1-5
-    fibreRotationNoise: PI / 100,
-    fibreOpacityNoiseBase: 200,  // 50-200
-  }
-  testPaint = new PaintBrushArea(testExamplePaintData);
-
-  // testLinesData = {
-  //   posX: -100,
-  //   posY: -100,
-  //   custom_width: 300,
-  //   custom_height: 370,
-  //   colorObject: color(0),
-  //   distance: 20,
-  //   noise: 1,
-  //   strokeSize: 2,
-  //   curveTightness: 3,
-  // }
-  // testLines = new NewLines(testLinesData);
-
-  testSphereData = {
-    custom_width: 300,
-    custom_height: 370,
-    posX: -100,
-    posY: -100,
-    colorObject: color(0),
-    margin: -10 * SCALING_FACTOR,
-    fillColorNoise: 50,
-    fillColorOpacityMax: 20,
-    noStroke: true,
-    strokeWeight: 1,
-    strokeColorNoise: 0,
-    strokeOpacityMax: 1,
-    numberQuantisizer: 10 * SCALING_FACTOR,
-  }
-  testSphere = new paintedSphere(testSphereData);
 }
 
 
@@ -375,124 +147,16 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-
-  // MASKING example
-  // image(paper);
-  // shape = createGraphics(width, height);
-  // shape.ellipse(200, 200, 200, 200);
-  // paper = paper.get(); // convert to image
-  // paper.mask
-
-
-  // paper.show();  // out
-  // splatter.show();  // out
-
-
-
   // ENDRESULT
   background(200);
   backgroundSphere.show();
-  // backGrid.show();
+  backGrid.show();
   frontGrid.show();
   canvas.show();
-  // canvasAgent.show();
-  // agentPaintbrush.show();
-
-  // maska
-  // brush.buffer = brush.buffer.get();
-  // brush.buffer.mask(fog.buffer);
-
-  // RANDOM AREAS
-  // for (let area of all_areas) {
-  //   area.show();
-  //   image(area.buffer, area.posX, area.posY, area.buffer.width, area.buffer.height);
-  // }
-
-  // PERLIN NOISE
-  // image(noise_fog, - width / 2, - height / 2, noise_fog.width, noise_fog.height);
-
-  // image(backup, - width / 2, - height / 2, backup.width * SCALING_FACTOR, backup.height * SCALING_FACTOR);
-  // image(backdown, - width / 2, - height / 2 + backup.height + backmiddle.height, backdown.width * SCALING_FACTOR, backdown.height * SCALING_FACTOR);
-
-  // image(sphere, - sphere.width / 2, - sphere.height / 2, sphere.width * SCALING_FACTOR, sphere.height * SCALING_FACTOR);
-
-  // image(backmiddle, - width / 2, - height / 2 + backup.height, backmiddle.width * SCALING_FACTOR, backmiddle.height * SCALING_FACTOR);
-  // image(grainy_gradient, - width / 2, - height / 2, grainy_gradient.width, grainy_gradient.height);
-
-
-
-  // BINOMIAL FUNCTION
-  // for (var i = 0; i < binomial_points.length; i++) {
-  //   push();
-  //   strokeWeight(2);
-  //   point(binomial_points[i].x, binomial_points[i].y);
-  //   pop();
-  // }
-
-
-  // if (grid.boxes_completely_run == true && preview_called == false) {
-  //   logging.debug("all work is done");
-  //   fxpreview();
-  //   preview_called = true;
-  // }
-
-
-
-  // exampleGrid.show();
-
-
-  // PERLIN Noise
-  // image(flowfield.update_noise(), -300, 0);
-
-
-
-  // Example
-  // exampleBackgroundSphere.show();
-
-  // EXAMPLE PaintAreas
-  // examplePaintBrushArea.show();
-  // examplePaintBrushArea2.show();
-
-  // linesExample.show()
-
-
-  // example for background layer of paintbrush
-  // testSphere.show();
-
-  // testPaint.show();
-
-  // testLines.show();
+  canvasAgent.show();
+  agentPaintbrush.show();
 
   noLoop();
 
-}
-
-
-// https://github.com/royhzq/betajs
-function betaPDF(x, a, b) {
-  // Beta probability density function impementation
-  // using logarithms, no factorials involved.
-  // Overcomes the problem with large integers
-  return Math.exp(lnBetaPDF(x, a, b))
-}
-function lnBetaPDF(x, a, b) {
-  // Log of the Beta Probability Density Function
-  return ((a - 1) * Math.log(x) + (b - 1) * Math.log(1 - x)) - lnBetaFunc(a, b)
-}
-function lnBetaFunc(a, b) {
-  // Log Beta Function
-  // ln(Beta(x,y))
-  foo = 0.0;
-
-  for (i = 0; i < a - 2; i++) {
-    foo += Math.log(a - 1 - i);
-  }
-  for (i = 0; i < b - 2; i++) {
-    foo += Math.log(b - 1 - i);
-  }
-  for (i = 0; i < a + b - 2; i++) {
-    foo -= Math.log(a + b - 1 - i);
-  }
-  return foo
 }
 
