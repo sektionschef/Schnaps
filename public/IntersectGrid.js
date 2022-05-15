@@ -142,7 +142,7 @@ class IntersectGrid {
                     distance: 10 * SCALING_FACTOR,
                     noise: 1 * SCALING_FACTOR,
                     strokeSize: 1 * SCALING_FACTOR,
-                    curveTightness: 3,
+                    curveTightness: 1,
                 });
             }
 
@@ -242,14 +242,14 @@ class IntersectGrid {
 
 
             if (logging.getLevel() <= 1) {
-                // this.showDebug(this.rects[i]);
+                this.showDebug(this.rects[i]);
             }
 
             this.rects[i].paintedArea.show();
 
-            // if (this.rects[i].lines !== undefined) {
-            //     this.rects[i].lines.show();
-            // }
+            if (this.rects[i].lines !== undefined) {
+                this.rects[i].lines.show();
+            }
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {
@@ -257,7 +257,7 @@ class IntersectGrid {
                 this.interactionRects[i].paintedArea.show();
             }
             if (logging.getLevel() <= 1) {
-                // this.showDebug(this.interactionRects[i]);
+                this.showDebug(this.interactionRects[i]);
             }
         }
 

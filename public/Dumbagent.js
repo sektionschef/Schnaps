@@ -92,24 +92,25 @@ class DumbAgent {
                     this.posY = getRandomFromInterval(0, this.customHeight)
                 }
 
-                push();
+                buffer.push();
 
-                translate(this.posX - width / 2, this.posY - height / 2);
-                strokeWeight(this.agentSize);
-                stroke(this.color);
+                // buffer.translate(this.posX - width / 2, this.posY - height / 2);
+                buffer.translate(this.posX, this.posY);
+                buffer.strokeWeight(this.agentSize);
+                buffer.stroke(this.color);
                 // stroke(colory);
                 // rotate(i % PI);
-                rotate(angle);
-                line(0, 0, this.lineLength, this.lineLength);
+                buffer.rotate(angle);
+                buffer.line(0, 0, this.lineLength, this.lineLength);
 
                 // optional
                 // stroke(color(this.color.levels[0], this.color.levels[1], this.color.levels[2], this.opacityLevel2));
                 // stroke(colory);
-                stroke(this.color);
-                point(0, 0);
-                point(this.lineLength, this.lineLength);
+                buffer.stroke(this.color);
+                buffer.point(0, 0);
+                buffer.point(this.lineLength, this.lineLength);
 
-                pop();
+                buffer.pop();
             }
         }
     }

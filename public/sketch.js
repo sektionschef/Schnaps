@@ -99,9 +99,10 @@ function setup() {
   canvasData = {
     custom_width: width,
     custom_height: height,
-    posX: -width / 2,
-    posY: -height / 2,
+    posX: 0,
+    posY: 0,
     colorObject: color(230),
+    opacity: 100,
   }
 
   agentPaintbrushData = {
@@ -156,12 +157,27 @@ function setup() {
     padding: 50,
   }
 
-  // canvas = new CanvasOverlay(canvasData);
-  // canvasAgent = new DumbAgent();
-  // agentPaintbrush = new DumbAgent(agentPaintbrushData);
+  let CanvasAgentData = {
+    posXImage: 0,
+    posYImage: 0,
+    customWidth: width,
+    customHeight: height,
+    colorObject: color(100, 100, 100),
+    stepSize: 10 * SCALING_FACTOR,  // 10 is hero
+    agentSize: 1 * SCALING_FACTOR,
+    opacityLevel: 10,
+    // opacityLevel2: 20,
+    lineLength: 15 * SCALING_FACTOR,
+    loopSize: 10000,
+    numberAgents: 5,
+  }
+
+  canvas = new CanvasOverlay(canvasData);
+  canvasAgent = new DumbAgent(CanvasAgentData);
+  agentPaintbrush = new DumbAgent(agentPaintbrushData);
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
-  // backGrid = new IntersectGrid(backGridData);
+  backGrid = new IntersectGrid(backGridData);
 
 }
 
@@ -181,9 +197,9 @@ function draw() {
   buffer.background(200);
   backgroundSphere.show();
   // canvasAgent.show();
-  // backGrid.show();
+  backGrid.show();
   frontGrid.show();
-  // canvas.show();
+  canvas.show();
   // agentPaintbrush.show();
 
   // absolute value / exportRatio
@@ -191,8 +207,6 @@ function draw() {
 
   // Draw buffer to canvas
   image(buffer, -width / 2, - height / 2);
-
-
 
   noLoop();
 
