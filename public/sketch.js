@@ -3,15 +3,27 @@
 const SWITCH_LOGGING_LEVEL = "info";
 // const SWITCH_LOGGING_LEVEL = "debug";
 
+
+
+let scaleRatio = 1;
+let exportRatio = 5;
+let buffer;
+let canvas;
+let exportPaper = {
+  width: 4000,
+  height: 4000
+}
+
+
+
+
+// DEP
 const CANVAS_WIDTH = 1080;
 const CANVAS_HEIGHT = CANVAS_WIDTH;
-
-
-// variable stuff
 let SCALING_FACTOR = 1;
-let rescaling_width;
-let rescaling_height;
-let preview_called = false;
+// let rescaling_width;
+// let rescaling_height;
+// let preview_called = false;
 
 let fxhash_number;
 let xoff = 0;
@@ -24,12 +36,22 @@ function preload() {
 }
 
 function setup() {
-
-  pixelDensity(1);
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
+  let rescaling_width = exportPaper.width / exportRatio;
+  let rescaling_height = exportPaper.height / exportRatio;
+
+
+
   // let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
-  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL);
+  // createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL);
+
+  buffer = createGraphics(rescaling_width, rescaling_height);
+  canvas = createCanvas(rescaling_width, rescaling_height, WEBGL);
+
+  // Adjust according to screens pixel density.
+  // pixelDensity(1);
+  exportRatio /= pixelDensity();
 
   NOISESEED = hashFnv32a(fxhash);
   logging.debug("Noise seed: " + NOISESEED);
@@ -44,7 +66,7 @@ function setup() {
   logging.debug(color2);
 
 
-  resize_canvas();
+  // resize_canvas();
 
   FRONTNUMBERRECTS = 30 // 30
   BACKNUMBERRECTS = 20 // 20
@@ -104,14 +126,14 @@ function setup() {
     posX: 0,
     posY: 0,
     colorObject: color(255),
-    margin: -50 * SCALING_FACTOR,
+    margin: -50,
     fillColorNoise: 50,
     fillColorOpacityMax: 10,
     noStroke: true,
     strokeWeight: 1,
     strokeColorNoise: 0,
     strokeOpacityMax: 250,
-    numberQuantisizer: 4 * SCALING_FACTOR,
+    numberQuantisizer: 4,
   }
 
   let frontGridData = {
@@ -134,12 +156,12 @@ function setup() {
     padding: 50,
   }
 
-  canvas = new CanvasOverlay(canvasData);
-  canvasAgent = new DumbAgent();
-  agentPaintbrush = new DumbAgent(agentPaintbrushData);
+  // canvas = new CanvasOverlay(canvasData);
+  // canvasAgent = new DumbAgent();
+  // agentPaintbrush = new DumbAgent(agentPaintbrushData);
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
-  backGrid = new IntersectGrid(backGridData);
+  // backGrid = new IntersectGrid(backGridData);
 
 }
 
@@ -150,14 +172,27 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  // ENDRESULT
-  background(200);
+  // Clear buffer each frame
+  buffer.clear();
+  // Transform (scale) all the drawings
+  buffer.scale(scaleRatio);
+
+  // Make all the drawing to the buffer instead of canvas 
+  buffer.background(200);
   backgroundSphere.show();
-  canvasAgent.show();
-  backGrid.show();
+  // canvasAgent.show();
+  // backGrid.show();
   frontGrid.show();
-  canvas.show();
+  // canvas.show();
   // agentPaintbrush.show();
+
+  // absolute value / exportRatio
+  // buffer.rect(3900 / exportRatio, 500, 20, 20);
+
+  // Draw buffer to canvas
+  image(buffer, -width / 2, - height / 2);
+
+
 
   noLoop();
 

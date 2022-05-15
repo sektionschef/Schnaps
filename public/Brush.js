@@ -177,17 +177,19 @@ class PaintBrushArea {
 
             for (var fibre of brushStroke.fibres) {
 
-                push();
+                buffer.push();
                 if (this.orientation == "horizontal") {
-                    translate((this.posX - this.custom_width / 2 + fibre.startX), (this.posY - this.custom_height / 2 + brushStroke.brushPosY))
-                    rotate(fibre.angleFibre);
+                    // buffer.translate((this.posX - this.custom_width / 2 + fibre.startX), (this.posY - this.custom_height / 2 + brushStroke.brushPosY))
+                    buffer.translate((this.posX + fibre.startX), (this.posY + brushStroke.brushPosY))
+                    buffer.rotate(fibre.angleFibre);
                 } else if (this.orientation == "vertical") {
-                    translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + fibre.startY))
-                    rotate(fibre.angleFibre / PI / 2);
+                    // buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + fibre.startY))
+                    buffer.translate((this.posX + brushStroke.brushPosX), (this.posY + fibre.startY))
+                    buffer.rotate(fibre.angleFibre / PI / 2);
                 }
-                stroke(fibre.colorFibre);
-                strokeWeight(fibre.sizeStrokeFibre);
-                noFill();
+                buffer.stroke(fibre.colorFibre);
+                buffer.strokeWeight(fibre.sizeStrokeFibre);
+                buffer.noFill();
                 // if (fxrand() > 0.75) {
                 //     curveTightness(4);
                 // } else {
@@ -221,34 +223,36 @@ class PaintBrushArea {
                 // endShape();
 
                 if (this.orientation == "horizontal") {
-                    line(0, this.sizeStroke * fibre.i, 0, fibre.stop - fibre.startX, this.sizeStroke * fibre.i, 0);
+                    buffer.line(0, this.sizeStroke * fibre.i, fibre.stop - fibre.startX, this.sizeStroke * fibre.i);
                 } else if (this.orientation == "vertical") {
-                    line(this.sizeStroke * fibre.i, 0, 0, this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
+                    buffer.line(this.sizeStroke * fibre.i, 0, this.sizeStroke * fibre.i, (fibre.stop - fibre.startY));
                 }
 
-                pop();
+                buffer.pop();
 
             }
 
             if (logging.getLevel() <= 1) {
                 // DEBUG Grid
-                push();
-                strokeWeight(1);
-                noFill();
-                translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + brushStroke.brushPosY))
-                rect(0, 0, this.brushLength, this.brushBreadth);
-                pop();
+                buffer.push();
+                buffer.strokeWeight(1);
+                buffer.noFill();
+                // buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + brushStroke.brushPosY))
+                buffer.translate((this.posX + brushStroke.brushPosX), (this.posY + brushStroke.brushPosY))
+                buffer.rect(0, 0, this.brushLength, this.brushBreadth);
+                buffer.pop();
             }
 
         }
 
         if (logging.getLevel() <= 1) {
-            // DEBUG RECT for AREA
-            push();
-            fill(30);
-            translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2));
-            rect(0, 0, this.custom_width, this.custom_height);
-            pop();
+            // // DEBUG RECT for AREA
+            buffer.push();
+            buffer.fill(30);
+            // buffer.translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2));
+            buffer.translate((this.posX), (this.posY));
+            buffer.rect(0, 0, this.custom_width, this.custom_height);
+            buffer.pop();
         }
 
     }

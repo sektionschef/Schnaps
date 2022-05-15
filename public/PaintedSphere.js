@@ -77,32 +77,32 @@ class paintedSphere {
     show() {
 
         if (logging.getLevel() <= 1) {
-            push();
-            noFill();
-            strokeWeight(2);
-            stroke("black");
-            // translate(this.posX - width / 2, this.posY - height / 2);
-            translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2));
-            rect(0, 0, this.custom_width, this.custom_height);
-            pop();
+            buffer.push();
+            buffer.noFill();
+            buffer.strokeWeight(2);
+            buffer.stroke("black");
+            // buffer.translate(this.posX - width / 2, this.posY - height / 2);
+            buffer.translate((this.posX), (this.posY));
+            buffer.rect(0, 0, this.custom_width, this.custom_height);
+            buffer.pop();
         }
 
         for (var element of this.elements) {
-            push();
-            translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2));
+            buffer.push();
+            buffer.translate((this.posX), (this.posY));
             if (this.noStroke == true) {
-                noStroke();
+                buffer.noStroke();
             } else {
-                stroke(element.strokeColor);
-                strokeWeight(element.strokeSize);
+                buffer.stroke(element.strokeColor);
+                buffer.strokeWeight(element.strokeSize);
             }
-            fill(element.fillColor);
+            buffer.fill(element.fillColor);
 
-            ellipseMode(CENTER);
-            ellipse(element.posXEl, element.posYEl, element.widthShape, element.heightShape);
-            rectMode(CENTER);
-            rect(element.posXRe, element.posYRe, element.widthShape, element.heightShape);
-            pop();
+            buffer.ellipseMode(CENTER);
+            buffer.ellipse(element.posXEl, element.posYEl, element.widthShape, element.heightShape);
+            buffer.rectMode(CENTER);
+            buffer.rect(element.posXRe, element.posYRe, element.widthShape, element.heightShape);
+            buffer.pop();
             // return
         }
     }

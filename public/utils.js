@@ -100,10 +100,11 @@ function resize_canvas() {
 }
 
 function keyTyped() {
-    if (key === 's') {
+    if (key === 'e' || key == 'E') {
         // noLoop();
-        saveCanvas(canvas, 'snapshot', 'png');
+        // saveCanvas(canvas, 'snapshot', 'png');
         // loop();
+        exportHighResolution();
     } else if (key === "r") {
         reset_camera()
     } else if (key === "c") {
@@ -143,3 +144,21 @@ function hashFnv32a(str, asString, seed) {
 }
 
 
+function exportHighResolution() {
+    scaleRatio = exportRatio;
+
+    // Re-create buffer with exportRatio and re-draw
+    buffer = createGraphics(scaleRatio * width, scaleRatio * height);
+    draw();
+
+    // Get timestamp to name the ouput file
+    let timestamp = new Date().getTime();
+
+    // Save as PNG
+    save(buffer, str(timestamp), 'png');
+
+    // Reset scaleRation back to 1, re-create buffer, re-draw
+    scaleRatio = 1;
+    buffer = createGraphics(width, height);
+    draw();
+}

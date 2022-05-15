@@ -106,8 +106,12 @@ class IntersectGrid {
 
             var width_ = getRandomFromInterval(this.minSize, this.maxSize);
             var height_ = getRandomFromInterval(this.minSize, this.maxSize);
-            var posX_ = getRandomFromInterval(- (width / 2) + (width_ / 2) + this.padding, (width / 2) - (width_ / 2) - this.padding);
-            var posY_ = getRandomFromInterval(- (height / 2) + (height_ / 2) + this.padding, (height / 2) - (height_ / 2) - this.padding);
+            // nobuffer
+            // var posX_ = getRandomFromInterval(- (width / 2) + (width_ / 2) + this.padding, (width / 2) - (width_ / 2) - this.padding);
+            // var posY_ = getRandomFromInterval(- (height / 2) + (height_ / 2) + this.padding, (height / 2) - (height_ / 2) - this.padding);
+            // buffer
+            var posX_ = getRandomFromInterval(this.padding, width - this.padding - width_);
+            var posY_ = getRandomFromInterval(this.padding, height - this.padding - height_);
 
             this.rects.push(
                 {
@@ -232,19 +236,20 @@ class IntersectGrid {
 
         for (let i = 0; i < this.rects.length; i++) {
 
-            if (this.rects[i].spheres !== undefined) {
-                this.rects[i].spheres.show();
+            // if (this.rects[i].spheres !== undefined) {
+            //     this.rects[i].spheres.show();
+            // }
+
+
+            if (logging.getLevel() <= 1) {
+                // this.showDebug(this.rects[i]);
             }
 
             this.rects[i].paintedArea.show();
 
-            if (logging.getLevel() <= 1) {
-                this.showDebug(this.rects[i]);
-            }
-
-            if (this.rects[i].lines !== undefined) {
-                this.rects[i].lines.show();
-            }
+            // if (this.rects[i].lines !== undefined) {
+            //     this.rects[i].lines.show();
+            // }
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {
@@ -252,7 +257,7 @@ class IntersectGrid {
                 this.interactionRects[i].paintedArea.show();
             }
             if (logging.getLevel() <= 1) {
-                this.showDebug(this.interactionRects[i]);
+                // this.showDebug(this.interactionRects[i]);
             }
         }
 
@@ -260,22 +265,18 @@ class IntersectGrid {
 
     showDebug(object) {
 
-        push();
-        stroke(0);
-        // noStroke();
-        fill(brightenColor(object.colorObject, 50));
-        // noFill();
+        buffer.push();
+        buffer.stroke(0);
+        buffer.fill(brightenColor(object.colorObject, 50));
+        // buffer.noFill();
 
         if (typeof object.posXNew !== 'undefined') {
-            translate(object.posXNew, object.posYNew, 0);
-            box(object.widthNew, object.heightNew, 0);
+            buffer.translate(object.posXNew, object.posYNew, 0);
+            buffer.rect(0, 0, object.widthNew, object.heightNew);
         } else if (typeof object.posX !== 'undefined') {
-            translate(object.posX, object.posY, object.posZ);
-            box(object.width, object.height, object.depth);
+            buffer.translate(object.posX, object.posY, object.posZ);
+            buffer.rect(0, 0, object.width, object.height, object.depth);
         }
-        pop();
-
-
-
+        buffer.pop();
     }
 }
