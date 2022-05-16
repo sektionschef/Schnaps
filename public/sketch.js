@@ -1,29 +1,20 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-const SWITCH_LOGGING_LEVEL = "info";
-// const SWITCH_LOGGING_LEVEL = "debug";
+// const SWITCH_LOGGING_LEVEL = "info";
+const SWITCH_LOGGING_LEVEL = "debug";
 
 
 
-let scaleRatio = 1;
-let exportRatio = 5;
+let scaleRatio;
+let exportRatio;
 let buffer;
 let canvas;
 let exportPaper = {
   width: 4000,
   height: 4000
 }
-
-
-
-
-// DEP
-const CANVAS_WIDTH = 1080;
-const CANVAS_HEIGHT = CANVAS_WIDTH;
-let SCALING_FACTOR = 1;
-// let rescaling_width;
-// let rescaling_height;
-// let preview_called = false;
+let rescaling_width;
+let rescaling_height;
 
 let fxhash_number;
 let xoff = 0;
@@ -38,20 +29,7 @@ function preload() {
 function setup() {
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
-
-  dynamicWidthRatio = exportPaper.width / windowWidth
-  dynamicHeightRatio = exportPaper.height / windowHeight
-
-  if (dynamicWidthRatio > dynamicHeightRatio) {
-    logging.debug("Width is smaller than height. Width dominates")
-    exportRatio = dynamicWidthRatio;
-  } else {
-    logging.debug("width is larger than height. Height dominates.")
-    exportRatio = dynamicHeightRatio;
-  }
-
-  rescaling_width = exportPaper.width / exportRatio;
-  rescaling_height = exportPaper.height / exportRatio;
+  scaleDynamically();
 
   buffer = createGraphics(rescaling_width, rescaling_height);
   canvas = createCanvas(rescaling_width, rescaling_height, WEBGL);
@@ -119,11 +97,11 @@ function setup() {
     posXImage: 0,
     posYImage: 0,
     colorObject: color(color1),
-    stepSize: 5 * SCALING_FACTOR,
-    agentSize: 1 * SCALING_FACTOR,
+    stepSize: 5,
+    agentSize: 1,
     opacityLevel: 10,
     // opacityLevel2: 15,
-    lineLength: 30 * SCALING_FACTOR,
+    lineLength: 30,
     loopSize: 1000,
     numberAgents: 15,
   }
@@ -171,11 +149,11 @@ function setup() {
     customWidth: width,
     customHeight: height,
     colorObject: color(100, 100, 100),
-    stepSize: 10 * SCALING_FACTOR,  // 10 is hero
-    agentSize: 1 * SCALING_FACTOR,
+    stepSize: 10,  // 10 is hero
+    agentSize: 1,
     opacityLevel: 10,
     // opacityLevel2: 20,
-    lineLength: 15 * SCALING_FACTOR,
+    lineLength: 15,
     loopSize: 10000,
     numberAgents: 5,
   }

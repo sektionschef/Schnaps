@@ -11,7 +11,7 @@ class paintedSphere {
                 posX: -width / 2,
                 posY: -height / 2,
                 colorObject: color(200),
-                margin: 50 * SCALING_FACTOR,
+                margin: 50,
                 fillColorNoise: 20,
                 fillColorOpacityMax: 100,
                 noStroke: true,

@@ -7,11 +7,11 @@ class DumbAgent {
                 customWidth: width,
                 customHeight: height,
                 colorObject: color(100, 100, 100),
-                stepSize: 10 * SCALING_FACTOR,  // 10 is hero
-                agentSize: 1 * SCALING_FACTOR,
+                stepSize: 10,  // 10 is hero
+                agentSize: 1,
                 opacityLevel: 10,
                 // opacityLevel2: 20,
-                lineLength: 15 * SCALING_FACTOR,
+                lineLength: 15,
                 loopSize: 10000,
                 numberAgents: 5,
             }

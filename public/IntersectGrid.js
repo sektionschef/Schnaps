@@ -80,13 +80,13 @@ class IntersectGrid {
     constructor(data) {
         if (typeof data === 'undefined') {
             data = {
-                minSize: 100 * SCALING_FACTOR,
-                maxSize: 500 * SCALING_FACTOR,
+                minSize: 100,
+                maxSize: 500,
                 numberRects: 5,
                 firstLevelColors: [color(100)],
                 secondLevelColors: [color(30)],
                 lineColor: color(230),
-                padding: 50 * SCALING_FACTOR,  // frame to the edge of the canvas
+                padding: 50,  // frame to the edge of the canvas
             }
         }
         this.minSize = data.minSize;
@@ -139,9 +139,9 @@ class IntersectGrid {
                     custom_width: this.rects[i].width,
                     custom_height: this.rects[i].height,
                     colorObject: this.lineColor,
-                    distance: 10 * SCALING_FACTOR,
-                    noise: 1 * SCALING_FACTOR,
-                    strokeSize: 1 * SCALING_FACTOR,
+                    distance: 10,
+                    noise: 1,
+                    strokeSize: 1,
                     curveTightness: 1,
                 });
             }
@@ -153,14 +153,14 @@ class IntersectGrid {
             //     posX: this.rects[i].posX,
             //     posY: this.rects[i].posY,
             //     colorObject: color(getRandomFromList([20, 40, 200, 240])),
-            //     margin: 0 * SCALING_FACTOR,
+            //     margin: 0,
             //     fillColorNoise: 50,
             //     fillColorOpacityMax: 60,
             //     noStroke: true,
             //     strokeWeight: 1,
             //     strokeColorNoise: 0,
             //     strokeOpacityMax: 1,
-            //     numberQuantisizer: 55 * SCALING_FACTOR,
+            //     numberQuantisizer: 55,
             // });
             // }
         }
@@ -193,23 +193,23 @@ class IntersectGrid {
             posY: posY,
             colorObject: brightenColor(distortColor(colorObject, 6), 6),
             orientation: getRandomFromList(["horizontal", "vertical"]),
-            brushLength: BRUSHLENGTHANDBREADTH * SCALING_FACTOR,
-            brushBreadth: BRUSHLENGTHANDBREADTH * SCALING_FACTOR,
-            sizeStroke: BRUSHSTROKESIZE * SCALING_FACTOR,
+            brushLength: BRUSHLENGTHANDBREADTH,
+            brushBreadth: BRUSHLENGTHANDBREADTH,
+            sizeStroke: BRUSHSTROKESIZE,
             numberPaintLayers: NUMBERPAINTLAYERS,
-            overlap: 20 * SCALING_FACTOR,
+            overlap: 20,
             brightnessNoise: BRUSHBRIGHTNESSNOISE,
             colorNoise: BRUSHCOLORNOISE,
             opacityBoost: 0, // getRandomFromInterval(150, 255),
-            brushLengthNoise: 0.2 * SCALING_FACTOR,
-            brushBreadthNoise: 0.2 * SCALING_FACTOR,
+            brushLengthNoise: 0.2,
+            brushBreadthNoise: 0.2,
             brushAngleNoise: BRUSHANGLENOISE,
             fibreCurveTightness: FIBRECURVETIGHTNESS,  // shape of curve, between 0 and 5; little effect
             fibreColorNoise: 2,
             fibreBrightnessNoise: FIBREBRIGHTNESSNOISE,
-            fibreStrokeSizeNoise: FIBRESTROKESIZENOISE * SCALING_FACTOR,
-            fibreStartLengthNoise: FIBRESTARTLENGTHNOISE * SCALING_FACTOR,  // start earlier or later
-            fibreBreadthNoise: FIBREBREADTHNOISE * SCALING_FACTOR,  // noise of fibre along the y axis in the middle
+            fibreStrokeSizeNoise: FIBRESTROKESIZENOISE,
+            fibreStartLengthNoise: FIBRESTARTLENGTHNOISE,  // start earlier or later
+            fibreBreadthNoise: FIBREBREADTHNOISE,  // noise of fibre along the y axis in the middle
             fibreRotationNoise: FIBREROTATIONNOISE,
             fibreOpacityNoiseBase: FIBREOPACITYNOISEBASE,
         }

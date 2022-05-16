@@ -79,9 +79,9 @@ class PaintBrushArea {
                 posY: -100,
                 colorObject: color1,
                 orientation: "vertical",
-                brushLength: 30 * SCALING_FACTOR,  // 20-40
-                brushBreadth: 30 * SCALING_FACTOR,
-                sizeStroke: 2 * SCALING_FACTOR,
+                brushLength: 30,  // 20-40
+                brushBreadth: 30,
+                sizeStroke: 2,
                 numberPaintLayers: 2,
                 overlap: 20,
                 brightnessNoise: 5,
