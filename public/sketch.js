@@ -38,11 +38,20 @@ function preload() {
 function setup() {
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
-  let rescaling_width = exportPaper.width / exportRatio;
-  let rescaling_height = exportPaper.height / exportRatio;
 
-  // let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
-  // createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL);
+  dynamicWidthRatio = exportPaper.width / windowWidth
+  dynamicHeightRatio = exportPaper.height / windowHeight
+
+  if (dynamicWidthRatio > dynamicHeightRatio) {
+    logging.debug("Width is smaller than height. Width dominates")
+    exportRatio = dynamicWidthRatio;
+  } else {
+    logging.debug("width is larger than height. Height dominates.")
+    exportRatio = dynamicHeightRatio;
+  }
+
+  rescaling_width = exportPaper.width / exportRatio;
+  rescaling_height = exportPaper.height / exportRatio;
 
   buffer = createGraphics(rescaling_width, rescaling_height);
   canvas = createCanvas(rescaling_width, rescaling_height, WEBGL);
