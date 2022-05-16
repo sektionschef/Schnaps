@@ -1,8 +1,7 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-// const SWITCH_LOGGING_LEVEL = "info";
-const SWITCH_LOGGING_LEVEL = "debug";
-
+const SWITCH_LOGGING_LEVEL = "info";
+// const SWITCH_LOGGING_LEVEL = "debug";
 
 
 let scaleRatio;
@@ -17,8 +16,6 @@ let rescaling_width;
 let rescaling_height;
 
 let fxhash_number;
-let xoff = 0;
-
 
 logging.info("FXHASH: " + fxhash);
 // logging.info("Grid: " + GRID);
@@ -48,12 +45,13 @@ function setup() {
   color1 = colorPalette.primaryColor;
   color2 = colorPalette.secondaryColor;
 
+  logging.debug("color1:")
   logging.debug(color1);
+  logging.debug("color2:")
   logging.debug(color2);
 
 
   // resize_canvas();
-
   FRONTNUMBERRECTS = 30 // 30
   BACKNUMBERRECTS = 20 // 20
   GRIDBRIGHTNESSDIFF = -10;
