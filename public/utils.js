@@ -107,14 +107,11 @@ function windowResized() {
 
 function keyTyped() {
     if (key === 'e' || key == 'E') {
-        // noLoop();
-        // saveCanvas(canvas, 'snapshot', 'png');
-        // loop();
         exportHighResolution();
     } else if (key === "r") {
-        reset_camera()
+        // reset_camera()
     } else if (key === "c") {
-        camera(0, 0, height * 1.5, 0, 0, 0, 0, 1, 0);
+        // camera(0, 0, height * 1.5, 0, 0, 0, 0, 1, 0);
     }
 }
 

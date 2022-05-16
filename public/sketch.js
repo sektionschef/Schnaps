@@ -51,7 +51,9 @@ function setup() {
   logging.debug(color2);
 
 
-  // resize_canvas();
+  GRIDVISIBLE = false;
+  RECTSHADOW = true;
+
   FRONTNUMBERRECTS = 30 // 30
   BACKNUMBERRECTS = 20 // 20
   GRIDBRIGHTNESSDIFF = -10;

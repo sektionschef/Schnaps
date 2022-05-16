@@ -18,11 +18,14 @@ class NewLines {
         this.posY = data.posY;
         this.custom_width = data.custom_width;
         this.custom_height = data.custom_height;
+        // this.colorObject = data.colorObject;
         this.colorObject = data.colorObject;
         this.distance = data.distance;
         this.noise = data.noise;
         this.strokeSize = data.strokeSize;
         this.curveTightness = data.curveTightness;
+
+        // this.colorObject.setAlpha(1);
 
         if (this.custom_width > this.custom_height) {
             this.orientation = "vertical";

@@ -8,7 +8,6 @@ brightencolor mit 50
 nur zwei farben - normal und überschneidungen
 
 
-
 Inspiration
 * intersections von rectangles: https://editor.p5js.org/eric/sketches/HkW2DRKnl 
 * color palette: https://geeksoutofthebox.com/2020/09/13/a-color-palette-generator-in-p5-js/ 
@@ -16,12 +15,7 @@ Inspiration
 * image export: https://gokcetaskan.com/artofcode/high-quality-export 
 
 # Shortcuts
-* 's' | export png image
-* 'c' | center the artwork
-* 'r' | reset the perspective
-* scrolling | zoom in and zoom out 
-* left-clicking + dragging | rotate the camera
-* right-clicking + dragging | pan the camera position
+* 'e' | export png image in high resolution 4000x4000px
 
 # Notes
 100% generative

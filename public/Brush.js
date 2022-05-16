@@ -175,6 +175,16 @@ class PaintBrushArea {
 
         for (var brushStroke of this.brushStrokes) {
 
+            if (GRIDVISIBLE == true) {
+                buffer.push();
+                buffer.strokeWeight(1);
+                buffer.stroke(color(20, 50));
+                buffer.noFill();
+                buffer.translate((this.posX + brushStroke.brushPosX), (this.posY + brushStroke.brushPosY))
+                buffer.rect(0, 0, this.brushLength, this.brushBreadth);
+                buffer.pop();
+            }
+
             for (var fibre of brushStroke.fibres) {
 
                 buffer.push();
