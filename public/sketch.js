@@ -41,8 +41,6 @@ function setup() {
   let rescaling_width = exportPaper.width / exportRatio;
   let rescaling_height = exportPaper.height / exportRatio;
 
-
-
   // let canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL).parent('canvasHolder');
   // createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, WEBGL);
 
@@ -51,6 +49,7 @@ function setup() {
 
   // Adjust according to screens pixel density.
   // pixelDensity(1);
+  logging.debug("Pixel density: " + pixelDensity())
   exportRatio /= pixelDensity();
 
   NOISESEED = hashFnv32a(fxhash);
@@ -198,10 +197,11 @@ function draw() {
   backgroundSphere.show();
   // canvasAgent.show();
   backGrid.show();
-  frontGrid.show();
   canvas.show();
+  frontGrid.show();
   // agentPaintbrush.show();
 
+  // document
   // absolute value / exportRatio
   // buffer.rect(3900 / exportRatio, 500, 20, 20);
 
