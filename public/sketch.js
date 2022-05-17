@@ -52,7 +52,8 @@ function setup() {
 
 
   GRIDVISIBLE = false;
-  // Paintedspheres
+  RANDOMSPHERES = false;
+  CANVASAGENT = false;
 
   FRONTNUMBERRECTS = 20 // 30
   BACKNUMBERRECTS = 10 // 20
@@ -91,19 +92,34 @@ function setup() {
     opacity: 100,
   }
 
-  agentPaintbrushData = {
+  agentPaintData1 = {
     customWidth: width,
     customHeight: height,
     posXImage: 0,
     posYImage: 0,
     colorObject: color(color1),
     stepSize: 5,
-    agentSize: 1,
-    opacityLevel: 10,
-    // opacityLevel2: 15,
+    agentSize: 2,
+    opacityLine: 3,
+    opacityPoint: 0.2,
     lineLength: 30,
-    loopSize: 1000,
-    numberAgents: 15,
+    loopSize: 100,
+    numberAgents: 65,
+  }
+
+  agentPaintData2 = {
+    customWidth: width,
+    customHeight: height,
+    posXImage: 0,
+    posYImage: 0,
+    colorObject: color(color2),
+    stepSize: 5,
+    agentSize: 2,
+    opacityLine: 3,
+    opacityPoint: 0.2,
+    lineLength: 30,
+    loopSize: 100,
+    numberAgents: 65,
   }
 
 
@@ -148,12 +164,12 @@ function setup() {
     posYImage: 0,
     customWidth: width,
     customHeight: height,
-    colorObject: color(100, 100, 100),
+    colorObject: color(100),
     stepSize: 10,  // 10 is hero
-    agentSize: 1,
-    opacityLevel: 10,
-    // opacityLevel2: 20,
-    lineLength: 15,
+    agentSize: 2,
+    opacityLine: 10,
+    opacityPoint: 5,
+    lineLength: 20,
     loopSize: 10000,
     numberAgents: 5,
   }
@@ -168,7 +184,8 @@ function setup() {
 
   canvas = new CanvasOverlay(canvasData);
   canvasAgent = new DumbAgent(CanvasAgentData);
-  agentPaintbrush = new DumbAgent(agentPaintbrushData);
+  agentPaint1 = new DumbAgent(agentPaintData1);
+  agentPaint2 = new DumbAgent(agentPaintData2);
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
@@ -191,12 +208,17 @@ function draw() {
   // Make all the drawing to the buffer instead of canvas 
   buffer.background(200);
   backgroundSphere.show();
-  // canvasAgent.show();
+  if (CANVASAGENT == true) {
+    canvasAgent.show();
+  }
   backGrid.show();
-  randomSpheres.show();
+  if (RANDOMSPHERES == true) {
+    randomSpheres.show();
+  }
   canvas.show();
   frontGrid.show();
-  // agentPaintbrush.show();
+  agentPaint1.show();
+  agentPaint2.show();
 
   // document
   // absolute value / exportRatio
