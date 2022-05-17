@@ -143,6 +143,7 @@ class IntersectGrid {
                     noise: 1,
                     strokeSize: 1,
                     curveTightness: 1,
+                    opacityLevelHSB: 0.7,
                 });
             }
 

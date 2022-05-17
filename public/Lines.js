@@ -11,6 +11,7 @@ class NewLines {
                 noise: 1,
                 strokeSize: 2,
                 curveTightness: 3,
+                opacityLevelHSB: 0.7,
             }
         }
 
@@ -24,8 +25,9 @@ class NewLines {
         this.noise = data.noise;
         this.strokeSize = data.strokeSize;
         this.curveTightness = data.curveTightness;
+        this.opacityLevelHSB = data.opacityLevelHSB;
 
-        // this.colorObject.setAlpha(1);
+        this.colorObject.setAlpha(this.opacityLevelHSB);
 
         if (this.custom_width > this.custom_height) {
             this.orientation = "vertical";
