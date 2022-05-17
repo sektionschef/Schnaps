@@ -52,10 +52,10 @@ function setup() {
 
 
   GRIDVISIBLE = false;
-  RECTSHADOW = true;
+  // Paintedspheres
 
-  FRONTNUMBERRECTS = 30 // 30
-  BACKNUMBERRECTS = 20 // 20
+  FRONTNUMBERRECTS = 20 // 30
+  BACKNUMBERRECTS = 10 // 20
   GRIDBRIGHTNESSDIFF = -10;
   NUMBERPAINTLAYERS = 2;  // 2-3??
   BRUSHLENGTHANDBREADTH = 30 // getRandomFromInterval(20, 40);
@@ -158,12 +158,21 @@ function setup() {
     numberAgents: 5,
   }
 
+  let randomSphereData = {
+    minSize: 100,  // 100
+    maxSize: 300,  // 500
+    numberSpheres: 10,
+    colorObject: color(20),
+    padding: 50,
+  }
+
   canvas = new CanvasOverlay(canvasData);
   canvasAgent = new DumbAgent(CanvasAgentData);
   agentPaintbrush = new DumbAgent(agentPaintbrushData);
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
+  randomSpheres = new RandomPaintedSpheres(randomSphereData);
 
 }
 
@@ -184,6 +193,7 @@ function draw() {
   backgroundSphere.show();
   // canvasAgent.show();
   backGrid.show();
+  randomSpheres.show();
   canvas.show();
   frontGrid.show();
   // agentPaintbrush.show();

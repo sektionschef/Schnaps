@@ -110,3 +110,59 @@ class paintedSphere {
     }
 
 }
+
+class RandomPaintedSpheres {
+    constructor(data) {
+        if (typeof data === 'undefined') {
+            data = {
+                minSize: 100,
+                maxSize: 300,
+                numberSpheres: 20,
+                colorObject: color(20),
+                padding: 50,
+            }
+        }
+
+        this.minSize = data.minSize;
+        this.maxSize = data.maxSize;
+        this.numberSpheres = data.numberSpheres;
+        this.colorObject = data.colorObject;
+        this.padding = data.padding;
+
+        this.spheres = [];
+
+        for (let i = 0; i < this.numberSpheres; i++) {
+
+            var width_ = getRandomFromInterval(this.minSize, this.maxSize);
+            var height_ = getRandomFromInterval(this.minSize, this.maxSize);
+            var posX_ = getRandomFromInterval(this.padding, width - this.padding - width_);
+            var posY_ = getRandomFromInterval(this.padding, height - this.padding - height_);
+
+            this.spheres.push(
+                new paintedSphere(data = {
+                    custom_width: width_,
+                    custom_height: height_,
+                    posX: posX_,
+                    posY: posY_,
+                    // colorObject: color(getRandomFromList([20, 40, 200, 240])),
+                    colorObject: this.colorObject,
+                    margin: 0,
+                    fillColorNoise: 50,
+                    fillColorOpacityMax: 1,  // THISONE
+                    noStroke: true,
+                    strokeWeight: 1,
+                    strokeColorNoise: 0,
+                    strokeOpacityMax: 10,
+                    numberQuantisizer: 20,
+                }
+                ))
+        }
+    }
+
+
+    show() {
+        for (var sphere of this.spheres) {
+            sphere.show();
+        }
+    }
+}
