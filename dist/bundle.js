@@ -1,1 +1,1 @@
-window.$fxhashFeatures={Grid:GRID,"Paired boxes":PAIRING_COUNT,Palette:chosenPalette.name,"Camera flight":chosenCameraFlight.name,"Paint frame":label_feature(BORDER_FRAME,BORDER_FRAME_MIN,BORDER_FRAME_MAX),"Brush region":label_feature(BRUSH_SIZE,BRUSH_SIZE_MIN,BRUSH_SIZE_MAX),"Brush size":label_feature(PRIMARY_STROKE_WEIGHT,PRIMARY_STROKE_WEIGHT_MIN,PRIMARY_STROKE_WEIGHT_MAX),"Brush tightness":label_feature(BRUSH_TIGHTNESS,BRUSH_TIGHTNESS_MIN,BRUSH_TIGHTNESS_MAX),"Line stroke weight":label_feature(STROKE_SIZE,STROKE_SIZE_MIN,STROKE_SIZE_MAX)};
+window.$fxhashFeatures={};

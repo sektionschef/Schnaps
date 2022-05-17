@@ -1,7 +1,8 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Raumstreicher</title><meta name="description" content="Painting created with p5.js."><meta name="author" content="Stefan Schwaha"><meta property="og:title" content="Raumstreicher"><meta property="og:type" content="website"><meta property="og:url" content="https://digitalitility.com"><meta property="og:description" content="Space divided in painted boxes."><link rel="icon" href="favicon.ico"><script id="fxhash-snippet">//---- do not edit the following code (you can indent as you wish)
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Snorre</title><meta name="description" content="Painting created with p5.js."><meta name="author" content="Stefan Schwaha"><meta property="og:title" content="Snorre"><meta property="og:type" content="website"><meta property="og:url" content="https://digitalitility.com"><meta property="og:description" content="In Snorre we trust."><link rel="icon" href="favicon.ico"><script id="fxhash-snippet">//---- do not edit the following code (you can indent as you wish)
     let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
     var fxhash = "oo" + Array(49).fill(0).map(_ => alphabet[(Math.random() * alphabet.length) | 0]).join('')
-    // var fxhash = "oosViukGmmmNCJo7ZCrVmcqBUVi1JUzfZEmC8uvyRSpxstXhH1B"  // like it
+    // var fxhash = "ooPc5RNHAEy6o5PE5DewTvzqEpZH7mEeQohtef5dAme12MWsfYM"
+    // var fxhash = "ooPYqYze4RzWpQL3sU1JXzyYRsJGN5LR1DizwDzgQVm9cniRUtg"
     let b58dec = str => [...str].reduce((p, c) => p * alphabet.length + alphabet.indexOf(c) | 0, 0)
     let fxhashTrunc = fxhash.slice(2)
     let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}", 'g')
@@ -26,4 +27,4 @@
     function fxpreview() {
       console.log("fxhash: TRIGGER PREVIEW")
     }
-      //---- /do not edit the following code</script><script src="p5.min.js"></script><script src="loglevel.min.js"></script><script>var logging = log.noConflict();</script><script src="Grid.js" ) }}></script><script src="Box.js" ) }}></script><script src="Lines.js" ) }}></script><script src="Paint.js" ) }}></script><script src="utils.js" ) }}></script><script src="sketch.js" ) }}></script><link rel="stylesheet" href="styles.css"></head><body><div id="p5_loading" class="loadingclass"></div><div class="container"><div id="canvasHolder"></div></div><script defer="defer" src="./bundle.js"></script></body></html>
+      //---- /do not edit the following code</script><script src="p5.min.js"></script><script src="loglevel.min.js"></script><script>var logging = log.noConflict();</script><script src="IntersectGrid.js" ) }}></script><script src="ColorPalette.js" ) }}></script><script src="Dumbagent.js" ) }}></script><script src="CanvasOverlay.js" ) }}></script><script src="PaintedSphere.js" ) }}></script><script src="Brush.js" ) }}></script><script src="Lines.js" ) }}></script><script src="utils.js" ) }}></script><script src="sketch.js" ) }}></script><link rel="stylesheet" href="styles.css"></head><body><div id="p5_loading" class="loadingclass"></div><div class="container"><div id="canvasHolder"></div></div><script defer="defer" src="./bundle.js"></script></body></html>

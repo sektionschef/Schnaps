@@ -20,3 +20,7 @@ Inspiration
 # Notes
 100% generative
 created with p5.js
+
+
+
+npm run build
