@@ -12,6 +12,7 @@ class NewLines {
                 strokeSize: 2,
                 curveTightness: 3,
                 opacityLevelHSB: 0.7,
+                brushLengthAndBreadth: 30,
             }
         }
 
@@ -19,6 +20,7 @@ class NewLines {
         this.posY = data.posY;
         this.custom_width = data.custom_width;
         this.custom_height = data.custom_height;
+        console.log(this.custom_height);
         // this.colorObject = data.colorObject;
         this.colorObject = data.colorObject;
         this.distance = data.distance;
@@ -26,23 +28,26 @@ class NewLines {
         this.strokeSize = data.strokeSize;
         this.curveTightness = data.curveTightness;
         this.opacityLevelHSB = data.opacityLevelHSB;
+        this.brushLengthAndBreadth = data.brushLengthAndBreadth;
 
+        // DANGER transform to RGB red(), green(), blue()
         this.colorObject.setAlpha(this.opacityLevelHSB);
 
         if (this.custom_width > this.custom_height) {
             this.orientation = "vertical";
 
-            // number of lines is 1 lower than number of distances.
-
-            // this.nOfLines = Math.round(this.custom_width / this.distance);
-            this.nOfLines = Math.round((this.custom_width - this.distance) / (this.distance + this.strokeSize));
-            this.distance_ = this.custom_width / (this.nOfLines + 1);
+            this.custom_width_brush = Math.ceil(this.custom_width / this.brushLengthAndBreadth) * this.brushLengthAndBreadth;  // effective length if brushes are used, the have fixed length
+            this.nOfLines = Math.round((this.custom_width_brush - this.distance) / (this.distance + this.strokeSize));  // number of lines is 1 lower than number of distances.
+            this.distance_ = this.custom_width_brush / (this.nOfLines + 1);
         } else {
             this.orientation = "horizontal";
 
-            // this.nOfLines = Math.round(this.custom_height / this.distance);
-            this.nOfLines = Math.round((this.custom_height - this.distance) / (this.distance + this.strokeSize));
-            this.distance_ = this.custom_height / (this.nOfLines + 1);
+            // this.nOfLines = Math.round((this.custom_height - this.distance) / (this.distance + this.strokeSize));
+            // this.distance_ = this.custom_height / (this.nOfLines + 1);
+
+            this.custom_height_brush = Math.ceil(this.custom_height / this.brushLengthAndBreadth) * this.brushLengthAndBreadth;  // effective length if brushes are used, the have fixed length
+            this.nOfLines = Math.round((this.custom_height_brush - this.distance) / (this.distance + this.strokeSize));  // number of lines is 1 lower than number of distances.
+            this.distance_ = this.custom_height_brush / (this.nOfLines + 1);
         }
     }
 

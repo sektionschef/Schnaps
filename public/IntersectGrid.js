@@ -144,6 +144,7 @@ class IntersectGrid {
                     strokeSize: 1,
                     curveTightness: 1,
                     opacityLevelHSB: 0.7,
+                    brushLengthAndBreadth: BRUSHLENGTHANDBREADTH,
                 });
             }
         }
