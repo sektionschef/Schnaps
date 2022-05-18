@@ -27,7 +27,6 @@ class NewLines {
         this.strokeSize = data.strokeSize;
         this.curveTightness = data.curveTightness;
         this.opacityLevelHSB = data.opacityLevelHSB;
-        this.brushLengthAndBreadth = data.brushLengthAndBreadth;
 
         // DANGER transform to RGB red(), green(), blue()
         this.colorObject.setAlpha(this.opacityLevelHSB);
@@ -37,19 +36,11 @@ class NewLines {
 
             this.nOfLines = Math.round((this.custom_width - this.distance) / (this.distance + this.strokeSize));
             this.distance_ = this.custom_width / (this.nOfLines + 1);
-
-            // this.custom_width_brush = Math.round(this.custom_width / this.brushLengthAndBreadth) * this.brushLengthAndBreadth;  // effective length if brushes are used, the have fixed length
-            // this.nOfLines = Math.round((this.custom_width_brush - this.distance) / (this.distance + this.strokeSize));  // number of lines is 1 lower than number of distances.
-            // this.distance_ = this.custom_width_brush / (this.nOfLines + 1);
         } else {
             this.orientation = "horizontal";
 
             this.nOfLines = Math.round((this.custom_height - this.distance) / (this.distance + this.strokeSize));
             this.distance_ = this.custom_height / (this.nOfLines + 1);
-
-            // this.custom_height_brush = Math.round(this.custom_height / this.brushLengthAndBreadth) * this.brushLengthAndBreadth;  // effective length if brushes are used, the have fixed length
-            // this.nOfLines = Math.round((this.custom_height_brush - this.distance) / (this.distance + this.strokeSize));  // number of lines is 1 lower than number of distances.
-            // this.distance_ = this.custom_height_brush / (this.nOfLines + 1);
         }
     }
 
