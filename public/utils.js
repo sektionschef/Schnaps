@@ -73,6 +73,10 @@ function lessenColor(colorObject, diff) {
     return color(red, green, blue, opacity);
 }
 
+function fromHSBtoRGB(colorObject) {
+    return color(red(colorObject), green(colorObject), blue(colorObject));
+}
+
 // calculate the scaling params - choose the limiting factor either height or width
 function scaleDynamically() {
 

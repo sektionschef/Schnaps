@@ -22,8 +22,6 @@ class ColorPalette {
             this.primaryColorBrightness = Math.round(getRandomFromInterval(20, 50));;
 
             this.secondaryColorBrightness = Math.abs(this.primaryColorBrightness - 100);
-            console.log(this.primaryColorBrightness);
-            console.log(this.secondaryColorBrightness);
 
             colorMode(HSB);
             this.primaryColor_ = color(this.primaryColorHue, this.primaryColorSaturation, this.primaryColorBrightness);
