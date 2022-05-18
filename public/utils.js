@@ -26,7 +26,6 @@ function distortColor(colorObject, max_diff) {
 function brightenColor(colorObject, diff) {
 
     colorMode(HSB);
-    // console.log(colorObject)
     brightnessNew = brightness(colorObject) + getRandomFromInterval(-diff, diff);
     resultingColor = color(hue(colorObject), saturation(colorObject), brightnessNew);
 
