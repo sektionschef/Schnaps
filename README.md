@@ -18,9 +18,10 @@ Inspiration
 * 'e' | export png image in high resolution 4000x4000px
 
 # Notes
-100% generative
+100% generative, no pngs
 created with p5.js
 
 
+https://codepen.io/HunorMarton/details/eWvewo
 
 npm run build

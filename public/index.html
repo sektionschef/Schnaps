@@ -24,7 +24,7 @@
     var fxhash = "oo" + Array(49).fill(0).map(_ => alphabet[(Math.random() * alphabet.length) | 0]).join('')
     // var fxhash = "ooPc5RNHAEy6o5PE5DewTvzqEpZH7mEeQohtef5dAme12MWsfYM"
     // var fxhash = "ooPYqYze4RzWpQL3sU1JXzyYRsJGN5LR1DizwDzgQVm9cniRUtg"
-    var fxhash = "ooz5ribMxQCjw9Wa9y1QLKHS2fkHc7E8vXcm1xFk3RBiqM4bngS"  // check length
+    // var fxhash = "ooz5ribMxQCjw9Wa9y1QLKHS2fkHc7E8vXcm1xFk3RBiqM4bngS"  // check length
     // var fxhash = "oomPNUrjQXzLmNwthbPSru1NVDd5rSKEHVnPx61Dkt1XkCQyY4s"  // check length
     let b58dec = str => [...str].reduce((p, c) => p * alphabet.length + alphabet.indexOf(c) | 0, 0)
     let fxhashTrunc = fxhash.slice(2)

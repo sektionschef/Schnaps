@@ -11,7 +11,7 @@ class NewLines {
                 noise: 1,
                 strokeSize: 2,
                 curveTightness: 3,
-                opacityLevelHSB: 0.7,
+                opacityLevel: 180,
                 brushLengthAndBreadth: 30,
             }
         }
@@ -26,10 +26,9 @@ class NewLines {
         this.noise = data.noise;
         this.strokeSize = data.strokeSize;
         this.curveTightness = data.curveTightness;
-        this.opacityLevelHSB = data.opacityLevelHSB;
+        this.opacityLevel = data.opacityLevel;
 
-        // DANGER transform to RGB red(), green(), blue()
-        this.colorObject.setAlpha(this.opacityLevelHSB);
+        this.colorObject.setAlpha(this.opacityLevel);
 
         if (this.custom_width > this.custom_height) {
             this.orientation = "vertical";
