@@ -98,13 +98,13 @@ function setup() {
     posXImage: 0,
     posYImage: 0,
     colorObject: color(color1),
-    stepSize: 5,
+    stepSize: 15,
     agentSize: 2,
-    opacityLine: 3,
+    opacityLine: 5,
     opacityPoint: 0.2,
-    lineLength: 30,
+    lineLength: 20,
     loopSize: 100,
-    numberAgents: 65,
+    numberAgents: 135,
   }
 
   agentPaintData2 = {
@@ -113,13 +113,13 @@ function setup() {
     posXImage: 0,
     posYImage: 0,
     colorObject: color(color2),
-    stepSize: 5,
+    stepSize: 15,
     agentSize: 2,
-    opacityLine: 3,
+    opacityLine: 5,
     opacityPoint: 0.2,
-    lineLength: 30,
+    lineLength: 20,
     loopSize: 100,
-    numberAgents: 65,
+    numberAgents: 135,
   }
 
 
