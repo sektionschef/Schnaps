@@ -1,5 +1,6 @@
 # Schnaps
 
+intersectangles
 
 this.MIN = 100;
 this.MAX = 500;

@@ -90,7 +90,7 @@ class PaintBrushArea {
                 brushLengthNoise: 0.2,
                 brushBreadthNoise: 0.2,  // brushBreadthNoise
                 brushAngleNoise: PI / 20,
-                fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
+                // fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
                 fibreColorNoise: 2,
                 fibreBrightnessNoise: 2,
                 fibreStrokeSizeNoise: 1,
@@ -118,7 +118,7 @@ class PaintBrushArea {
         this.brushLengthNoise = data.brushLengthNoise;
         this.brushBreadthNoise = data.brushBreadthNoise;
         this.brushAngleNoise = data.brushAngleNoise;
-        this.fibreCurveTightness = data.fibreCurveTightness;
+        // this.fibreCurveTightness = data.fibreCurveTightness;
         this.fibreColorNoise = data.fibreColorNoise;
         this.fibreBrightnessNoise = data.fibreBrightnessNoise;
         this.fibreStrokeSizeNoise = data.fibreStrokeSizeNoise;

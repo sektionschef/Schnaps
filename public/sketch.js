@@ -40,29 +40,31 @@ function setup() {
   logging.debug("Noise seed: " + NOISESEED);
   noiseSeed(NOISESEED);
 
-  GRIDVISIBLE = false;
-  RANDOMSPHERES = true;
-  CANVASAGENT = true;
-  PALETTE = "color";
+  GRIDVISIBLE = false  // getRandomFromList([true, false]);
+  RANDOMSPHERES = getRandomFromList([true, false]);
+  CANVASAGENT = getRandomFromList([true, false]);
+  PALETTE = "color" // getRandomFromList(["greyscale", "color", "dumb color", "dark color"]);
+  console.log("PALETTE: " + PALETTE);
   CANVASROUGHNESS = getRandomFromInterval(60, 90);
   FRONTNUMBERRECTS = getRandomFromInterval(10, 20); // 20  // 30
   BACKNUMBERRECTS = getRandomFromInterval(10, 20); // 20
 
-  GRIDBRIGHTNESSDIFF = -10;
-  NUMBERPAINTLAYERS = 2;  // 2-3??
-  BRUSHLENGTHANDBREADTH = 30 // getRandomFromInterval(20, 40);
-  BRUSHSTROKESIZE = 1 // getRandomFromInterval(1, );
+  NUMBERPAINTLAYERS = getRandomFromList([2, 3]);  // 2-3??  // best 2
+  console.log("NUMBERPAINTLAYERS: " + NUMBERPAINTLAYERS)
+  GRIDBRIGHTNESSDIFF = -10;  // fix
+  BRUSHLENGTHANDBREADTH = getRandomFromInterval(25, 35);  // 30 best
+  BRUSHSTROKESIZE = 2 // getRandomFromInterval(1, );
   BRUSHBRIGHTNESSNOISE = 10 // getRandomFromInterval(5, 15);
-  if (PALETTE == "color") {
+  if (PALETTE != "greyscale") {
     BRUSHCOLORNOISE = 20 // getRandomFromInterval(5, 15);  // mit 20 besser
   } else if (PALETTE == "greyscale") {
-    BRUSHCOLORNOISE = 5
+    BRUSHCOLORNOISE = 2
   }
-  BRUSHANGLENOISE = PI / 40 // getRandomFromInterval(PI / 100, PI / 40);
-  FIBRECURVETIGHTNESS = 2 // getRandomFromInterval(2, 5);
-  FIBREBRIGHTNESSNOISE = 4 // getRandomFromInterval(4, 15);
-  FIBRESTROKESIZENOISE = 0.2;
-  FIBRESTARTLENGTHNOISE = 10 // getRandomFromInterval(10, 30);
+  BRUSHANGLENOISE = getRandomFromInterval(PI / 80, PI / 30);  // best PI / 40
+  // FIBRECURVETIGHTNESS = 2 // getRandomFromInterval(2, 5);
+  FIBREBRIGHTNESSNOISE = 4 // fix // getRandomFromInterval(4, 15);
+  FIBRESTROKESIZENOISE = 1;  // fix // 0.2
+  FIBRESTARTLENGTHNOISE = 10 // fix getRandomFromInterval(10, 30);
   FIBREBREADTHNOISE = 0.02 // getRandomFromInterval(1, 5); cool 0.2
   FIBREROTATIONNOISE = PI / 100;
   FIBREOPACITYNOISEBASE = 120 // 120-
@@ -188,8 +190,8 @@ function setup() {
   let randomSphereData = {
     minSize: 100,  // 100
     maxSize: 300,  // 500
-    numberSpheres: 10,
-    colorObject: color(30, 50),
+    numberSpheres: 6,
+    colorObject: color(30, 30),
     padding: 50,
   }
 

@@ -1,12 +1,24 @@
 class ColorPalette {
     constructor() {
 
-        if (PALETTE == "color") {
+        if (PALETTE != "greyscale") {
             this.primaryColorHue = Math.round(getRandomFromInterval(0, 360));
-            this.primaryColorSaturation = 85 // Math.round(getRandomFromInterval(90, 91));
-            this.primaryColorBrightness = 85 // Math.round(getRandomFromInterval(90, 91));
+            if (PALETTE == "color") {
+                this.primaryColorSaturation = 90 // Math.round(getRandomFromInterval(90, 91));
+                this.primaryColorBrightness = 90 // Math.round(getRandomFromInterval(90, 91));
+            } else if (PALETTE == "dumb color") {
+                this.primaryColorSaturation = 55 // Math.round(getRandomFromInterval(90, 91));
+                this.primaryColorBrightness = 80 // Math.round(getRandomFromInterval(90, 91));
+            } else if (PALETTE == "dark color") {
+                this.primaryColorSaturation = 100 // Math.round(getRandomFromInterval(90, 91));
+                this.primaryColorBrightness = 50 // Math.round(getRandomFromInterval(90, 91));
+            }
 
-            this.secondaryColorHue = this.primaryColorHue - (360 / 2) + 1;
+            // this.secondaryColorHue = this.primaryColorHue - (360 / 2) + 1;
+            // if (this.secondaryColorHue < 0) {
+            //     this.secondaryColorHue += 360;
+            // }
+            this.secondaryColorHue = this.primaryColorHue - (360 / 3) + 1;
             if (this.secondaryColorHue < 0) {
                 this.secondaryColorHue += 360;
             }
@@ -15,11 +27,10 @@ class ColorPalette {
             this.primaryColor_ = color(this.primaryColorHue, this.primaryColorSaturation, this.primaryColorBrightness);
             this.secondaryColor_ = color(this.secondaryColorHue, this.primaryColorSaturation, this.primaryColorBrightness);
             colorMode(RGB);
-
         } else if (PALETTE == "greyscale") {
             this.primaryColorHue = 0;
             this.primaryColorSaturation = 0;
-            this.primaryColorBrightness = Math.round(getRandomFromInterval(20, 50));;
+            this.primaryColorBrightness = Math.round(getRandomFromInterval(20, 40));;
 
             this.secondaryColorBrightness = Math.abs(this.primaryColorBrightness - 100);
 
