@@ -132,7 +132,8 @@ function setup() {
     custom_height: height,
     posX: 0,
     posY: 0,
-    colorObject: color(255),
+    // colorObject: color(255),
+    colorObject: color(255, 232, 189),
     margin: -50,
     fillColorNoise: 50,
     fillColorOpacityMax: 10,
@@ -220,9 +221,9 @@ function draw() {
     randomSpheres.show();
   }
   canvas.show();
-  frontGrid.show();
   agentPaint1.show();
   agentPaint2.show();
+  frontGrid.show();
 
   // document
   // absolute value / exportRatio
