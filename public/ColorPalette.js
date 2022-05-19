@@ -1,33 +1,37 @@
 class ColorPalette {
     constructor() {
 
-        if (PALETTE != "greyscale") {
+        if (PALETTE.includes("color")) {
             this.primaryColorHue = Math.round(getRandomFromInterval(0, 360));
-            if (PALETTE == "color") {
+            if (PALETTE.includes("full")) {
                 this.primaryColorSaturation = 90 // Math.round(getRandomFromInterval(90, 91));
                 this.primaryColorBrightness = 90 // Math.round(getRandomFromInterval(90, 91));
-            } else if (PALETTE == "dumb color") {
+            } else if (PALETTE.includes("weak")) {
                 this.primaryColorSaturation = 55 // Math.round(getRandomFromInterval(90, 91));
                 this.primaryColorBrightness = 80 // Math.round(getRandomFromInterval(90, 91));
-            } else if (PALETTE == "dark color") {
+            } else if (PALETTE.includes("dark")) {
                 this.primaryColorSaturation = 100 // Math.round(getRandomFromInterval(90, 91));
-                this.primaryColorBrightness = 50 // Math.round(getRandomFromInterval(90, 91));
+                this.primaryColorBrightness = 70 // Math.round(getRandomFromInterval(90, 91));
             }
 
-            // this.secondaryColorHue = this.primaryColorHue - (360 / 2) + 1;
-            // if (this.secondaryColorHue < 0) {
-            //     this.secondaryColorHue += 360;
-            // }
-            this.secondaryColorHue = this.primaryColorHue - (360 / 3) + 1;
-            if (this.secondaryColorHue < 0) {
-                this.secondaryColorHue += 360;
+            if (PALETTE.includes("complimentary")) {
+                this.secondaryColorHue = this.primaryColorHue - (360 / 2) + 1;
+                if (this.secondaryColorHue < 0) {
+                    this.secondaryColorHue += 360;
+                }
+            } else if (PALETTE.includes("triadic")) {
+                this.secondaryColorHue = this.primaryColorHue - (360 / 3) + 1;
+                if (this.secondaryColorHue < 0) {
+                    this.secondaryColorHue += 360;
+                }
             }
+
 
             colorMode(HSB);
             this.primaryColor_ = color(this.primaryColorHue, this.primaryColorSaturation, this.primaryColorBrightness);
             this.secondaryColor_ = color(this.secondaryColorHue, this.primaryColorSaturation, this.primaryColorBrightness);
             colorMode(RGB);
-        } else if (PALETTE == "greyscale") {
+        } else if (PALETTE.includes("greyscale")) {
             this.primaryColorHue = 0;
             this.primaryColorSaturation = 0;
             this.primaryColorBrightness = Math.round(getRandomFromInterval(20, 40));;
