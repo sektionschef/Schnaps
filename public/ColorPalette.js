@@ -4,10 +4,10 @@ class ColorPalette {
         if (PALETTE.includes("color")) {
             this.primaryColorHue = Math.round(getRandomFromInterval(0, 360));
             if (PALETTE.includes("full")) {
-                this.primaryColorSaturation = 90 // Math.round(getRandomFromInterval(90, 91));
-                this.primaryColorBrightness = 90 // Math.round(getRandomFromInterval(90, 91));
+                this.primaryColorSaturation = 85 // Math.round(getRandomFromInterval(90, 91));
+                this.primaryColorBrightness = 85 // Math.round(getRandomFromInterval(90, 91));
             } else if (PALETTE.includes("weak")) {
-                this.primaryColorSaturation = 55 // Math.round(getRandomFromInterval(90, 91));
+                this.primaryColorSaturation = 65 // Math.round(getRandomFromInterval(90, 91));
                 this.primaryColorBrightness = 80 // Math.round(getRandomFromInterval(90, 91));
             } else if (PALETTE.includes("dark")) {
                 this.primaryColorSaturation = 100 // Math.round(getRandomFromInterval(90, 91));

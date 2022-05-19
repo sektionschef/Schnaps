@@ -1,6 +1,6 @@
 # Schnaps
 
-intersectangles
+intersectangles, on two layers
 
 this.MIN = 100;
 this.MAX = 500;
