@@ -44,6 +44,7 @@ function setup() {
   RANDOMSPHERES = false;
   CANVASAGENT = false;
   PALETTE = "color";
+  CANVASROUGHNESS = getRandomFromInterval(60, 90);
 
   FRONTNUMBERRECTS = 20  // 30
   BACKNUMBERRECTS = 10 // 20
@@ -126,14 +127,19 @@ function setup() {
     numberAgents: 135,
   }
 
+  colorMode(HSB);
+
+  let canvasColor = fromHSBtoRGB(color(hue(color1), 20, CANVASROUGHNESS));
+  colorMode(RGB);
 
   backgroundSphereData = {
     custom_width: width,
     custom_height: height,
     posX: 0,
     posY: 0,
-    // colorObject: color(255),
-    colorObject: color(255, 232, 189),
+    // colorObject: color(255),  // cool
+    // colorObject: color(255, 232, 189),  // cool
+    colorObject: canvasColor,
     margin: -50,
     fillColorNoise: 50,
     fillColorOpacityMax: 10,
@@ -205,12 +211,9 @@ function draw() {
   ambientLight(255, 255, 255);
   ambientMaterial(255);
 
-  // Clear buffer each frame
   buffer.clear();
-  // Transform (scale) all the drawings
   buffer.scale(scaleRatio);
 
-  // Make all the drawing to the buffer instead of canvas 
   buffer.background(200);
   backgroundSphere.show();
   if (CANVASAGENT == true) {
@@ -229,7 +232,6 @@ function draw() {
   // absolute value / exportRatio
   // buffer.rect(3900 / exportRatio, 500, 20, 20);
 
-  // Draw buffer to canvas
   image(buffer, -width / 2, - height / 2);
 
   noLoop();

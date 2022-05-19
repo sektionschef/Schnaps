@@ -74,6 +74,7 @@ function lessenColor(colorObject, diff) {
 }
 
 function fromHSBtoRGB(colorObject) {
+    colorMode(RGB);
     return color(red(colorObject), green(colorObject), blue(colorObject));
 }
 
