@@ -41,13 +41,13 @@ function setup() {
   noiseSeed(NOISESEED);
 
   GRIDVISIBLE = false;
-  RANDOMSPHERES = false;
-  CANVASAGENT = false;
+  RANDOMSPHERES = true;
+  CANVASAGENT = true;
   PALETTE = "color";
   CANVASROUGHNESS = getRandomFromInterval(60, 90);
+  FRONTNUMBERRECTS = getRandomFromInterval(10, 20); // 20  // 30
+  BACKNUMBERRECTS = getRandomFromInterval(10, 20); // 20
 
-  FRONTNUMBERRECTS = 20  // 30
-  BACKNUMBERRECTS = 10 // 20
   GRIDBRIGHTNESSDIFF = -10;
   NUMBERPAINTLAYERS = 2;  // 2-3??
   BRUSHLENGTHANDBREADTH = 30 // getRandomFromInterval(20, 40);
@@ -178,7 +178,7 @@ function setup() {
     colorObject: color(100),
     stepSize: 10,  // 10 is hero
     agentSize: 2,
-    opacityLine: 10,
+    opacityLine: 5,
     opacityPoint: 5,
     lineLength: 20,
     loopSize: 10000,
@@ -189,7 +189,7 @@ function setup() {
     minSize: 100,  // 100
     maxSize: 300,  // 500
     numberSpheres: 10,
-    colorObject: color(20),
+    colorObject: color(30, 50),
     padding: 50,
   }
 
