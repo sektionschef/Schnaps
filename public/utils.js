@@ -106,7 +106,9 @@ function windowResized() {
     // redo
     resizeCanvas(rescaling_width, rescaling_height);
     buffer = createGraphics(width, height);
-    draw();
+
+    frontGrid = new IntersectGrid(frontGridData);
+    // draw();
 }
 
 function keyTyped() {

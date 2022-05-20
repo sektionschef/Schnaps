@@ -4,8 +4,8 @@ class DumbAgent {
             data = {
                 posXImage: 0,
                 posYImage: 0,
-                customWidth: width,
-                customHeight: height,
+                customWidth: exportPaper.width,
+                customHeight: exportPaper.height,
                 colorObject: color(100, 100, 100),
                 stepSize: 10,  // 10 is hero
                 agentSize: 1,

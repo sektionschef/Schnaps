@@ -2,8 +2,8 @@ class CanvasOverlay {
     constructor(data) {
         if (typeof data === 'undefined') {
             data = {
-                custom_width: width,
-                custom_height: height,
+                custom_width: exportPaper.width,
+                custom_height: exportPaper.height,
                 posX: 0,
                 posY: 0,
                 colorObject: color(100),

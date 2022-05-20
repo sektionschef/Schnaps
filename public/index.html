@@ -28,6 +28,8 @@
     // var fxhash = "ooz5ribMxQCjw9Wa9y1QLKHS2fkHc7E8vXcm1xFk3RBiqM4bngS"  // check length
     // var fxhash = "oomPNUrjQXzLmNwthbPSru1NVDd5rSKEHVnPx61Dkt1XkCQyY4s"  // check length
     // oofMJDsAFjvcVwcQRfBJENDnsJsV4ckB42cLV2cE1bwbsj5BFAA  // nice
+    // var fxhash = "ooykk6g1zkPqfbw2HBiU8mQc9VznGjqSZ4ytKa34V472WqxkeuD";  // also nice
+    var fxhash = "oo2CaXLNUra9ipUr7PAh8NsjE11QYZZTVp2CiwKpr6zVmvXrQTZ";
     let b58dec = str => [...str].reduce((p, c) => p * alphabet.length + alphabet.indexOf(c) | 0, 0)
     let fxhashTrunc = fxhash.slice(2)
     let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}", 'g')

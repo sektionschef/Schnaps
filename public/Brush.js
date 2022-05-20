@@ -189,12 +189,12 @@ class PaintBrushArea {
 
                 buffer.push();
                 if (this.orientation == "horizontal") {
-                    // buffer.translate((this.posX - this.custom_width / 2 + fibre.startX), (this.posY - this.custom_height / 2 + brushStroke.brushPosY))
-                    buffer.translate((this.posX + fibre.startX), (this.posY + brushStroke.brushPosY))
+                    buffer.translate((this.posX - this.custom_width / 2 + fibre.startX), (this.posY - this.custom_height / 2 + brushStroke.brushPosY))
+                    // buffer.translate((this.posX + fibre.startX), (this.posY + brushStroke.brushPosY))
                     buffer.rotate(fibre.angleFibre);
                 } else if (this.orientation == "vertical") {
-                    // buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + fibre.startY))
-                    buffer.translate((this.posX + brushStroke.brushPosX), (this.posY + fibre.startY))
+                    buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + fibre.startY))
+                    // buffer.translate((this.posX + brushStroke.brushPosX), (this.posY + fibre.startY))
                     buffer.rotate(fibre.angleFibre / PI / 2);
                 }
                 buffer.stroke(fibre.colorFibre);
@@ -247,8 +247,7 @@ class PaintBrushArea {
                 buffer.push();
                 buffer.strokeWeight(1);
                 buffer.noFill();
-                // buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + brushStroke.brushPosY))
-                buffer.translate((this.posX + brushStroke.brushPosX), (this.posY + brushStroke.brushPosY))
+                buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + brushStroke.brushPosY))
                 buffer.rect(0, 0, this.brushLength, this.brushBreadth);
                 buffer.pop();
             }
@@ -258,8 +257,8 @@ class PaintBrushArea {
         if (logging.getLevel() <= 1) {
             // // DEBUG RECT for AREA
             buffer.push();
-            buffer.fill(30);
-            // buffer.translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2));
+            buffer.rectMode(CENTER);
+            buffer.fill("purple");
             buffer.translate((this.posX), (this.posY));
             buffer.rect(0, 0, this.custom_width, this.custom_height);
             buffer.pop();

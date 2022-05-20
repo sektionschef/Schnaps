@@ -6,8 +6,8 @@ class paintedSphere {
 
         if (typeof data === 'undefined') {
             data = {
-                custom_width: width,
-                custom_height: height,
+                custom_width: exportPaper.width,
+                custom_height: exportPaper.height,
                 posX: -width / 2,
                 posY: -height / 2,
                 colorObject: color(200),
@@ -135,8 +135,8 @@ class RandomPaintedSpheres {
 
             var width_ = getRandomFromInterval(this.minSize, this.maxSize);
             var height_ = getRandomFromInterval(this.minSize, this.maxSize);
-            var posX_ = getRandomFromInterval(this.padding, width - this.padding - width_);
-            var posY_ = getRandomFromInterval(this.padding, height - this.padding - height_);
+            var posX_ = getRandomFromInterval(this.padding, exportPaper.width - this.padding - width_);
+            var posY_ = getRandomFromInterval(this.padding, exportPaper.height - this.padding - height_);
 
             this.spheres.push(
                 new paintedSphere(data = {

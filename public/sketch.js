@@ -37,7 +37,7 @@ function setup() {
   exportRatio /= pixelDensity();
 
   NOISESEED = hashFnv32a(fxhash);
-  logging.debug("Noise seed: " + NOISESEED);
+  logging.info("Noise seed: " + NOISESEED);
   noiseSeed(NOISESEED);
 
   GRIDVISIBLE = false  // getRandomFromList([true, false]);
@@ -46,7 +46,7 @@ function setup() {
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   console.log("PALETTE: " + PALETTE);
   CANVASROUGHNESS = getRandomFromInterval(60, 90);
-  FRONTNUMBERRECTS = getRandomFromInterval(10, 17); // 20  // 30
+  FRONTNUMBERRECTS = 5 //getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = getRandomFromInterval(10, 17); // 20
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // 2-3??  // best 2
   GRIDBRIGHTNESSDIFF = -10;  // fix
@@ -89,8 +89,8 @@ function setup() {
   lineColor1b = color(color2b);
 
   canvasData = {
-    custom_width: width,
-    custom_height: height,
+    custom_width: exportPaper.width,
+    custom_height: exportPaper.height,
     posX: 0,
     posY: 0,
     colorObject: color(230),
@@ -98,8 +98,8 @@ function setup() {
   }
 
   agentPaintData1 = {
-    customWidth: width,
-    customHeight: height,
+    customWidth: exportPaper.width,
+    customHeight: exportPaper.height,
     posXImage: 0,
     posYImage: 0,
     colorObject: color(color1),
@@ -113,8 +113,8 @@ function setup() {
   }
 
   agentPaintData2 = {
-    customWidth: width,
-    customHeight: height,
+    customWidth: exportPaper.width,
+    customHeight: exportPaper.height,
     posXImage: 0,
     posYImage: 0,
     colorObject: color(color2),
@@ -133,8 +133,8 @@ function setup() {
   colorMode(RGB);
 
   backgroundSphereData = {
-    custom_width: width,
-    custom_height: height,
+    custom_width: exportPaper.width,
+    custom_height: exportPaper.height,
     posX: 0,
     posY: 0,
     // colorObject: color(255),  // cool
@@ -150,17 +150,17 @@ function setup() {
     numberQuantisizer: 4,
   }
 
-  let frontGridData = {
-    minSize: 50,  // 50
-    maxSize: 200,  // 300
+  frontGridData = {
+    minSize: 200 / exportRatio,  // 50
+    maxSize: 800 / exportRatio,  // 200
     numberRects: FRONTNUMBERRECTS,
     firstLevelColors: [color1],
     secondLevelColors: [color2],
     lineColor: lineColor1,
-    padding: 50,
+    padding: 200 / exportRatio,
   }
 
-  let backGridData = {
+  backGridData = {
     minSize: 100,  // 100
     maxSize: 300,  // 500
     numberRects: BACKNUMBERRECTS,
@@ -170,11 +170,11 @@ function setup() {
     padding: 50,
   }
 
-  let CanvasAgentData = {
+  CanvasAgentData = {
     posXImage: 0,
     posYImage: 0,
-    customWidth: width,
-    customHeight: height,
+    customWidth: exportPaper.width,
+    customHeight: exportPaper.height,
     colorObject: color(100),
     stepSize: 10,  // 10 is hero
     agentSize: 2,
@@ -185,7 +185,7 @@ function setup() {
     numberAgents: 5,
   }
 
-  let randomSphereData = {
+  randomSphereData = {
     minSize: 100,  // 100
     maxSize: 300,  // 500
     numberSpheres: 6,
@@ -215,22 +215,23 @@ function draw() {
   buffer.scale(scaleRatio);
 
   buffer.background(200);
-  backgroundSphere.show();
-  if (CANVASAGENT == true) {
-    canvasAgent.show();
-  }
-  backGrid.show();
-  if (RANDOMSPHERES == true) {
-    randomSpheres.show();
-  }
-  canvas.show();
-  agentPaint1.show();
-  agentPaint2.show();
+  // backgroundSphere.show();
+  // if (CANVASAGENT == true) {
+  //   canvasAgent.show();
+  // }
+  // backGrid.show();
+  // if (RANDOMSPHERES == true) {
+  //   randomSpheres.show();
+  // }
+  // canvas.show();
+  // agentPaint1.show();
+  // agentPaint2.show();
   frontGrid.show();
 
   // document
   // absolute value / exportRatio
-  // buffer.rect(3900 / exportRatio, 500, 20, 20);
+  // rectMode(CENTER);
+  // buffer.rect(3900 / exportRatio, 2000 / exportRatio, 60 / exportRatio, 60 / exportRatio);
 
   image(buffer, -width / 2, - height / 2);
 
