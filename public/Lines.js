@@ -46,8 +46,7 @@ class NewLines {
     show() {
         buffer.push();
 
-        // buffer.translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2), 0);
-        buffer.translate((this.posX), (this.posY), 0);
+        buffer.translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2), 0);
 
         if (logging.getLevel() <= 1) {
             // DEBUG

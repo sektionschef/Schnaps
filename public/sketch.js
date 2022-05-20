@@ -46,7 +46,7 @@ function setup() {
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   console.log("PALETTE: " + PALETTE);
   CANVASROUGHNESS = getRandomFromInterval(60, 90);
-  FRONTNUMBERRECTS = 5 //getRandomFromInterval(10, 17); // 20  // 30
+  FRONTNUMBERRECTS = getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = getRandomFromInterval(10, 17); // 20
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // 2-3??  // best 2
   GRIDBRIGHTNESSDIFF = -10;  // fix
@@ -219,7 +219,7 @@ function draw() {
   // if (CANVASAGENT == true) {
   //   canvasAgent.show();
   // }
-  // backGrid.show();
+  backGrid.show();
   // if (RANDOMSPHERES == true) {
   //   randomSpheres.show();
   // }
