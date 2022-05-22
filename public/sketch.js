@@ -26,6 +26,7 @@ function preload() {
 function setup() {
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
+
   scaleDynamically();
 
   buffer = createGraphics(rescaling_width, rescaling_height);
@@ -46,8 +47,8 @@ function setup() {
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   console.log("PALETTE: " + PALETTE);
   CANVASROUGHNESS = getRandomFromInterval(60, 90);
-  FRONTNUMBERRECTS = getRandomFromInterval(10, 17); // 20  // 30
-  BACKNUMBERRECTS = getRandomFromInterval(10, 17); // 20
+  FRONTNUMBERRECTS = 1 // getRandomFromInterval(10, 17); // 20  // 30
+  BACKNUMBERRECTS = 1 // getRandomFromInterval(10, 17); // 20
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // 2-3??  // best 2
   GRIDBRIGHTNESSDIFF = -10;  // fix
   BRUSHLENGTHANDBREADTH = getRandomFromInterval(25, 35);  // 30 best
@@ -87,6 +88,11 @@ function setup() {
   // lineColor1b = color(20, 150);
   lineColor1 = color(color2);
   lineColor1b = color(color2b);
+
+  // pool_fibres = [];
+  // for (let i = 0; i < 10000; i++) {
+  //   pool_fibres[i] = fxrand();
+  // }
 
   canvasData = {
     custom_width: exportPaper.width,
@@ -151,13 +157,13 @@ function setup() {
   }
 
   frontGridData = {
-    minSize: 200 / exportRatio,  // 50
-    maxSize: 800 / exportRatio,  // 200
+    minSize: 200,  // 50
+    maxSize: 800,  // 200
     numberRects: FRONTNUMBERRECTS,
     firstLevelColors: [color1],
     secondLevelColors: [color2],
     lineColor: lineColor1,
-    padding: 200 / exportRatio,
+    padding: 200,
   }
 
   backGridData = {
@@ -167,7 +173,7 @@ function setup() {
     firstLevelColors: [color2b],
     secondLevelColors: [color1b],
     lineColor: lineColor1b,
-    padding: 50,
+    padding: 200,
   }
 
   CanvasAgentData = {
@@ -200,8 +206,8 @@ function setup() {
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
+  // console.log(fxrand());
   randomSpheres = new RandomPaintedSpheres(randomSphereData);
-
 }
 
 
@@ -219,19 +225,26 @@ function draw() {
   // if (CANVASAGENT == true) {
   //   canvasAgent.show();
   // }
-  backGrid.show();
+  // backGrid.show();
   // if (RANDOMSPHERES == true) {
   //   randomSpheres.show();
   // }
   // canvas.show();
   // agentPaint1.show();
   // agentPaint2.show();
+
+  console.log(fxrand());
   frontGrid.show();
 
   // document
   // absolute value / exportRatio
-  // rectMode(CENTER);
-  // buffer.rect(3900 / exportRatio, 2000 / exportRatio, 60 / exportRatio, 60 / exportRatio);
+  buffer.push();
+  rectMode(CENTER);
+  buffer.fill("pink");
+  buffer.translate(getRandomFromInterval(width / 2, width) / exportRatio, 2000 / exportRatio);
+  // buffer.translate(3900 / exportRatio, 2000 / exportRatio);
+  buffer.rect(0, 0, 60 / exportRatio, 60 / exportRatio);
+  buffer.pop();
 
   image(buffer, -width / 2, - height / 2);
 

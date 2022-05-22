@@ -80,13 +80,13 @@ class IntersectGrid {
     constructor(data) {
         if (typeof data === 'undefined') {
             data = {
-                minSize: 400 / exportRatio,  // 100 resize
-                maxSize: 2000 / exportRatio, // 500 resize
+                minSize: 400,  // 100 resize
+                maxSize: 2000, // 500 resize
                 numberRects: 5,
                 firstLevelColors: [color(100)],
                 secondLevelColors: [color(30)],
                 lineColor: color(230),
-                padding: 200 / exportRatio,  // frame to the edge of the canvas
+                padding: 200,  // frame to the edge of the canvas
             }
         }
         this.minSize = data.minSize;
@@ -97,7 +97,6 @@ class IntersectGrid {
         this.lineColor = data.lineColor;
         this.padding = data.padding;
 
-
         // for debug
         this.rects = [];
         this.interactionRects = [];
@@ -106,6 +105,7 @@ class IntersectGrid {
 
             var width_ = getRandomFromInterval(this.minSize, this.maxSize);
             var height_ = getRandomFromInterval(this.minSize, this.maxSize);
+
             // nobuffer
             // var posX_ = getRandomFromInterval(- (width / 2) + (width_ / 2) + this.padding, (width / 2) - (width_ / 2) - this.padding);
             // var posY_ = getRandomFromInterval(- (height / 2) + (height_ / 2) + this.padding, (height / 2) - (height_ / 2) - this.padding);
@@ -123,6 +123,7 @@ class IntersectGrid {
                     colorObject: getRandomFromList(this.firstLevelColors),
                 }
             )
+
             this.rects[i].paintedArea = this.createPaintbrushAreas(
                 this.rects[i].posX,
                 this.rects[i].posY,
@@ -146,7 +147,6 @@ class IntersectGrid {
                 });
             }
         }
-
 
         // sort by size
         this.rects.sort(function (a, b) { return (b.width * b.height) - (a.width * a.height) });
@@ -177,12 +177,12 @@ class IntersectGrid {
             brushBreadth: BRUSHLENGTHANDBREADTH,
             sizeStroke: BRUSHSTROKESIZE,
             numberPaintLayers: NUMBERPAINTLAYERS,
-            overlap: 80 / exportRatio,
+            overlap: 80,
             brightnessNoise: BRUSHBRIGHTNESSNOISE,
             colorNoise: BRUSHCOLORNOISE,
             opacityBoost: 0, // getRandomFromInterval(150, 255),
-            brushLengthNoise: 0.8 / exportRatio,
-            brushBreadthNoise: 0.8 / exportRatio,
+            brushLengthNoise: 0.8,
+            brushBreadthNoise: 0.8,
             brushAngleNoise: BRUSHANGLENOISE,
             // fibreCurveTightness: FIBRECURVETIGHTNESS,  // shape of curve, between 0 and 5; little effect
             fibreColorNoise: 2,
@@ -249,11 +249,11 @@ class IntersectGrid {
         buffer.rectMode(CENTER);
 
         if (typeof object.posXNew !== 'undefined') {
-            buffer.translate(object.posXNew, object.posYNew);
-            buffer.rect(0, 0, object.widthNew, object.heightNew);
+            buffer.translate(object.posXNew / exportRatio, object.posYNew / exportRatio);
+            buffer.rect(0, 0, object.widthNew / exportRatio, object.heightNew / exportRatio);
         } else if (typeof object.posX !== 'undefined') {
-            buffer.translate(object.posX, object.posY);
-            buffer.rect(0, 0, object.width, object.height);
+            buffer.translate(object.posX / exportRatio, object.posY / exportRatio);
+            buffer.rect(0, 0, object.width / exportRatio, object.height / exportRatio);
         }
         buffer.pop();
     }

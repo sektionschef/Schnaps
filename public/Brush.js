@@ -7,9 +7,10 @@ class Fibre {
         this.fibreLengthNoise = 0.6
         this.fibreOpacityNoise = 0.3
 
+
         // this.complete = false;
-        this.posMiddle14 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
-        this.posMiddle34 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
+        // this.posMiddle14 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
+        // this.posMiddle34 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
         this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
         this.startX = brush.brushPosX + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts    
         this.startY = brush.brushPosY + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts
@@ -28,6 +29,7 @@ class Fibre {
 
         this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * this.fibreOpacityNoise) * (255 - brush.area.fibreOpacityNoiseBase) + brush.area.fibreOpacityNoiseBase);
         this.angleFibre = brush.angle + getRandomFromInterval(-brush.area.fibreRotationNoise, brush.area.fibreRotationNoise);
+
     }
 
 }
@@ -145,6 +147,7 @@ class PaintBrushArea {
 
         this.numberFibres = this.brushBreadth / this.sizeStroke
 
+        // console.log(fxrand());
         this.brushStrokes = [];
         this.createBrushes();
 
