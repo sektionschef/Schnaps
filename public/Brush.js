@@ -183,7 +183,7 @@ class PaintBrushArea {
                 buffer.strokeWeight(1);
                 buffer.stroke(color(20, 50));
                 buffer.noFill();
-                buffer.translate((this.posX + brushStroke.brushPosX) / exportRatio, (this.posY + brushStroke.brushPosY) / exportRatio)
+                buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) / exportRatio, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) / exportRatio)
                 buffer.rect(0, 0, this.brushLength / exportRatio, this.brushBreadth / exportRatio);
                 buffer.pop();
             }

@@ -181,8 +181,8 @@ class IntersectGrid {
             brightnessNoise: BRUSHBRIGHTNESSNOISE,
             colorNoise: BRUSHCOLORNOISE,
             opacityBoost: 0, // getRandomFromInterval(150, 255),
-            brushLengthNoise: 0.8,
-            brushBreadthNoise: 0.8,
+            brushLengthNoise: 0.2,  // FEATURES
+            brushBreadthNoise: 0.2,  // FEATURES
             brushAngleNoise: BRUSHANGLENOISE,
             // fibreCurveTightness: FIBRECURVETIGHTNESS,  // shape of curve, between 0 and 5; little effect
             fibreColorNoise: 2,

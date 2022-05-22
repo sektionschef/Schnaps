@@ -1,7 +1,7 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-// const SWITCH_LOGGING_LEVEL = "info";
-const SWITCH_LOGGING_LEVEL = "debug";
+const SWITCH_LOGGING_LEVEL = "info";
+// const SWITCH_LOGGING_LEVEL = "debug";
 
 
 let scaleRatio;
@@ -41,17 +41,17 @@ function setup() {
   logging.info("Noise seed: " + NOISESEED);
   noiseSeed(NOISESEED);
 
-  GRIDVISIBLE = false  // getRandomFromList([true, false]);
+  GRIDVISIBLE = true  // getRandomFromList([true, false]);
   RANDOMSPHERES = getRandomFromList([true, false]);
   CANVASAGENT = getRandomFromList([true, false]);
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   console.log("PALETTE: " + PALETTE);
   CANVASROUGHNESS = getRandomFromInterval(60, 90);
-  FRONTNUMBERRECTS = 5 // getRandomFromInterval(10, 17); // 20  // 30
-  BACKNUMBERRECTS = 5 // getRandomFromInterval(10, 17); // 20
+  FRONTNUMBERRECTS = 1 // getRandomFromInterval(10, 17); // 20  // 30
+  BACKNUMBERRECTS = 0 // getRandomFromInterval(10, 17); // 20
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // 2-3??  // best 2
   GRIDBRIGHTNESSDIFF = -10;  // fix
-  BRUSHLENGTHANDBREADTH = 120 // getRandomFromInterval(25, 35);  // 30 best
+  BRUSHLENGTHANDBREADTH = 150 // getRandomFromInterval(25, 35);  // 30 best
   BRUSHSTROKESIZE = 1 // getRandomFromInterval(1, );
   BRUSHBRIGHTNESSNOISE = 10 // getRandomFromInterval(5, 15);
   if (PALETTE != "greyscale") {
