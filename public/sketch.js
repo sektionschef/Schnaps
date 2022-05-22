@@ -1,7 +1,7 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-const SWITCH_LOGGING_LEVEL = "info";
-// const SWITCH_LOGGING_LEVEL = "debug";
+// const SWITCH_LOGGING_LEVEL = "info";
+const SWITCH_LOGGING_LEVEL = "debug";
 
 
 let scaleRatio;
@@ -47,12 +47,12 @@ function setup() {
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   console.log("PALETTE: " + PALETTE);
   CANVASROUGHNESS = getRandomFromInterval(60, 90);
-  FRONTNUMBERRECTS = 1 // getRandomFromInterval(10, 17); // 20  // 30
-  BACKNUMBERRECTS = 1 // getRandomFromInterval(10, 17); // 20
+  FRONTNUMBERRECTS = 5 // getRandomFromInterval(10, 17); // 20  // 30
+  BACKNUMBERRECTS = 5 // getRandomFromInterval(10, 17); // 20
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // 2-3??  // best 2
   GRIDBRIGHTNESSDIFF = -10;  // fix
-  BRUSHLENGTHANDBREADTH = getRandomFromInterval(25, 35);  // 30 best
-  BRUSHSTROKESIZE = 2 // getRandomFromInterval(1, );
+  BRUSHLENGTHANDBREADTH = 120 // getRandomFromInterval(25, 35);  // 30 best
+  BRUSHSTROKESIZE = 1 // getRandomFromInterval(1, );
   BRUSHBRIGHTNESSNOISE = 10 // getRandomFromInterval(5, 15);
   if (PALETTE != "greyscale") {
     BRUSHCOLORNOISE = getRandomFromInterval(15, 25);  // mit 20 besser
@@ -157,23 +157,23 @@ function setup() {
   }
 
   frontGridData = {
-    minSize: 200,  // 50
-    maxSize: 800,  // 200
+    minSize: 500,  // 50
+    maxSize: 1000,  // 200
     numberRects: FRONTNUMBERRECTS,
     firstLevelColors: [color1],
     secondLevelColors: [color2],
     lineColor: lineColor1,
-    padding: 200,
+    padding: 100,
   }
 
   backGridData = {
-    minSize: 100,  // 100
-    maxSize: 300,  // 500
+    minSize: 750,  // 100
+    maxSize: 1500,  // 500
     numberRects: BACKNUMBERRECTS,
     firstLevelColors: [color2b],
     secondLevelColors: [color1b],
     lineColor: lineColor1b,
-    padding: 200,
+    padding: 100,
   }
 
   CanvasAgentData = {
@@ -206,7 +206,6 @@ function setup() {
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
-  // console.log(fxrand());
   randomSpheres = new RandomPaintedSpheres(randomSphereData);
 }
 
@@ -225,7 +224,7 @@ function draw() {
   // if (CANVASAGENT == true) {
   //   canvasAgent.show();
   // }
-  // backGrid.show();
+  backGrid.show();
   // if (RANDOMSPHERES == true) {
   //   randomSpheres.show();
   // }
@@ -233,15 +232,16 @@ function draw() {
   // agentPaint1.show();
   // agentPaint2.show();
 
-  console.log(fxrand());
   frontGrid.show();
+  // console.log(fxrand());
 
   // document
   // absolute value / exportRatio
+  // DUMMY POSITIONING
   buffer.push();
   rectMode(CENTER);
   buffer.fill("pink");
-  buffer.translate(getRandomFromInterval(width / 2, width) / exportRatio, 2000 / exportRatio);
+  buffer.translate(getRandomFromInterval(exportPaper.width / 2, exportPaper.width) / exportRatio, 2000 / exportRatio);
   // buffer.translate(3900 / exportRatio, 2000 / exportRatio);
   buffer.rect(0, 0, 60 / exportRatio, 60 / exportRatio);
   buffer.pop();

@@ -111,8 +111,8 @@ class IntersectGrid {
             // var posY_ = getRandomFromInterval(- (height / 2) + (height_ / 2) + this.padding, (height / 2) - (height_ / 2) - this.padding);
             // buffer
 
-            var posX_ = getRandomFromInterval(this.padding, width - this.padding - width_);
-            var posY_ = getRandomFromInterval(this.padding, height - this.padding - height_);
+            var posX_ = getRandomFromInterval(this.padding + width_ / 2, exportPaper.width - this.padding - width_ / 2);
+            var posY_ = getRandomFromInterval(this.padding + height / 2, exportPaper.height - this.padding - height_ / 2);
 
             this.rects.push(
                 {
@@ -139,7 +139,7 @@ class IntersectGrid {
                     custom_width: this.rects[i].width,
                     custom_height: this.rects[i].height,
                     colorObject: this.lineColor,
-                    distance: 10,
+                    distance: 40,
                     noise: 1,
                     strokeSize: 1,
                     curveTightness: 1,

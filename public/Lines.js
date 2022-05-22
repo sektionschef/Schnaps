@@ -46,16 +46,16 @@ class NewLines {
     show() {
         buffer.push();
 
-        buffer.translate((this.posX - this.custom_width / 2), (this.posY - this.custom_height / 2), 0);
+        buffer.translate((this.posX - this.custom_width / 2) / exportRatio, (this.posY - this.custom_height / 2) / exportRatio, 0);
 
         if (logging.getLevel() <= 1) {
             // DEBUG
             buffer.noStroke();
             buffer.fill("red");
-            buffer.rect(0, 0, this.custom_width, this.custom_height, 0);
+            buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio, 0);
         }
 
-        buffer.strokeWeight(this.strokeSize);
+        buffer.strokeWeight(this.strokeSize / exportRatio);
         buffer.stroke(this.colorObject);
         buffer.noFill();
         buffer.curveTightness(this.curveTightness);
@@ -69,14 +69,14 @@ class NewLines {
                 pos_ += this.distance_
                 buffer.beginShape();
                 // first
-                buffer.curveVertex(0, pos_, 0);
-                buffer.curveVertex(0, pos_, 0);
+                buffer.curveVertex(0, pos_ / exportRatio, 0);
+                buffer.curveVertex(0, pos_ / exportRatio, 0);
                 // middle
-                buffer.curveVertex(this.limit / 4, pos_ + getRandomFromInterval(- this.noise, this.noise), 0);
-                buffer.curveVertex(this.limit * 3 / 4, pos_ + getRandomFromInterval(- this.noise, this.noise), 0);
+                buffer.curveVertex(this.limit / 4 / exportRatio, (pos_ + getRandomFromInterval(- this.noise, this.noise)) / exportRatio, 0);
+                buffer.curveVertex(this.limit * 3 / 4 / exportRatio, (pos_ + getRandomFromInterval(- this.noise, this.noise)) / exportRatio, 0);
                 // last
-                buffer.curveVertex(this.limit, pos_, 0);
-                buffer.curveVertex(this.limit, pos_, 0);
+                buffer.curveVertex(this.limit / exportRatio, pos_ / exportRatio, 0);
+                buffer.curveVertex(this.limit / exportRatio, pos_ / exportRatio, 0);
                 buffer.endShape();
             }
         } else if (this.orientation == "vertical") {
@@ -88,14 +88,14 @@ class NewLines {
                 pos_ += this.distance_
                 buffer.beginShape();
                 // first
-                buffer.curveVertex(pos_, 0, 0);
-                buffer.curveVertex(pos_, 0, 0);
+                buffer.curveVertex(pos_ / exportRatio, 0, 0);
+                buffer.curveVertex(pos_ / exportRatio, 0, 0);
                 // middle
-                buffer.curveVertex((pos_ + getRandomFromInterval(- this.noise, this.noise)), (this.limit) / 4, 0);
-                buffer.curveVertex((pos_ + getRandomFromInterval(- this.noise, this.noise)), (this.limit) * 3 / 4, 0);
+                buffer.curveVertex((pos_ + getRandomFromInterval(- this.noise, this.noise)) / exportRatio, (this.limit) / 4 / exportRatio, 0);
+                buffer.curveVertex((pos_ + getRandomFromInterval(- this.noise, this.noise)) / exportRatio, (this.limit) * 3 / 4 / exportRatio, 0);
                 // last
-                buffer.curveVertex(pos_, this.limit, 0);
-                buffer.curveVertex(pos_, this.limit, 0);
+                buffer.curveVertex(pos_ / exportRatio, this.limit / exportRatio, 0);
+                buffer.curveVertex(pos_ / exportRatio, this.limit / exportRatio, 0);
                 buffer.endShape();
             }
         }

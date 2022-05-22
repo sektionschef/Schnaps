@@ -183,8 +183,8 @@ class PaintBrushArea {
                 buffer.strokeWeight(1);
                 buffer.stroke(color(20, 50));
                 buffer.noFill();
-                buffer.translate((this.posX + brushStroke.brushPosX), (this.posY + brushStroke.brushPosY))
-                buffer.rect(0, 0, this.brushLength, this.brushBreadth);
+                buffer.translate((this.posX + brushStroke.brushPosX) / exportRatio, (this.posY + brushStroke.brushPosY) / exportRatio)
+                buffer.rect(0, 0, this.brushLength / exportRatio, this.brushBreadth / exportRatio);
                 buffer.pop();
             }
 
@@ -192,16 +192,16 @@ class PaintBrushArea {
 
                 buffer.push();
                 if (this.orientation == "horizontal") {
-                    buffer.translate((this.posX - this.custom_width / 2 + fibre.startX), (this.posY - this.custom_height / 2 + brushStroke.brushPosY))
+                    buffer.translate((this.posX - this.custom_width / 2 + fibre.startX) / exportRatio, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) / exportRatio)
                     // buffer.translate((this.posX + fibre.startX), (this.posY + brushStroke.brushPosY))
                     buffer.rotate(fibre.angleFibre);
                 } else if (this.orientation == "vertical") {
-                    buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + fibre.startY))
+                    buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) / exportRatio, (this.posY - this.custom_height / 2 + fibre.startY) / exportRatio)
                     // buffer.translate((this.posX + brushStroke.brushPosX), (this.posY + fibre.startY))
                     buffer.rotate(fibre.angleFibre / PI / 2);
                 }
                 buffer.stroke(fibre.colorFibre);
-                buffer.strokeWeight(fibre.sizeStrokeFibre);
+                buffer.strokeWeight(fibre.sizeStrokeFibre) / exportRatio;
                 buffer.noFill();
                 // if (fxrand() > 0.75) {
                 //     curveTightness(4);
@@ -236,9 +236,9 @@ class PaintBrushArea {
                 // endShape();
 
                 if (this.orientation == "horizontal") {
-                    buffer.line(0, this.sizeStroke * fibre.i, fibre.stop - fibre.startX, this.sizeStroke * fibre.i);
+                    buffer.line(0, (this.sizeStroke * fibre.i) / exportRatio, (fibre.stop - fibre.startX) / exportRatio, (this.sizeStroke * fibre.i) / exportRatio);
                 } else if (this.orientation == "vertical") {
-                    buffer.line(this.sizeStroke * fibre.i, 0, this.sizeStroke * fibre.i, (fibre.stop - fibre.startY));
+                    buffer.line((this.sizeStroke * fibre.i) / exportRatio, 0, (this.sizeStroke * fibre.i) / exportRatio, (fibre.stop - fibre.startY) / exportRatio);
                 }
 
                 buffer.pop();
@@ -248,10 +248,10 @@ class PaintBrushArea {
             if (logging.getLevel() <= 1) {
                 // DEBUG Grid
                 buffer.push();
-                buffer.strokeWeight(1);
+                buffer.strokeWeight(1) / exportRatio;
                 buffer.noFill();
-                buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX), (this.posY - this.custom_height / 2 + brushStroke.brushPosY))
-                buffer.rect(0, 0, this.brushLength, this.brushBreadth);
+                buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) / exportRatio, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) / exportRatio)
+                buffer.rect(0, 0, this.brushLength / exportRatio, this.brushBreadth / exportRatio);
                 buffer.pop();
             }
 
@@ -262,8 +262,8 @@ class PaintBrushArea {
             buffer.push();
             buffer.rectMode(CENTER);
             buffer.fill("purple");
-            buffer.translate((this.posX), (this.posY));
-            buffer.rect(0, 0, this.custom_width, this.custom_height);
+            buffer.translate((this.posX) / exportRatio, (this.posY) / exportRatio);
+            buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
             buffer.pop();
         }
 
