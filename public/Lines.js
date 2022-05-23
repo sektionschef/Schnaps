@@ -41,6 +41,7 @@ class NewLines {
             this.nOfLines = Math.round((this.custom_height - this.distance) / (this.distance + this.strokeSize));
             this.distance_ = this.custom_height / (this.nOfLines + 1);
         }
+        // console.log(fxrand());
     }
 
     show() {

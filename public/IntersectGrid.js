@@ -28,10 +28,19 @@ class IntersectRect {
     update() {
         // helper
         var r1StartX = this.rect1.posX - this.rect1.width / 2;
+        // console.log("this.rect1.posX: " + this.rect1.posX);
+        // console.log("this.rect1.width: " + this.rect1.width);
+        // console.log("r1StartX: " + r1StartX);
         var r2StartX = this.rect2.posX - this.rect2.width / 2;
+        // console.log("this.rect2.posX: " + this.rect2.posX);
+        // console.log("this.rect2.width: " + this.rect2.width);
+        // console.log("r2StartX: " + r2StartX);
         var r1Full = r1StartX + this.rect1.width;
         var r2Full = r2StartX + this.rect2.width;
         var r1StartY = this.rect1.posY - this.rect1.height / 2;
+        // console.log("this.rect1.posY: " + this.rect1.posY);  // culprit
+        // console.log("this.rect1.height: " + this.rect1.height);
+        // console.log("r1StartY: " + r1StartY);
         var r2StartY = this.rect2.posY - this.rect2.height / 2;
         var r1FullY = r1StartY + this.rect1.height;
         var r2FullY = r2StartY + this.rect2.height;
@@ -49,26 +58,42 @@ class IntersectRect {
                 // x-axis | rect 2 overlaps from left
                 this.widthNew = Math.min(r2Full, r1Full) - r1StartX;
                 this.posXNew = (r1StartX) + this.widthNew / 2;
+                console.log("1. w" + this.widthNew);
             } else if (r2Full > r1Full) {
                 // x-axis | rect 2 overlaps from right
                 this.widthNew = r1Full - r2StartX;
                 this.posXNew = r1Full - this.widthNew / 2;
+                console.log("2. w" + this.widthNew);
             } else {
                 // x-axis | overlaps fully
                 this.widthNew = this.rect2.width;
                 this.posXNew = this.rect2.posX;
+                // console.log("3." + this.widthNew);
             }
 
             if (r2StartY < r1StartY) {
                 // y-axis | rect2 above
+                console.log("r2FullY " + r2FullY);
+                console.log("r1FullY " + r1FullY);
                 this.heightNew = Math.min(r2FullY, r1FullY) - r1StartY;
                 this.posYNew = r1StartY + this.heightNew / 2;
+                console.log("1. h" + this.heightNew);
             } else if (r2FullY > r1FullY) {
                 this.heightNew = r1FullY - r2StartY;
                 this.posYNew = r1FullY - this.heightNew / 2;
+                console.log("2. h" + this.heightNew);
             } else {
                 this.heightNew = this.rect2.height;
                 this.posYNew = this.rect2.posY;
+                // console.log("3." + this.heightNew);
+            }
+
+            if (this.widthNew < 50 || this.heightNew < 50) {
+                logging.debug("intersection rect is too small to exist.")
+                this.widthNew = undefined;
+                this.heightNew = undefined;
+                this.posXNew = undefined;
+                this.posYNew = undefined;
             }
 
         }
@@ -97,22 +122,19 @@ class IntersectGrid {
         this.lineColor = data.lineColor;
         this.padding = data.padding;
 
+
         // for debug
         this.rects = [];
         this.interactionRects = [];
 
+        // console.log(this.numberRects);
         for (let i = 0; i < this.numberRects; i++) {
 
-            var width_ = getRandomFromInterval(this.minSize, this.maxSize);
-            var height_ = getRandomFromInterval(this.minSize, this.maxSize);
+            var width_ = Math.round(getRandomFromInterval(this.minSize, this.maxSize));
+            var height_ = Math.round(getRandomFromInterval(this.minSize, this.maxSize));
 
-            // nobuffer
-            // var posX_ = getRandomFromInterval(- (width / 2) + (width_ / 2) + this.padding, (width / 2) - (width_ / 2) - this.padding);
-            // var posY_ = getRandomFromInterval(- (height / 2) + (height_ / 2) + this.padding, (height / 2) - (height_ / 2) - this.padding);
-            // buffer
-
-            var posX_ = getRandomFromInterval(this.padding + width_ / 2, exportPaper.width - this.padding - width_ / 2);
-            var posY_ = getRandomFromInterval(this.padding + height / 2, exportPaper.height - this.padding - height_ / 2);
+            var posX_ = Math.round(getRandomFromInterval(this.padding + width_ / 2, exportPaper.width - this.padding - width_ / 2));
+            var posY_ = Math.round(getRandomFromInterval(this.padding + height_ / 2, exportPaper.height - this.padding - height_ / 2));
 
             this.rects.push(
                 {
@@ -132,6 +154,7 @@ class IntersectGrid {
                 this.rects[i].colorObject
             )
 
+            // console.log(fxrand());
             if (fxrand() > 0.6) {
                 this.rects[i].lines = new NewLines(data = {
                     posX: this.rects[i].posX,
@@ -140,14 +163,14 @@ class IntersectGrid {
                     custom_height: this.rects[i].height,
                     colorObject: this.lineColor,
                     distance: 40,
-                    noise: 1,
-                    strokeSize: 1,
+                    noise: 4,
+                    strokeSize: 4,
                     curveTightness: 1,
                     opacityLevel: 150,
                 });
             }
         }
-
+        // console.log(fxrand());
         // sort by size
         this.rects.sort(function (a, b) { return (b.width * b.height) - (a.width * a.height) });
 
@@ -200,7 +223,8 @@ class IntersectGrid {
     update() {
         for (let i = 0; i < this.interactionRects.length; i++) {
             this.interactionRects[i].update();
-            if (this.interactionRects[i].widthNew) {  // if empty
+            if (this.interactionRects[i].widthNew !== undefined) {  // if not empty
+
                 this.interactionRects[i].paintedArea = this.createPaintbrushAreas(
                     this.interactionRects[i].posXNew,
                     this.interactionRects[i].posYNew,
@@ -218,42 +242,46 @@ class IntersectGrid {
 
 
             if (logging.getLevel() <= 1) {
-                this.showDebug(this.rects[i]);
+                this.showDebug(this.rects[i], color(0, 255, 0, 100));
             }
 
-            this.rects[i].paintedArea.show();
+            // this.rects[i].paintedArea.show();
 
             if (this.rects[i].lines !== undefined) {
-                this.rects[i].lines.show();
+                // this.rects[i].lines.show();
             }
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {
             if (this.interactionRects[i].paintedArea !== undefined) {
-                this.interactionRects[i].paintedArea.show();
+                // this.interactionRects[i].paintedArea.show();
             }
             if (logging.getLevel() <= 1) {
-                this.showDebug(this.interactionRects[i]);
+                this.showDebug(this.interactionRects[i], color(255, 0, 0, 100));
             }
         }
 
     }
 
-    showDebug(object) {
+    showDebug(object, colorObject) {
 
         buffer.push();
         // buffer.stroke(0);
         buffer.noStroke();
         // buffer.fill(brightenColor(object.colorObject, 50));
-        buffer.fill(color("green"));
+        buffer.fill(colorObject);
         buffer.rectMode(CENTER);
 
         if (typeof object.posXNew !== 'undefined') {
             buffer.translate(object.posXNew / exportRatio, object.posYNew / exportRatio);
             buffer.rect(0, 0, object.widthNew / exportRatio, object.heightNew / exportRatio);
+            buffer.stroke(15);
+            buffer.point(0, 0)
         } else if (typeof object.posX !== 'undefined') {
             buffer.translate(object.posX / exportRatio, object.posY / exportRatio);
             buffer.rect(0, 0, object.width / exportRatio, object.height / exportRatio);
+            buffer.stroke(5);
+            buffer.point(0, 0)
         }
         buffer.pop();
     }

@@ -4,14 +4,15 @@ class Fibre {
         this.i = i;
         this.brush = brush;
 
-        this.fibreLengthNoise = 0.6
+        this.fibreLengthNoise = 0.2  // 0.6
         this.fibreOpacityNoise = 0.3
 
-
+        // archive
         // this.complete = false;
         // this.posMiddle14 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
         // this.posMiddle34 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
-        this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
+
+        this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);// TROUBLE BUBBLE + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
         this.startX = brush.brushPosX + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts    
         this.startY = brush.brushPosY + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts
 
@@ -21,15 +22,10 @@ class Fibre {
             this.stop = brush.brushPosY + brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;  // where the fibre stops
         }
 
-        // if (fxrand() < 0.75) {
         this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise), brush.area.fibreBrightnessNoise);
-        // } else {
-        // this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise * 3), brush.area.fibreBrightnessNoise * 3);
-        // }
 
         this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * this.fibreOpacityNoise) * (255 - brush.area.fibreOpacityNoiseBase) + brush.area.fibreOpacityNoiseBase);
         this.angleFibre = brush.angle + getRandomFromInterval(-brush.area.fibreRotationNoise, brush.area.fibreRotationNoise);
-
     }
 
 }
@@ -37,6 +33,7 @@ class Fibre {
 class Brush {
     constructor(area, x, y, loopLayer) {
         // brush.complete = false;
+
 
         this.area = area
         this.brushPosX = x;
@@ -62,6 +59,7 @@ class Brush {
         }
 
         noiseSeed(NOISESEED + fxrand() * 10);
+        // console.log(this.numberFibres_);
         for (var i = 0; i < this.numberFibres_; i++) {
             this.fibres.push(new Fibre(this, i));
         }
@@ -129,28 +127,31 @@ class PaintBrushArea {
         this.fibreRotationNoise = data.fibreRotationNoise;
         this.fibreOpacityNoiseBase = data.fibreOpacityNoiseBase;
 
+        // REMOVED
         // make sure the brushes nicely fill the area and do not overlap, calc the optimal solution
-        if (this.orientation == "horizontal") {
-            var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
-            this.brushLength = this.custom_width / brushLengthNeeded;
+        // if (this.orientation == "horizontal") {
+        //     var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
+        //     this.brushLength = this.custom_width / brushLengthNeeded;
 
-            var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
-            this.brushBreadth = this.custom_height / brushHeightNeeded
+        //     var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
+        //     this.brushBreadth = this.custom_height / brushHeightNeeded
 
-        } else if (this.orientation == "vertical") {
-            var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
-            this.brushLength = this.custom_height / brushHeightNeeded;
+        // } else if (this.orientation == "vertical") {
+        //     var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
+        //     this.brushLength = this.custom_height / brushHeightNeeded;
 
-            var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
-            this.brushBreadth = this.custom_width / brushLengthNeeded
-        }
+        //     var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
+        //     this.brushBreadth = this.custom_width / brushLengthNeeded
+        // }
 
         this.numberFibres = this.brushBreadth / this.sizeStroke
 
         // console.log(fxrand());
+        // console.log(this.custom_width);
+        // console.log(this.custom_height);
+
         this.brushStrokes = [];
         this.createBrushes();
-
     }
 
     createBrushes() {
@@ -203,37 +204,6 @@ class PaintBrushArea {
                 buffer.stroke(fibre.colorFibre);
                 buffer.strokeWeight(fibre.sizeStrokeFibre) / exportRatio;
                 buffer.noFill();
-                // if (fxrand() > 0.75) {
-                //     curveTightness(4);
-                // } else {
-                //     curveTightness(this.fibreCurveTightness);
-                // }
-
-                // beginShape();
-                // if (this.orientation == "horizontal") {
-                //     curveVertex(0, this.sizeStroke * fibre.i, 0);
-                //     curveVertex(0, this.sizeStroke * fibre.i, 0);
-                // } else if (this.orientation == "vertical") {
-                //     curveVertex(this.sizeStroke * fibre.i, 0, 0);
-                //     curveVertex(this.sizeStroke * fibre.i, 0, 0);
-                // }
-                // // middle
-                // if (this.orientation == "horizontal") {
-                //     curveVertex((fibre.stop - fibre.startX) / 4, (fibre.posMiddle14 + this.sizeStroke * fibre.i), 0);
-                //     curveVertex((fibre.stop - fibre.startX) / 4 * 3, (fibre.posMiddle34 + this.sizeStroke * fibre.i), 0);
-                // } else if (this.orientation == "vertical") {
-                //     curveVertex((fibre.posMiddle14 + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4, 0);
-                //     curveVertex((fibre.posMiddle34 + this.sizeStroke * fibre.i), (fibre.stop - fibre.startY) / 4 * 3, 0);
-                // }
-                // // end
-                // if (this.orientation == "horizontal") {
-                //     curveVertex((fibre.stop - fibre.startX), this.sizeStroke * fibre.i, 0);
-                //     curveVertex((fibre.stop - fibre.startX), this.sizeStroke * fibre.i, 0);
-                // } else if (this.orientation == "vertical") {
-                //     curveVertex(this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
-                //     curveVertex(this.sizeStroke * fibre.i, (fibre.stop - fibre.startY), 0);
-                // }
-                // endShape();
 
                 if (this.orientation == "horizontal") {
                     buffer.line(0, (this.sizeStroke * fibre.i) / exportRatio, (fibre.stop - fibre.startX) / exportRatio, (this.sizeStroke * fibre.i) / exportRatio);
@@ -247,24 +217,24 @@ class PaintBrushArea {
 
             if (logging.getLevel() <= 1) {
                 // DEBUG Grid
-                buffer.push();
-                buffer.strokeWeight(1) / exportRatio;
-                buffer.noFill();
-                buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) / exportRatio, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) / exportRatio)
-                buffer.rect(0, 0, this.brushLength / exportRatio, this.brushBreadth / exportRatio);
-                buffer.pop();
+                // buffer.push();
+                // buffer.strokeWeight(1) / exportRatio;
+                // buffer.noFill();
+                // buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) / exportRatio, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) / exportRatio)
+                // buffer.rect(0, 0, this.brushLength / exportRatio, this.brushBreadth / exportRatio);
+                // buffer.pop();
             }
 
         }
 
         if (logging.getLevel() <= 1) {
             // // DEBUG RECT for AREA
-            buffer.push();
-            buffer.rectMode(CENTER);
-            buffer.fill("purple");
-            buffer.translate((this.posX) / exportRatio, (this.posY) / exportRatio);
-            buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
-            buffer.pop();
+            // buffer.push();
+            // buffer.rectMode(CENTER);
+            // buffer.fill("purple");
+            // buffer.translate((this.posX) / exportRatio, (this.posY) / exportRatio);
+            // buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
+            // buffer.pop();
         }
 
     }

@@ -83,8 +83,8 @@ function scaleDynamically() {
 
     scaleRatio = 1;  // scale to window width
     exportRatio = 5;  // scale to the export dimensions
-    dynamicWidthRatio = exportPaper.width / windowWidth;
-    dynamicHeightRatio = exportPaper.height / windowHeight;
+    dynamicWidthRatio = Math.round(exportPaper.width / windowWidth);
+    dynamicHeightRatio = Math.round(exportPaper.height / windowHeight);
 
     if (dynamicWidthRatio > dynamicHeightRatio) {
         logging.debug("Width is smaller than height. Width dominates")
@@ -94,8 +94,8 @@ function scaleDynamically() {
         exportRatio = dynamicHeightRatio;
     }
 
-    rescaling_width = exportPaper.width / exportRatio;
-    rescaling_height = exportPaper.height / exportRatio;
+    rescaling_width = Math.round(exportPaper.width / exportRatio);
+    rescaling_height = Math.round(exportPaper.height / exportRatio);
 }
 
 // each time window.innerWidth changes

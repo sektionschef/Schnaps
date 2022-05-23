@@ -1,7 +1,7 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-const SWITCH_LOGGING_LEVEL = "info";
-// const SWITCH_LOGGING_LEVEL = "debug";
+// const SWITCH_LOGGING_LEVEL = "info";
+const SWITCH_LOGGING_LEVEL = "debug";
 
 
 let scaleRatio;
@@ -41,13 +41,13 @@ function setup() {
   logging.info("Noise seed: " + NOISESEED);
   noiseSeed(NOISESEED);
 
-  GRIDVISIBLE = true  // getRandomFromList([true, false]);
+  GRIDVISIBLE = false  // getRandomFromList([true, false]);
   RANDOMSPHERES = getRandomFromList([true, false]);
   CANVASAGENT = getRandomFromList([true, false]);
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   console.log("PALETTE: " + PALETTE);
   CANVASROUGHNESS = getRandomFromInterval(60, 90);
-  FRONTNUMBERRECTS = 1 // getRandomFromInterval(10, 17); // 20  // 30
+  FRONTNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = 0 // getRandomFromInterval(10, 17); // 20
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // 2-3??  // best 2
   GRIDBRIGHTNESSDIFF = -10;  // fix
@@ -62,7 +62,7 @@ function setup() {
   FIBREBRIGHTNESSNOISE = 4 // fix // getRandomFromInterval(4, 15);
   BRUSHANGLENOISE = getRandomFromInterval(PI / 80, PI / 40);  // best PI / 40
   // FIBRECURVETIGHTNESS = 2 // getRandomFromInterval(2, 5);
-  FIBRESTROKESIZENOISE = 0.2;  // fix // 0.2
+  FIBRESTROKESIZENOISE = 2;  // fix // 0.2
   FIBRESTARTLENGTHNOISE = 10 // fix getRandomFromInterval(10, 30);
   FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
   FIBREROTATIONNOISE = PI / 100;
@@ -205,6 +205,7 @@ function setup() {
   agentPaint2 = new DumbAgent(agentPaintData2);
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
+  // console.log(fxrand());
   backGrid = new IntersectGrid(backGridData);
   randomSpheres = new RandomPaintedSpheres(randomSphereData);
 }
