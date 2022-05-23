@@ -10,6 +10,8 @@ class paintedSphere {
                 custom_height: exportPaper.height,
                 posX: -width / 2,
                 posY: -height / 2,
+                elementSizeMin: 10,
+                elementSizeMax: 50,
                 colorObject: color(200),
                 margin: 50,
                 fillColorNoise: 20,
@@ -27,6 +29,8 @@ class paintedSphere {
         this.custom_height = data.custom_height;
         this.posX = data.posX;
         this.posY = data.posY;
+        this.elementSizeMin = data.elementSizeMin;
+        this.elementSizeMax = data.elementSizeMax;
         this.colorObject = data.colorObject;
         this.margin = data.margin;
         this.fillColorNoise = data.fillColorNoise;
@@ -52,10 +56,12 @@ class paintedSphere {
             let fillColorRed = getRandomFromInterval(this.colorObjectRed - this.fillColorNoise, this.colorObjectRed + this.fillColorNoise);
             let fillColorGreen = getRandomFromInterval(this.colorObjectGreen - this.fillColorNoise, this.colorObjectGreen + this.fillColorNoise);
             let fillColorBlue = getRandomFromInterval(this.colorObjectBlue - this.fillColorNoise, this.colorObjectBlue + this.fillColorNoise);
+
             // let fillColorOpacity = getRandomFromInterval(this.fillColorOpacityMax / 2, this.fillColorOpacityMax);
             let fillColorOpacity = this.fillColorOpacityMax;
             // let strokeColorOpacity = getRandomFromInterval(this.strokeOpacityMax / 2, this.strokeOpacityMax);
             let strokeColorOpacity = this.strokeOpacityMax;
+
             // let widthShape = getRandomFromInterval((this.custom_width - this.margin * 2) * 0.05, (this.custom_width - this.margin * 2) * 0.05);  // ca. 50
             // let heightShape = getRandomFromInterval((this.custom_height - this.margin * 2) * 0.05, (this.custom_height - this.margin * 2) * 0.05);  // ca. 50
             let widthShape = getRandomFromInterval(10, 50);
@@ -70,8 +76,8 @@ class paintedSphere {
                 strokeSize: this.strokeWeight,
                 posXEl: getRandomFromInterval(this.margin, this.custom_width - this.margin),
                 posYEl: getRandomFromInterval(this.margin, this.custom_height - this.margin),
-                posXRe: getRandomFromInterval(this.margin, this.custom_width - this.margin - widthShape),
-                posYRe: getRandomFromInterval(this.margin, this.custom_height - this.margin - heightShape),
+                posXRe: getRandomFromInterval(this.margin, this.custom_width - this.margin - widthShape / 2),
+                posYRe: getRandomFromInterval(this.margin, this.custom_height - this.margin - heightShape / 2),
             })
         }
     }

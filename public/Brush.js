@@ -7,14 +7,9 @@ class Fibre {
         this.fibreLengthNoise = 0.2  // 0.6
         this.fibreOpacityNoise = 0.3
 
-        // archive
-        // this.complete = false;
-        // this.posMiddle14 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
-        // this.posMiddle34 = getRandomFromInterval(-brush.area.fibreBreadthNoise, brush.area.fibreBreadthNoise);
-
-        this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);// TROUBLE BUBBLE + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
-        this.startX = brush.brushPosX + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts    
-        this.startY = brush.brushPosY + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // // where the fibre starts
+        this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
+        this.startX = brush.brushPosX + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // where the fibre starts    
+        this.startY = brush.brushPosY + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // where the fibre starts
 
         if (brush.area.orientation == "horizontal") {
             this.stop = brush.brushPosX + brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;  // where the fibre stops
@@ -32,8 +27,6 @@ class Fibre {
 
 class Brush {
     constructor(area, x, y, loopLayer) {
-        // brush.complete = false;
-
 
         this.area = area
         this.brushPosX = x;
@@ -59,7 +52,6 @@ class Brush {
         }
 
         noiseSeed(NOISESEED + fxrand() * 10);
-        // console.log(this.numberFibres_);
         for (var i = 0; i < this.numberFibres_; i++) {
             this.fibres.push(new Fibre(this, i));
         }
@@ -90,7 +82,6 @@ class PaintBrushArea {
                 brushLengthNoise: 0.2,
                 brushBreadthNoise: 0.2,  // brushBreadthNoise
                 brushAngleNoise: PI / 20,
-                // fibreCurveTightness: 5,  // shape of curve, between 0 and 5; little effect
                 fibreColorNoise: 2,
                 fibreBrightnessNoise: 2,
                 fibreStrokeSizeNoise: 1,
@@ -118,7 +109,6 @@ class PaintBrushArea {
         this.brushLengthNoise = data.brushLengthNoise;
         this.brushBreadthNoise = data.brushBreadthNoise;
         this.brushAngleNoise = data.brushAngleNoise;
-        // this.fibreCurveTightness = data.fibreCurveTightness;
         this.fibreColorNoise = data.fibreColorNoise;
         this.fibreBrightnessNoise = data.fibreBrightnessNoise;
         this.fibreStrokeSizeNoise = data.fibreStrokeSizeNoise;
@@ -127,7 +117,6 @@ class PaintBrushArea {
         this.fibreRotationNoise = data.fibreRotationNoise;
         this.fibreOpacityNoiseBase = data.fibreOpacityNoiseBase;
 
-        // REMOVED
         // make sure the brushes nicely fill the area and do not overlap, calc the optimal solution
         if (this.orientation == "horizontal") {
             var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
@@ -145,10 +134,6 @@ class PaintBrushArea {
         }
 
         this.numberFibres = this.brushBreadth / this.sizeStroke
-
-        // console.log(fxrand());
-        // console.log(this.custom_width);
-        // console.log(this.custom_height);
 
         this.brushStrokes = [];
         this.createBrushes();

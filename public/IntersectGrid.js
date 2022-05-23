@@ -72,7 +72,7 @@ class IntersectRect {
             }
 
             if (this.widthNew < (exportPaper.width * 0.01) || this.heightNew < (exportPaper.height * 0.01)) {
-                logging.debug("intersection rect is too small to exist.")
+                logging.debug("The intersection rect is too small to exist.")
                 this.widthNew = undefined;
                 this.heightNew = undefined;
                 this.posXNew = undefined;
@@ -137,7 +137,6 @@ class IntersectGrid {
                 this.rects[i].colorObject
             )
 
-            // console.log(fxrand());
             if (fxrand() > 0.6) {
                 this.rects[i].lines = new NewLines(data = {
                     posX: this.rects[i].posX,
@@ -153,7 +152,6 @@ class IntersectGrid {
                 });
             }
         }
-        // console.log(fxrand());
         // sort by size
         this.rects.sort(function (a, b) { return (b.width * b.height) - (a.width * a.height) });
 
@@ -190,7 +188,6 @@ class IntersectGrid {
             brushLengthNoise: 0.2,  // FEATURES
             brushBreadthNoise: 0.2,  // FEATURES
             brushAngleNoise: BRUSHANGLENOISE,
-            // fibreCurveTightness: FIBRECURVETIGHTNESS,  // shape of curve, between 0 and 5; little effect
             fibreColorNoise: 2,
             fibreBrightnessNoise: FIBREBRIGHTNESSNOISE,
             fibreStrokeSizeNoise: FIBRESTROKESIZENOISE,
@@ -243,7 +240,6 @@ class IntersectGrid {
                 this.showDebug(this.interactionRects[i], color(255, 0, 0, 100));
             }
         }
-
     }
 
     showDebug(object, colorObject) {

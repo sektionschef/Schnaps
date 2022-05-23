@@ -20,7 +20,6 @@ class NewLines {
         this.posY = data.posY;
         this.custom_width = data.custom_width;
         this.custom_height = data.custom_height;
-        // this.colorObject = data.colorObject;
         this.colorObject = data.colorObject;
         this.distance = data.distance;
         this.noise = data.noise;
@@ -41,7 +40,6 @@ class NewLines {
             this.nOfLines = Math.round((this.custom_height - this.distance) / (this.distance + this.strokeSize));
             this.distance_ = this.custom_height / (this.nOfLines + 1);
         }
-        // console.log(fxrand());
     }
 
     show() {
@@ -82,7 +80,6 @@ class NewLines {
             }
         } else if (this.orientation == "vertical") {
             this.limit = this.custom_height;
-            // for (var i = 0; i < (this.custom_width); i += this.distance_) {
             let pos_ = 0;
             for (var i = 0; i <= this.nOfLines; i++) {
 

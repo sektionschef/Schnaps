@@ -46,7 +46,7 @@ function setup() {
   CANVASAGENT = true // getRandomFromList([true, false]);
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   logging.info("PALETTE: " + PALETTE);
-  CANVASROUGHNESS = getRandomFromInterval(60, 90);
+  CANVASROUGHNESS = 60 // getRandomFromInterval(60, 80);
   FRONTNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // 2-3??  // best 2
@@ -61,7 +61,6 @@ function setup() {
   }
   FIBREBRIGHTNESSNOISE = 4 // fix // getRandomFromInterval(4, 15);
   BRUSHANGLENOISE = getRandomFromInterval(PI / 80, PI / 40);  // best PI / 40
-  // FIBRECURVETIGHTNESS = 2 // getRandomFromInterval(2, 5);
   FIBRESTROKESIZENOISE = 2;  // fix // 0.2
   FIBRESTARTLENGTHNOISE = 10 // fix getRandomFromInterval(10, 30);
   FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
@@ -88,11 +87,6 @@ function setup() {
   // lineColor1b = color(20, 150);
   lineColor1 = color(color2);
   lineColor1b = color(color2b);
-
-  // pool_fibres = [];
-  // for (let i = 0; i < 10000; i++) {
-  //   pool_fibres[i] = fxrand();
-  // }
 
   canvasData = {
     custom_width: exportPaper.width,
@@ -134,8 +128,7 @@ function setup() {
   }
 
   colorMode(HSB);
-
-  let canvasColor = fromHSBtoRGB(color(hue(color1), 20, CANVASROUGHNESS));
+  let canvasColor = fromHSBtoRGB(color(hue(color1), 10, CANVASROUGHNESS));
   colorMode(RGB);
 
   backgroundSphereData = {
@@ -145,6 +138,8 @@ function setup() {
     posY: 0,
     // colorObject: color(255),  // cool
     // colorObject: color(255, 232, 189),  // cool
+    elementSizeMin: 20,
+    elementSizeMax: 40,
     colorObject: canvasColor,
     margin: -50,
     fillColorNoise: 50,
@@ -152,8 +147,8 @@ function setup() {
     noStroke: true,
     strokeWeight: 1,
     strokeColorNoise: 0,
-    strokeOpacityMax: 250,
-    numberQuantisizer: 4,
+    strokeOpacityMax: 100,
+    numberQuantisizer: getRandomFromInterval(5, 8),
   }
 
   frontGridData = {
@@ -203,7 +198,7 @@ function setup() {
   // canvasAgent = new DumbAgent(CanvasAgentData);
   // agentPaint1 = new DumbAgent(agentPaintData1);
   // agentPaint2 = new DumbAgent(agentPaintData2);
-  // backgroundSphere = new paintedSphere(backgroundSphereData);
+  backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
   // randomSpheres = new RandomPaintedSpheres(randomSphereData);
@@ -220,11 +215,14 @@ function draw() {
   buffer.scale(scaleRatio);
 
   buffer.background(200);
-  // backgroundSphere.show();
+  backgroundSphere.show();
+
   // if (CANVASAGENT == true) {
   //   canvasAgent.show();
   // }
+
   backGrid.show();
+
   // if (RANDOMSPHERES == true) {
   //   randomSpheres.show();
   // }
@@ -237,13 +235,12 @@ function draw() {
   // document
   // absolute value / exportRatio
   // DUMMY POSITIONING
-  buffer.push();
-  rectMode(CENTER);
-  buffer.fill("pink");
-  buffer.translate(getRandomFromInterval(exportPaper.width / 2, exportPaper.width) / exportRatio, 2000 / exportRatio);
-  // buffer.translate(3900 / exportRatio, 2000 / exportRatio);
-  buffer.rect(0, 0, 60 / exportRatio, 60 / exportRatio);
-  buffer.pop();
+  // buffer.push();
+  // rectMode(CENTER);
+  // buffer.fill("pink");
+  // buffer.translate(getRandomFromInterval(exportPaper.width / 2, exportPaper.width) / exportRatio, 2000 / exportRatio);
+  // buffer.rect(0, 0, 60 / exportRatio, 60 / exportRatio);
+  // buffer.pop();
 
   image(buffer, -width / 2, - height / 2);
 
