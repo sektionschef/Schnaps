@@ -199,14 +199,14 @@ function setup() {
     padding: 50,
   }
 
-  canvas = new CanvasOverlay(canvasData);
-  canvasAgent = new DumbAgent(CanvasAgentData);
-  agentPaint1 = new DumbAgent(agentPaintData1);
-  agentPaint2 = new DumbAgent(agentPaintData2);
-  backgroundSphere = new paintedSphere(backgroundSphereData);
+  // canvas = new CanvasOverlay(canvasData);
+  // canvasAgent = new DumbAgent(CanvasAgentData);
+  // agentPaint1 = new DumbAgent(agentPaintData1);
+  // agentPaint2 = new DumbAgent(agentPaintData2);
+  // backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
-  randomSpheres = new RandomPaintedSpheres(randomSphereData);
+  // randomSpheres = new RandomPaintedSpheres(randomSphereData);
 }
 
 
@@ -220,17 +220,17 @@ function draw() {
   buffer.scale(scaleRatio);
 
   buffer.background(200);
-  backgroundSphere.show();
-  if (CANVASAGENT == true) {
-    canvasAgent.show();
-  }
+  // backgroundSphere.show();
+  // if (CANVASAGENT == true) {
+  //   canvasAgent.show();
+  // }
   backGrid.show();
-  if (RANDOMSPHERES == true) {
-    randomSpheres.show();
-  }
-  canvas.show();
-  agentPaint1.show();
-  agentPaint2.show();
+  // if (RANDOMSPHERES == true) {
+  //   randomSpheres.show();
+  // }
+  // canvas.show();
+  // agentPaint1.show();
+  // agentPaint2.show();
 
   frontGrid.show();
 

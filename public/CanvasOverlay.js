@@ -18,7 +18,7 @@ class CanvasOverlay {
         this.colorObject = data.colorObject;
         this.opacity = data.opacity;
 
-        var maxCell = 3000;  // amount of cells per line, used to be 300 for width of 1000
+        var maxCell = 1200;  // amazing with 3000 amount of cells per line, used to be 300 for width of 1000
         this.strokeWeight_ = 0.5;
         // this.colorUsed = brightenColor(color(this.colorObject, this.opacity), -20);
         this.colorUsed = color(red(this.colorObject), green(this.colorObject), blue(this.colorObject), this.opacity);
