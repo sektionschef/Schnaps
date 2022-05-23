@@ -47,24 +47,27 @@ function setup() {
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   logging.info("PALETTE: " + PALETTE);
   CANVASROUGHNESS = 60 // getRandomFromInterval(60, 80);
+
   FRONTNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20  // 30
-  BACKNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20
+  BACKNUMBERRECTS = 0 // getRandomFromInterval(10, 17); // 20
+
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // 2-3??  // best 2
-  GRIDBRIGHTNESSDIFF = -10;  // fix
-  BRUSHLENGTHANDBREADTH = 150 // getRandomFromInterval(25, 35);  // 30 best
-  BRUSHSTROKESIZE = 1 // getRandomFromInterval(1, );
-  BRUSHBRIGHTNESSNOISE = 10 // getRandomFromInterval(5, 15);
+  GRIDBRIGHTNESSDIFF = -15;  // fix
+
+  BRUSHLENGTHANDBREADTH = 150 // getRandomFromInterval(120, 150);
+  BRUSHSTROKESIZE = getRandomFromInterval(0.6, 1.4);
+  BRUSHBRIGHTNESSNOISE = getRandomFromInterval(5, 15);
   if (PALETTE != "greyscale") {
     BRUSHCOLORNOISE = getRandomFromInterval(15, 25);  // mit 20 besser
   } else if (PALETTE == "greyscale") {
     BRUSHCOLORNOISE = 0;
   }
-  FIBREBRIGHTNESSNOISE = 4 // fix // getRandomFromInterval(4, 15);
+  FIBREBRIGHTNESSNOISE = 6; // fix
   BRUSHANGLENOISE = getRandomFromInterval(PI / 80, PI / 40);  // best PI / 40
-  FIBRESTROKESIZENOISE = 2;  // fix // 0.2
-  FIBRESTARTLENGTHNOISE = 10 // fix getRandomFromInterval(10, 30);
+  FIBRESTROKESIZENOISE = 0.2;  // fix // 0.2
+  FIBRESTARTLENGTHNOISE = getRandomFromInterval(60, 120);
   FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
-  FIBREROTATIONNOISE = PI / 100;
+  FIBREROTATIONNOISE = PI / 60 // getRandomFromList([- PI / 6, - PI / 4, PI / 4, PI / 6]);
   FIBREOPACITYNOISEBASE = 120 // 120-
 
   colorPalette = new ColorPalette();

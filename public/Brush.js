@@ -4,7 +4,7 @@ class Fibre {
         this.i = i;
         this.brush = brush;
 
-        this.fibreLengthNoise = 0.2  // 0.6
+        this.fibreLengthNoise = 0.4  // 0.6
         this.fibreOpacityNoise = 0.3
 
         this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
