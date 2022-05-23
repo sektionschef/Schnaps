@@ -1,7 +1,7 @@
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
-// const SWITCH_LOGGING_LEVEL = "info";
-const SWITCH_LOGGING_LEVEL = "debug";
+const SWITCH_LOGGING_LEVEL = "info";
+// const SWITCH_LOGGING_LEVEL = "debug";
 
 
 let scaleRatio;
@@ -252,6 +252,9 @@ function draw() {
   noLoop();
 
   fxpreview()
+  console.log(fxrand());
 
 }
 
+
+// check two different resolutions and compare fxrand() at the end of code, should be the same.

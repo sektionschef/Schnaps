@@ -129,20 +129,20 @@ class PaintBrushArea {
 
         // REMOVED
         // make sure the brushes nicely fill the area and do not overlap, calc the optimal solution
-        // if (this.orientation == "horizontal") {
-        //     var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
-        //     this.brushLength = this.custom_width / brushLengthNeeded;
+        if (this.orientation == "horizontal") {
+            var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
+            this.brushLength = this.custom_width / brushLengthNeeded;
 
-        //     var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
-        //     this.brushBreadth = this.custom_height / brushHeightNeeded
+            var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
+            this.brushBreadth = this.custom_height / brushHeightNeeded
 
-        // } else if (this.orientation == "vertical") {
-        //     var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
-        //     this.brushLength = this.custom_height / brushHeightNeeded;
+        } else if (this.orientation == "vertical") {
+            var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
+            this.brushLength = this.custom_height / brushHeightNeeded;
 
-        //     var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
-        //     this.brushBreadth = this.custom_width / brushLengthNeeded
-        // }
+            var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
+            this.brushBreadth = this.custom_width / brushLengthNeeded
+        }
 
         this.numberFibres = this.brushBreadth / this.sizeStroke
 
@@ -217,24 +217,24 @@ class PaintBrushArea {
 
             if (logging.getLevel() <= 1) {
                 // DEBUG Grid
-                // buffer.push();
-                // buffer.strokeWeight(1) / exportRatio;
-                // buffer.noFill();
-                // buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) / exportRatio, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) / exportRatio)
-                // buffer.rect(0, 0, this.brushLength / exportRatio, this.brushBreadth / exportRatio);
-                // buffer.pop();
+                buffer.push();
+                buffer.strokeWeight(1) / exportRatio;
+                buffer.noFill();
+                buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) / exportRatio, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) / exportRatio)
+                buffer.rect(0, 0, this.brushLength / exportRatio, this.brushBreadth / exportRatio);
+                buffer.pop();
             }
 
         }
 
         if (logging.getLevel() <= 1) {
             // // DEBUG RECT for AREA
-            // buffer.push();
-            // buffer.rectMode(CENTER);
-            // buffer.fill("purple");
-            // buffer.translate((this.posX) / exportRatio, (this.posY) / exportRatio);
-            // buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
-            // buffer.pop();
+            buffer.push();
+            buffer.rectMode(CENTER);
+            buffer.fill("purple");
+            buffer.translate((this.posX) / exportRatio, (this.posY) / exportRatio);
+            buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
+            buffer.pop();
         }
 
     }
