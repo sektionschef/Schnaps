@@ -64,8 +64,8 @@ class paintedSphere {
 
             // let widthShape = getRandomFromInterval((this.custom_width - this.margin * 2) * 0.05, (this.custom_width - this.margin * 2) * 0.05);  // ca. 50
             // let heightShape = getRandomFromInterval((this.custom_height - this.margin * 2) * 0.05, (this.custom_height - this.margin * 2) * 0.05);  // ca. 50
-            let widthShape = getRandomFromInterval(10, 50);
-            let heightShape = getRandomFromInterval(10, 50);
+            let widthShape = getRandomFromInterval(this.elementSizeMin, this.elementSizeMax);
+            let heightShape = getRandomFromInterval(this.elementSizeMin, this.elementSizeMax);
 
             this.elements.push({
                 // strokeColor: color(this.colorObjectRed + this.strokeColorNoise, this.colorObjectGreen + this.strokeColorNoise, this.colorObjectBlue + this.strokeColorNoise, strokeColorOpacity),
@@ -90,8 +90,8 @@ class paintedSphere {
             buffer.strokeWeight(2);
             buffer.stroke("black");
             // buffer.translate(this.posX - width / 2, this.posY - height / 2);
-            buffer.translate((this.posX), (this.posY));
-            buffer.rect(0, 0, this.custom_width, this.custom_height);
+            buffer.translate((this.posX / exportRatio), (this.posY / exportRatio));
+            buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
             buffer.pop();
         }
 
@@ -107,9 +107,9 @@ class paintedSphere {
             buffer.fill(element.fillColor);
 
             buffer.ellipseMode(CENTER);
-            buffer.ellipse(element.posXEl, element.posYEl, element.widthShape, element.heightShape);
+            buffer.ellipse(element.posXEl / exportRatio, element.posYEl / exportRatio, element.widthShape / exportRatio, element.heightShape / exportRatio);
             buffer.rectMode(CENTER);
-            buffer.rect(element.posXRe, element.posYRe, element.widthShape, element.heightShape);
+            buffer.rect(element.posXRe / exportRatio, element.posYRe / exportRatio, element.widthShape / exportRatio, element.heightShape / exportRatio);
             buffer.pop();
             // return
         }

@@ -131,7 +131,7 @@ function setup() {
   }
 
   colorMode(HSB);
-  let canvasColor = fromHSBtoRGB(color(hue(color1), 10, CANVASROUGHNESS));
+  let canvasColor = fromHSBtoRGB(color(hue(color1), 3, CANVASROUGHNESS));
   colorMode(RGB);
 
   backgroundSphereData = {
@@ -141,17 +141,17 @@ function setup() {
     posY: 0,
     // colorObject: color(255),  // cool
     // colorObject: color(255, 232, 189),  // cool
-    elementSizeMin: 20,
-    elementSizeMax: 40,
+    elementSizeMin: 80,
+    elementSizeMax: 180,
     colorObject: canvasColor,
     margin: -50,
-    fillColorNoise: 50,
-    fillColorOpacityMax: 10,
+    fillColorNoise: 30,
+    fillColorOpacityMax: 4,
     noStroke: true,
     strokeWeight: 1,
     strokeColorNoise: 0,
-    strokeOpacityMax: 100,
-    numberQuantisizer: getRandomFromInterval(5, 8),
+    strokeOpacityMax: 2,
+    numberQuantisizer: 1// getRandomFromInterval(5, 8),
   }
 
   frontGridData = {

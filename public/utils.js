@@ -105,7 +105,7 @@ function windowResized() {
 
     // redo
     resizeCanvas(rescaling_width, rescaling_height);
-    buffer = createGraphics(width, height);
+    buffer = createGraphics(rescaling_width, rescaling_height);
 
     frontGrid = new IntersectGrid(frontGridData);
     // draw();
