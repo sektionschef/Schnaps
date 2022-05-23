@@ -42,13 +42,13 @@ function setup() {
   noiseSeed(NOISESEED);
 
   GRIDVISIBLE = false  // getRandomFromList([true, false]);
-  RANDOMSPHERES = getRandomFromList([true, false]);
-  CANVASAGENT = getRandomFromList([true, false]);
+  RANDOMSPHERES = true // getRandomFromList([true, false]);
+  CANVASAGENT = true // getRandomFromList([true, false]);
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
-  console.log("PALETTE: " + PALETTE);
+  logging.info("PALETTE: " + PALETTE);
   CANVASROUGHNESS = getRandomFromInterval(60, 90);
   FRONTNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20  // 30
-  BACKNUMBERRECTS = 0 // getRandomFromInterval(10, 17); // 20
+  BACKNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // 2-3??  // best 2
   GRIDBRIGHTNESSDIFF = -10;  // fix
   BRUSHLENGTHANDBREADTH = 150 // getRandomFromInterval(25, 35);  // 30 best
@@ -205,7 +205,6 @@ function setup() {
   agentPaint2 = new DumbAgent(agentPaintData2);
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
-  // console.log(fxrand());
   backGrid = new IntersectGrid(backGridData);
   randomSpheres = new RandomPaintedSpheres(randomSphereData);
 }
@@ -221,20 +220,19 @@ function draw() {
   buffer.scale(scaleRatio);
 
   buffer.background(200);
-  // backgroundSphere.show();
-  // if (CANVASAGENT == true) {
-  //   canvasAgent.show();
-  // }
+  backgroundSphere.show();
+  if (CANVASAGENT == true) {
+    canvasAgent.show();
+  }
   backGrid.show();
-  // if (RANDOMSPHERES == true) {
-  //   randomSpheres.show();
-  // }
-  // canvas.show();
-  // agentPaint1.show();
-  // agentPaint2.show();
+  if (RANDOMSPHERES == true) {
+    randomSpheres.show();
+  }
+  canvas.show();
+  agentPaint1.show();
+  agentPaint2.show();
 
   frontGrid.show();
-  // console.log(fxrand());
 
   // document
   // absolute value / exportRatio
@@ -252,7 +250,7 @@ function draw() {
   noLoop();
 
   fxpreview()
-  console.log(fxrand());
+  logging.info("safety check for diff resolutions - fxrand: " + fxrand());
 
 }
 
