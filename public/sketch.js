@@ -49,8 +49,8 @@ function setup() {
 
   CANVASROUGHNESS = 80 // getRandomFromInterval(60, 80);
 
-  FRONTNUMBERRECTS = 8 // getRandomFromInterval(10, 17); // 20  // 30
-  BACKNUMBERRECTS = 0 // getRandomFromInterval(10, 17); // 20
+  FRONTNUMBERRECTS = 18 // getRandomFromInterval(10, 17); // 20  // 30
+  BACKNUMBERRECTS = 18 // getRandomFromInterval(10, 17); // 20
 
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // best 2
   GRIDBRIGHTNESSDIFF = -15;  // fix
@@ -59,7 +59,7 @@ function setup() {
   BRUSHSTROKESIZE = 2 // getRandomFromInterval(0.6, 1.4);
   BRUSHBRIGHTNESSNOISE = getRandomFromInterval(5, 15);
   if (PALETTE != "greyscale") {
-    BRUSHCOLORNOISE = getRandomFromInterval(15, 25);  // mit 20 besser
+    BRUSHCOLORNOISE = 15// getRandomFromInterval(15, 25);  // mit 20 besser
   } else if (PALETTE == "greyscale") {
     BRUSHCOLORNOISE = 0;
   }
@@ -162,8 +162,8 @@ function setup() {
   }
 
   frontGridData = {
-    minSize: 500,  // 50
-    maxSize: 1000,  // 200
+    minSize: 200,  // 50
+    maxSize: 700,  // 200
     numberRects: FRONTNUMBERRECTS,
     firstLevelColors: [color1],
     secondLevelColors: [color2],
@@ -172,11 +172,11 @@ function setup() {
   }
 
   backGridData = {
-    minSize: 750,  // 100
-    maxSize: 1500,  // 500
+    minSize: 550,  // 100
+    maxSize: 1000,  // 500
     numberRects: BACKNUMBERRECTS,
-    firstLevelColors: [color2b],
-    secondLevelColors: [color1b],
+    firstLevelColors: [color1b],
+    secondLevelColors: [color2b],
     lineColor: lineColor1b,
     padding: 200,
   }
@@ -208,7 +208,7 @@ function setup() {
   // canvasAgent = new DumbAgent(CanvasAgentData);
   // agentPaint1 = new DumbAgent(agentPaintData1);
   // agentPaint2 = new DumbAgent(agentPaintData2);
-  // backgroundSphere = new paintedSphere(backgroundSphereData);
+  backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
   // randomSpheres = new RandomPaintedSpheres(randomSphereData);
@@ -226,13 +226,13 @@ function draw() {
 
   buffer.background(200);
 
-  // backgroundSphere.show();
+  backgroundSphere.show();
 
   // if (CANVASAGENT == true) {
   //   canvasAgent.show();
   // }
 
-  // backGrid.show();
+  backGrid.show();
 
   // if (RANDOMSPHERES == true) {
   //   randomSpheres.show();
