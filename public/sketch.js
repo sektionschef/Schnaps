@@ -46,7 +46,8 @@ function setup() {
   CANVASAGENT = true // getRandomFromList([true, false]);
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   logging.info("PALETTE: " + PALETTE);
-  CANVASROUGHNESS = 60 // getRandomFromInterval(60, 80);
+
+  CANVASROUGHNESS = 80 // getRandomFromInterval(60, 80);
 
   FRONTNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = 0 // getRandomFromInterval(10, 17); // 20
@@ -131,7 +132,7 @@ function setup() {
   }
 
   colorMode(HSB);
-  let canvasColor = fromHSBtoRGB(color(hue(color1), 3, CANVASROUGHNESS));
+  let canvasColor = fromHSBtoRGB(color(hue(color1), 4, CANVASROUGHNESS));
   colorMode(RGB);
 
   backgroundSphereData = {
@@ -145,13 +146,13 @@ function setup() {
     elementSizeMax: 180,
     colorObject: canvasColor,
     margin: -50,
-    fillColorNoise: 30,
-    fillColorOpacityMax: 4,
+    fillColorNoise: 10,
+    fillColorOpacityMax: 50,
     noStroke: true,
     strokeWeight: 1,
     strokeColorNoise: 0,
     strokeOpacityMax: 2,
-    numberQuantisizer: 1// getRandomFromInterval(5, 8),
+    numberQuantisizer: 8// getRandomFromInterval(5, 8),
   }
 
   frontGridData = {
@@ -161,7 +162,7 @@ function setup() {
     firstLevelColors: [color1],
     secondLevelColors: [color2],
     lineColor: lineColor1,
-    padding: 100,
+    padding: 200,
   }
 
   backGridData = {
@@ -171,7 +172,7 @@ function setup() {
     firstLevelColors: [color2b],
     secondLevelColors: [color1b],
     lineColor: lineColor1b,
-    padding: 100,
+    padding: 200,
   }
 
   CanvasAgentData = {
