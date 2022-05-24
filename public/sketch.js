@@ -41,7 +41,7 @@ function setup() {
   logging.info("Noise seed: " + NOISESEED);
   noiseSeed(NOISESEED);
 
-  GRIDVISIBLE = false  // getRandomFromList([true, false]);
+  GRIDVISIBLE = true  // getRandomFromList([true, false]);
   RANDOMSPHERES = true // getRandomFromList([true, false]);
   CANVASAGENT = true // getRandomFromList([true, false]);
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
@@ -49,14 +49,14 @@ function setup() {
 
   CANVASROUGHNESS = 80 // getRandomFromInterval(60, 80);
 
-  FRONTNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20  // 30
+  FRONTNUMBERRECTS = 1 // getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = 0 // getRandomFromInterval(10, 17); // 20
 
-  NUMBERPAINTLAYERS = getRandomFromList([2]);  // 2-3??  // best 2
+  NUMBERPAINTLAYERS = getRandomFromList([1]);  // best 2
   GRIDBRIGHTNESSDIFF = -15;  // fix
 
-  BRUSHLENGTHANDBREADTH = 150 // getRandomFromInterval(120, 150);
-  BRUSHSTROKESIZE = getRandomFromInterval(0.6, 1.4);
+  BRUSHLENGTHANDBREADTH = 100 // getRandomFromInterval(120, 150);
+  BRUSHSTROKESIZE = 1 // getRandomFromInterval(0.6, 1.4);
   BRUSHBRIGHTNESSNOISE = getRandomFromInterval(5, 15);
   if (PALETTE != "greyscale") {
     BRUSHCOLORNOISE = getRandomFromInterval(15, 25);  // mit 20 besser

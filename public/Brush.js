@@ -119,17 +119,17 @@ class PaintBrushArea {
 
         // make sure the brushes nicely fill the area and do not overlap, calc the optimal solution
         if (this.orientation == "horizontal") {
-            var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
+            var brushLengthNeeded = this.custom_width / this.brushLength;
             this.brushLength = this.custom_width / brushLengthNeeded;
 
-            var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
+            var brushHeightNeeded = this.custom_height / this.brushBreadth;
             this.brushBreadth = this.custom_height / brushHeightNeeded
 
         } else if (this.orientation == "vertical") {
-            var brushHeightNeeded = Math.round(this.custom_height / this.brushBreadth);
+            var brushHeightNeeded = this.custom_height / this.brushBreadth;
             this.brushLength = this.custom_height / brushHeightNeeded;
 
-            var brushLengthNeeded = Math.round(this.custom_width / this.brushLength);
+            var brushLengthNeeded = this.custom_width / this.brushLength;
             this.brushBreadth = this.custom_width / brushLengthNeeded
         }
 
@@ -179,11 +179,9 @@ class PaintBrushArea {
                 buffer.push();
                 if (this.orientation == "horizontal") {
                     buffer.translate((this.posX - this.custom_width / 2 + fibre.startX) / exportRatio, (this.posY - this.custom_height / 2 + brushStroke.brushPosY) / exportRatio)
-                    // buffer.translate((this.posX + fibre.startX), (this.posY + brushStroke.brushPosY))
                     buffer.rotate(fibre.angleFibre);
                 } else if (this.orientation == "vertical") {
                     buffer.translate((this.posX - this.custom_width / 2 + brushStroke.brushPosX) / exportRatio, (this.posY - this.custom_height / 2 + fibre.startY) / exportRatio)
-                    // buffer.translate((this.posX + brushStroke.brushPosX), (this.posY + fibre.startY))
                     buffer.rotate(fibre.angleFibre / PI / 2);
                 }
                 buffer.stroke(fibre.colorFibre);
@@ -191,9 +189,9 @@ class PaintBrushArea {
                 buffer.noFill();
 
                 if (this.orientation == "horizontal") {
-                    buffer.line(0, (this.sizeStroke * fibre.i) / exportRatio, (fibre.stop - fibre.startX) / exportRatio, (this.sizeStroke * fibre.i) / exportRatio);
+                    buffer.line(0, this.sizeStroke / exportRatio * fibre.i, (fibre.stop - fibre.startX) / exportRatio, this.sizeStroke / exportRatio * fibre.i);
                 } else if (this.orientation == "vertical") {
-                    buffer.line((this.sizeStroke * fibre.i) / exportRatio, 0, (this.sizeStroke * fibre.i) / exportRatio, (fibre.stop - fibre.startY) / exportRatio);
+                    buffer.line(this.sizeStroke / exportRatio * fibre.i, 0, this.sizeStroke / exportRatio * fibre.i, (fibre.stop - fibre.startY) / exportRatio);
                 }
 
                 buffer.pop();
