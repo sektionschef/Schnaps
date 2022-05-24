@@ -11,11 +11,12 @@ class Fibre {
         this.startX = brush.brushPosX + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // where the fibre starts    
         this.startY = brush.brushPosY + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // where the fibre starts
 
-        if (brush.area.orientation == "horizontal") {
-            this.stop = brush.brushPosX + brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;  // where the fibre stops
-        } else if (brush.area.orientation == "vertical") {
-            this.stop = brush.brushPosY + brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;  // where the fibre stops
-        }
+        // if (brush.area.orientation == "horizontal") {
+        // this.stop = brush.brushPosX + brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;  // where the fibre stops
+        // } else if (brush.area.orientation == "vertical") {
+        // this.stop = brush.brushPosY + brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;  // where the fibre stops
+        // }
+        this.fibreLength = brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;
 
         this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise), brush.area.fibreBrightnessNoise);
 
@@ -117,20 +118,21 @@ class PaintBrushArea {
         this.fibreRotationNoise = data.fibreRotationNoise;
         this.fibreOpacityNoiseBase = data.fibreOpacityNoiseBase;
 
+
         // make sure the brushes nicely fill the area and do not overlap, calc the optimal solution
         if (this.orientation == "horizontal") {
             var brushLengthNeeded = this.custom_width / this.brushLength;
             this.brushLength = this.custom_width / brushLengthNeeded;
 
             var brushHeightNeeded = this.custom_height / this.brushBreadth;
-            this.brushBreadth = this.custom_height / brushHeightNeeded
+            this.brushBreadth = this.custom_height / brushHeightNeeded;
 
         } else if (this.orientation == "vertical") {
             var brushHeightNeeded = this.custom_height / this.brushBreadth;
             this.brushLength = this.custom_height / brushHeightNeeded;
 
             var brushLengthNeeded = this.custom_width / this.brushLength;
-            this.brushBreadth = this.custom_width / brushLengthNeeded
+            this.brushBreadth = this.custom_width / brushLengthNeeded;
         }
 
         this.numberFibres = this.brushBreadth / this.sizeStroke
@@ -189,9 +191,19 @@ class PaintBrushArea {
                 buffer.noFill();
 
                 if (this.orientation == "horizontal") {
-                    buffer.line(0, this.sizeStroke / exportRatio * fibre.i, (fibre.stop - fibre.startX) / exportRatio, this.sizeStroke / exportRatio * fibre.i);
+                    buffer.line(
+                        0,
+                        this.sizeStroke / exportRatio * fibre.i,
+                        fibre.fibreLength / exportRatio,
+                        this.sizeStroke / exportRatio * fibre.i
+                    );
                 } else if (this.orientation == "vertical") {
-                    buffer.line(this.sizeStroke / exportRatio * fibre.i, 0, this.sizeStroke / exportRatio * fibre.i, (fibre.stop - fibre.startY) / exportRatio);
+                    buffer.line(
+                        this.sizeStroke / exportRatio * fibre.i,
+                        0,
+                        this.sizeStroke / exportRatio * fibre.i,
+                        fibre.fibreLength / exportRatio
+                    );
                 }
 
                 buffer.pop();

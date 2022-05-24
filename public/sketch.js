@@ -55,7 +55,7 @@ function setup() {
   NUMBERPAINTLAYERS = getRandomFromList([1]);  // best 2
   GRIDBRIGHTNESSDIFF = -15;  // fix
 
-  BRUSHLENGTHANDBREADTH = 100 // getRandomFromInterval(120, 150);
+  BRUSHLENGTHANDBREADTH = 120 // getRandomFromInterval(120, 150);
   BRUSHSTROKESIZE = 1 // getRandomFromInterval(0.6, 1.4);
   BRUSHBRIGHTNESSNOISE = getRandomFromInterval(5, 15);
   if (PALETTE != "greyscale") {
@@ -202,7 +202,7 @@ function setup() {
   // canvasAgent = new DumbAgent(CanvasAgentData);
   // agentPaint1 = new DumbAgent(agentPaintData1);
   // agentPaint2 = new DumbAgent(agentPaintData2);
-  backgroundSphere = new paintedSphere(backgroundSphereData);
+  // backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
   // randomSpheres = new RandomPaintedSpheres(randomSphereData);
@@ -219,7 +219,7 @@ function draw() {
   buffer.scale(scaleRatio);
 
   buffer.background(200);
-  backgroundSphere.show();
+  // backgroundSphere.show();
 
   // if (CANVASAGENT == true) {
   //   canvasAgent.show();
@@ -256,4 +256,4 @@ function draw() {
 }
 
 
-// check two different resolutions and compare fxrand() at the end of code, should be the same.
+// check two different resolutions and compare fxrand() at the end of code, should be the same. with the same hash!

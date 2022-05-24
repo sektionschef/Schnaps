@@ -94,8 +94,8 @@ function scaleDynamically() {
         exportRatio = dynamicHeightRatio;
     }
 
-    rescaling_width = Math.round(exportPaper.width / exportRatio);
-    rescaling_height = Math.round(exportPaper.height / exportRatio);
+    rescaling_width = exportPaper.width / exportRatio.toFixed(2);
+    rescaling_height = exportPaper.height / exportRatio.toFixed(2);
 }
 
 // each time window.innerWidth changes
