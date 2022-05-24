@@ -196,6 +196,8 @@ class IntersectGrid {
             fibreBreadthNoise: FIBREBREADTHNOISE,  // noise of fibre along the y axis in the middle
             fibreRotationNoise: FIBREROTATIONNOISE,
             fibreOpacityNoiseBase: FIBREOPACITYNOISEBASE,
+            fibreLengthPerlin: FIBRELENGTHPERLIN,
+            fibreOpacityPerlin: FIBREOPACITYPERLIN,
         }
 
         return new PaintBrushArea(brushData);
