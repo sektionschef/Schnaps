@@ -200,19 +200,19 @@ function setup() {
   randomSphereData = {
     minSize: 100,  // 100
     maxSize: 300,  // 500
-    numberSpheres: 6,
+    numberSpheres: 60,
     colorObject: color(30, 30),
-    padding: 50,
+    padding: 100,
   }
 
   // canvas = new CanvasOverlay(canvasData);
   // canvasAgent = new DumbAgent(CanvasAgentData);
   // agentPaint1 = new DumbAgent(agentPaintData1);
   // agentPaint2 = new DumbAgent(agentPaintData2);
-  backgroundSphere = new paintedSphere(backgroundSphereData);
-  frontGrid = new IntersectGrid(frontGridData);
-  backGrid = new IntersectGrid(backGridData);
-  // randomSpheres = new RandomPaintedSpheres(randomSphereData);
+  // backgroundSphere = new paintedSphere(backgroundSphereData);
+  // frontGrid = new IntersectGrid(frontGridData);
+  // backGrid = new IntersectGrid(backGridData);
+  randomSpheres = new RandomPaintedSpheres(randomSphereData);
 }
 
 
@@ -227,22 +227,22 @@ function draw() {
 
   buffer.background(200);
 
-  backgroundSphere.show();
+  // backgroundSphere.show();
 
   // if (CANVASAGENT == true) {
   //   canvasAgent.show();
   // }
 
-  backGrid.show();
+  // backGrid.show();
 
-  // if (RANDOMSPHERES == true) {
-  //   randomSpheres.show();
-  // }
+  if (RANDOMSPHERES == true) {
+    randomSpheres.show();
+  }
   // canvas.show();
   // agentPaint1.show();
   // agentPaint2.show();
 
-  frontGrid.show();
+  // frontGrid.show();
 
   // document
   // absolute value / exportRatio

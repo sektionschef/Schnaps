@@ -84,20 +84,21 @@ class paintedSphere {
 
     show() {
 
-        if (logging.getLevel() <= 1) {
+        if (logging.getLevel() <= 2) {
             buffer.push();
             buffer.noFill();
             buffer.strokeWeight(2);
             buffer.stroke("black");
             // buffer.translate(this.posX - width / 2, this.posY - height / 2);
-            buffer.translate((this.posX / exportRatio), (this.posY / exportRatio));
+            buffer.rectMode(CENTER);
+            buffer.translate(((this.posX) / exportRatio), ((this.posY) / exportRatio));
             buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
             buffer.pop();
         }
 
         for (var element of this.elements) {
             buffer.push();
-            buffer.translate((this.posX), (this.posY));
+            buffer.translate((this.posX - this.custom_width / 2) / exportRatio, (this.posY - this.custom_height / 2) / exportRatio);
             if (this.noStroke == true) {
                 buffer.noStroke();
             } else {
@@ -106,9 +107,10 @@ class paintedSphere {
             }
             buffer.fill(element.fillColor);
 
-            buffer.ellipseMode(CENTER);
-            buffer.ellipse(element.posXEl / exportRatio, element.posYEl / exportRatio, element.widthShape / exportRatio, element.heightShape / exportRatio);
             buffer.rectMode(CENTER);
+            buffer.ellipseMode(CENTER);
+
+            buffer.ellipse(element.posXEl / exportRatio, element.posYEl / exportRatio, element.widthShape / exportRatio, element.heightShape / exportRatio);
             buffer.rect(element.posXRe / exportRatio, element.posYRe / exportRatio, element.widthShape / exportRatio, element.heightShape / exportRatio);
             buffer.pop();
             // return
@@ -121,8 +123,8 @@ class RandomPaintedSpheres {
     constructor(data) {
         if (typeof data === 'undefined') {
             data = {
-                minSize: 100,
-                maxSize: 300,
+                minSize: 10,
+                maxSize: 30,
                 numberSpheres: 20,
                 colorObject: color(20),
                 padding: 50,
@@ -141,8 +143,8 @@ class RandomPaintedSpheres {
 
             var width_ = getRandomFromInterval(this.minSize, this.maxSize);
             var height_ = getRandomFromInterval(this.minSize, this.maxSize);
-            var posX_ = getRandomFromInterval(this.padding, exportPaper.width - this.padding - width_);
-            var posY_ = getRandomFromInterval(this.padding, exportPaper.height - this.padding - height_);
+            var posX_ = getRandomFromInterval(this.padding + width_ / 2, exportPaper.width - this.padding - width_ / 2);
+            var posY_ = getRandomFromInterval(this.padding + height_ / 2, exportPaper.height - this.padding - height_ / 2);
 
             this.spheres.push(
                 new paintedSphere(data = {
@@ -150,11 +152,13 @@ class RandomPaintedSpheres {
                     custom_height: height_,
                     posX: posX_,
                     posY: posY_,
+                    elementSizeMin: 10,
+                    elementSizeMax: 50,
                     // colorObject: color(getRandomFromList([20, 40, 200, 240])),
                     colorObject: this.colorObject,
                     margin: 0,
                     fillColorNoise: 50,
-                    fillColorOpacityMax: 1,  // THISONE
+                    fillColorOpacityMax: 5,  // THISONE
                     noStroke: true,
                     strokeWeight: 1,
                     strokeColorNoise: 0,
