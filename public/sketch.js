@@ -47,7 +47,7 @@ function setup() {
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   logging.info("PALETTE: " + PALETTE);
 
-  CANVASROUGHNESS = 80 // getRandomFromInterval(60, 80);
+  CANVASROUGHNESS = 60 // getRandomFromInterval(60, 80);
 
   FRONTNUMBERRECTS = 18 // getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = 18 // getRandomFromInterval(10, 17); // 20
@@ -198,9 +198,9 @@ function setup() {
   }
 
   randomSphereData = {
-    minSize: 100,  // 100
-    maxSize: 300,  // 500
-    numberSpheres: 60,
+    minSize: 300,  // 100
+    maxSize: 600,  // 500
+    numberSpheres: 6,
     colorObject: color(30, 30),
     padding: 100,
   }
@@ -209,9 +209,9 @@ function setup() {
   // canvasAgent = new DumbAgent(CanvasAgentData);
   // agentPaint1 = new DumbAgent(agentPaintData1);
   // agentPaint2 = new DumbAgent(agentPaintData2);
-  // backgroundSphere = new paintedSphere(backgroundSphereData);
-  // frontGrid = new IntersectGrid(frontGridData);
-  // backGrid = new IntersectGrid(backGridData);
+  backgroundSphere = new paintedSphere(backgroundSphereData);
+  frontGrid = new IntersectGrid(frontGridData);
+  backGrid = new IntersectGrid(backGridData);
   randomSpheres = new RandomPaintedSpheres(randomSphereData);
 }
 
@@ -227,13 +227,13 @@ function draw() {
 
   buffer.background(200);
 
-  // backgroundSphere.show();
+  backgroundSphere.show();
 
   // if (CANVASAGENT == true) {
   //   canvasAgent.show();
   // }
 
-  // backGrid.show();
+  backGrid.show();
 
   if (RANDOMSPHERES == true) {
     randomSpheres.show();
@@ -242,7 +242,7 @@ function draw() {
   // agentPaint1.show();
   // agentPaint2.show();
 
-  // frontGrid.show();
+  frontGrid.show();
 
   // document
   // absolute value / exportRatio

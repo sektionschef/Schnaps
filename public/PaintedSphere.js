@@ -84,18 +84,6 @@ class paintedSphere {
 
     show() {
 
-        if (logging.getLevel() <= 2) {
-            buffer.push();
-            buffer.noFill();
-            buffer.strokeWeight(2);
-            buffer.stroke("black");
-            // buffer.translate(this.posX - width / 2, this.posY - height / 2);
-            buffer.rectMode(CENTER);
-            buffer.translate(((this.posX) / exportRatio), ((this.posY) / exportRatio));
-            buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
-            buffer.pop();
-        }
-
         for (var element of this.elements) {
             buffer.push();
             buffer.translate((this.posX - this.custom_width / 2) / exportRatio, (this.posY - this.custom_height / 2) / exportRatio);
@@ -113,7 +101,17 @@ class paintedSphere {
             buffer.ellipse(element.posXEl / exportRatio, element.posYEl / exportRatio, element.widthShape / exportRatio, element.heightShape / exportRatio);
             buffer.rect(element.posXRe / exportRatio, element.posYRe / exportRatio, element.widthShape / exportRatio, element.heightShape / exportRatio);
             buffer.pop();
-            // return
+        }
+
+        if (logging.getLevel() <= 2) {
+            buffer.push();
+            buffer.noFill();
+            buffer.strokeWeight(2);
+            buffer.stroke("black");
+            buffer.rectMode(CENTER);
+            buffer.translate(((this.posX) / exportRatio), ((this.posY) / exportRatio));
+            buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
+            buffer.pop();
         }
     }
 
@@ -150,20 +148,20 @@ class RandomPaintedSpheres {
                 new paintedSphere(data = {
                     custom_width: width_,
                     custom_height: height_,
-                    posX: posX_,
-                    posY: posY_,
-                    elementSizeMin: 10,
-                    elementSizeMax: 50,
+                    posX: 0, // posX_,
+                    posY: 0, // posY_,
+                    elementSizeMin: 50,
+                    elementSizeMax: 100,
                     // colorObject: color(getRandomFromList([20, 40, 200, 240])),
                     colorObject: this.colorObject,
                     margin: 0,
-                    fillColorNoise: 50,
-                    fillColorOpacityMax: 5,  // THISONE
+                    fillColorNoise: 30,
+                    fillColorOpacityMax: 2,  // THISONE
                     noStroke: true,
-                    strokeWeight: 1,
+                    strokeWeight: 2,
                     strokeColorNoise: 0,
-                    strokeOpacityMax: 10,
-                    numberQuantisizer: 20,
+                    strokeOpacityMax: 2,
+                    numberQuantisizer: 4,
                 }
                 ))
         }
