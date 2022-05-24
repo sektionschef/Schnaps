@@ -200,7 +200,7 @@ function setup() {
   randomSphereData = {
     minSize: 300,  // 100
     maxSize: 600,  // 500
-    numberSpheres: 6,
+    numberSpheres: 60,
     colorObject: color(30, 30),
     padding: 100,
   }
@@ -233,7 +233,7 @@ function draw() {
   //   canvasAgent.show();
   // }
 
-  backGrid.show();
+  // backGrid.show();
 
   if (RANDOMSPHERES == true) {
     randomSpheres.show();
@@ -242,7 +242,7 @@ function draw() {
   // agentPaint1.show();
   // agentPaint2.show();
 
-  frontGrid.show();
+  // frontGrid.show();
 
   // document
   // absolute value / exportRatio

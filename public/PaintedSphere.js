@@ -76,8 +76,8 @@ class paintedSphere {
                 strokeSize: this.strokeWeight,
                 posXEl: getRandomFromInterval(this.margin, this.custom_width - this.margin),
                 posYEl: getRandomFromInterval(this.margin, this.custom_height - this.margin),
-                posXRe: getRandomFromInterval(this.margin, this.custom_width - this.margin - widthShape / 2),
-                posYRe: getRandomFromInterval(this.margin, this.custom_height - this.margin - heightShape / 2),
+                posXRe: getRandomFromInterval(this.margin, this.custom_width - this.margin),
+                posYRe: getRandomFromInterval(this.margin, this.custom_height - this.margin),
             })
         }
     }
@@ -98,7 +98,7 @@ class paintedSphere {
             buffer.rectMode(CENTER);
             buffer.ellipseMode(CENTER);
 
-            buffer.ellipse(element.posXEl / exportRatio, element.posYEl / exportRatio, element.widthShape / exportRatio, element.heightShape / exportRatio);
+            // buffer.ellipse(element.posXEl / exportRatio, element.posYEl / exportRatio, element.widthShape / exportRatio, element.heightShape / exportRatio);
             buffer.rect(element.posXRe / exportRatio, element.posYRe / exportRatio, element.widthShape / exportRatio, element.heightShape / exportRatio);
             buffer.pop();
         }
@@ -141,8 +141,8 @@ class RandomPaintedSpheres {
 
             var width_ = getRandomFromInterval(this.minSize, this.maxSize);
             var height_ = getRandomFromInterval(this.minSize, this.maxSize);
-            var posX_ = getRandomFromInterval(this.padding + width_ / 2, exportPaper.width - this.padding - width_ / 2);
-            var posY_ = getRandomFromInterval(this.padding + height_ / 2, exportPaper.height - this.padding - height_ / 2);
+            var posX_ = getRandomFromInterval(this.padding, exportPaper.width - this.padding - width_);
+            var posY_ = getRandomFromInterval(this.padding, exportPaper.height - this.padding - height_);
 
             this.spheres.push(
                 new paintedSphere(data = {
