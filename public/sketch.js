@@ -41,7 +41,7 @@ function setup() {
   logging.info("Noise seed: " + NOISESEED);
   noiseSeed(NOISESEED);
 
-  GRIDVISIBLE = true  // getRandomFromList([true, false]);
+  GRIDVISIBLE = false  // getRandomFromList([true, false]);
   RANDOMSPHERES = true // getRandomFromList([true, false]);
   CANVASAGENT = true // getRandomFromList([true, false]);
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
@@ -49,7 +49,7 @@ function setup() {
 
   CANVASROUGHNESS = 80 // getRandomFromInterval(60, 80);
 
-  FRONTNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20  // 30
+  FRONTNUMBERRECTS = 2 // getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = 0 // getRandomFromInterval(10, 17); // 20
 
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // best 2
@@ -63,13 +63,19 @@ function setup() {
   } else if (PALETTE == "greyscale") {
     BRUSHCOLORNOISE = 0;
   }
-  FIBREBRIGHTNESSNOISE = 6; // fix
   BRUSHANGLENOISE = getRandomFromInterval(PI / 80, PI / 40);  // best PI / 40
+  BRUSHBREADTHNOISE = 0.2;
+  BRUSHLENGTHNOISE = 0.2;
+
+  FIBREBRIGHTNESSNOISE = 6; // fix
+  FIBRECOLORNOISE = 2;
   FIBRESTROKESIZENOISE = 0.2;  // fix // 0.2
   FIBRESTARTLENGTHNOISE = getRandomFromInterval(60, 120);
   FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
   FIBREROTATIONNOISE = PI / 60 // getRandomFromList([- PI / 6, - PI / 4, PI / 4, PI / 6]);
   FIBREOPACITYNOISEBASE = 150 // 120-
+  FIBRELENGTHPERLIN = 0.1;
+  FIBREOPACITYPERLIN = 0.1;
 
   colorPalette = new ColorPalette();
 

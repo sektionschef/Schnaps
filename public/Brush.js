@@ -4,18 +4,19 @@ class Fibre {
         this.i = i;
         this.brush = brush;
 
-        this.fibreLengthNoise = 0.2  // 0.6
-        this.fibreOpacityNoise = 0.3
+        // pass on to classes
+        this.fibreLengthPerlin = FIBRELENGTHPERLIN;
+        this.fibreOpacityPerlin = FIBREOPACITYPERLIN;
 
         this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
-        this.startX = brush.brushPosX + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // where the fibre starts    
-        this.startY = brush.brushPosY + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // where the fibre starts
+        this.startX = brush.brushPosX + noise(this.i * this.fibreLengthPerlin) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // where the fibre starts    
+        this.startY = brush.brushPosY + noise(this.i * this.fibreLengthPerlin) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // where the fibre starts
 
-        this.fibreLength = brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;
+        this.fibreLength = brush.brushLength_ // + noise(this.i * this.fibreLengthPerlin) * brush.area.fibreStartLengthNoise;
 
         this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise), brush.area.fibreBrightnessNoise);
 
-        this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * this.fibreOpacityNoise) * (255 - brush.area.fibreOpacityNoiseBase) + brush.area.fibreOpacityNoiseBase);
+        this.colorFibre = color(red(this.colorFibre), green(this.colorFibre), blue(this.colorFibre), noise(this.i * this.fibreOpacityPerlin) * (255 - brush.area.fibreOpacityNoiseBase) + brush.area.fibreOpacityNoiseBase);
         this.angleFibre = brush.angle + getRandomFromInterval(-brush.area.fibreRotationNoise, brush.area.fibreRotationNoise);
     }
 
