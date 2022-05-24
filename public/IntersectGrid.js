@@ -95,6 +95,7 @@ class IntersectGrid {
                 secondLevelColors: [color(30)],
                 lineColor: color(230),
                 padding: 200,  // frame to the edge of the canvas
+                shadow: true,
             }
         }
         this.minSize = data.minSize;
@@ -104,11 +105,13 @@ class IntersectGrid {
         this.secondLevelColors = data.secondLevelColors;
         this.lineColor = data.lineColor;
         this.padding = data.padding;
+        this.shadow = data.shadow;
 
 
         // for debug
         this.rects = [];
         this.interactionRects = [];
+        this.spheres = [];
 
         // console.log(this.numberRects);
         for (let i = 0; i < this.numberRects; i++) {
@@ -150,6 +153,56 @@ class IntersectGrid {
                     curveTightness: 1,
                     opacityLevel: 150,
                 });
+            }
+
+            if (this.shadow == true) {
+
+                var psx = (this.rects[i].posX - this.rects[i].width / 2 + 100);
+                var psy = (this.rects[i].posY - this.rects[i].height / 2 + 100);
+
+                this.rects[i].spheres = new paintedSphere(data = {
+                    custom_width: this.rects[i].width,
+                    custom_height: this.rects[i].height,
+                    posX: psx,
+                    posY: psy,
+                    elementSizeMin: 50,
+                    elementSizeMax: 100,
+                    // colorObject: color(getRandomFromList([20, 40, 200, 240])),
+                    colorObject: color(30, 30),
+                    margin: 0,
+                    fillColorNoise: 30,
+                    fillColorOpacityMax: 5,
+                    noStroke: true,
+                    strokeWeight: 2,
+                    strokeColorNoise: 0,
+                    strokeOpacityMax: 2,
+                    numberQuantisizer: 4,
+                }
+                );
+            } else {
+
+                var psx = (this.rects[i].posX - this.rects[i].width / 2 + 50);
+                var psy = (this.rects[i].posY - this.rects[i].height / 2 + 50);
+
+                this.rects[i].spheres = new paintedSphere(data = {
+                    custom_width: this.rects[i].width,
+                    custom_height: this.rects[i].height,
+                    posX: psx,
+                    posY: psy,
+                    elementSizeMin: 50,
+                    elementSizeMax: 100,
+                    // colorObject: color(getRandomFromList([20, 40, 200, 240])),
+                    colorObject: color(30, 30),
+                    margin: 0,
+                    fillColorNoise: 30,
+                    fillColorOpacityMax: 10,
+                    noStroke: true,
+                    strokeWeight: 2,
+                    strokeColorNoise: 0,
+                    strokeOpacityMax: 2,
+                    numberQuantisizer: 6,
+                }
+                );
             }
         }
         // sort by size
@@ -226,6 +279,10 @@ class IntersectGrid {
 
             if (logging.getLevel() <= 1) {
                 this.showDebug(this.rects[i], color(0, 255, 0, 100));
+            }
+
+            if (this.rects[i].spheres !== undefined) {
+                this.rects[i].spheres.show();
             }
 
             this.rects[i].paintedArea.show();

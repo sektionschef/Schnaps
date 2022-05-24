@@ -103,7 +103,7 @@ class paintedSphere {
             buffer.pop();
         }
 
-        if (logging.getLevel() <= 2) {
+        if (logging.getLevel() <= 1) {
             buffer.push();
             buffer.noFill();
             buffer.strokeWeight(2);

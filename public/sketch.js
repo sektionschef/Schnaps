@@ -47,7 +47,7 @@ function setup() {
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   logging.info("PALETTE: " + PALETTE);
 
-  CANVASROUGHNESS = 60 // getRandomFromInterval(60, 80);
+  CANVASROUGHNESS = 70;
 
   FRONTNUMBERRECTS = 18 // getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = 18 // getRandomFromInterval(10, 17); // 20
@@ -170,6 +170,7 @@ function setup() {
     secondLevelColors: [color2],
     lineColor: lineColor1,
     padding: 200,
+    shadow: true,
   }
 
   backGridData = {
@@ -180,6 +181,7 @@ function setup() {
     secondLevelColors: [color2b],
     lineColor: lineColor1b,
     padding: 200,
+    shadow: false,
   }
 
   CanvasAgentData = {
@@ -200,7 +202,7 @@ function setup() {
   randomSphereData = {
     minSize: 300,  // 100
     maxSize: 600,  // 500
-    numberSpheres: 60,
+    numberSpheres: 16,
     colorObject: color(30, 30),
     padding: 100,
   }
@@ -233,16 +235,16 @@ function draw() {
   //   canvasAgent.show();
   // }
 
-  // backGrid.show();
+  backGrid.show();
 
   if (RANDOMSPHERES == true) {
-    randomSpheres.show();
+    // randomSpheres.show();
   }
   // canvas.show();
   // agentPaint1.show();
   // agentPaint2.show();
 
-  // frontGrid.show();
+  frontGrid.show();
 
   // document
   // absolute value / exportRatio
