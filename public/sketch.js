@@ -49,14 +49,14 @@ function setup() {
 
   CANVASROUGHNESS = 80 // getRandomFromInterval(60, 80);
 
-  FRONTNUMBERRECTS = 2 // getRandomFromInterval(10, 17); // 20  // 30
+  FRONTNUMBERRECTS = 8 // getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = 0 // getRandomFromInterval(10, 17); // 20
 
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // best 2
   GRIDBRIGHTNESSDIFF = -15;  // fix
 
   BRUSHLENGTHANDBREADTH = 120 // getRandomFromInterval(120, 150);
-  BRUSHSTROKESIZE = 1 // getRandomFromInterval(0.6, 1.4);
+  BRUSHSTROKESIZE = 2 // getRandomFromInterval(0.6, 1.4);
   BRUSHBRIGHTNESSNOISE = getRandomFromInterval(5, 15);
   if (PALETTE != "greyscale") {
     BRUSHCOLORNOISE = getRandomFromInterval(15, 25);  // mit 20 besser
@@ -67,15 +67,15 @@ function setup() {
   BRUSHBREADTHNOISE = 0.2;
   BRUSHLENGTHNOISE = 0.2;
 
-  FIBREBRIGHTNESSNOISE = 6; // fix
-  FIBRECOLORNOISE = 2;
-  FIBRESTROKESIZENOISE = 0.2;  // fix // 0.2
-  FIBRESTARTLENGTHNOISE = getRandomFromInterval(60, 120);
-  FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
-  FIBREROTATIONNOISE = PI / 60 // getRandomFromList([- PI / 6, - PI / 4, PI / 4, PI / 6]);
-  FIBREOPACITYNOISEBASE = 150 // 120-
-  FIBRELENGTHPERLIN = 0.1;
-  FIBREOPACITYPERLIN = 0.1;
+  FIBREBRIGHTNESSNOISE = 3;
+  FIBRECOLORNOISE = 3;
+  FIBRESTROKESIZENOISE = 0.6;  // fix // 0.2
+  FIBRESTARTLENGTHNOISE = getRandomFromInterval(30, 50);
+  FIBREBREADTHNOISE = 0.3 // getRandomFromInterval(1, 5); cool 0.2
+  FIBREROTATIONNOISE = PI / 60; // PI / 30<->PI / 50
+  FIBREOPACITYNOISEBASE = 100 // 100
+  FIBRELENGTHPERLIN = 0.3;  // 0.01<->0.03
+  FIBREOPACITYPERLIN = 0.4;
 
   colorPalette = new ColorPalette();
 
@@ -225,13 +225,14 @@ function draw() {
   buffer.scale(scaleRatio);
 
   buffer.background(200);
+
   // backgroundSphere.show();
 
   // if (CANVASAGENT == true) {
   //   canvasAgent.show();
   // }
 
-  backGrid.show();
+  // backGrid.show();
 
   // if (RANDOMSPHERES == true) {
   //   randomSpheres.show();
@@ -255,9 +256,9 @@ function draw() {
   image(buffer, -width / 2, - height / 2);
 
   noLoop();
-
   fxpreview()
-  logging.info("safety check for diff resolutions - fxrand: " + fxrand());
+
+  logging.debug("safety check for diff resolutions - fxrand: " + fxrand());
 
 }
 

@@ -1,3 +1,5 @@
+PATER = 6;
+
 class Fibre {
     constructor(brush, i) {
 
@@ -38,12 +40,14 @@ class Brush {
         if ((loopLayer > 0) && (fxrand() > 0.85)) {
             if (this.area.orientation == "horizontal") {
                 this.brushPosX = getRandomFromInterval(this.area.overlap / 2, this.area.custom_width - this.brushLength_ - this.area.overlap / 2);
-                this.brushPosY = getRandomFromInterval(this.area.overlap / 2, this.area.custom_height - this.numberFibres_ * this.area.sizeStroke - this.area.overlap / 2);
+                // this.brushPosY = getRandomFromInterval(this.area.overlap / 2, this.area.custom_height - this.numberFibres_ * this.area.sizeStroke - this.area.overlap / 2);
+                this.brushPosY = getRandomFromInterval(this.area.overlap / 2, this.area.custom_height - this.numberFibres_ * PATER - this.area.overlap / 2);
             }
         }
         if ((loopLayer > 0) && (fxrand() > 0.85)) {
             if (this.area.orientation == "vertical") {
-                this.brushPosX = getRandomFromInterval(this.area.overlap / 2, this.area.custom_width - this.numberFibres_ * this.area.sizeStroke - this.area.overlap / 2);
+                // this.brushPosX = getRandomFromInterval(this.area.overlap / 2, this.area.custom_width - this.numberFibres_ * this.area.sizeStroke - this.area.overlap / 2);
+                this.brushPosX = getRandomFromInterval(this.area.overlap / 2, this.area.custom_width - this.numberFibres_ * PATER - this.area.overlap / 2);
                 this.brushPosY = getRandomFromInterval(this.area.overlap / 2, this.area.custom_height - this.brushLength_ - this.area.overlap / 2);
             }
         }
@@ -62,14 +66,14 @@ class PaintBrushArea {
 
         if (typeof data === 'undefined') {
             data = {
-                custom_width: 600,
-                custom_height: 400,
-                posX: -100,
-                posY: -100,
+                custom_width: 800,
+                custom_height: 800,
+                posX: 100,
+                posY: 100,
                 colorObject: color1,
                 orientation: "vertical",
-                brushLength: 30,  // 20-40
-                brushBreadth: 30,
+                brushLength: 150,  // 20-40
+                brushBreadth: 150,
                 sizeStroke: 2,
                 numberPaintLayers: 2,
                 overlap: 20,
@@ -131,7 +135,7 @@ class PaintBrushArea {
             this.brushBreadth = this.custom_width / brushLengthNeeded;
         }
 
-        this.numberFibres = this.brushBreadth / this.sizeStroke
+        this.numberFibres = this.brushBreadth / PATER // this.sizeStroke
 
         this.brushStrokes = [];
         this.createBrushes();
@@ -189,15 +193,19 @@ class PaintBrushArea {
                 if (this.orientation == "horizontal") {
                     buffer.line(
                         0,
-                        this.sizeStroke / exportRatio * fibre.i,
+                        PATER / exportRatio * fibre.i,
+                        // this.sizeStroke / exportRatio * fibre.i,
                         fibre.fibreLength / exportRatio,
-                        this.sizeStroke / exportRatio * fibre.i
+                        // this.sizeStroke / exportRatio * fibre.i
+                        PATER / exportRatio * fibre.i,
                     );
                 } else if (this.orientation == "vertical") {
                     buffer.line(
-                        this.sizeStroke / exportRatio * fibre.i,
+                        // this.sizeStroke / exportRatio * fibre.i,
+                        PATER / exportRatio * fibre.i,
                         0,
-                        this.sizeStroke / exportRatio * fibre.i,
+                        // this.sizeStroke / exportRatio * fibre.i,
+                        PATER / exportRatio * fibre.i,
                         fibre.fibreLength / exportRatio
                     );
                 }
