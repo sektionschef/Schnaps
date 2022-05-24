@@ -4,18 +4,13 @@ class Fibre {
         this.i = i;
         this.brush = brush;
 
-        this.fibreLengthNoise = 0.4  // 0.6
+        this.fibreLengthNoise = 0.2  // 0.6
         this.fibreOpacityNoise = 0.3
 
         this.sizeStrokeFibre = brush.area.sizeStroke + getRandomFromInterval(-brush.area.fibreStrokeSizeNoise, brush.area.fibreStrokeSizeNoise);  // size of fibre
         this.startX = brush.brushPosX + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // where the fibre starts    
         this.startY = brush.brushPosY + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise - brush.area.fibreStartLengthNoise;  // where the fibre starts
 
-        // if (brush.area.orientation == "horizontal") {
-        // this.stop = brush.brushPosX + brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;  // where the fibre stops
-        // } else if (brush.area.orientation == "vertical") {
-        // this.stop = brush.brushPosY + brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;  // where the fibre stops
-        // }
         this.fibreLength = brush.brushLength_ + noise(this.i * this.fibreLengthNoise) * brush.area.fibreStartLengthNoise;
 
         this.colorFibre = brightenColor(distortColor(color(brush.colorBrush), brush.area.fibreColorNoise), brush.area.fibreBrightnessNoise);

@@ -49,10 +49,10 @@ function setup() {
 
   CANVASROUGHNESS = 80 // getRandomFromInterval(60, 80);
 
-  FRONTNUMBERRECTS = 1 // getRandomFromInterval(10, 17); // 20  // 30
+  FRONTNUMBERRECTS = 7 // getRandomFromInterval(10, 17); // 20  // 30
   BACKNUMBERRECTS = 0 // getRandomFromInterval(10, 17); // 20
 
-  NUMBERPAINTLAYERS = getRandomFromList([1]);  // best 2
+  NUMBERPAINTLAYERS = getRandomFromList([2]);  // best 2
   GRIDBRIGHTNESSDIFF = -15;  // fix
 
   BRUSHLENGTHANDBREADTH = 120 // getRandomFromInterval(120, 150);
@@ -69,7 +69,7 @@ function setup() {
   FIBRESTARTLENGTHNOISE = getRandomFromInterval(60, 120);
   FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
   FIBREROTATIONNOISE = PI / 60 // getRandomFromList([- PI / 6, - PI / 4, PI / 4, PI / 6]);
-  FIBREOPACITYNOISEBASE = 120 // 120-
+  FIBREOPACITYNOISEBASE = 150 // 120-
 
   colorPalette = new ColorPalette();
 
