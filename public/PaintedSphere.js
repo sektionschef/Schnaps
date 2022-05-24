@@ -86,7 +86,7 @@ class paintedSphere {
 
         for (var element of this.elements) {
             buffer.push();
-            buffer.translate((this.posX - this.custom_width / 2) / exportRatio, (this.posY - this.custom_height / 2) / exportRatio);
+            buffer.translate((this.posX) / exportRatio, (this.posY) / exportRatio);
             if (this.noStroke == true) {
                 buffer.noStroke();
             } else {
@@ -109,7 +109,7 @@ class paintedSphere {
             buffer.strokeWeight(2);
             buffer.stroke("black");
             buffer.rectMode(CENTER);
-            buffer.translate(((this.posX) / exportRatio), ((this.posY) / exportRatio));
+            buffer.translate((this.posX + this.custom_width / 2) / exportRatio, (this.posY + this.custom_height / 2) / exportRatio);
             buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
             buffer.pop();
         }
@@ -148,8 +148,8 @@ class RandomPaintedSpheres {
                 new paintedSphere(data = {
                     custom_width: width_,
                     custom_height: height_,
-                    posX: 0, // posX_,
-                    posY: 0, // posY_,
+                    posX: posX_,
+                    posY: posY_,
                     elementSizeMin: 50,
                     elementSizeMax: 100,
                     // colorObject: color(getRandomFromList([20, 40, 200, 240])),
