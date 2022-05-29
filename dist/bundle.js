@@ -1,1 +1,1 @@
-window.$fxhashFeatures={};
+window.$fxhashFeatures={"Number of elements":NUMBEROFELEMENTS_LABEL,"Brush size":BRUSHLENGTHANDBREADTH_LABEL,"Stroke size":BRUSHSTROKESIZE_LABEL};
