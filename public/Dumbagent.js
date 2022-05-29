@@ -35,8 +35,8 @@ class DumbAgent {
         // this.colorLine.setAlpha(this.opacityLine);
         // this.colorPoint.setAlpha(this.opacityPoint);
 
-        this.posX = getRandomFromInterval(0, this.customWidth);
-        this.posY = getRandomFromInterval(0, this.customHeight);
+        this.posX = getRandomFromInterval(0, this.customWidth / exportRatio);
+        this.posY = getRandomFromInterval(0, this.customHeight / exportRatio);
         this.complete = false;
     }
 
@@ -61,49 +61,55 @@ class DumbAgent {
                 ]);
 
                 if (directive == "up") {
-                    this.posY -= this.stepSize;
+                    this.posY -= this.stepSize / exportRatio;
                 } else if (directive == "up-right") {
-                    this.posX += this.stepSize;
-                    this.posY -= this.stepSize;
+                    this.posX += this.stepSize / exportRatio;
+                    this.posY -= this.stepSize / exportRatio;
                 } else if (directive == "right") {
-                    this.posX += this.stepSize;
+                    this.posX += this.stepSize / exportRatio;
                 } else if (directive == "right-down") {
-                    this.posX += this.stepSize;
-                    this.posY += this.stepSize;
+                    this.posX += this.stepSize / exportRatio;
+                    this.posY += this.stepSize / exportRatio;
                 } else if (directive == "down") {
-                    this.posY += this.stepSize;
+                    this.posY += this.stepSize / exportRatio;
                 } else if (directive == "down-left") {
-                    this.posX -= this.stepSize;
-                    this.posY += this.stepSize;
+                    this.posX -= this.stepSize / exportRatio;
+                    this.posY += this.stepSize / exportRatio;
                 } else if (directive == "left") {
-                    this.posX -= this.stepSize;
+                    this.posX -= this.stepSize / exportRatio;
                 } else if (directive == "left-up") {
-                    this.posX -= this.stepSize;
-                    this.posY -= this.stepSize;
+                    this.posX -= this.stepSize / exportRatio;
+                    this.posY -= this.stepSize / exportRatio;
                 }
 
-                if (this.posX > this.customWidth | this.posX < 0) {
-                    this.posX = getRandomFromInterval(0, this.customWidth)
+                if (this.posX > this.customWidth / exportRatio | this.posX < 0) {
+                    this.posX = getRandomFromInterval(0, this.customWidth / exportRatio)
                 }
-                if (this.posY > this.customHeight | this.posY < 0) {
-                    this.posY = getRandomFromInterval(0, this.customHeight)
+                if (this.posY > this.customHeight / exportRatio | this.posY < 0) {
+                    this.posY = getRandomFromInterval(0, this.customHeight / exportRatio)
                 }
 
                 buffer.push();
 
                 buffer.translate(this.posX, this.posY);
-                buffer.strokeWeight(this.agentSize);
+                buffer.strokeWeight(this.agentSize / exportRatio);
                 buffer.stroke(this.colorLine);
                 buffer.rotate(angle);
-                buffer.line(0, 0, this.lineLength, this.lineLength);
+                buffer.line(0, 0, this.lineLength / exportRatio, this.lineLength / exportRatio);
 
                 buffer.stroke(this.colorPoint);
                 buffer.point(0, 0);
-                buffer.point(this.lineLength, this.lineLength);
+                buffer.point(this.lineLength / exportRatio, this.lineLength / exportRatio);
+
 
                 buffer.pop();
             }
         }
+        buffer.push();
+        buffer.noFill();
+        buffer.stroke(20);
+        buffer.rect(0, 0, this.customWidth / exportRatio, this.customHeight / exportRatio);
+        buffer.pop();
     }
 
 }
