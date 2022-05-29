@@ -105,7 +105,7 @@ class IntersectGrid {
         this.secondLevelColors = data.secondLevelColors;
         this.lineColor = data.lineColor;
         this.padding = data.padding;
-        this.shadow = data.shadow;
+        this.firstShadow = data.firstShadow;
 
 
         // for debug
@@ -155,7 +155,7 @@ class IntersectGrid {
                 });
             }
 
-            if (this.shadow == true) {
+            if (this.firstShadow == true) {
 
                 var psx = (this.rects[i].posX - this.rects[i].width / 2 + 100);
                 var psy = (this.rects[i].posY - this.rects[i].height / 2 + 100);
@@ -192,7 +192,7 @@ class IntersectGrid {
                     elementSizeMin: 50,
                     elementSizeMax: 100,
                     // colorObject: color(getRandomFromList([20, 40, 200, 240])),
-                    colorObject: color(30, 30),
+                    colorObject: color(60, 30),
                     margin: 0,
                     fillColorNoise: 30,
                     fillColorOpacityMax: 10,
@@ -256,6 +256,10 @@ class IntersectGrid {
         return new PaintBrushArea(brushData);
     }
 
+    createSpheres(posX, posY, rectWidth, rectHeight, colorObject) {
+
+    }
+
     update() {
         for (let i = 0; i < this.interactionRects.length; i++) {
             this.interactionRects[i].update();
@@ -268,6 +272,56 @@ class IntersectGrid {
                     this.interactionRects[i].heightNew,
                     this.interactionRects[i].colorObject
                 )
+            }
+
+            if (this.firstShadow == true) {
+
+                var psx = (this.interactionRects[i].posXNew - this.interactionRects[i].widthNew / 2 + 100);
+                var psy = (this.interactionRects[i].posYNew - this.interactionRects[i].heightNew / 2 + 100);
+
+                this.interactionRects[i].spheres = new paintedSphere(data = {
+                    custom_width: this.interactionRects[i].widthNew,
+                    custom_height: this.interactionRects[i].heightNew,
+                    posX: psx,
+                    posY: psy,
+                    elementSizeMin: 50,
+                    elementSizeMax: 100,
+                    // colorObject: color(getRandomFromList([20, 40, 200, 240])),
+                    colorObject: color(30, 30),
+                    margin: 0,
+                    fillColorNoise: 30,
+                    fillColorOpacityMax: 5,
+                    noStroke: true,
+                    strokeWeight: 2,
+                    strokeColorNoise: 0,
+                    strokeOpacityMax: 2,
+                    numberQuantisizer: 4,
+                }
+                );
+            } else {
+
+                var psx = (this.interactionRects[i].posX - this.interactionRects[i].width / 2 + 50);
+                var psy = (this.interactionRects[i].posY - this.reinteractionRectscts[i].height / 2 + 50);
+
+                this.interactionRects[i].spheres = new paintedSphere(data = {
+                    custom_width: this.interactionRects[i].width,
+                    custom_height: this.interactionRects[i].height,
+                    posX: psx,
+                    posY: psy,
+                    elementSizeMin: 50,
+                    elementSizeMax: 100,
+                    // colorObject: color(getRandomFromList([20, 40, 200, 240])),
+                    colorObject: color(60, 30),
+                    margin: 0,
+                    fillColorNoise: 30,
+                    fillColorOpacityMax: 10,
+                    noStroke: true,
+                    strokeWeight: 2,
+                    strokeColorNoise: 0,
+                    strokeOpacityMax: 2,
+                    numberQuantisizer: 6,
+                }
+                );
             }
         }
     }

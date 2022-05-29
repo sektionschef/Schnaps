@@ -15,7 +15,7 @@
 // [https://fxhash.xyz/articles/guide-mint-generative-token#features]
 //
 window.$fxhashFeatures = {
-    // "Grid": GRID,
+    // "Number of elements": NUMBEROFELEMENTS,
     // "Paired boxes": PAIRING_COUNT,
     // "Palette": chosenPalette.name,
     // "Camera flight": chosenCameraFlight.name,

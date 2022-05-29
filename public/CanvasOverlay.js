@@ -18,28 +18,35 @@ class CanvasOverlay {
         this.colorObject = data.colorObject;
         this.opacity = data.opacity;
 
-        var maxCell = 1200;  // amazing with 3000 amount of cells per line, used to be 300 for width of 1000
-        this.strokeWeight_ = 0.5;
-        // this.colorUsed = brightenColor(color(this.colorObject, this.opacity), -20);
+        this.cellPerLine = 100; // 1200;  // amazing with 3000 amount of cells per line, used to be 300 for width of 1000
+        this.strokeWeight_ = 1;  // 0.5
         this.colorUsed = color(red(this.colorObject), green(this.colorObject), blue(this.colorObject), this.opacity);
         this.deviation = 0.3;
 
-        this.cell = maxCell;
-        this.scl = this.custom_width / this.cell;
+        this.scl = this.custom_width / this.cellPerLine;
     }
 
     show() {
         buffer.push();
-        buffer.translate(this.posX, this.posY);
-        buffer.strokeWeight(this.strokeWeight_);
+        buffer.translate(this.posX / exportRatio, this.posY / exportRatio);
+        buffer.strokeWeight(this.strokeWeight_ / exportRatio);
         buffer.stroke(this.colorUsed);
-        for (let x = 0; x < this.custom_width; x += this.scl) {
-            for (let y = 0; y < this.custom_height; y += this.scl) {
-                // buffer.strokeWeight(this.strokeWeight_);
-                // buffer.stroke(this.colorUsed);
-                buffer.point(x + getRandomFromInterval(-this.deviation, this.deviation), y + getRandomFromInterval(-this.deviation, this.deviation));
+
+        var scl = this.scl / exportRatio;
+        var deviation_ = this.deviation / exportRatio;
+
+        for (let x = 0; x < this.custom_width; x += scl) {
+            for (let y = 0; y < this.custom_height; y += scl) {
+                buffer.point((x + getRandomFromInterval(-deviation_, deviation_)) / exportRatio, (y + getRandomFromInterval(deviation_, deviation_)) / exportRatio);
             }
         }
+        buffer.pop();
+
+        // debug
+        buffer.push();
+        buffer.translate(this.posX / exportRatio, this.posY / exportRatio);
+        buffer.noFill();
+        buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
         buffer.pop();
     }
 }

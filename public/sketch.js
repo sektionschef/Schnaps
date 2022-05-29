@@ -38,8 +38,15 @@ function setup() {
   exportRatio /= pixelDensity();
 
   NOISESEED = hashFnv32a(fxhash);
-  logging.info("Noise seed: " + NOISESEED);
+  logging.debug("Noise seed: " + NOISESEED);
   noiseSeed(NOISESEED);
+
+
+  NUMBEROFELEMENTS = Math.round(getRandomFromInterval(10, 25));
+  NUMBEROFELEMENTS_LABEL = label_feature(NUMBEROFELEMENTS, 10, 25);
+  logging.info("NUMBEROFELEMENTS: " + NUMBEROFELEMENTS_LABEL + ", " + NUMBEROFELEMENTS)
+
+
 
   GRIDVISIBLE = false  // getRandomFromList([true, false]);
   RANDOMSPHERES = true // getRandomFromList([true, false]);
@@ -47,10 +54,7 @@ function setup() {
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   logging.info("PALETTE: " + PALETTE);
 
-  CANVASROUGHNESS = 70;
-
-  FRONTNUMBERRECTS = 18 // getRandomFromInterval(10, 17); // 20  // 30
-  BACKNUMBERRECTS = 18 // getRandomFromInterval(10, 17); // 20
+  CANVASROUGHNESS = 80;
 
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // best 2
   GRIDBRIGHTNESSDIFF = -15;  // fix
@@ -105,7 +109,7 @@ function setup() {
     posX: 0,
     posY: 0,
     colorObject: color(230),
-    opacity: 100,
+    opacity: 100,  // 100
   }
 
   agentPaintData1 = {
@@ -165,23 +169,23 @@ function setup() {
   frontGridData = {
     minSize: 200,  // 50
     maxSize: 700,  // 200
-    numberRects: FRONTNUMBERRECTS,
+    numberRects: NUMBEROFELEMENTS,
     firstLevelColors: [color1],
     secondLevelColors: [color2],
     lineColor: lineColor1,
     padding: 200,
-    shadow: true,
+    firstShadow: true,
   }
 
   backGridData = {
     minSize: 550,  // 100
     maxSize: 1000,  // 500
-    numberRects: BACKNUMBERRECTS,
+    numberRects: NUMBEROFELEMENTS,
     firstLevelColors: [color1b],
     secondLevelColors: [color2b],
     lineColor: lineColor1b,
     padding: 200,
-    shadow: false,
+    firstShadow: false,
   }
 
   CanvasAgentData = {
@@ -202,19 +206,19 @@ function setup() {
   randomSphereData = {
     minSize: 300,  // 100
     maxSize: 600,  // 500
-    numberSpheres: 16,
+    numbesrSpheres: 16,
     colorObject: color(30, 30),
     padding: 100,
   }
 
-  // canvas = new CanvasOverlay(canvasData);
+  canvas = new CanvasOverlay(canvasData);
   // canvasAgent = new DumbAgent(CanvasAgentData);
   // agentPaint1 = new DumbAgent(agentPaintData1);
   // agentPaint2 = new DumbAgent(agentPaintData2);
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
-  randomSpheres = new RandomPaintedSpheres(randomSphereData);
+  // randomSpheres = new RandomPaintedSpheres(randomSphereData);  // REMOVE
 }
 
 
@@ -227,7 +231,7 @@ function draw() {
   buffer.clear();
   buffer.scale(scaleRatio);
 
-  buffer.background(200);
+  buffer.background(250);
 
   backgroundSphere.show();
 
@@ -240,11 +244,11 @@ function draw() {
   if (RANDOMSPHERES == true) {
     // randomSpheres.show();
   }
-  // canvas.show();
   // agentPaint1.show();
   // agentPaint2.show();
 
   frontGrid.show();
+  // canvas.show();
 
   // document
   // absolute value / exportRatio
