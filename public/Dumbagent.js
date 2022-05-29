@@ -42,6 +42,7 @@ class DumbAgent {
 
     show() {
 
+
         for (var v = 0; v < this.numberAgents; v++) {
             for (var i = 0; i < this.loopSize; i++) {
 
@@ -49,6 +50,7 @@ class DumbAgent {
                 // let angle = getRandomFromList([PI / 2, PI / 4, PI]);
                 let angle = i % PI;
 
+                let stepSizeTemp = getRandomFromInterval(this.stepSize / exportRatio / 2, this.stepSize / exportRatio);
                 let directive = getRandomFromList([
                     "up",
                     "up-right",
@@ -61,25 +63,25 @@ class DumbAgent {
                 ]);
 
                 if (directive == "up") {
-                    this.posY -= this.stepSize / exportRatio;
+                    this.posY -= stepSizeTemp;
                 } else if (directive == "up-right") {
-                    this.posX += this.stepSize / exportRatio;
-                    this.posY -= this.stepSize / exportRatio;
+                    this.posX += stepSizeTemp;
+                    this.posY -= stepSizeTemp;
                 } else if (directive == "right") {
-                    this.posX += this.stepSize / exportRatio;
+                    this.posX += stepSizeTemp;
                 } else if (directive == "right-down") {
-                    this.posX += this.stepSize / exportRatio;
-                    this.posY += this.stepSize / exportRatio;
+                    this.posX += stepSizeTemp;
+                    this.posY += stepSizeTemp;
                 } else if (directive == "down") {
-                    this.posY += this.stepSize / exportRatio;
+                    this.posY += stepSizeTemp;
                 } else if (directive == "down-left") {
-                    this.posX -= this.stepSize / exportRatio;
-                    this.posY += this.stepSize / exportRatio;
+                    this.posX -= stepSizeTemp;
+                    this.posY += stepSizeTemp;
                 } else if (directive == "left") {
-                    this.posX -= this.stepSize / exportRatio;
+                    this.posX -= stepSizeTemp;
                 } else if (directive == "left-up") {
-                    this.posX -= this.stepSize / exportRatio;
-                    this.posY -= this.stepSize / exportRatio;
+                    this.posX -= stepSizeTemp;
+                    this.posY -= stepSizeTemp;
                 }
 
                 if (this.posX > this.customWidth / exportRatio | this.posX < 0) {

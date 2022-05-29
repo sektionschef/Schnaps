@@ -55,8 +55,8 @@ function setup() {
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // best 2
   GRIDBRIGHTNESSDIFF = -10;  // fix
 
-  BRUSHLENGTHANDBREADTH = Math.round(getRandomFromInterval(100, 200));
-  BRUSHLENGTHANDBREADTH_LABEL = label_feature(BRUSHLENGTHANDBREADTH, 100, 200)
+  BRUSHLENGTHANDBREADTH = Math.round(getRandomFromInterval(100, 160));
+  BRUSHLENGTHANDBREADTH_LABEL = label_feature(BRUSHLENGTHANDBREADTH, 100, 160)
   logging.info("BRUSHLENGTHANDBREADTH: " + BRUSHLENGTHANDBREADTH_LABEL + ", " + BRUSHLENGTHANDBREADTH)
   BRUSHSTROKESIZE = getRandomFromInterval(1.5, 2.5);
   BRUSHSTROKESIZE_LABEL = label_feature(BRUSHSTROKESIZE, 1.5, 2.5)
@@ -134,14 +134,14 @@ function setup() {
     customHeight: exportPaper.height,
     posXImage: 0,
     posYImage: 0,
-    colorObject: color(color1),
-    stepSize: 3,
-    agentSize: 2,
-    opacityLine: 2,
-    opacityPoint: 0.2,
+    colorObject: color(color1b),
+    stepSize: 20,
+    agentSize: 10,
+    opacityLine: 5,
+    opacityPoint: 5,
     lineLength: 20,
     loopSize: 100,
-    numberAgents: 135,
+    numberAgents: 55,
   }
 
   agentPaintData2 = {
@@ -149,14 +149,14 @@ function setup() {
     customHeight: exportPaper.height,
     posXImage: 0,
     posYImage: 0,
-    colorObject: color(color2),
-    stepSize: 3,
-    agentSize: 2,
-    opacityLine: 0.2,
-    opacityPoint: 0.2,
+    colorObject: color(color2b),
+    stepSize: 20,
+    agentSize: 10,
+    opacityLine: 5,
+    opacityPoint: 5,
     lineLength: 20,
     loopSize: 100,
-    numberAgents: 135,
+    numberAgents: 55,
   }
 
   backgroundSphereData = {
@@ -209,8 +209,8 @@ function setup() {
     colorObject: color(150),
     stepSize: 60,  // 10 is hero
     agentSize: 8,
-    opacityLine: 25,
-    opacityPoint: 25,
+    opacityLine: 15,
+    opacityPoint: 15,
     lineLength: 20,
     loopSize: 4000,
     numberAgents: 5,
@@ -228,8 +228,8 @@ function setup() {
   if (CANVASAGENT == true) {
     canvasAgent = new DumbAgent(CanvasAgentData);
   }
-  // agentPaint1 = new DumbAgent(agentPaintData1);
-  // agentPaint2 = new DumbAgent(agentPaintData2);
+  agentPaint1 = new DumbAgent(agentPaintData1);
+  agentPaint2 = new DumbAgent(agentPaintData2);
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
@@ -261,10 +261,11 @@ function draw() {
   // if (RANDOMSPHERES == true) {
   //   randomSpheres.show();
   // }
-  // agentPaint1.show();
-  // agentPaint2.show();
 
+  agentPaint1.show();
+  agentPaint2.show();
   frontGrid.show();
+
   // canvas.show();
 
   // document

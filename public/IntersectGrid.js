@@ -149,7 +149,7 @@ class IntersectGrid {
                     colorObject: this.lineColor,
                     distance: 40,
                     noise: 4,
-                    strokeSize: 4,
+                    strokeSize: 6,
                     curveTightness: 1,
                     opacityLevel: 150,
                 });
