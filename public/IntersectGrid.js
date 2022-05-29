@@ -155,55 +155,62 @@ class IntersectGrid {
                 });
             }
 
-            if (this.firstShadow == true) {
+            this.rects[i].spheres = this.createSpheres(
+                this.rects[i].posX,
+                this.rects[i].posY,
+                this.rects[i].width,
+                this.rects[i].height,
+            )
 
-                var psx = (this.rects[i].posX - this.rects[i].width / 2 + 100);
-                var psy = (this.rects[i].posY - this.rects[i].height / 2 + 100);
+            // if (this.firstShadow == true) {
 
-                this.rects[i].spheres = new paintedSphere(data = {
-                    custom_width: this.rects[i].width,
-                    custom_height: this.rects[i].height,
-                    posX: psx,
-                    posY: psy,
-                    elementSizeMin: 50,
-                    elementSizeMax: 100,
-                    // colorObject: color(getRandomFromList([20, 40, 200, 240])),
-                    colorObject: color(30, 30),
-                    margin: 0,
-                    fillColorNoise: 30,
-                    fillColorOpacityMax: 5,
-                    noStroke: true,
-                    strokeWeight: 2,
-                    strokeColorNoise: 0,
-                    strokeOpacityMax: 2,
-                    numberQuantisizer: 4,
-                }
-                );
-            } else {
+            //     var psx = (this.rects[i].posX - this.rects[i].width / 2 + 100);
+            //     var psy = (this.rects[i].posY - this.rects[i].height / 2 + 100);
 
-                var psx = (this.rects[i].posX - this.rects[i].width / 2 + 50);
-                var psy = (this.rects[i].posY - this.rects[i].height / 2 + 50);
+            //     this.rects[i].spheres = new paintedSphere(data = {
+            //         custom_width: this.rects[i].width,
+            //         custom_height: this.rects[i].height,
+            //         posX: psx,
+            //         posY: psy,
+            //         elementSizeMin: 50,
+            //         elementSizeMax: 100,
+            //         // colorObject: color(getRandomFromList([20, 40, 200, 240])),
+            //         colorObject: color(30, 30),
+            //         margin: 0,
+            //         fillColorNoise: 30,
+            //         fillColorOpacityMax: 5,
+            //         noStroke: true,
+            //         strokeWeight: 2,
+            //         strokeColorNoise: 0,
+            //         strokeOpacityMax: 2,
+            //         numberQuantisizer: 4,
+            //     }
+            //     );
+            // } else {
 
-                this.rects[i].spheres = new paintedSphere(data = {
-                    custom_width: this.rects[i].width,
-                    custom_height: this.rects[i].height,
-                    posX: psx,
-                    posY: psy,
-                    elementSizeMin: 50,
-                    elementSizeMax: 100,
-                    // colorObject: color(getRandomFromList([20, 40, 200, 240])),
-                    colorObject: color(60, 30),
-                    margin: 0,
-                    fillColorNoise: 30,
-                    fillColorOpacityMax: 10,
-                    noStroke: true,
-                    strokeWeight: 2,
-                    strokeColorNoise: 0,
-                    strokeOpacityMax: 2,
-                    numberQuantisizer: 6,
-                }
-                );
-            }
+            //     var psx = (this.rects[i].posX - this.rects[i].width / 2 + 50);
+            //     var psy = (this.rects[i].posY - this.rects[i].height / 2 + 50);
+
+            //     this.rects[i].spheres = new paintedSphere(data = {
+            //         custom_width: this.rects[i].width,
+            //         custom_height: this.rects[i].height,
+            //         posX: psx,
+            //         posY: psy,
+            //         elementSizeMin: 50,
+            //         elementSizeMax: 100,
+            //         // colorObject: color(getRandomFromList([20, 40, 200, 240])),
+            //         colorObject: color(60, 30),
+            //         margin: 0,
+            //         fillColorNoise: 30,
+            //         fillColorOpacityMax: 10,
+            //         noStroke: true,
+            //         strokeWeight: 2,
+            //         strokeColorNoise: 0,
+            //         strokeOpacityMax: 2,
+            //         numberQuantisizer: 6,
+            //     }
+            //     );
+            // }
         }
         // sort by size
         this.rects.sort(function (a, b) { return (b.width * b.height) - (a.width * a.height) });
@@ -256,7 +263,38 @@ class IntersectGrid {
         return new PaintBrushArea(brushData);
     }
 
-    createSpheres(posX, posY, rectWidth, rectHeight, colorObject) {
+    createSpheres(posX, posY, rectWidth, rectHeight) {
+
+        if (this.firstShadow == true) {
+
+            var psx = (posX - rectWidth / 2 + 100);
+            var psy = (posY - rectHeight / 2 + 100);
+            var shadowColor = color(30, 30);
+        } else {
+            var psx = (posX - rectWidth / 2 + 50);
+            var psy = (posY - rectHeight / 2 + 50);
+            var shadowColor = color(60, 30);
+        }
+
+        var data = {
+            custom_width: rectWidth,
+            custom_height: rectHeight,
+            posX: psx,
+            posY: psy,
+            elementSizeMin: 50,
+            elementSizeMax: 100,
+            colorObject: shadowColor,
+            margin: 0,
+            fillColorNoise: 30,
+            fillColorOpacityMax: 5,
+            noStroke: true,
+            strokeWeight: 2,
+            strokeColorNoise: 0,
+            strokeOpacityMax: 2,
+            numberQuantisizer: 4,
+        }
+
+        return new paintedSphere(data)
 
     }
 
@@ -264,6 +302,13 @@ class IntersectGrid {
         for (let i = 0; i < this.interactionRects.length; i++) {
             this.interactionRects[i].update();
             if (this.interactionRects[i].widthNew !== undefined) {  // if not empty
+
+                this.interactionRects[i].spheres = this.createSpheres(
+                    this.interactionRects[i].posXNew,
+                    this.interactionRects[i].posYNew,
+                    this.interactionRects[i].widthNew,
+                    this.interactionRects[i].heightNew,
+                )
 
                 this.interactionRects[i].paintedArea = this.createPaintbrushAreas(
                     this.interactionRects[i].posXNew,
@@ -274,55 +319,55 @@ class IntersectGrid {
                 )
             }
 
-            if (this.firstShadow == true) {
+            // if (this.firstShadow == true) {
 
-                var psx = (this.interactionRects[i].posXNew - this.interactionRects[i].widthNew / 2 + 100);
-                var psy = (this.interactionRects[i].posYNew - this.interactionRects[i].heightNew / 2 + 100);
+            //     var psx = (this.interactionRects[i].posXNew - this.interactionRects[i].widthNew / 2 + 100);
+            //     var psy = (this.interactionRects[i].posYNew - this.interactionRects[i].heightNew / 2 + 100);
 
-                this.interactionRects[i].spheres = new paintedSphere(data = {
-                    custom_width: this.interactionRects[i].widthNew,
-                    custom_height: this.interactionRects[i].heightNew,
-                    posX: psx,
-                    posY: psy,
-                    elementSizeMin: 50,
-                    elementSizeMax: 100,
-                    // colorObject: color(getRandomFromList([20, 40, 200, 240])),
-                    colorObject: color(30, 30),
-                    margin: 0,
-                    fillColorNoise: 30,
-                    fillColorOpacityMax: 5,
-                    noStroke: true,
-                    strokeWeight: 2,
-                    strokeColorNoise: 0,
-                    strokeOpacityMax: 2,
-                    numberQuantisizer: 4,
-                }
-                );
-            } else {
+            //     this.interactionRects[i].spheres = new paintedSphere(data = {
+            //         custom_width: this.interactionRects[i].widthNew,
+            //         custom_height: this.interactionRects[i].heightNew,
+            //         posX: psx,
+            //         posY: psy,
+            //         elementSizeMin: 50,
+            //         elementSizeMax: 100,
+            //         // colorObject: color(getRandomFromList([20, 40, 200, 240])),
+            //         colorObject: color(30, 30),
+            //         margin: 0,
+            //         fillColorNoise: 30,
+            //         fillColorOpacityMax: 5,
+            //         noStroke: true,
+            //         strokeWeight: 2,
+            //         strokeColorNoise: 0,
+            //         strokeOpacityMax: 2,
+            //         numberQuantisizer: 4,
+            //     }
+            //     );
+            // } else {
 
-                var psx = (this.interactionRects[i].posX - this.interactionRects[i].width / 2 + 50);
-                var psy = (this.interactionRects[i].posY - this.reinteractionRectscts[i].height / 2 + 50);
+            //     var psx = (this.interactionRects[i].posX - this.interactionRects[i].width / 2 + 50);
+            //     var psy = (this.interactionRects[i].posY - this.reinteractionRectscts[i].height / 2 + 50);
 
-                this.interactionRects[i].spheres = new paintedSphere(data = {
-                    custom_width: this.interactionRects[i].width,
-                    custom_height: this.interactionRects[i].height,
-                    posX: psx,
-                    posY: psy,
-                    elementSizeMin: 50,
-                    elementSizeMax: 100,
-                    // colorObject: color(getRandomFromList([20, 40, 200, 240])),
-                    colorObject: color(60, 30),
-                    margin: 0,
-                    fillColorNoise: 30,
-                    fillColorOpacityMax: 10,
-                    noStroke: true,
-                    strokeWeight: 2,
-                    strokeColorNoise: 0,
-                    strokeOpacityMax: 2,
-                    numberQuantisizer: 6,
-                }
-                );
-            }
+            //     this.interactionRects[i].spheres = new paintedSphere(data = {
+            //         custom_width: this.interactionRects[i].width,
+            //         custom_height: this.interactionRects[i].height,
+            //         posX: psx,
+            //         posY: psy,
+            //         elementSizeMin: 50,
+            //         elementSizeMax: 100,
+            //         // colorObject: color(getRandomFromList([20, 40, 200, 240])),
+            //         colorObject: color(60, 30),
+            //         margin: 0,
+            //         fillColorNoise: 30,
+            //         fillColorOpacityMax: 10,
+            //         noStroke: true,
+            //         strokeWeight: 2,
+            //         strokeColorNoise: 0,
+            //         strokeOpacityMax: 2,
+            //         numberQuantisizer: 6,
+            //     }
+            //     );
+            // }
         }
     }
 
@@ -347,6 +392,11 @@ class IntersectGrid {
         }
 
         for (let i = 0; i < this.interactionRects.length; i++) {
+
+            if (this.interactionRects[i].spheres !== undefined) {
+                this.interactionRects[i].spheres.show();
+            }
+
             if (this.interactionRects[i].paintedArea !== undefined) {
                 this.interactionRects[i].paintedArea.show();
             }
