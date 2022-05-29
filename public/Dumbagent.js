@@ -107,11 +107,11 @@ class DumbAgent {
                 buffer.pop();
             }
         }
-        buffer.push();
-        buffer.noFill();
-        buffer.stroke(20);
-        buffer.rect(0, 0, this.customWidth / exportRatio, this.customHeight / exportRatio);
-        buffer.pop();
+        // buffer.push();
+        // buffer.noFill();
+        // buffer.stroke(20);
+        // buffer.rect(0, 0, this.customWidth / exportRatio, this.customHeight / exportRatio);
+        // buffer.pop();
     }
 
 }

@@ -1,3 +1,16 @@
+NUMBEROFELEMENTS = Math.round(getRandomFromInterval(10, 25));
+NUMBEROFELEMENTS_LABEL = label_feature(NUMBEROFELEMENTS, 10, 25);
+logging.info("NUMBEROFELEMENTS: " + NUMBEROFELEMENTS_LABEL + ", " + NUMBEROFELEMENTS)
+
+BRUSHLENGTHANDBREADTH = Math.round(getRandomFromInterval(100, 160));
+BRUSHLENGTHANDBREADTH_LABEL = label_feature(BRUSHLENGTHANDBREADTH, 100, 160)
+logging.info("BRUSHLENGTHANDBREADTH: " + BRUSHLENGTHANDBREADTH_LABEL + ", " + BRUSHLENGTHANDBREADTH)
+
+BRUSHSTROKESIZE = getRandomFromInterval(1.5, 2.5);
+BRUSHSTROKESIZE_LABEL = label_feature(BRUSHSTROKESIZE, 1.5, 2.5)
+logging.info("BRUSHSTROKESIZE: " + BRUSHSTROKESIZE_LABEL + ", " + BRUSHSTROKESIZE)
+
+
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
 const SWITCH_LOGGING_LEVEL = "info";
@@ -25,7 +38,6 @@ function preload() {
 function setup() {
   logging.setLevel(SWITCH_LOGGING_LEVEL);
 
-
   scaleDynamically();
 
   buffer = createGraphics(rescaling_width, rescaling_height);
@@ -39,9 +51,6 @@ function setup() {
   noiseSeed(NOISESEED);
 
   // FEATURES
-  NUMBEROFELEMENTS = Math.round(getRandomFromInterval(10, 25));
-  NUMBEROFELEMENTS_LABEL = label_feature(NUMBEROFELEMENTS, 10, 25);
-  logging.info("NUMBEROFELEMENTS: " + NUMBEROFELEMENTS_LABEL + ", " + NUMBEROFELEMENTS)
 
   PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   logging.info("PALETTE: " + PALETTE);
@@ -54,13 +63,6 @@ function setup() {
 
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // best 2
   GRIDBRIGHTNESSDIFF = -10;  // fix
-
-  BRUSHLENGTHANDBREADTH = Math.round(getRandomFromInterval(100, 160));
-  BRUSHLENGTHANDBREADTH_LABEL = label_feature(BRUSHLENGTHANDBREADTH, 100, 160)
-  logging.info("BRUSHLENGTHANDBREADTH: " + BRUSHLENGTHANDBREADTH_LABEL + ", " + BRUSHLENGTHANDBREADTH)
-  BRUSHSTROKESIZE = getRandomFromInterval(1.5, 2.5);
-  BRUSHSTROKESIZE_LABEL = label_feature(BRUSHSTROKESIZE, 1.5, 2.5)
-  logging.info("BRUSHSTROKESIZE: " + BRUSHSTROKESIZE_LABEL + ", " + BRUSHSTROKESIZE)
 
   BRUSHBRIGHTNESSNOISE = 10 // fix
   if (PALETTE != "greyscale") {
@@ -137,8 +139,8 @@ function setup() {
     colorObject: color(color1b),
     stepSize: 20,
     agentSize: 10,
-    opacityLine: 5,
-    opacityPoint: 5,
+    opacityLine: 2,
+    opacityPoint: 2,
     lineLength: 20,
     loopSize: 100,
     numberAgents: 55,
@@ -152,8 +154,8 @@ function setup() {
     colorObject: color(color2b),
     stepSize: 20,
     agentSize: 10,
-    opacityLine: 5,
-    opacityPoint: 5,
+    opacityLine: 2,
+    opacityPoint: 2,
     lineLength: 20,
     loopSize: 100,
     numberAgents: 55,
@@ -283,7 +285,7 @@ function draw() {
   noLoop();
   fxpreview()
 
-  logging.debug("safety check for diff resolutions - fxrand: " + fxrand());
+  logging.info("safety check for diff resolutions - fxrand: " + fxrand());
 
 }
 
