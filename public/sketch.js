@@ -105,7 +105,9 @@ function setup() {
 
 
   color1b = saturateColorStatic(brightenColorStatic(color1, GRIDBRIGHTNESSDIFF), GRIDBRIGHTNESSDIFF);
+  color1b = lerpColor(color1b, color(72, 61, 139), 0.1);  // add some blue
   color2b = saturateColorStatic(brightenColorStatic(color2, GRIDBRIGHTNESSDIFF), GRIDBRIGHTNESSDIFF);
+  color2b = lerpColor(color2b, color(72, 61, 139), 0.1);  // add some blue
 
   // lineColor1 = brightenColorStatic(color1, +60);
   // lineColor1b = brightenColorStatic(color1b, +60);
@@ -150,7 +152,7 @@ function setup() {
     colorObject: color(color2),
     stepSize: 3,
     agentSize: 2,
-    opacityLine: 2,
+    opacityLine: 0.2,
     opacityPoint: 0.2,
     lineLength: 20,
     loopSize: 100,
@@ -204,13 +206,13 @@ function setup() {
     posYImage: 0,
     customWidth: exportPaper.width,
     customHeight: exportPaper.height,
-    colorObject: color(100),
-    stepSize: 10,  // 10 is hero
-    agentSize: 2,
-    opacityLine: 5,
-    opacityPoint: 5,
+    colorObject: color(150),
+    stepSize: 60,  // 10 is hero
+    agentSize: 8,
+    opacityLine: 25,
+    opacityPoint: 25,
     lineLength: 20,
-    loopSize: 10000,
+    loopSize: 4000,
     numberAgents: 5,
   }
 
@@ -222,8 +224,10 @@ function setup() {
     padding: 100,
   }
 
-  canvas = new CanvasOverlay(canvasData);
-  // canvasAgent = new DumbAgent(CanvasAgentData);
+  // canvas = new CanvasOverlay(canvasData);
+  if (CANVASAGENT == true) {
+    canvasAgent = new DumbAgent(CanvasAgentData);
+  }
   // agentPaint1 = new DumbAgent(agentPaintData1);
   // agentPaint2 = new DumbAgent(agentPaintData2);
   backgroundSphere = new paintedSphere(backgroundSphereData);
@@ -248,15 +252,15 @@ function draw() {
 
   backgroundSphere.show();
 
-  // if (CANVASAGENT == true) {
-  //   canvasAgent.show();
-  // }
+  if (CANVASAGENT == true) {
+    canvasAgent.show();
+  }
 
   backGrid.show();
 
-  if (RANDOMSPHERES == true) {
-    randomSpheres.show();
-  }
+  // if (RANDOMSPHERES == true) {
+  //   randomSpheres.show();
+  // }
   // agentPaint1.show();
   // agentPaint2.show();
 
