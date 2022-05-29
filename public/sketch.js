@@ -18,7 +18,6 @@ let rescaling_height;
 let fxhash_number;
 
 logging.info("FXHASH: " + fxhash);
-// logging.info("Grid: " + GRID);
 
 function preload() {
 }
@@ -32,8 +31,6 @@ function setup() {
   buffer = createGraphics(rescaling_width, rescaling_height);
   canvas = createCanvas(rescaling_width, rescaling_height, WEBGL);
 
-  // Adjust according to screens pixel density.
-  // pixelDensity(1);
   logging.debug("Pixel density: " + pixelDensity())
   exportRatio /= pixelDensity();
 
@@ -41,27 +38,32 @@ function setup() {
   logging.debug("Noise seed: " + NOISESEED);
   noiseSeed(NOISESEED);
 
-
+  // FEATURES
   NUMBEROFELEMENTS = Math.round(getRandomFromInterval(10, 25));
   NUMBEROFELEMENTS_LABEL = label_feature(NUMBEROFELEMENTS, 10, 25);
   logging.info("NUMBEROFELEMENTS: " + NUMBEROFELEMENTS_LABEL + ", " + NUMBEROFELEMENTS)
 
-
-
-  GRIDVISIBLE = false  // getRandomFromList([true, false]);
-  RANDOMSPHERES = true // getRandomFromList([true, false]);
-  CANVASAGENT = true // getRandomFromList([true, false]);
-  PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
+  // PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
+  PALETTE = getRandomFromList(["greyscale"]);
   logging.info("PALETTE: " + PALETTE);
 
+  GRIDVISIBLE = false  // maybie  getRandomFromList([true, false]);
+  RANDOMSPHERES = false // not good
+
+  CANVASAGENT = true // getRandomFromList([true, false]);
   CANVASROUGHNESS = 80;
 
   NUMBERPAINTLAYERS = getRandomFromList([2]);  // best 2
-  GRIDBRIGHTNESSDIFF = -15;  // fix
+  GRIDBRIGHTNESSDIFF = -10;  // fix
 
-  BRUSHLENGTHANDBREADTH = 120 // getRandomFromInterval(120, 150);
-  BRUSHSTROKESIZE = 2 // getRandomFromInterval(0.6, 1.4);
-  BRUSHBRIGHTNESSNOISE = getRandomFromInterval(5, 15);
+  BRUSHLENGTHANDBREADTH = Math.round(getRandomFromInterval(100, 200));
+  BRUSHLENGTHANDBREADTH_LABEL = label_feature(BRUSHLENGTHANDBREADTH, 100, 200)
+  logging.info("BRUSHLENGTHANDBREADTH: " + BRUSHLENGTHANDBREADTH_LABEL + ", " + BRUSHLENGTHANDBREADTH)
+  BRUSHSTROKESIZE = getRandomFromInterval(1.5, 2.5);
+  BRUSHSTROKESIZE_LABEL = label_feature(BRUSHSTROKESIZE, 1.5, 2.5)
+  logging.info("BRUSHSTROKESIZE: " + BRUSHSTROKESIZE_LABEL + ", " + BRUSHSTROKESIZE)
+
+  BRUSHBRIGHTNESSNOISE = 10 // fix
   if (PALETTE != "greyscale") {
     BRUSHCOLORNOISE = 15// getRandomFromInterval(15, 25);  // mit 20 besser
   } else if (PALETTE == "greyscale") {
@@ -206,7 +208,7 @@ function setup() {
   randomSphereData = {
     minSize: 300,  // 100
     maxSize: 600,  // 500
-    numbesrSpheres: 16,
+    numberSpheres: 16,
     colorObject: color(30, 30),
     padding: 100,
   }
@@ -218,7 +220,9 @@ function setup() {
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
-  // randomSpheres = new RandomPaintedSpheres(randomSphereData);  // REMOVE
+  if (RANDOMSPHERES == true) {
+    randomSpheres = new RandomPaintedSpheres(randomSphereData);  // REMOVE
+  }
 }
 
 
@@ -242,7 +246,7 @@ function draw() {
   backGrid.show();
 
   if (RANDOMSPHERES == true) {
-    // randomSpheres.show();
+    randomSpheres.show();
   }
   // agentPaint1.show();
   // agentPaint2.show();
