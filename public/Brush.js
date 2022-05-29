@@ -35,13 +35,13 @@ class Brush {
             if (this.area.orientation == "horizontal") {
                 this.brushPosX = getRandomFromInterval(this.area.overlap / 2, this.area.custom_width - this.brushLength_ - this.area.overlap / 2);
                 // this.brushPosY = getRandomFromInterval(this.area.overlap / 2, this.area.custom_height - this.numberFibres_ * this.area.sizeStroke - this.area.overlap / 2);
-                this.brushPosY = getRandomFromInterval(this.area.overlap / 2, this.area.custom_height - this.numberFibres_ * this.area.brushFibreDensity - this.area.overlap / 2);
+                this.brushPosY = getRandomFromInterval(this.area.overlap / 2, this.area.custom_height - this.numberFibres_ * this.area.brushFibreSparseness - this.area.overlap / 2);
             }
         }
         if ((loopLayer > 0) && (fxrand() > 0.85)) {
             if (this.area.orientation == "vertical") {
                 // this.brushPosX = getRandomFromInterval(this.area.overlap / 2, this.area.custom_width - this.numberFibres_ * this.area.sizeStroke - this.area.overlap / 2);
-                this.brushPosX = getRandomFromInterval(this.area.overlap / 2, this.area.custom_width - this.numberFibres_ * this.area.brushFibreDensity - this.area.overlap / 2);
+                this.brushPosX = getRandomFromInterval(this.area.overlap / 2, this.area.custom_width - this.numberFibres_ * this.area.brushFibreSparseness - this.area.overlap / 2);
                 this.brushPosY = getRandomFromInterval(this.area.overlap / 2, this.area.custom_height - this.brushLength_ - this.area.overlap / 2);
             }
         }
@@ -77,7 +77,7 @@ class PaintBrushArea {
                 brushLengthNoise: 0.2,
                 brushBreadthNoise: 0.2,  // brushBreadthNoise
                 brushAngleNoise: PI / 20,
-                brushFibreDensity: 6,
+                brushFibreSparseness: 6,
                 fibreColorNoise: 2,
                 fibreBrightnessNoise: 2,
                 fibreStrokeSizeNoise: 1,
@@ -102,7 +102,7 @@ class PaintBrushArea {
         this.brightnessNoise = data.brightnessNoise;
         this.colorNoise = data.colorNoise;
         this.opacityBoost = data.opacityBoost;
-        this.brushFibreDensity = data.brushFibreDensity
+        this.brushFibreSparseness = data.brushFibreSparseness;
         this.brushLengthNoise = data.brushLengthNoise;
         this.brushBreadthNoise = data.brushBreadthNoise;
         this.brushAngleNoise = data.brushAngleNoise;
@@ -133,7 +133,7 @@ class PaintBrushArea {
             this.brushBreadth = this.custom_width / brushLengthNeeded;
         }
 
-        this.numberFibres = this.brushBreadth / this.brushFibreDensity // this.sizeStroke
+        this.numberFibres = this.brushBreadth / this.brushFibreSparseness // this.sizeStroke
 
         this.brushStrokes = [];
         this.createBrushes();
@@ -191,19 +191,19 @@ class PaintBrushArea {
                 if (this.orientation == "horizontal") {
                     buffer.line(
                         0,
-                        this.brushFibreDensity / exportRatio * fibre.i,
+                        this.brushFibreSparseness / exportRatio * fibre.i,
                         // this.sizeStroke / exportRatio * fibre.i,
                         fibre.fibreLength / exportRatio,
                         // this.sizeStroke / exportRatio * fibre.i
-                        this.brushFibreDensity / exportRatio * fibre.i,
+                        this.brushFibreSparseness / exportRatio * fibre.i,
                     );
                 } else if (this.orientation == "vertical") {
                     buffer.line(
                         // this.sizeStroke / exportRatio * fibre.i,
-                        this.brushFibreDensity / exportRatio * fibre.i,
+                        this.brushFibreSparseness / exportRatio * fibre.i,
                         0,
                         // this.sizeStroke / exportRatio * fibre.i,
-                        this.brushFibreDensity / exportRatio * fibre.i,
+                        this.brushFibreSparseness / exportRatio * fibre.i,
                         fibre.fibreLength / exportRatio
                     );
                 }

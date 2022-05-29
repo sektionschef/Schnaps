@@ -43,8 +43,7 @@ function setup() {
   NUMBEROFELEMENTS_LABEL = label_feature(NUMBEROFELEMENTS, 10, 25);
   logging.info("NUMBEROFELEMENTS: " + NUMBEROFELEMENTS_LABEL + ", " + NUMBEROFELEMENTS)
 
-  // PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
-  PALETTE = getRandomFromList(["greyscale"]);
+  PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
   logging.info("PALETTE: " + PALETTE);
 
   GRIDVISIBLE = false  // maybie  getRandomFromList([true, false]);
@@ -65,22 +64,32 @@ function setup() {
 
   BRUSHBRIGHTNESSNOISE = 10 // fix
   if (PALETTE != "greyscale") {
-    BRUSHCOLORNOISE = 15// getRandomFromInterval(15, 25);  // mit 20 besser
+    BRUSHCOLORNOISE = 10  // fix
   } else if (PALETTE == "greyscale") {
     BRUSHCOLORNOISE = 0;
   }
-  BRUSHANGLENOISE = getRandomFromInterval(PI / 80, PI / 40);  // best PI / 40
+
+  // if (STYLE == "wild") {
+  // }
+
+  BRUSHANGLENOISE = getRandomFromInterval(PI / 20, PI / 80);  // best PI / 40
+  logging.info("BRUSHANGLENOISE: " + BRUSHANGLENOISE);
   BRUSHBREADTHNOISE = 0.2;
   BRUSHLENGTHNOISE = 0.2;
-  BRUSHFIBREDENSITY = 6;
+  BRUSHFIBRESPARSENESS = Math.round(getRandomFromInterval(5, 7));  // 6
+  logging.info("BRUSHFIBRESPARSENESS: " + BRUSHFIBRESPARSENESS);
+
 
   FIBREBRIGHTNESSNOISE = 3;
   FIBRECOLORNOISE = 3;
   FIBRESTROKESIZENOISE = 0.6;  // fix // 0.2
-  FIBRESTARTLENGTHNOISE = getRandomFromInterval(30, 50);
-  FIBREBREADTHNOISE = 0.3 // getRandomFromInterval(1, 5); cool 0.2
-  FIBREROTATIONNOISE = PI / 60; // PI / 30<->PI / 50
-  FIBREOPACITYNOISEBASE = 100 // 100
+  FIBRESTARTLENGTHNOISE = getRandomFromInterval(30, 70);
+  logging.info("FIBRESTARTLENGTHNOISE: " + FIBRESTARTLENGTHNOISE);
+  FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
+  FIBREROTATIONNOISE = getRandomFromInterval(PI / 30, PI / 70); // PI / 30<->PI / 50
+  logging.info("FIBREROTATIONNOISE: " + FIBREROTATIONNOISE);
+  FIBREOPACITYNOISEBASE = Math.round(getRandomFromInterval(70, 140));
+  logging.info("FIBREOPACITYNOISEBASE: " + FIBREOPACITYNOISEBASE);
   FIBRELENGTHPERLIN = 0.3;  // 0.01<->0.03
   FIBREOPACITYPERLIN = 0.4;
 
@@ -104,6 +113,10 @@ function setup() {
   // lineColor1b = color(20, 150);
   lineColor1 = color(color2);
   lineColor1b = color(color2b);
+
+  colorMode(HSB);
+  let canvasColor = fromHSBtoRGB(color(hue(color1), 4, CANVASROUGHNESS));
+  colorMode(RGB);
 
   canvasData = {
     custom_width: exportPaper.width,
@@ -144,10 +157,6 @@ function setup() {
     numberAgents: 135,
   }
 
-  colorMode(HSB);
-  let canvasColor = fromHSBtoRGB(color(hue(color1), 4, CANVASROUGHNESS));
-  colorMode(RGB);
-
   backgroundSphereData = {
     custom_width: exportPaper.width,
     custom_height: exportPaper.height,
@@ -160,7 +169,7 @@ function setup() {
     colorObject: canvasColor,
     margin: -50,
     fillColorNoise: 10,
-    fillColorOpacityMax: 50,
+    fillColorOpacityMax: 70,
     noStroke: true,
     strokeWeight: 1,
     strokeColorNoise: 0,

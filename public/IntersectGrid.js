@@ -140,7 +140,7 @@ class IntersectGrid {
                 this.rects[i].colorObject
             )
 
-            if (fxrand() > 0.6) {
+            if (fxrand() > 0.75) {
                 this.rects[i].lines = new NewLines(data = {
                     posX: this.rects[i].posX,
                     posY: this.rects[i].posY,
@@ -204,7 +204,7 @@ class IntersectGrid {
             brushLengthNoise: BRUSHLENGTHNOISE,
             brushBreadthNoise: BRUSHBREADTHNOISE,
             brushAngleNoise: BRUSHANGLENOISE,
-            brushFibreDensity: BRUSHFIBREDENSITY,
+            brushFibreSparseness: BRUSHFIBRESPARSENESS,
             fibreColorNoise: FIBRECOLORNOISE,
             fibreBrightnessNoise: FIBREBRIGHTNESSNOISE,
             fibreStrokeSizeNoise: FIBRESTROKESIZENOISE,
