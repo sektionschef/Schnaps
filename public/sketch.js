@@ -10,7 +10,7 @@ NOISESEED = hashFnv32a(fxhash);
 logging.debug("Noise seed: " + NOISESEED);
 
 PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
-logging.info("Palette: " + PALETTE);
+console.info("Palette: " + PALETTE);
 
 NUMBEROFELEMENTS = Math.round(getRandomFromInterval(10, 25));
 NUMBEROFELEMENTS_LABEL = label_feature(NUMBEROFELEMENTS, 10, 25);
@@ -18,11 +18,11 @@ console.info("Number of elements: " + NUMBEROFELEMENTS_LABEL + ", " + NUMBEROFEL
 
 BRUSHLENGTHANDBREADTH = Math.round(getRandomFromInterval(100, 160));
 BRUSHLENGTHANDBREADTH_LABEL = label_feature(BRUSHLENGTHANDBREADTH, 100, 160)
-logging.info("Brush length: " + BRUSHLENGTHANDBREADTH_LABEL + ", " + BRUSHLENGTHANDBREADTH)
+console.info("Brush length: " + BRUSHLENGTHANDBREADTH_LABEL + ", " + BRUSHLENGTHANDBREADTH)
 
 BRUSHSTROKESIZE = getRandomFromInterval(1.5, 2.5);
 BRUSHSTROKESIZE_LABEL = label_feature(BRUSHSTROKESIZE, 1.5, 2.5)
-logging.info("Brush stroke size: " + BRUSHSTROKESIZE_LABEL + ", " + BRUSHSTROKESIZE.toFixed(2))
+console.info("Brush stroke size: " + BRUSHSTROKESIZE_LABEL + ", " + BRUSHSTROKESIZE.toFixed(2))
 
 
 GRIDVISIBLE = false  // maybie  getRandomFromList([true, false]);
@@ -40,25 +40,25 @@ if (PALETTE != "greyscale") {
 }
 BRUSHANGLENOISE = getRandomFromInterval(Math.PI / 20, Math.PI / 80);  // best PI / 40
 BRUSHANGLENOISE_LABEL = label_feature(BRUSHANGLENOISE, Math.PI / 80, Math.PI / 20)
-logging.info("Brush angle noise: " + BRUSHANGLENOISE_LABEL + ", " + BRUSHANGLENOISE.toFixed(2));
+console.info("Brush angle noise: " + BRUSHANGLENOISE_LABEL + ", " + BRUSHANGLENOISE.toFixed(2));
 BRUSHBREADTHNOISE = 0.2;
 BRUSHLENGTHNOISE = 0.2;
 BRUSHFIBRESPARSENESS = Math.round(getRandomFromInterval(5, 7));  // 6
 BRUSHFIBRESPARSENESS_LABEL = label_feature(BRUSHFIBRESPARSENESS, 5, 7)
-logging.info("Brush fibre sparseness: " + BRUSHFIBRESPARSENESS_LABEL + ", " + BRUSHFIBRESPARSENESS);
+console.info("Brush fibre sparseness: " + BRUSHFIBRESPARSENESS_LABEL + ", " + BRUSHFIBRESPARSENESS);
 
 
 FIBREBRIGHTNESSNOISE = 3;
 FIBRECOLORNOISE = 3;
 FIBRESTROKESIZENOISE = 0.6;  // fix
 FIBRESTARTLENGTHNOISE = getRandomFromInterval(30, 70);
-logging.info("Fibre start length: " + Math.round(FIBRESTARTLENGTHNOISE));
+console.info("Fibre start length: " + Math.round(FIBRESTARTLENGTHNOISE));
 FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
 FIBREROTATIONNOISE = getRandomFromInterval(Math.PI / 30, Math.PI / 70); // PI / 30<->PI / 50
 FIBREROTATIONNOISE_LABEL = label_feature(FIBREROTATIONNOISE, Math.PI / 70, Math.PI / 30)
-logging.info("Fibre rotation noise: " + FIBREROTATIONNOISE_LABEL + ", " + FIBREROTATIONNOISE.toFixed(2));
+console.info("Fibre rotation noise: " + FIBREROTATIONNOISE_LABEL + ", " + FIBREROTATIONNOISE.toFixed(2));
 FIBREOPACITYNOISEBASE = Math.round(getRandomFromInterval(70, 140));
-logging.info("Fibre opacity noise: " + FIBREOPACITYNOISEBASE);
+console.info("Fibre opacity noise: " + FIBREOPACITYNOISEBASE);
 FIBRELENGTHPERLIN = 0.3;  // 0.01<->0.03
 FIBREOPACITYPERLIN = 0.4;
 
@@ -118,17 +118,17 @@ function setup() {
   let canvasColor = fromHSBtoRGB(color(hue(color1), 4, CANVASROUGHNESS));
   colorMode(RGB);
 
-  canvasData = {
-    custom_width: exportPaper.width,
-    custom_height: exportPaper.height,
-    posX: 0,
-    posY: 0,
-    colorObject: color(130),
-    opacity: 50,  // 100
-    cellPerLine: 150,
-    strokeWeight_: 1,
-    deviation: 0.3,
-  }
+  // canvasData = {
+  //   custom_width: exportPaper.width,
+  //   custom_height: exportPaper.height,
+  //   posX: 0,
+  //   posY: 0,
+  //   colorObject: color(130),
+  //   opacity: 50,  // 100
+  //   cellPerLine: 150,
+  //   strokeWeight_: 1,
+  //   deviation: 0.3,
+  // }
 
   agentPaintData1 = {
     customWidth: exportPaper.width,
@@ -217,7 +217,7 @@ function setup() {
     numberAgents: 5,
   }
 
-  canvas = new CanvasOverlay(canvasData);
+  // canvas = new CanvasOverlay(canvasData);
   canvasAgent = new DumbAgent(CanvasAgentData);
   agentPaint1 = new DumbAgent(agentPaintData1);
   agentPaint2 = new DumbAgent(agentPaintData2);
@@ -248,7 +248,7 @@ function draw() {
   agentPaint2.show();
   frontGrid.show();
 
-  canvas.show();
+  // canvas.show();
 
   // document
   // absolute value / exportRatio
@@ -265,6 +265,6 @@ function draw() {
   noLoop();
   fxpreview()
 
-  logging.info("safety check for diff resolutions - fxrand: " + fxrand());
+  console.info("safety check for diff resolutions - fxrand: " + fxrand());
 
 }
