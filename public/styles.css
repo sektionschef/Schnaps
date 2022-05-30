@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
 	margin: 0px;
 	padding: 0px;
 	/*
@@ -15,9 +16,10 @@ html {
 */
 
 body {
-	width:  100%;
+	width: 100%;
 	height: 100%;
-	overflow: hidden;  /* hide sidebars */
+	overflow: hidden;
+	/* hide sidebars */
 	touch-action: none;
 	/*
 	flex-direction: row;
@@ -29,30 +31,11 @@ canvas {
 	display: block;
 }
 
-{
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
+	{
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
 }
-
-
-#p5_loading {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	border: 8px solid #E6E4E2;
-	border-top: 8px solid #80817E;
-	border-radius: 50%;
-	width: 50px;
-	height: 50px;
-	animation: spin 2s linear infinite;
-  }
-  
-  @keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-  }

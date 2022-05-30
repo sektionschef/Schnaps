@@ -7,7 +7,10 @@ class CanvasOverlay {
                 posX: 0,
                 posY: 0,
                 colorObject: color(100),
-                opacity: 100,
+                opacity: 150,
+                cellPerLine: 100,  // 1200;  // amazing with 3000 amount of cells per line, used to be 300 for width of 1000
+                strokeWeight_: 0.3,
+                deviation: 0.3,
             }
         }
 
@@ -17,11 +20,11 @@ class CanvasOverlay {
         this.posY = data.posY;
         this.colorObject = data.colorObject;
         this.opacity = data.opacity;
+        this.cellPerLine = data.cellPerLine;
+        this.strokeWeight_ = data.strokeWeight_;
+        this.deviation = data.deviation
 
-        this.cellPerLine = 100; // 1200;  // amazing with 3000 amount of cells per line, used to be 300 for width of 1000
-        this.strokeWeight_ = 1;  // 0.5
         this.colorUsed = color(red(this.colorObject), green(this.colorObject), blue(this.colorObject), this.opacity);
-        this.deviation = 0.3;
 
         this.scl = this.custom_width / this.cellPerLine;
     }
@@ -43,10 +46,13 @@ class CanvasOverlay {
         buffer.pop();
 
         // debug
-        buffer.push();
-        buffer.translate(this.posX / exportRatio, this.posY / exportRatio);
-        buffer.noFill();
-        buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
-        buffer.pop();
+        if (logging.getLevel() <= 1) {
+            buffer.push();
+            buffer.translate(this.posX / exportRatio, this.posY / exportRatio);
+            buffer.noFill();
+            buffer.stroke(10)
+            buffer.rect(0, 0, this.custom_width / exportRatio, this.custom_height / exportRatio);
+            buffer.pop();
+        }
     }
 }

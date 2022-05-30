@@ -119,6 +119,7 @@ class paintedSphere {
 
 }
 
+// randomly placed rects with painted spheres on the canvas
 class RandomPaintedSpheres {
     constructor(data) {
         if (typeof data === 'undefined') {

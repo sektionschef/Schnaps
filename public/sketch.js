@@ -127,8 +127,11 @@ function setup() {
     custom_height: exportPaper.height,
     posX: 0,
     posY: 0,
-    colorObject: color(230),
-    opacity: 100,  // 100
+    colorObject: color(130),
+    opacity: 150,  // 100
+    cellPerLine: 150,
+    strokeWeight_: 0.5,
+    deviation: 0.5,
   }
 
   agentPaintData1 = {
@@ -226,7 +229,7 @@ function setup() {
     padding: 100,
   }
 
-  // canvas = new CanvasOverlay(canvasData);
+  canvas = new CanvasOverlay(canvasData);
   if (CANVASAGENT == true) {
     canvasAgent = new DumbAgent(CanvasAgentData);
   }
@@ -268,7 +271,7 @@ function draw() {
   agentPaint2.show();
   frontGrid.show();
 
-  // canvas.show();
+  canvas.show();
 
   // document
   // absolute value / exportRatio
@@ -288,6 +291,3 @@ function draw() {
   logging.info("safety check for diff resolutions - fxrand: " + fxrand());
 
 }
-
-
-// check two different resolutions and compare fxrand() at the end of code, should be the same. with the same hash!

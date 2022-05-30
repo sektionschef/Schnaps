@@ -107,20 +107,7 @@ function windowResized() {
     resizeCanvas(rescaling_width, rescaling_height);
     buffer = createGraphics(rescaling_width, rescaling_height);
 
-
-
-    if (CANVASAGENT == true) {
-        canvasAgent = new DumbAgent(CanvasAgentData);
-    }
-    agentPaint1 = new DumbAgent(agentPaintData1);
-    agentPaint2 = new DumbAgent(agentPaintData2);
-    backgroundSphere = new paintedSphere(backgroundSphereData);
-    frontGrid = new IntersectGrid(frontGridData);
-    backGrid = new IntersectGrid(backGridData);
-    if (RANDOMSPHERES == true) {
-        randomSpheres = new RandomPaintedSpheres(randomSphereData);  // REMOVE
-    }
-
+    // construct_everything();
     draw();
 }
 
