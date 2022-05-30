@@ -7,10 +7,10 @@ class CanvasOverlay {
                 posX: 0,
                 posY: 0,
                 colorObject: color(100),
-                opacity: 150,
+                opacity: 100,
                 cellPerLine: 100,  // 1200;  // amazing with 3000 amount of cells per line, used to be 300 for width of 1000
                 strokeWeight_: 0.3,
-                deviation: 0.3,
+                deviation: 10,
             }
         }
 
@@ -25,7 +25,6 @@ class CanvasOverlay {
         this.deviation = data.deviation
 
         this.colorUsed = color(red(this.colorObject), green(this.colorObject), blue(this.colorObject), this.opacity);
-
         this.scl = this.custom_width / this.cellPerLine;
     }
 
@@ -36,7 +35,9 @@ class CanvasOverlay {
         buffer.stroke(this.colorUsed);
 
         var scl = this.scl / exportRatio;
-        var deviation_ = this.deviation / exportRatio;
+        var deviation_ = this.deviation;
+
+        // logging.info("scl: " + scl);
 
         for (let x = 0; x < this.custom_width; x += scl) {
             for (let y = 0; y < this.custom_height; y += scl) {

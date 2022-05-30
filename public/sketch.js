@@ -1,20 +1,66 @@
-NUMBEROFELEMENTS = Math.round(getRandomFromInterval(10, 25));
-NUMBEROFELEMENTS_LABEL = label_feature(NUMBEROFELEMENTS, 10, 25);
-logging.info("NUMBEROFELEMENTS: " + NUMBEROFELEMENTS_LABEL + ", " + NUMBEROFELEMENTS)
-
-BRUSHLENGTHANDBREADTH = Math.round(getRandomFromInterval(100, 160));
-BRUSHLENGTHANDBREADTH_LABEL = label_feature(BRUSHLENGTHANDBREADTH, 100, 160)
-logging.info("BRUSHLENGTHANDBREADTH: " + BRUSHLENGTHANDBREADTH_LABEL + ", " + BRUSHLENGTHANDBREADTH)
-
-BRUSHSTROKESIZE = getRandomFromInterval(1.5, 2.5);
-BRUSHSTROKESIZE_LABEL = label_feature(BRUSHSTROKESIZE, 1.5, 2.5)
-logging.info("BRUSHSTROKESIZE: " + BRUSHSTROKESIZE_LABEL + ", " + BRUSHSTROKESIZE)
-
-
 // trace, debug, info, warn, error
 // const SWITCH_LOGGING_LEVEL = "warn";
 const SWITCH_LOGGING_LEVEL = "info";
 // const SWITCH_LOGGING_LEVEL = "debug";
+
+logging.setLevel(SWITCH_LOGGING_LEVEL);
+
+console.info("fxhash: " + fxhash);
+NOISESEED = hashFnv32a(fxhash);
+logging.debug("Noise seed: " + NOISESEED);
+
+PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
+logging.info("Palette: " + PALETTE);
+
+NUMBEROFELEMENTS = Math.round(getRandomFromInterval(10, 25));
+NUMBEROFELEMENTS_LABEL = label_feature(NUMBEROFELEMENTS, 10, 25);
+console.info("Number of elements: " + NUMBEROFELEMENTS_LABEL + ", " + NUMBEROFELEMENTS)
+
+BRUSHLENGTHANDBREADTH = Math.round(getRandomFromInterval(100, 160));
+BRUSHLENGTHANDBREADTH_LABEL = label_feature(BRUSHLENGTHANDBREADTH, 100, 160)
+logging.info("Brush length: " + BRUSHLENGTHANDBREADTH_LABEL + ", " + BRUSHLENGTHANDBREADTH)
+
+BRUSHSTROKESIZE = getRandomFromInterval(1.5, 2.5);
+BRUSHSTROKESIZE_LABEL = label_feature(BRUSHSTROKESIZE, 1.5, 2.5)
+logging.info("Brush stroke size: " + BRUSHSTROKESIZE_LABEL + ", " + BRUSHSTROKESIZE.toFixed(2))
+
+
+GRIDVISIBLE = false  // maybie  getRandomFromList([true, false]);
+
+CANVASROUGHNESS = 80;  // fix
+
+NUMBERPAINTLAYERS = getRandomFromList([2]);  // best 2
+GRIDBRIGHTNESSDIFF = -10;  // fix
+
+BRUSHBRIGHTNESSNOISE = 10 // fix
+if (PALETTE != "greyscale") {
+  BRUSHCOLORNOISE = 10  // fix
+} else if (PALETTE == "greyscale") {
+  BRUSHCOLORNOISE = 0;
+}
+BRUSHANGLENOISE = getRandomFromInterval(Math.PI / 20, Math.PI / 80);  // best PI / 40
+BRUSHANGLENOISE_LABEL = label_feature(BRUSHANGLENOISE, Math.PI / 80, Math.PI / 20)
+logging.info("Brush angle noise: " + BRUSHANGLENOISE_LABEL + ", " + BRUSHANGLENOISE.toFixed(2));
+BRUSHBREADTHNOISE = 0.2;
+BRUSHLENGTHNOISE = 0.2;
+BRUSHFIBRESPARSENESS = Math.round(getRandomFromInterval(5, 7));  // 6
+BRUSHFIBRESPARSENESS_LABEL = label_feature(BRUSHFIBRESPARSENESS, 5, 7)
+logging.info("Brush fibre sparseness: " + BRUSHFIBRESPARSENESS_LABEL + ", " + BRUSHFIBRESPARSENESS);
+
+
+FIBREBRIGHTNESSNOISE = 3;
+FIBRECOLORNOISE = 3;
+FIBRESTROKESIZENOISE = 0.6;  // fix
+FIBRESTARTLENGTHNOISE = getRandomFromInterval(30, 70);
+logging.info("Fibre start length: " + Math.round(FIBRESTARTLENGTHNOISE));
+FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
+FIBREROTATIONNOISE = getRandomFromInterval(Math.PI / 30, Math.PI / 70); // PI / 30<->PI / 50
+FIBREROTATIONNOISE_LABEL = label_feature(FIBREROTATIONNOISE, Math.PI / 70, Math.PI / 30)
+logging.info("Fibre rotation noise: " + FIBREROTATIONNOISE_LABEL + ", " + FIBREROTATIONNOISE.toFixed(2));
+FIBREOPACITYNOISEBASE = Math.round(getRandomFromInterval(70, 140));
+logging.info("Fibre opacity noise: " + FIBREOPACITYNOISEBASE);
+FIBRELENGTHPERLIN = 0.3;  // 0.01<->0.03
+FIBREOPACITYPERLIN = 0.4;
 
 
 let scaleRatio;
@@ -30,13 +76,10 @@ let rescaling_height;
 
 let fxhash_number;
 
-logging.info("FXHASH: " + fxhash);
-
 function preload() {
 }
 
 function setup() {
-  logging.setLevel(SWITCH_LOGGING_LEVEL);
 
   scaleDynamically();
 
@@ -46,54 +89,7 @@ function setup() {
   logging.debug("Pixel density: " + pixelDensity())
   exportRatio /= pixelDensity();
 
-  NOISESEED = hashFnv32a(fxhash);
-  logging.debug("Noise seed: " + NOISESEED);
   noiseSeed(NOISESEED);
-
-  // FEATURES
-
-  PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
-  logging.info("PALETTE: " + PALETTE);
-
-  GRIDVISIBLE = false  // maybie  getRandomFromList([true, false]);
-  RANDOMSPHERES = false // not good
-
-  CANVASAGENT = true // getRandomFromList([true, false]);
-  CANVASROUGHNESS = 80;
-
-  NUMBERPAINTLAYERS = getRandomFromList([2]);  // best 2
-  GRIDBRIGHTNESSDIFF = -10;  // fix
-
-  BRUSHBRIGHTNESSNOISE = 10 // fix
-  if (PALETTE != "greyscale") {
-    BRUSHCOLORNOISE = 10  // fix
-  } else if (PALETTE == "greyscale") {
-    BRUSHCOLORNOISE = 0;
-  }
-
-  // if (STYLE == "wild") {
-  // }
-
-  BRUSHANGLENOISE = getRandomFromInterval(PI / 20, PI / 80);  // best PI / 40
-  logging.info("BRUSHANGLENOISE: " + BRUSHANGLENOISE);
-  BRUSHBREADTHNOISE = 0.2;
-  BRUSHLENGTHNOISE = 0.2;
-  BRUSHFIBRESPARSENESS = Math.round(getRandomFromInterval(5, 7));  // 6
-  logging.info("BRUSHFIBRESPARSENESS: " + BRUSHFIBRESPARSENESS);
-
-
-  FIBREBRIGHTNESSNOISE = 3;
-  FIBRECOLORNOISE = 3;
-  FIBRESTROKESIZENOISE = 0.6;  // fix // 0.2
-  FIBRESTARTLENGTHNOISE = getRandomFromInterval(30, 70);
-  logging.info("FIBRESTARTLENGTHNOISE: " + FIBRESTARTLENGTHNOISE);
-  FIBREBREADTHNOISE = 0.2 // getRandomFromInterval(1, 5); cool 0.2
-  FIBREROTATIONNOISE = getRandomFromInterval(PI / 30, PI / 70); // PI / 30<->PI / 50
-  logging.info("FIBREROTATIONNOISE: " + FIBREROTATIONNOISE);
-  FIBREOPACITYNOISEBASE = Math.round(getRandomFromInterval(70, 140));
-  logging.info("FIBREOPACITYNOISEBASE: " + FIBREOPACITYNOISEBASE);
-  FIBRELENGTHPERLIN = 0.3;  // 0.01<->0.03
-  FIBREOPACITYPERLIN = 0.4;
 
   colorPalette = new ColorPalette();
 
@@ -128,10 +124,10 @@ function setup() {
     posX: 0,
     posY: 0,
     colorObject: color(130),
-    opacity: 150,  // 100
+    opacity: 50,  // 100
     cellPerLine: 150,
-    strokeWeight_: 0.5,
-    deviation: 0.5,
+    strokeWeight_: 1,
+    deviation: 0.3,
   }
 
   agentPaintData1 = {
@@ -221,26 +217,13 @@ function setup() {
     numberAgents: 5,
   }
 
-  randomSphereData = {
-    minSize: 300,  // 100
-    maxSize: 600,  // 500
-    numberSpheres: 16,
-    colorObject: color(30, 30),
-    padding: 100,
-  }
-
   canvas = new CanvasOverlay(canvasData);
-  if (CANVASAGENT == true) {
-    canvasAgent = new DumbAgent(CanvasAgentData);
-  }
+  canvasAgent = new DumbAgent(CanvasAgentData);
   agentPaint1 = new DumbAgent(agentPaintData1);
   agentPaint2 = new DumbAgent(agentPaintData2);
   backgroundSphere = new paintedSphere(backgroundSphereData);
   frontGrid = new IntersectGrid(frontGridData);
   backGrid = new IntersectGrid(backGridData);
-  if (RANDOMSPHERES == true) {
-    randomSpheres = new RandomPaintedSpheres(randomSphereData);  // REMOVE
-  }
 }
 
 
@@ -257,15 +240,9 @@ function draw() {
 
   backgroundSphere.show();
 
-  if (CANVASAGENT == true) {
-    canvasAgent.show();
-  }
+  canvasAgent.show();
 
   backGrid.show();
-
-  // if (RANDOMSPHERES == true) {
-  //   randomSpheres.show();
-  // }
 
   agentPaint1.show();
   agentPaint2.show();
