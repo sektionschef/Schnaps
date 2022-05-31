@@ -265,6 +265,6 @@ function draw() {
   noLoop();
   fxpreview()
 
-  console.info("safety check for diff resolutions - fxrand: " + fxrand());
+  console.info("safety check for diff resolutions same hash: " + fxrand());
 
 }
