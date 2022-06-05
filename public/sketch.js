@@ -9,8 +9,8 @@ console.info("fxhash: " + fxhash);
 NOISESEED = hashFnv32a(fxhash);
 logging.debug("Noise seed: " + NOISESEED);
 
-// PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
-PALETTE = getRandomFromList(["greyscale"]);  // STAMMERSDORF
+PALETTE = getRandomFromList(["greyscale", "full color complimentary", "full color triadic", "weak color complimentary", "weak color triadic", "dark color complimentary", "dark color triadic"]);
+// PALETTE = getRandomFromList(["greyscale"]);  // STAMMERSDORF
 console.info("Palette: " + PALETTE);
 
 NUMBEROFELEMENTS = Math.round(getRandomFromInterval(10, 25));
@@ -44,7 +44,7 @@ BRUSHANGLENOISE_LABEL = label_feature(BRUSHANGLENOISE, Math.PI / 80, Math.PI / 2
 console.info("Brush angle noise: " + BRUSHANGLENOISE_LABEL + ", " + BRUSHANGLENOISE.toFixed(2));
 BRUSHBREADTHNOISE = 0.2;
 BRUSHLENGTHNOISE = 0.2;
-BRUSHFIBRESPARSENESS = 5 // Math.round(getRandomFromInterval(5, 7));  // 6  STAMMERSDORF
+BRUSHFIBRESPARSENESS = Math.round(getRandomFromInterval(5, 7));  // 5  STAMMERSDORF
 BRUSHFIBRESPARSENESS_LABEL = label_feature(BRUSHFIBRESPARSENESS, 5, 7)
 console.info("Brush fibre sparseness: " + BRUSHFIBRESPARSENESS_LABEL + ", " + BRUSHFIBRESPARSENESS);
 
@@ -69,10 +69,10 @@ let exportRatio;
 let buffer;
 let canvas;
 let exportPaper = {
-  // width: 4000,
-  // height: 4000
-  width: 3840,  // STAMMERSDORF
-  height: 2160  // STAMMERSDORF
+  width: 4000,
+  height: 4000
+  // width: 3840,  // STAMMERSDORF
+  // height: 2160  // STAMMERSDORF
 }
 let rescaling_width;
 let rescaling_height;
